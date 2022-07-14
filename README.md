@@ -11,3 +11,7 @@
     $ git add /folder/file
     $ git commit -m "fix/update cái gì?"
     $ git push -u orgin main
+
+# Cài đặt các thư viện/framework đã được cài trong Project (các thư viện này đã có trong package.json)
+
+    $ npm install
