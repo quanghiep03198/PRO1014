@@ -1,6 +1,10 @@
 module.exports = {
-	content: ["index.html", "admin.php"],
+	content: ["index.html", "admin.php", "./admin/**/*.{html,js,php}", "site/**/*.{html,js,php}"],
 	theme: {
+		colors: {
+			"primary-color": "var(--primary-color)",
+			"secondary-color": "var(--secondary-color)",
+		},
 		extend: {},
 		screens: {
 			sm: "375px",

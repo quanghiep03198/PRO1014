@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body>
-    <h1 class="text-red-500">ahihi</h1>
+    <div class="container flex">
+        <?php include 'admin/components/sidebar.php' ?>
+    </div>
 </body>
 
 </html>
