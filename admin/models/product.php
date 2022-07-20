@@ -1,9 +1,9 @@
 <?php
 include 'lib/db_execute.php';
-
-function get_all_product()
+// lấy tất cả sản phảm
+function get_all_products()
 {
-    $sql = "";
+    $sql = "SELECT * FROM product";
     $products = select_all_records($sql);
     return $products;
 }
