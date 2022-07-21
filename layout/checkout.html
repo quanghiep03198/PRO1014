@@ -1,0 +1,205 @@
+!
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="" rel="stylesheet" />
+    <title></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/build/tailwind.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar bg-base-100">
+                <div class="navbar-start">
+
+                    <a href=""><img class="max-h-[150px] max-w-[150px] hover:scale-[1.2]" src="/img/logo.png" alt=""></a>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal p-0">
+                        <li><a href="" class="text-[20px] font-[600]">Trang chủ</a></li>
+                        <li><a href="" class="text-[20px] font-[600]">Cửa hàng</a></li>
+                        <li><a href="" class="text-[20px] font-[600]">Dịch vụ</a></li>
+                        <li><a href="" class="text-[20px] font-[600]">Tin tức</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-end gap-[25px] pr-[10px]">
+                    <a href=""><img class="max-h-[25px] max-w-[25px] hover:scale-[1.5]" src="/img/Vector (1).png" alt=""></a>
+                    <a href=""><img class="max-h-[25px] max-w-[25px] hover:scale-[1.5]" src="/img/Heart.png" alt=""></a>
+                    <div class="indicator">
+                        <a href=""><img class="max-h-[25px] max-w-[25px] hover:scale-[1.5]" src="/img/Vector.png" alt=""></a>
+                        <span class="badge badge-sm badge-error indicator-item"></span>
+                    </div>
+                    <div class="dropdown dropdown-end">
+                        <label tabindex="0" class="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </label>
+                        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a href="">Trang chủ</a></li>
+                            <li><a href="">Cửa hàng</a></li>
+                            <li><a href="">Dịch vụ</a></li>
+                            <li><a href="">Tin tức</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+    <!-- HEADER END  -->
+    <main>
+        <div class="bao bg-[#EDEDED] pt-[10px] pb-[80px]">
+            <div class="mt-20">
+                <!-- <h1 class="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">Tailwind CSS Ecommerce Checkout Page UI
+            </h1> -->
+            </div>
+            <div class="container p-12 mx-auto bg-[#fff] ">
+                <div class="flex flex-col w-full px-0 mx-auto md:flex-row gap-5 ">
+                    <div class="flex flex-col md:w-full">
+                        <div class="dv lg:flex justify-start gap-[290px] ">
+                            <h2 class="mb-4 font-[500]  text-[40px] text-[#407CB4] block lg:hidden">Kiểm tra lại thông tin </h2>
+                            <div class="q">
+                                <h2 class="mb-4 font-[500]  text-[40px] text-[#407CB4] hidden lg:block">1. Thông tin nhận hàng </h2>
+                            </div>
+                            <div class="sdd">
+                                <h2 class="mb-4 font-[500]  text-[40px] text-[#407CB4] hidden lg:block">2. Giao hàng </h2>
+                            </div>
+                        </div>
+                        <form class="justify-center w-full mx-auto" method="post" action>
+                            <div class="">
+                                <div class="space-x-0 lg:flex lg:space-x-4">
+                                    <div class="w-full lg:w-1/2">
+                                        <label for="firstName" class="block mb-3 text-xl font-semibold ">Họ tên</label>
+                                        <input name="firstName" type="text" placeholder="" class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+
+                                    <div class="w-full lg:w-1/2">
+
+                                        <label for="giaohang" class="block mb-3 text-xl font-semibold mt-4 lg:mt-0">Phương thức giao hàng</label>
+                                        <select name="giaohang" id="giaohang" class="text-lg font-[400] w-full text-[#858585] border-2 py-3">
+                                            <option value="">Giao hàng nhanh</option>
+                                            <option value="">Giao hàng tiết kiệm</option>
+                                            <option value="">Giao hàng nhanh</option>
+                                            <option value="">Giao hàng nhanh</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="w-full ">
+                                        <label for="Email" class="block mb-3 text-xl font-semibold ">Số điện thoại</label>
+                                        <input name="Last Name" type="text" placeholder="" class="lg:w-[49.3%] w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="w-full">
+
+                                        <label for="Address" class="block mb-3 text-xl font-semibold ">Địa chỉ</label>
+                                        <div class="as flex lg:justify-between">
+
+                                            <div class="ba lg:w-[49.3%] w-full ">
+                                                <input name="Address" type="text" placeholder="" class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                            </div>
+                                            <div class="lop text-left lg:w-[49.3%] ">
+                                                <h2 class="mb-4 font-[500] hidden lg:block text-[40px] text-[#407CB4] ">3. Thanh toán</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                                    <div class="w-full lg:w-1/2">
+                                        <label for="note" class="block mb-3 text-xl font-semibold ">Ghi chú</label>
+                                        <input name="note" type="text" placeholder="" class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+
+                                    <div class="w-full lg:w-1/2 ">
+
+                                        <label for="tt" class="block mb-3 text-xl font-semibold mt-4 lg:mt-0">
+                                        Phương thức thanh toán</label>
+                                        <select name="tt" id="tt" class="text-lg font-[400] w-full text-[#858585] border-2 py-3">
+                                            <option value="">Thanh toán khi nhận hàng</option>
+                                            <option value="">Giao hàng tiết kiệm</option>
+                                            <option value="">Giao hàng nhanh</option>
+                                            <option value="">Giao hàng nhanh</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="mt-[50px]">
+                                    <button class="lg:w-1/5 px-6 text-[20px] text-[#fff] bg-[#4A4A4A] hover:opacity-80 py-[15px] rounded">Xác nhận đơn hàng</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <div class="footer py-[80px]  bg-[#222222] text-[#fff] text-center">
+            <div>
+                <img src="/img/logo-footer.png" alt="">
+
+            </div>
+            <div class="flex flex-col justify-between gap-[20px]">
+                <span class="text-[32px] font-[600] text-[#fff] mb-[15px]">Hỗ trợ</span>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]">Chính sách bảo hành</a>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]">Chính sách mua hàng</a>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]">Chính sách thanh toán</a>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]">Chính sách đổi trả</a>
+            </div>
+            <div class="flex flex-col justify-between gap-[20px]">
+                <span class="text-[32px] font-[600] text-[#fff] mb-[15px]">Dịch vụ</span>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]">Cung cấp máy chơi game chính hãng</a>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]">Sửa chữa lấy ngay</a>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]">Thiết kế, lắp đặt PS Center</a>
+
+            </div>
+            <div class="flex flex-col justify-between gap-[20px]">
+                <span class="text-[32px] font-[600] text-[#fff] mb-[15px]">Liên hệ</span>
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]"> <img class="inline-block mr-[10px]" src="/img/phone.png" alt=""> 033 608 9988
+                </a>
+
+                <a class="link link-hover text-[20px] font-[400] text-[#fff] "> <img class="inline-block mr-[10px]" src="/img/mail.png" alt=""> pshnstore@gmail.com</a>
+
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]"> <img class="inline-block mr-[10px]" src="/img/vt.png" alt=""> Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</a>
+
+                <a class="link link-hover text-[20px] font-[400] text-[#fff]"> <img class="inline-block mr-[10px]" src="/img/fb.png" alt=""> https://fb.me/psstorevn</a>
+
+            </div>
+        </div>
+        <div class="ke max-w-[1440px] container">
+            <hr class="border-1 border-[#fff]">
+        </div>
+        <div class="cop bg-[#222222] text-center py-[30px] ">
+            <p class="text-[#fff] text-[20px] font-[400]">Đại lý được ủy quyền bỏi Sony Việt Nam</p>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

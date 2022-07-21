@@ -1,0 +1,24 @@
+{
+  "name": "tetthoi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "tailwind":"npx tailwindcss -i css/tailwind.css -o build/tailwind.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.5",
+    "vite": "^2.9.14"
+  },
+  "dependencies": {
+    "daisyui": "^2.18.1",
+    "flowbite": "^1.4.7",
+    "tw-elements": "^1.0.0-alpha12"
+  }
+}
