@@ -37,11 +37,11 @@ LIMIT 0, 10
 SELECT * FROM product 
 INNER JOIN product_category ON product.cate_id = product.cate_id
 INNER JOIN manufacturer ON product.manu_id = manufacturer.manu_id
-WHERE product.cate_id = ? AND  manufacturer.MANU_ID = ?
+WHERE product.cate_id = ? AND  manufacturer.manu_id = ?
 ORDER BY (price- price * discount) ASC ;
 
 -- lọc sản phẩm theo danh mục và có hãng sản xuất là x
-SELECT * FROM product INNER JOIN manufacturer ON product.MANU_ID = manufacturer.MANU_ID;
+SELECT * FROM product INNER JOIN manufacturer ON product.manu_id = manufacturer.manu_id;
 
 -- lấy danh sách sản phẩm đang giảm giá
 SELECT * FROM product WHERE DISCOUNT > 0;

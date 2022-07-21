@@ -1,4 +1,4 @@
-<div class="fixed h-[100vh] dropdown dropdown-right">
+<div class=" h-[100vh] dropdown dropdown-right">
     <!-- nav-icon -->
     <nav class="h-100 p-[30px] flex flex-col justify-between items-center bg-[color:var(--primary-color)] h-[100vh] " tabindex="0">
         <ul class="flex flex-col justify-center gap-4 items-center h-1/2">

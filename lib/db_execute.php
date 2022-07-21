@@ -3,6 +3,8 @@ function get_db_connection()
 {
     $connection = new mysqli("localhost", "root", "03011998", "pro1014");
     if ($connection->connect_error) die($connection->connect_error);
+    echo "<script>alert('connect to database!)</script>";
+
     return $connection;
 }
 
