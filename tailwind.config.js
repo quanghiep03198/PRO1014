@@ -1,5 +1,5 @@
 module.exports = {
-	content: ["index.html", "admin.php", "./admin/views/product.php", "site/**/*.{html,js,php}"],
+	content: ["site/**/*.{html,js,php}", "admin/**/*.{html,js,php}"],
 	theme: {
 		extend: {},
 		screens: {
