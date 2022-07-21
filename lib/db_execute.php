@@ -7,6 +7,7 @@ function get_db_connection()
 
     return $connection;
 }
+get_db_connection();
 
 // lấy 1 giá trị
 function select_one_value($sql)
