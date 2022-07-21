@@ -51,3 +51,4 @@ SELECT * FROM product WHERE DISCOUNT > 0;
 SELECT * FROM product ORDER BY DISCOUNT DESC LIMIT 0,10;
 
 -- thêm feedback của khách hàng về sản phẩm
+INSERT INTO product_feedback (product_id,user_id,pr_review_id) VALUES (?,?,?);
