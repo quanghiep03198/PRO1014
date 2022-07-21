@@ -1,10 +1,9 @@
--- query tạo database
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 19, 2022 lúc 06:02 PM
+-- Thời gian đã tạo: Th7 21, 2022 lúc 04:18 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -29,9 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `manufacturer` (
-  `MANU_ID` int(2) NOT NULL,
-  `MANU_NAME` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `manu_id` int(2) NOT NULL,
+  `manu_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `manufacturer`
+--
+
+INSERT INTO `manufacturer` (`manu_id`, `manu_name`) VALUES
+(1, 'SONY'),
+(2, 'NITENDO');
 
 -- --------------------------------------------------------
 
@@ -40,18 +47,31 @@ CREATE TABLE `manufacturer` (
 --
 
 CREATE TABLE `orders` (
-  `ORDER_PARENT_ID` int(20) NOT NULL,
-  `ORDER_ID` int(10) DEFAULT NULL,
-  `USER_ID` int(10) NOT NULL,
-  `USER_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `ADDRESS` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `CREATE_DATE` timestamp NOT NULL DEFAULT current_timestamp(),
-  `PHONE` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `ORDER_STT_ID` int(20) NOT NULL DEFAULT 1,
-  `SHIPPING_METHOD_ID` int(1) NOT NULL,
-  `PAYMENT_METHOD_ID` int(1) NOT NULL,
-  `TOTAL_AMOUNT` int(10) NOT NULL
+  `order_parent_id` int(20) NOT NULL,
+  `order_id` int(10) DEFAULT NULL,
+  `user_id` int(10) NOT NULL,
+  `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `order_stt_id` int(20) NOT NULL DEFAULT 1,
+  `shipping_method_id` int(1) NOT NULL,
+  `payment_method_id` int(1) NOT NULL,
+  `total_amount` int(10) NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`order_parent_id`, `order_id`, `user_id`, `user_name`, `address`, `create_date`, `phone`, `order_stt_id`, `shipping_method_id`, `payment_method_id`, `total_amount`, `email`) VALUES
+(1, 1, 1, 'Quang', 'HaNoi', '0000-00-00 00:00:00', '45345345', 1, 1, 1, 5000, 'abc@gmail.com'),
+(3, 2, 2, 'HAI', 'HaNoi', '0000-00-00 00:00:00', '45345345', 2, 2, 2, 4000, 'abc@gmail.com'),
+(7, 3, 3, 'Hiep', 'HaNoi', '0000-00-00 00:00:00', '45345345', 2, 2, 2, 3000, 'abc@gmail.com'),
+(11, 4, 1, '', '', '2022-07-21 03:01:10', '', 1, 1, 1, 0, NULL),
+(13, 5, 3, 'Hiep', '', '2022-07-21 03:25:20', '', 1, 1, 2, 0, NULL),
+(14, 6, 3, 'Hiep', '', '2022-07-21 03:28:34', '', 1, 1, 2, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -60,14 +80,29 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_items` (
-  `ITEM_ID` int(20) NOT NULL,
-  `ORDER_ID` int(20) NOT NULL,
-  `PRODUCT_ID` int(10) NOT NULL,
-  `UNIT_PRICE` int(10) NOT NULL,
-  `QUANTITY` int(5) NOT NULL,
-  `TOTAL` int(10) NOT NULL,
-  `WARRANTY_TIME` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `item_id` int(20) NOT NULL,
+  `order_parent_id` int(20) NOT NULL,
+  `product_id` int(10) NOT NULL,
+  `unit_price` int(10) NOT NULL,
+  `quantity` int(5) NOT NULL,
+  `total` int(10) NOT NULL,
+  `warranty_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_items`
+--
+
+INSERT INTO `order_items` (`item_id`, `order_parent_id`, `product_id`, `unit_price`, `quantity`, `total`, `warranty_time`) VALUES
+(1, 1, 4, 20, 20, 400, '0000-00-00 00:00:00'),
+(2, 1, 4, 20, 30, 600, '0000-00-00 00:00:00'),
+(6, 3, 7, 10, 30, 300, '0000-00-00 00:00:00'),
+(7, 7, 7, 10, 30, 300, '0000-00-00 00:00:00'),
+(8, 7, 7, 50, 30, 1500, '0000-00-00 00:00:00'),
+(9, 3, 7, 50, 30, 1500, '0000-00-00 00:00:00'),
+(11, 14, 7, 50, 30, 1500, '0000-00-00 00:00:00'),
+(12, 14, 7, 5, 3, 15, '0000-00-00 00:00:00'),
+(13, 14, 7, 5, 3, 15, '2022-07-21 03:49:46');
 
 -- --------------------------------------------------------
 
@@ -76,9 +111,17 @@ CREATE TABLE `order_items` (
 --
 
 CREATE TABLE `order_status` (
-  `ORDER_STT_ID` int(20) NOT NULL,
-  `ORDER_STT_NAME` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `order_stt_id` int(20) NOT NULL,
+  `order_stt_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_status`
+--
+
+INSERT INTO `order_status` (`order_stt_id`, `order_stt_name`) VALUES
+(1, 'Da TT'),
+(2, 'Chua TT');
 
 -- --------------------------------------------------------
 
@@ -87,9 +130,17 @@ CREATE TABLE `order_status` (
 --
 
 CREATE TABLE `payment_method` (
-  `PAYMENT_METHOD_ID` int(1) NOT NULL,
-  `METHOD_NAME` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `payment_method_id` int(1) NOT NULL,
+  `method_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `payment_method`
+--
+
+INSERT INTO `payment_method` (`payment_method_id`, `method_name`) VALUES
+(1, 'Online'),
+(2, 'Giao Tai Nha');
 
 -- --------------------------------------------------------
 
@@ -98,14 +149,14 @@ CREATE TABLE `payment_method` (
 --
 
 CREATE TABLE `posts` (
-  `POST_ID` int(10) NOT NULL,
-  `POST_BODY` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `POST_TITLE` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `POSTED_DATE` timestamp NOT NULL DEFAULT current_timestamp(),
-  `POST_DESC` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `USER_ID` int(10) NOT NULL,
-  `PST_CATE_ID` int(10) NOT NULL,
-  `POST_IMG` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `post_id` int(10) NOT NULL,
+  `post_body` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `post_title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `posted_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `post_desc` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `pst_cate_id` int(10) NOT NULL,
+  `post_img` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -115,8 +166,8 @@ CREATE TABLE `posts` (
 --
 
 CREATE TABLE `post_category` (
-  `PST_CATE_ID` int(10) NOT NULL,
-  `PST_CATE_NAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+  `pst_cate_id` int(10) NOT NULL,
+  `pst_cate_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -126,10 +177,10 @@ CREATE TABLE `post_category` (
 --
 
 CREATE TABLE `post_comment` (
-  `PST_COMMENT_ID` int(10) NOT NULL,
-  `PST_COMMENT_CONTENT` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `POSTED_DATE` timestamp NOT NULL DEFAULT current_timestamp(),
-  `USER_ID` int(10) NOT NULL
+  `pst_comment_id` int(10) NOT NULL,
+  `pst_comment_content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `posted_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -139,17 +190,29 @@ CREATE TABLE `post_comment` (
 --
 
 CREATE TABLE `product` (
-  `PRODUCT_ID` int(10) NOT NULL,
-  `PRODUCT_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `CATE_ID` int(2) NOT NULL,
-  `PRODUCT_IMG` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `PRICE` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `DESCRIPTION` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `DISCOUNT` float NOT NULL,
-  `STOCK` int(5) NOT NULL,
-  `WARRANTY_TIME` int(1) NOT NULL,
-  `MANU_ID` int(2) NOT NULL
+  `product_id` int(10) NOT NULL,
+  `product_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cate_id` int(2) NOT NULL,
+  `product_img` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `price` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `discount` float NOT NULL,
+  `stock` int(5) NOT NULL,
+  `warranty_time` int(1) NOT NULL,
+  `manu_id` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product`
+--
+
+INSERT INTO `product` (`product_id`, `product_name`, `cate_id`, `product_img`, `price`, `description`, `discount`, `stock`, `warranty_time`, `manu_id`) VALUES
+(1, 'Play Station 1', 1, 'img1', '500', 'ngon', 20, 5, 2, 2),
+(4, 'Play Station 3', 3, 'img1', '500', 'ngon', 30, 5, 2, 1),
+(5, 'Play Station 3', 3, 'img1', '500', 'ngon', 50, 5, 2, 1),
+(6, 'Play Station 3', 3, 'img1', '500', 'ngon', 70, 5, 2, 1),
+(7, 'Play Station 4', 3, 'img1', '500', 'ngon', 0, 5, 2, 1),
+(8, '4', 3, 'img1', '500', 'ngon', 0, 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -158,10 +221,20 @@ CREATE TABLE `product` (
 --
 
 CREATE TABLE `product_category` (
-  `CATE_ID` int(2) NOT NULL,
-  `CATE_NAME` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `CATE_IMAGE` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `cate_id` int(2) NOT NULL,
+  `cate_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `cate_image` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_category`
+--
+
+INSERT INTO `product_category` (`cate_id`, `cate_name`, `cate_image`) VALUES
+(1, 'Máy chơi game', 'img'),
+(2, 'Tau Cầm Chơi Game', 'image1.png'),
+(3, 'Phụ Kiện', 'image2.png'),
+(4, 'Thẻ PSN', 'image3.png');
 
 -- --------------------------------------------------------
 
@@ -170,11 +243,11 @@ CREATE TABLE `product_category` (
 --
 
 CREATE TABLE `product_comment` (
-  `PR_COMMENT_ID` int(10) NOT NULL,
-  `USER_ID` int(20) NOT NULL,
-  `PRODUCT_ID` int(10) NOT NULL,
-  `CMT_CONTENT` int(11) NOT NULL,
-  `COMMENT_DATE` timestamp NOT NULL DEFAULT current_timestamp()
+  `pr_comment_id` int(10) NOT NULL,
+  `user_id` int(20) NOT NULL,
+  `product_id` int(10) NOT NULL,
+  `cmt_content` int(11) NOT NULL,
+  `coment_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -184,11 +257,11 @@ CREATE TABLE `product_comment` (
 --
 
 CREATE TABLE `product_comment_reply` (
-  `PR_REPLY_ID` int(10) NOT NULL,
-  `USER_ID` int(20) NOT NULL,
-  `PR_REPLY_CONTENT` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `PR_REPLY_DATE` timestamp NOT NULL DEFAULT current_timestamp(),
-  `PR_COMMENT_ID` int(10) NOT NULL
+  `pr_reply_id` int(10) NOT NULL,
+  `user_id` int(20) NOT NULL,
+  `pr_reply_content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pr_reply_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `pr_comment_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -198,11 +271,19 @@ CREATE TABLE `product_comment_reply` (
 --
 
 CREATE TABLE `product_feedback` (
-  `FEEDBACK_ID` int(10) NOT NULL,
-  `PRODUCT_ID` int(10) NOT NULL,
-  `USER_ID` int(20) NOT NULL,
-  `PR_REVIEW_ID` int(10) NOT NULL
+  `feedback_id` int(10) NOT NULL,
+  `product_id` int(10) NOT NULL,
+  `user_id` int(20) NOT NULL,
+  `pr_review_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_feedback`
+--
+
+INSERT INTO `product_feedback` (`feedback_id`, `product_id`, `user_id`, `pr_review_id`) VALUES
+(0, 1, 1, 1),
+(0, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -211,9 +292,17 @@ CREATE TABLE `product_feedback` (
 --
 
 CREATE TABLE `product_review` (
-  `PR_REVIEW_ID` int(10) NOT NULL,
-  `PR_REVIEW_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `pr_review_id` int(10) NOT NULL,
+  `pr_review_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_review`
+--
+
+INSERT INTO `product_review` (`pr_review_id`, `pr_review_name`) VALUES
+(1, 'San pham tot'),
+(2, 'San pham khong tot');
 
 -- --------------------------------------------------------
 
@@ -222,9 +311,9 @@ CREATE TABLE `product_review` (
 --
 
 CREATE TABLE `services` (
-  `SERVICE_ID` int(10) NOT NULL,
-  `SERVICE_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `SERVICE_COST` int(10) NOT NULL
+  `service_id` int(10) NOT NULL,
+  `service_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `service_cost` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -234,10 +323,18 @@ CREATE TABLE `services` (
 --
 
 CREATE TABLE `shipping_method` (
-  `SHIPPING_METHOD_ID` int(1) NOT NULL,
-  `METHOD_NAME` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `SHIPPING_COST` int(10) NOT NULL
+  `shipping_method_id` int(1) NOT NULL,
+  `method_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `shipping_cost` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `shipping_method`
+--
+
+INSERT INTO `shipping_method` (`shipping_method_id`, `method_name`, `shipping_cost`) VALUES
+(1, 'HaNoi', 10000),
+(2, 'HCM', 20000);
 
 -- --------------------------------------------------------
 
@@ -246,11 +343,11 @@ CREATE TABLE `shipping_method` (
 --
 
 CREATE TABLE `site_setting` (
-  `LOGO1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `LOGO2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `EMAIL` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `FACEBOOK` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `HOTLINE` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `logo1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `logo2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `facebook` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `hotline` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -260,15 +357,24 @@ CREATE TABLE `site_setting` (
 --
 
 CREATE TABLE `users` (
-  `USER_ID` int(20) NOT NULL,
-  `USER_NAME` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `PASSWORD` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `ROLE_ID` int(2) NOT NULL,
-  `AVATAR` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `EMAIL` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `PHONE` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `ADDRESS` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `user_id` int(20) NOT NULL,
+  `user_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role_id` int(2) NOT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `password`, `role_id`, `avatar`, `email`, `phone`, `address`) VALUES
+(1, 'Quang', '123456', 5, 'img4.png', 'quang@gmail.com', '0898898989', 'HaNoi'),
+(2, 'Hai', '738373', 6, 'img6.png', 'hai@gmail.com', '053453453', 'HaiPhong'),
+(3, 'Hiep', '353555345', 2, 'img8.png', 'hiep@gmail.com', '5345345345', 'Nam Dinh');
 
 -- --------------------------------------------------------
 
@@ -277,9 +383,19 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `user_role` (
-  `ROLE_ID` int(2) NOT NULL,
-  `ROLE_NAME` enum('admin','user','','') COLLATE utf8_unicode_ci NOT NULL
+  `role_id` int(2) NOT NULL,
+  `role_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `user_role`
+--
+
+INSERT INTO `user_role` (`role_id`, `role_name`) VALUES
+(2, 'user'),
+(4, 'user'),
+(5, 'admin'),
+(6, 'user1');
 
 -- --------------------------------------------------------
 
@@ -288,8 +404,8 @@ CREATE TABLE `user_role` (
 --
 
 CREATE TABLE `wishlist` (
-  `WISHLIST_ID` int(10) NOT NULL,
-  `USER_ID` int(10) NOT NULL
+  `wishlist_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -299,9 +415,9 @@ CREATE TABLE `wishlist` (
 --
 
 CREATE TABLE `wishlist_item` (
-  `WISHLIST_ITEM_ID` int(10) NOT NULL,
-  `WISHLIST_ID` int(10) NOT NULL,
-  `PRODUCT_ID` int(10) NOT NULL
+  `wishlist_item_id` int(10) NOT NULL,
+  `wishlist_id` int(10) NOT NULL,
+  `product_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -312,142 +428,143 @@ CREATE TABLE `wishlist_item` (
 -- Chỉ mục cho bảng `manufacturer`
 --
 ALTER TABLE `manufacturer`
-  ADD PRIMARY KEY (`MANU_ID`);
+  ADD PRIMARY KEY (`manu_id`);
 
 --
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`ORDER_PARENT_ID`),
-  ADD UNIQUE KEY `ORDER_ID` (`ORDER_ID`),
-  ADD KEY `lk_order_user` (`USER_ID`),
-  ADD KEY `lk_order_orderstt` (`ORDER_STT_ID`),
-  ADD KEY `lk_order_shipping` (`SHIPPING_METHOD_ID`),
-  ADD KEY `lk_order_payment` (`PAYMENT_METHOD_ID`);
+  ADD PRIMARY KEY (`order_parent_id`),
+  ADD UNIQUE KEY `ORDER_ID` (`order_id`),
+  ADD KEY `lk_order_orderstt` (`order_stt_id`),
+  ADD KEY `lk_order_payment` (`payment_method_id`),
+  ADD KEY `lk_order_shipping` (`shipping_method_id`),
+  ADD KEY `lk_order_user` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`ITEM_ID`),
-  ADD KEY `lk_orderitem_product` (`PRODUCT_ID`),
-  ADD KEY `lk_orderitem_order` (`ORDER_ID`);
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `lk_orderitem_product` (`product_id`),
+  ADD KEY `lk_orderitem_order` (`order_parent_id`);
 
 --
 -- Chỉ mục cho bảng `order_status`
 --
 ALTER TABLE `order_status`
-  ADD PRIMARY KEY (`ORDER_STT_ID`);
+  ADD PRIMARY KEY (`order_stt_id`);
 
 --
 -- Chỉ mục cho bảng `payment_method`
 --
 ALTER TABLE `payment_method`
-  ADD PRIMARY KEY (`PAYMENT_METHOD_ID`);
+  ADD PRIMARY KEY (`payment_method_id`);
 
 --
 -- Chỉ mục cho bảng `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`POST_ID`),
-  ADD KEY `lk_post_user` (`USER_ID`),
-  ADD KEY `lk_post_postcategory` (`PST_CATE_ID`);
+  ADD PRIMARY KEY (`post_id`),
+  ADD KEY `lk_post_postcategory` (`pst_cate_id`),
+  ADD KEY `lk_post_user` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `post_category`
 --
 ALTER TABLE `post_category`
-  ADD PRIMARY KEY (`PST_CATE_ID`);
+  ADD PRIMARY KEY (`pst_cate_id`);
 
 --
 -- Chỉ mục cho bảng `post_comment`
 --
 ALTER TABLE `post_comment`
-  ADD PRIMARY KEY (`PST_COMMENT_ID`),
-  ADD KEY `lk_postcomment_user` (`USER_ID`);
+  ADD PRIMARY KEY (`pst_comment_id`),
+  ADD KEY `lk_postcomment_user` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`PRODUCT_ID`),
-  ADD KEY `lk_product_manufacturer` (`MANU_ID`);
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `fk_pro_cate` (`cate_id`),
+  ADD KEY `lk_product_manufacturer` (`manu_id`);
 
 --
 -- Chỉ mục cho bảng `product_category`
 --
 ALTER TABLE `product_category`
-  ADD PRIMARY KEY (`CATE_ID`);
+  ADD PRIMARY KEY (`cate_id`);
 
 --
 -- Chỉ mục cho bảng `product_comment`
 --
 ALTER TABLE `product_comment`
-  ADD PRIMARY KEY (`PR_COMMENT_ID`),
-  ADD KEY `lk_productcoment_user` (`USER_ID`),
-  ADD KEY `lk_productcoment_product` (`PRODUCT_ID`);
+  ADD PRIMARY KEY (`pr_comment_id`),
+  ADD KEY `lk_productcoment_product` (`product_id`),
+  ADD KEY `lk_productcoment_user` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `product_comment_reply`
 --
 ALTER TABLE `product_comment_reply`
-  ADD PRIMARY KEY (`PR_REPLY_ID`),
-  ADD KEY `lk_productreply_user` (`USER_ID`),
-  ADD KEY `lk_productreply_productcommnet` (`PR_COMMENT_ID`);
+  ADD PRIMARY KEY (`pr_reply_id`),
+  ADD KEY `lk_productreply_productcommnet` (`pr_comment_id`),
+  ADD KEY `lk_productreply_user` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `product_feedback`
 --
 ALTER TABLE `product_feedback`
-  ADD KEY `lk_feedback_product` (`PRODUCT_ID`),
-  ADD KEY `lk_feedback_user` (`USER_ID`),
-  ADD KEY `lk_feedback_productreview` (`PR_REVIEW_ID`);
+  ADD KEY `lk_feedback_product` (`product_id`),
+  ADD KEY `lk_feedback_user` (`user_id`),
+  ADD KEY `lk_feedback_productreview` (`pr_review_id`);
 
 --
 -- Chỉ mục cho bảng `product_review`
 --
 ALTER TABLE `product_review`
-  ADD PRIMARY KEY (`PR_REVIEW_ID`);
+  ADD PRIMARY KEY (`pr_review_id`);
 
 --
 -- Chỉ mục cho bảng `services`
 --
 ALTER TABLE `services`
-  ADD PRIMARY KEY (`SERVICE_ID`);
+  ADD PRIMARY KEY (`service_id`);
 
 --
 -- Chỉ mục cho bảng `shipping_method`
 --
 ALTER TABLE `shipping_method`
-  ADD PRIMARY KEY (`SHIPPING_METHOD_ID`);
+  ADD PRIMARY KEY (`shipping_method_id`);
 
 --
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`USER_ID`),
-  ADD KEY `lk_user_userrole` (`ROLE_ID`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `lk_user_userrole` (`role_id`);
 
 --
 -- Chỉ mục cho bảng `user_role`
 --
 ALTER TABLE `user_role`
-  ADD PRIMARY KEY (`ROLE_ID`);
+  ADD PRIMARY KEY (`role_id`);
 
 --
 -- Chỉ mục cho bảng `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD PRIMARY KEY (`WISHLIST_ID`),
-  ADD KEY `lk_wishlist_user` (`USER_ID`);
+  ADD PRIMARY KEY (`wishlist_id`),
+  ADD KEY `lk_wishlist_user` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `wishlist_item`
 --
 ALTER TABLE `wishlist_item`
-  ADD PRIMARY KEY (`WISHLIST_ITEM_ID`),
-  ADD KEY `lk_wishlistitem_wishlist` (`WISHLIST_ID`),
-  ADD KEY `lk_wishlistitem_product` (`PRODUCT_ID`);
+  ADD PRIMARY KEY (`wishlist_item_id`),
+  ADD KEY `lk_wishlistitem_product` (`product_id`),
+  ADD KEY `lk_wishlistitem_wishlist` (`wishlist_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -457,115 +574,115 @@ ALTER TABLE `wishlist_item`
 -- AUTO_INCREMENT cho bảng `manufacturer`
 --
 ALTER TABLE `manufacturer`
-  MODIFY `MANU_ID` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `manu_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ORDER_PARENT_ID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_parent_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `ITEM_ID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `item_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `order_status`
 --
 ALTER TABLE `order_status`
-  MODIFY `ORDER_STT_ID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_stt_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `payment_method`
 --
 ALTER TABLE `payment_method`
-  MODIFY `PAYMENT_METHOD_ID` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `payment_method_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `POST_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `post_category`
 --
 ALTER TABLE `post_category`
-  MODIFY `PST_CATE_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `pst_cate_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `post_comment`
 --
 ALTER TABLE `post_comment`
-  MODIFY `PST_COMMENT_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `pst_comment_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `PRODUCT_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `CATE_ID` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `cate_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `product_comment`
 --
 ALTER TABLE `product_comment`
-  MODIFY `PR_COMMENT_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `pr_comment_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product_comment_reply`
 --
 ALTER TABLE `product_comment_reply`
-  MODIFY `PR_REPLY_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `pr_reply_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product_review`
 --
 ALTER TABLE `product_review`
-  MODIFY `PR_REVIEW_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `pr_review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `services`
 --
 ALTER TABLE `services`
-  MODIFY `SERVICE_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `service_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `shipping_method`
 --
 ALTER TABLE `shipping_method`
-  MODIFY `SHIPPING_METHOD_ID` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `shipping_method_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `USER_ID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `ROLE_ID` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `role_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `WISHLIST_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `wishlist_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `wishlist_item`
 --
 ALTER TABLE `wishlist_item`
-  MODIFY `WISHLIST_ITEM_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `wishlist_item_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -575,81 +692,79 @@ ALTER TABLE `wishlist_item`
 -- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `lk_order_orderstt` FOREIGN KEY (`ORDER_STT_ID`) REFERENCES `order_status` (`ORDER_STT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_order_payment` FOREIGN KEY (`PAYMENT_METHOD_ID`) REFERENCES `payment_method` (`PAYMENT_METHOD_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_order_shipping` FOREIGN KEY (`SHIPPING_METHOD_ID`) REFERENCES `shipping_method` (`SHIPPING_METHOD_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_order_user` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_order_orderstt` FOREIGN KEY (`order_stt_id`) REFERENCES `order_status` (`ORDER_STT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_order_payment` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`PAYMENT_METHOD_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_order_shipping` FOREIGN KEY (`shipping_method_id`) REFERENCES `shipping_method` (`SHIPPING_METHOD_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_order_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  ADD CONSTRAINT `lk_orderitem_order` FOREIGN KEY (`ORDER_ID`) REFERENCES `orders` (`ORDER_PARENT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_orderitem_product` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`PRODUCT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_orderitem_order` FOREIGN KEY (`order_parent_id`) REFERENCES `orders` (`order_parent_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `lk_post_postcategory` FOREIGN KEY (`PST_CATE_ID`) REFERENCES `post_category` (`PST_CATE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_post_user` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_post_postcategory` FOREIGN KEY (`pst_cate_id`) REFERENCES `post_category` (`PST_CATE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_post_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `post_comment`
 --
 ALTER TABLE `post_comment`
-  ADD CONSTRAINT `lk_postcomment_user` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_postcomment_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `lk_product_manufacturer` FOREIGN KEY (`MANU_ID`) REFERENCES `manufacturer` (`MANU_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pro_cate` FOREIGN KEY (`cate_id`) REFERENCES `product_category` (`CATE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_product_manufacturer` FOREIGN KEY (`manu_id`) REFERENCES `manufacturer` (`MANU_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `product_comment`
 --
 ALTER TABLE `product_comment`
-  ADD CONSTRAINT `lk_productcoment_product` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`PRODUCT_ID`),
-  ADD CONSTRAINT `lk_productcoment_user` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_productcoment_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_productcoment_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `product_comment_reply`
 --
 ALTER TABLE `product_comment_reply`
-  ADD CONSTRAINT `lk_productreply_productcommnet` FOREIGN KEY (`PR_COMMENT_ID`) REFERENCES `product_comment` (`PR_COMMENT_ID`),
-  ADD CONSTRAINT `lk_productreply_user` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_productreply_productcommnet` FOREIGN KEY (`pr_comment_id`) REFERENCES `product_comment` (`pr_comment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_productreply_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `product_feedback`
 --
 ALTER TABLE `product_feedback`
-  ADD CONSTRAINT `lk_feedback_product` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`PRODUCT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_feedback_productreview` FOREIGN KEY (`PR_REVIEW_ID`) REFERENCES `product_review` (`PR_REVIEW_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_feedback_user` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_feedback_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_feedback_productreview` FOREIGN KEY (`pr_review_id`) REFERENCES `product_review` (`PR_REVIEW_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_feedback_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `lk_user_userrole` FOREIGN KEY (`ROLE_ID`) REFERENCES `user_role` (`ROLE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_user_userrole` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`ROLE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD CONSTRAINT `lk_wishlist_user` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_wishlist_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Các ràng buộc cho bảng `wishlist_item`
 --
 ALTER TABLE `wishlist_item`
-  ADD CONSTRAINT `lk_wishlistitem_product` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`PRODUCT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `lk_wishlistitem_wishlist` FOREIGN KEY (`WISHLIST_ID`) REFERENCES `wishlist` (`WISHLIST_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `lk_wishlistitem_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `lk_wishlistitem_wishlist` FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist` (`wishlist_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
--- query tạo tất cả các bảng
