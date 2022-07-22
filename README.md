@@ -15,3 +15,7 @@
 # Cài đặt các thư viện/framework đã được cài trong Project (các thư viện này đã có trong package.json)
 
     $ npm install
+
+# Chạy tailwind
+
+    $ npm run tailwind
