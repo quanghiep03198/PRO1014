@@ -26,7 +26,6 @@ $list_sanpham = pdo_query($sqli);
         <div class="container">
             <div class="navbar bg-base-100">
                 <div class="navbar-start">
-
                     <a href=""><img class="max-h-[150px] max-w-[150px] hover:scale-[1.2]" src="/img/logo.png" alt=""></a>
                 </div>
                 <div class="navbar-center hidden lg:flex">

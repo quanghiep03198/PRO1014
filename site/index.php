@@ -2,7 +2,7 @@
 // using global variable
 include_once '../lib/global.php';
 include_once '../lib/db_execute.php';
-include_once '../lib/validate.php'
+include_once '../lib/validate.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
