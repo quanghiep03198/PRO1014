@@ -5,4 +5,4 @@ INSERT INTO manufacturer (manu_name) VALUES (?);
 -- sửa nhà sản xuất
 UPDATE manufacturer SET manu_name = ? WHERE manu_id = ?;
 -- xóa nhà sản xuất
-DELETE FROM manufacturer WHERE manu_id = ?;
+DELETE FROM manufacturer WHERE manu_id = ? ;
