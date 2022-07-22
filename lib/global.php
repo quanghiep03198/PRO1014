@@ -2,6 +2,8 @@
 $ROOT_AVATAR = "../img/avatars/";
 $ROOT_PRODUCT = '../img/products/';
 $ROOT_BANNER = "../img/banners/";
+$ROOT_SITE = "../img/settings/";
+
 // chuẩn hóa chuỗi
 function strStandardize($string)
 {

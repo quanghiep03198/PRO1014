@@ -1,3 +1,9 @@
+<?php
+// using global variable
+include_once '../lib/global.php';
+include_once '../lib/db_execute.php';
+include_once '../lib/validate.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +12,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
 <body>
-    <?php include_once 'site/components/header.php'; ?>
+    <?php include_once 'components/header.php'; ?>
     <main>
         <?php
 
@@ -23,7 +29,8 @@
 
         ?>
     </main>
-    <?php include_once 'site/components/footer.php' ?>
+    <?php include_once 'components/footer.php' ?>
+    <script type="module" src="js/cart.js"></script>
 </body>
 
 </html>
