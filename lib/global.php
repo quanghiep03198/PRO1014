@@ -1,8 +1,7 @@
 <?php
-$ROOT_AVATAR_ADMIN = "../site/view/img/avatar/";
-$IMG_ROOT_ADMIN = '../site/view/img/products/';
-$ROOT_AVATAR = "./site/view/img/avatar/";
-$IMG_ROOT = './site/view/img/products/';
+$ROOT_AVATAR = "../img/avatars/";
+$ROOT_PRODUCT = '../img/products/';
+$ROOT_BANNER = "../img/banners/";
 // chuẩn hóa chuỗi
 function strStandardize($string)
 {

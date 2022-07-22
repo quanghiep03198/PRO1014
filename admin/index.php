@@ -1,18 +1,38 @@
 <?php
-require_once "../lib/routes.php";
-require_once "controllers/product.php";
+// using global variable
+include_once '../lib/global.php';
+include_once '../lib/db_execute.php';
+include_once '../lib/validate.php'
+// using controllers
 
-router_on("/admin/", function () {
-});
-// all product
-router_on("/admin/product/list", function () {
-    showProduct();
-});
-// one product
-router_on("/admin/product/list?id", function () {
-});
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-router_on("/404", function () {
-    include './views/error.php';
-});
-router_resolve();
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="flex">
+        <aside class="h-screen">
+            <?php include './components/sidebar.php' ?>
+        </aside>
+        <main class="w-full">
+            <?php
+            $page = isset($_GET['page']) ? str_replace("-", "/", $_GET['page']) : 'home';
+            $file = "pages/{$page}.php";
+            if (file_exists($file))
+                include_once $file;
+            else include_once "pages/404.php"
+            ?>
+        </main>
+    </div>
+</body>
+
+</html>

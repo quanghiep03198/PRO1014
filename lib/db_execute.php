@@ -1,13 +1,13 @@
 <?php
 function get_db_connection()
 {
-    $connection = new mysqli("localhost", "root", "03011998", "pro1014");
+    $connection = new mysqli("localhost", "root", "", "pro1014");
     if ($connection->connect_error) die($connection->connect_error);
     echo "<script>alert('connect to database!)</script>";
 
     return $connection;
 }
-get_db_connection();
+
 
 // lấy 1 giá trị
 function select_one_value($sql)
