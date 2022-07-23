@@ -6,14 +6,14 @@ function get_all_product()
 }
 function get_product_by_cate($cate, $manu)
 {
-    $sql = "SELECT product.id, product.prod_name,product.price FROM product
+    $sql = "SELECT product.id, product.prod_name,product.price,product.image FROM product
             WHERE product.cate_id = {$cate} AND product.man_id = {$manu}";
     return select_all_records($sql);
 }
 function get_one_product($id)
 {
     if (isset($id)) :
-        $sql = "SELECT * FROM product WHERE {$id}";
+        $sql = "SELECT * FROM product WHERE id={$id}";
         return select_single_record($sql);
     endif;
 }

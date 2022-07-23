@@ -42,7 +42,8 @@ extract($product);
         <!-- product slider -->
         <div class="swiper product-slider container mx-auto">
             <div class="swiper-wrapper">
-                <?php foreach (get_product_by_cate($cate_id, $man_id) as $items) : extract($items);
+                <?php
+                foreach (get_product_by_cate($cate_id, $man_id) as $items) : extract($items);
                 ?>
                     <div class="swiper-slide p-5">
                         <div class='card shadow-lg w-80 rounded-md'>
