@@ -1,16 +1,7 @@
-// import Swiper bundle with all modules installed
-import Swiper from "swiper/bundle";
-
-// import styles bundle
-import "swiper/css/bundle";
-
-// init Swiper:
 const productSlider = new Swiper(".product-slider", {
-	slidesPerView: 1,
-	spaceBetween: 10,
-	pagination: {
-		el: ".swiper-pagination",
-		clickable: true,
+	navigation: {
+		nextEl: ".swiper-button-next",
+		prevEl: ".swiper-button-prev",
 	},
 	breakpoints: {
 		"@0.00": {
@@ -23,11 +14,11 @@ const productSlider = new Swiper(".product-slider", {
 		},
 		"@1.00": {
 			slidesPerView: 3,
-			spaceBetween: 40,
+			spaceBetween: 30,
 		},
 		"@1.50": {
 			slidesPerView: 4,
-			spaceBetween: 50,
+			spaceBetween: 40,
 		},
 	},
 });

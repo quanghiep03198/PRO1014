@@ -23,3 +23,14 @@ function get_feedback_counter($id)
     $sql = "SELECT COUNT(feedback_id) FROM product_feedback WHERE product_id = $id";
     return select_one_value($sql);
 }
+// tìm sản phẩm theo keyword
+function get_product_by_kw($kw)
+{
+    $sql = "SELECT * FROM product 
+            INNER JOIN product_category ON product.cate_id = product.cate_id
+            INNER JOIN manufacturer ON product.manu_id = manufacturer.manu_id
+            WHERE product.product_name LIKE '%{$kw}%' OR 
+            product_category.cate_name LIKE '%{$kw}%' OR 
+            manufacturer.manu_name LIKE '%{$kw}%'";
+    return select_all_records($sql);
+}
