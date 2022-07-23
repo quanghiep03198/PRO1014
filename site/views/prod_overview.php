@@ -3,15 +3,15 @@
 $product = get_one_product($_GET['id']);
 extract($product);
 ?>
-<div class="container w-full mx-auto">
+<div class="container w-full mx-auto py-10">
     <section>
-        <div class="flex justify-center items-stretch sm:flex-col md:flex-row lg:flex-row gap-10">
-            <picture class="basis-1/3">
-                <img src=<?= $ROOT_PRODUCT . $image ?> alt="" class="max-w-full object-contain">
+        <div class="container mx-auto flex flex-grow justify-center items-stretch sm:flex-col md:flex-row lg:flex-row gap-16">
+            <picture class="basis-1/2">
+                <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="max-w-full object-contain">
             </picture>
-            <div class="flex flex-col gap-5">
+            <div class="w-full flex flex-col gap-5">
                 <h2 class="text-4xl font-normal"><?= $prod_name ?></h2>
-                <p class="font-semibold text-4xl"><?= $price  . 'đ' ?></p>
+                <span class="font-semibold text-4xl"><?= $price  . 'đ' ?></span>
                 <div class="rating">
                     <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
                     <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
@@ -21,15 +21,22 @@ extract($product);
                 </div>
                 <span class="font-medium text-2xl">Bảo hành : <span class="font-normal"><?= $warranty_time . ' năm' ?></span></span>
                 <span class="font-medium text-2xl">Kho hàng : <span class="font-normal"> Còn hàng</span></span>
-                <div class="py-[50px] flex justify-start items-center gap-8">
-                    <div class="">
-                        <a href="" class="btn btn-wide sm:btn-sm md:btn-md lg:btn-lg">Mua
-                            ngay</a>
+                <div class="custom-number-input h-full">
+                    <div class="flex items-center gap-0 w-full rounded-lg relative bg-transparent mt-1">
+                        <button type="button" data-action="decrement" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">-</button>
+                        <input type="number" min=1 value=1 class="quantity outline-none focus:outline-none text-center w-10 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number"></input>
+                        <button type="button" data-action="increment" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">+</button>
                     </div>
-                    <div class="">
-                        <a href="" class="btn btn-wide sm:btn-sm md:btn-md lg:btn-lg">Thêm
-                            vào giỏ hàng</a>
-                    </div>
+                </div>
+                <div class="py-[50px] flex justify-start items-center gap-8 text-capitalize">
+                    <a href="" class="btn btn-wide sm:btn-sm md:btn-md lg:btn-lg">mua ngay</a>
+                    <form action="">
+                        <input type="hidden" value>
+                        <input type="hidden" value>
+                        <input type="hidden" value>
+                        <input type="hidden" name="">
+                        <a href="" class="btn btn-wide sm:btn-sm md:btn-md lg:btn-lg">thêm vào giỏ hàng</a>
+                    </form>
                 </div>
             </div>
         </div>
@@ -48,7 +55,7 @@ extract($product);
                     <div class="swiper-slide p-5">
                         <div class='card shadow-lg w-80 rounded-md'>
                             <a href=<?php echo "?page=prod_overview&id={$id}" ?>>
-                                <img src=<?= $ROOT_PRODUCT . $image ?> alt="" class="card-img max-w-[250px] h-[250px] object-contain">
+                                <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="card-img max-w-[250px] h-[250px] object-contain">
                             </a>
                             <div class="card-body">
                                 <h4 class='text-[20px] truncate '><?= $prod_name ?></h4>

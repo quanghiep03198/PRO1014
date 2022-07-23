@@ -1,8 +1,8 @@
 <header>
-    <div class="navbar justify-between bg-base-100">
+    <div class="container mx-auto navbar justify-between bg-base-100">
         <!-- logo -->
         <div class="navbar-start">
-            <a href=""><img class="sm:max-w-[100px] lg:max-w-[150px]" src=<?= $ROOT_SITE . 'logo.png' ?> alt=""></a>
+            <a href=""><img class="sm:max-w-[100px] lg:max-w-[150px]" src=<?= ROOT_SITE . 'logo.png' ?> alt=""></a>
         </div>
         <!-- nav-link  -->
         <div class="navbar-center hidden lg:flex">

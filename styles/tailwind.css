@@ -8,6 +8,11 @@
 		--secondary-color: rgba(64, 124, 180, 1);
 		/* ... */
 	}
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 }
 @layer components {
 }

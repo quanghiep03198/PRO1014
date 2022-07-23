@@ -8,7 +8,7 @@
             </div>
         </div>
         <picture>
-            <img class="lg:w-full" src=<?= $ROOT_BANNER . 'banner-homepage.png' ?> alt="">
+            <img class="lg:w-full" src=<?= ROOT_BANNER . 'banner-homepage.png' ?> alt="">
         </picture>
     </div>
 </div>

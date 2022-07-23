@@ -1,12 +1,13 @@
 <?php
-$ROOT_AVATAR = "../img/avatars/";
-$ROOT_PRODUCT = '../img/products/';
-$ROOT_BANNER = "../img/banners/";
-$ROOT_SITE = "../img/settings/";
+const ROOT_AVATAR = "img/avatars/";
+const ROOT_PRODUCT = 'img/products/';
+const ROOT_BANNER =  "img/banners/";
+const ROOT_SITE = "img/settings/";
 
 // chuẩn hóa chuỗi
 function strStandardize($string)
 {
+
     $string = trim($string);
     while (strpos($string, "  ")) {
         $string = str_replace("  ", " ", $string);
