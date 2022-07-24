@@ -1,59 +1,153 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-localStorage.setItem("cart", JSON.stringify([]));
-// counter button
-const decrementButtons = $$(`button[data-action="decrement"]`);
-const incrementButtons = $$(`button[data-action="increment"]`);
-decrementButtons.forEach((btn) => {
-	btn.addEventListener("click", (e) => {
-		const btn = e.target.parentElement.querySelector('button[data-action="decrement"]');
-		const target = btn.nextElementSibling;
-		let value = Number(target.value);
-		value--;
-		if (value < 1) value = 1;
-		target.value = value;
-	});
-});
-incrementButtons.forEach((btn) => {
-	btn.addEventListener("click", (e) => {
-		const btn = e.target.parentElement.querySelector('button[data-action="decrement"]');
-		const target = btn.nextElementSibling;
-		let value = Number(target.value);
-		value++;
-		target.value = value;
-	});
-});
+// khởi tạo giỏ hàng trên localstorage
+if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
+const cartItems = [];
+const cartCounter = $("#cart-counter");
+cartCounter.innerText = JSON.parse(localStorage.getItem("cart")).length; // cart counter = 0 by default
+
+/**
+ *  show empty message
+ */
+const showEmptyCart = () => {
+	if (!localStorage.getItem("cart") || JSON.parse(localStorage.getItem("cart")).length == 0) $("#cart-container").innerHTML = /*html */ `<div class="center">Bạn chưa chọn sản phẩm nào!</div>`;
+};
+
 /**
  * Thêm sản phẩm vào giỏ hàng
  */
-let cartItems = JSON.parse(localStorage.getItem("cart"));
-console.log(cartItems);
-function addCart(button) {
+const addCart = (button) => {
 	const product = {
 		id: button.parentElement.querySelector(`input[name = "id"]`).value,
 		name: button.parentElement.querySelector(`input[name = "name"]`).value,
+		manu: button.parentElement.querySelector(`input[name = "manu"]`).value,
 		img: button.parentElement.querySelector(`input[name = "img"]`).value,
 		price: +button.parentElement.querySelector(`input[name = "price"]`).value,
 		qty: +button.parentElement.querySelector(`input[name = "qty"]`).value,
 	};
-	// kiểm tra sản phẩm đã có trong giỏ hàng chưa? nếu đã tồn tại => update lại số lượng
-	const duplicatedItem = cartItems.find((item) => item.id == product.id);
+	product.total = product.price * product.qty;
+	// kiểm tra sản phẩm đã có trong giỏ hàng chưa? nếu đã tồn tại => update lại số lượng, thành tiền
+	const duplicatedItem = cartItems?.find((item) => item.id == product.id);
 	if (duplicatedItem) {
-		duplicatedItem["qty"] += product.qty;
-		// alert(`Sản phẩm đã tồn tại trong giỏ hàng!`);
-	} else cartItems.push(product);
-	localStorage.setItem("cart", JSON.stringify(cartItems));
-	console.log(JSON.parse(localStorage.getItem("cart")));
-}
-// render cart item
+		duplicatedItem.qty += product.qty;
+		duplicatedItem.total = duplicatedItem.price * duplicatedItem.qty;
+		cartItems[cartItems.indexOf(duplicatedItem)] = duplicatedItem;
+		localStorage.setItem("cart", JSON.stringify(cartItems));
+	}
+	// nếu sản phẩm ko tồn tại trong giỏ hàng thì thêm mới
+	else {
+		cartItems.push(product);
+		localStorage.setItem("cart", JSON.stringify(cartItems));
+		cartCounter.innerText = cartItems.length;
+	}
+};
+/**
+ *
+ */
+const getTotalAmount = (data) => {
+	const tempPayment = $("#temp-payment");
+	const discount = $("#discount");
+	const totalAmount = $("#total-amount");
+	const giftcode = $("#gift-code");
+	giftcode.oninput = () => {};
+	tempPayment.dataset.cash = data?.reduce((previousValue, currentValue) => {
+		return previousValue + currentValue.total;
+	}, 0);
+	discount.innerText = `${discount.dataset.cash}₫`;
+
+	tempPayment.innerText = `${tempPayment.dataset.cash}₫`;
+
+	totalAmount.dataset.cash = +tempPayment.dataset.cash + discount.dataset.cash;
+	totalAmount.innerText = `${totalAmount.dataset.cash}₫`;
+};
+
+/**
+ * render cart items
+ */
+const cartList = document.querySelector("#cart-list");
 const renderCart = (data) => {
-	return data
-		.map(
-			(item) => /*html */ `
-	`,
+	const output = data
+		?.map(
+			(item) => /*html */ `<tr>
+									<th>
+										<button type="button" class="btn btn-ghost text-2xl text-gray-500 hover:text-gray-800" onclick="removeItem(${item.id})"><i class="bi bi-trash"></i></button>
+									</th>
+									<td>
+										<div class="flex items-center space-x-3">
+												<picture class="mask mask-squircle w-12 h-12">
+													<img src="img/products/${item.img}" alt="">
+												</picture>
+											<div>
+												<div class="font-bold">
+													<span class="block font-medium truncate">${item.name}</span>
+												</div>
+												<div class="text-sm opacity-50">
+													<span class="block font-medium ">${item.manu}</span>
+												</div>
+											</div>
+										</div>
+									</td>
+									<td>
+										<span class=" block font-medium text-blue-600">${item.price}</span>
+									</td>
+									<td>
+										<div class="col-span-1 flex justify-start items-center gap-0 w-full rounded-lg relative bg-transparent mt-1">
+											<input type="hidden" name="id" value=${item.id}>
+											<input type="hidden" name="unit-price" value=${item.price}>
+											<input type="hidden" name="qty" value=${item.qty}>
+											<input type="hidden" name="qty" value=${item.total}>
+											<button type="button" onclick="changeQty(this,-1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">-</button>
+											<input type="number" min=1 value=${item.qty} class="quantity outline-none focus:outline-none text-center w-10 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number">
+											<button type="button" onclick="changeQty(this,1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">+</button>
+										</div>
+									</td>
+									<th>
+										<span class="block total-price font-medium">${item.total}</span>
+									</th>
+								</tr>`,
 		)
 		.join("");
+	cartList.innerHTML = output;
+	getTotalAmount(JSON.parse(localStorage.getItem("cart")));
+	showEmptyCart();
 };
-// update cart item
-const name = (params) => {};
-// delete cart item
+renderCart(JSON.parse(localStorage.getItem("cart")));
+
+/**
+ * update cart item
+ */
+const updateCartItem = (id, qty) => {
+	const cartItems = JSON.parse(localStorage.getItem("cart"));
+	const item = cartItems.find((item) => item.id == id);
+	// update qty & total của sản phẩm trong giỏ hàng
+	if (item) {
+		item.qty = qty;
+		item.total = item.price * item.qty;
+		cartItems[cartItems.indexOf(item)] = item;
+		// update lại toàn bộ giỏ hàng
+		localStorage.setItem("cart", JSON.stringify(cartItems));
+		renderCart(JSON.parse(localStorage.getItem("cart"))); // render ra ngoài
+	}
+	console.log(cartItems);
+};
+/**
+ * delete cart item
+ */
+const removeItem = (id) => {
+	console.log(id);
+	const cartItems = JSON.parse(localStorage.getItem("cart"));
+	localStorage.setItem("cart", JSON.stringify(cartItems.filter((item) => item.id != id)));
+	renderCart(JSON.parse(localStorage.getItem("cart")));
+};
+
+/**
+ * change item quantity
+ */
+
+const changeQty = (btn, unitVal) => {
+	const id = btn.parentElement.querySelector(`input[name="id"]`).value;
+	const target = btn.parentElement.querySelector(".quantity");
+	let value = +target.value; // ảo ma canada
+	value += +unitVal;
+	if (value < 1) value = 1;
+	target.value = value;
+	updateCartItem(id, target.value);
+};

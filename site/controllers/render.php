@@ -1,5 +1,5 @@
 <?php
-function render()
+function page_render()
 {
     include_once 'site/components/header.php';
     $page = isset($_GET['page']) ? str_replace("-", "/", $_GET['page']) : 'home';
