@@ -1,8 +1,8 @@
-<header>
-    <div class="container mx-auto navbar justify-between bg-base-100">
+<header class="sticky top-0 bg-white z-50 sm:px-5 lg:px-24">
+    <div class="mx-auto navbar justify-between bg-base-100 ">
         <!-- logo -->
         <div class="navbar-start">
-            <a href=""><img class="sm:max-w-[100px] lg:max-w-[150px]" src=<?= ROOT_SITE . 'logo.png' ?> alt=""></a>
+            <a href=""><img class="sm:max-w-[7rem] lg:max-w-[10rem]" src=<?= ROOT_SITE . 'logo.png' ?> alt=""></a>
         </div>
         <!-- nav-link  -->
         <div class="navbar-center hidden lg:flex">
@@ -33,7 +33,8 @@
             <a href="?page=wishlist" class="text-xl"><i class="bi bi-heart"></i></a>
             <div class="indicator">
                 <a href="?page=cart" class="text-xl"><i class="bi bi-cart3"></i></a>
-                <span class="badge badge-md badge-error indicator-item text-white">0</span>
+                <span class="badge badge-md badge-error indicator-item text-white" id="cart-counter">
+                </span>
             </div>
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-sm lg:hidden"><i class="bi bi-list"></i></label>
