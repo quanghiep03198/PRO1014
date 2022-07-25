@@ -36,3 +36,10 @@
         <p class="text-[#fff] text-[20px] font-[400]">Đại lý được ủy quyền bỏi Sony Việt Nam</p>
     </div>
 </footer>
+<script type="text/javascript">
+    // khởi tạo giỏ hàng trên localstorage
+    if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
+    const cartItems = [];
+    const cartCounter = document.querySelector("#cart-counter");
+    cartCounter.innerText = JSON.parse(localStorage.getItem("cart")).length;
+</script>

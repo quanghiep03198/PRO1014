@@ -1,55 +1,60 @@
 // get name of each field
-const getFieldName = (input) => {
-	return input.name.charAt(0).toUpperCase() + input.name.slice(1).toLowerCase();
+const getFieldName = (formControl) => {
+	return formControl.getAttribute("data-name");
 };
 // get input element
 
 // show error message
-const showError = (input, message) => {
+const showError = (formControl, message) => {
 	const errorIcon = /*html */ `<i class="bi bi-x align-center"></i>`;
-	const errorMessage = input.parentElement.querySelector(".error-message");
+	const errorMessage = formControl.parentElement.querySelector(".error-message");
 	errorMessage.innerHTML = errorIcon + message;
-	errorMessage.style.color = "var(--error)";
-	input.classList.add("input-error");
-	input.classList.toggle("input-success");
+	formControl.classList.add("input-error");
+	formControl.classList.toggle("input-success");
 };
 // show success if value of the field is valid
-const showSuccess = (input, message) => {
-	const successMessage = input.parentElement.querySelector(".error-message");
+const showSuccess = (formControl, message) => {
+	const successMessage = formControl.parentElement.querySelector(".error-message");
 	successMessage.innerHTML = message;
-	input.classList.add("input-success");
-	input.classList.toggle("input-error");
+	formControl.classList.add("input-success");
+	formControl.classList.remove("input-error");
 };
 
 /**
  * các rule thực hiện check các trường input
  */
-const isRequired = (...inputs) => {
-	let countNullElems = 0;
-	inputs.forEach((input) => {
-		if (input.value.trim() != "") showSuccess(input, null);
+const isRequired = (...formControls) => {
+	let errorCount = 0;
+	formControls.forEach((formControl) => {
+		if (formControl.value.trim() != "") showSuccess(formControl, null);
 		else {
-			countNullElems++;
-			showError(input, `Bạn chưa nhập ${getFieldName(input)}`);
+			errorCount++;
+			showError(formControl, `Bạn chưa nhập ${getFieldName(formControl)}`);
 		}
-		input.oninput = () => {
-			if (input.value.trim() != "") showSuccess(input, null);
+		formControl.oninput = () => {
+			if (formControl.value.trim() != "") showSuccess(formControl, null);
 			else {
-				countNullElems++;
-				showError(input, `Bạn chưa nhập ${getFieldName(input)}`);
+				errorCount++;
+				showError(formControl, `Bạn chưa nhập ${getFieldName(formControl)}`);
 			}
 		};
-		console.log(countNullElems);
+		formControl.onchange = () => {
+			if (formControl.value.trim() != "") showSuccess(formControl, null);
+			else {
+				errorCount++;
+				showError(formControl, `Bạn chưa nhập ${getFieldName(formControl)}`);
+			}
+		};
 	});
-	return countNullElems == 0 ? true : false;
+	return errorCount == 0 ? true : false;
 };
 
-const isEmail = (emailInput) => {
+const isEmail = (formControl) => {
 	let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	emailInput.oninput = () => {
-		regexEmail.test(emailInput.value) ? showSuccess(emailInput, null) : showError(emailInput, "Email không hợp lệ");
+	formControl.oninput = () => {
+		regexEmail.test(formControl.value) ? showSuccess(formControl, null) : showError(formControl, "Email không hợp lệ");
 	};
-	return regexEmail.test(emailInput.value) ? true : false;
+	return regexEmail.test(formControl.value) ? true : false;
 };
 
 const ckMatchingValue = (input1, input2) => {

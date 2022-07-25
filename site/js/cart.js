@@ -1,68 +1,36 @@
-// khởi tạo giỏ hàng trên localstorage
-if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
-const cartItems = [];
-const cartCounter = $("#cart-counter");
-cartCounter.innerText = JSON.parse(localStorage.getItem("cart")).length; // cart counter = 0 by default
+const $ = (selector) => {
+	const elements = document.querySelectorAll(selector);
+	return elements.length == 1 ? elements[0] : elements;
+};
 
-/**
- *  show empty message
- */
+const cartList = $("#cart-list");
 const showEmptyCart = () => {
-	if (!localStorage.getItem("cart") || JSON.parse(localStorage.getItem("cart")).length == 0) $("#cart-container").innerHTML = /*html */ `<div class="center">Bạn chưa chọn sản phẩm nào!</div>`;
-};
-
-/**
- * Thêm sản phẩm vào giỏ hàng
- */
-const addCart = (button) => {
-	const product = {
-		id: button.parentElement.querySelector(`input[name = "id"]`).value,
-		name: button.parentElement.querySelector(`input[name = "name"]`).value,
-		manu: button.parentElement.querySelector(`input[name = "manu"]`).value,
-		img: button.parentElement.querySelector(`input[name = "img"]`).value,
-		price: +button.parentElement.querySelector(`input[name = "price"]`).value,
-		qty: +button.parentElement.querySelector(`input[name = "qty"]`).value,
-	};
-	product.total = product.price * product.qty;
-	// kiểm tra sản phẩm đã có trong giỏ hàng chưa? nếu đã tồn tại => update lại số lượng, thành tiền
-	const duplicatedItem = cartItems?.find((item) => item.id == product.id);
-	if (duplicatedItem) {
-		duplicatedItem.qty += product.qty;
-		duplicatedItem.total = duplicatedItem.price * duplicatedItem.qty;
-		cartItems[cartItems.indexOf(duplicatedItem)] = duplicatedItem;
-		localStorage.setItem("cart", JSON.stringify(cartItems));
-	}
-	// nếu sản phẩm ko tồn tại trong giỏ hàng thì thêm mới
-	else {
-		cartItems.push(product);
-		localStorage.setItem("cart", JSON.stringify(cartItems));
-		cartCounter.innerText = cartItems.length;
-	}
+	const cartItems = JSON.parse(localStorage.getItem("cart"));
+	if (cartItems.length == 0) cartList.innerHTML = /*html */ `<tr><td colspan='5'>Bạn chưa có sản phẩm nào trong giỏ hàng</td></tr>`;
 };
 /**
- *
+ * Tính tiền
  */
 const getTotalAmount = (data) => {
 	const tempPayment = $("#temp-payment");
 	const discount = $("#discount");
 	const totalAmount = $("#total-amount");
 	const giftcode = $("#gift-code");
-	giftcode.oninput = () => {};
+	// giftcode.oninput = () => {};
 	tempPayment.dataset.cash = data?.reduce((previousValue, currentValue) => {
 		return previousValue + currentValue.total;
 	}, 0);
 	discount.innerText = `${discount.dataset.cash}₫`;
-
+	// tổng tiền tạm tính
 	tempPayment.innerText = `${tempPayment.dataset.cash}₫`;
-
-	totalAmount.dataset.cash = +tempPayment.dataset.cash + discount.dataset.cash;
+	// tổng tiền thanh toán chưa bao gồm phí ship
+	totalAmount.dataset.cash = +tempPayment.dataset.cash + +discount.dataset.cash;
 	totalAmount.innerText = `${totalAmount.dataset.cash}₫`;
 };
 
 /**
  * render cart items
  */
-const cartList = document.querySelector("#cart-list");
 const renderCart = (data) => {
 	const output = data
 		?.map(
@@ -86,7 +54,7 @@ const renderCart = (data) => {
 										</div>
 									</td>
 									<td>
-										<span class=" block font-medium text-blue-600">${item.price}</span>
+										<span class=" block font-medium text-blue-600">${item.price}₫</span>
 									</td>
 									<td>
 										<div class="col-span-1 flex justify-start items-center gap-0 w-full rounded-lg relative bg-transparent mt-1">
@@ -100,7 +68,7 @@ const renderCart = (data) => {
 										</div>
 									</td>
 									<th>
-										<span class="block total-price font-medium">${item.total}</span>
+										<span class="block total-price font-medium">${item.total}₫</span>
 									</th>
 								</tr>`,
 		)

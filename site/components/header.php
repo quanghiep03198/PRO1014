@@ -1,5 +1,5 @@
-<header class="sticky top-0 bg-white z-50 sm:px-5 lg:px-24">
-    <div class="mx-auto navbar justify-between bg-base-100 ">
+<header class="w-full bg-white">
+    <div class="max-w-[90%] mx-auto navbar justify-between items-center">
         <!-- logo -->
         <div class="navbar-start">
             <a href=""><img class="sm:max-w-[7rem] lg:max-w-[10rem]" src=<?= ROOT_SITE . 'logo.png' ?> alt=""></a>
