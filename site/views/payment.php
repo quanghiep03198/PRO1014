@@ -8,11 +8,11 @@ if (isset($_POST['checkout']) && !empty($_COOKIE['cart'])) {
     $payment = $_POST['payment_method'];
     $address = $_POST['address'];
     $total_amount = $_POST['total_amount'];
-    $order_id = substr(md5(rand(0, 9999)), 0, 8); // tạo mã đơn hàng ngẫu nhiên
+    $order_key_id = substr(md5(rand(0, 9999)), 0, 8); // tạo mã đơn hàng ngẫu nhiên
 
     if ($payment == 1) {
-        $lastID = execute_query("INSERT INTO orders( order_id, user_id, user_name, shipping_address, email, phone, create_date, shipping_method_id, payment_method_id, total_amount)
-                            VALUES( '{$order_id}', 0, '{$customer_name}', '{$address}', '{$email}', '{$phone}', CURRENT_DATE(), {$shipping}, {$payment}, {$total_amount})");
+        $lastID = execute_query("INSERT INTO orders( order_key_id, user_id, user_name, shipping_address, email, phone, create_date, shipping_method_id, payment_method_id, total_amount)
+                            VALUES( '{$order_key_id}', 0, '{$customer_name}', '{$address}', '{$email}', '{$phone}', CURRENT_DATE(), {$shipping}, {$payment}, {$total_amount})");
 
         foreach ($cartList as $item) {
             execute_query(

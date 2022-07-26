@@ -62,7 +62,8 @@
 		</div>
 	</main>
 	<?php include_once 'site/components/footer.php'; ?>
-	<script src="site/js/cart.js"></script>
+	<script type="text/javascript" src="site/js/common.js"></script>
+	<script type="text/javascript" src="site/js/cart.js"></script>
 </body>
 
 </html>

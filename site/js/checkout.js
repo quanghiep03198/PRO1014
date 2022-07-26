@@ -1,7 +1,4 @@
-const $ = (selector) => {
-	const elements = document.querySelectorAll(selector);
-	return elements.length == 1 ? elements[0] : elements;
-};
+import $ from "./site/js/common.js";
 const form = $("#check-out__form");
 console.log(form);
 if (form) {
@@ -13,6 +10,7 @@ if (form) {
 		const shipping = form.querySelector(`select[name="shipping_method"]`);
 		const payment = form.querySelector(`select[name="payment_method"]`);
 		const totalAmount = form.querySelector(`input[name="total_amount"]`);
+		// validate thông tin người dùng
 		const isNotEmpty = isRequired(customerName, phone, email, address, shipping, payment);
 		if (!isNotEmpty) event.preventDefault();
 		if (!isEmail(email)) event.preventDefault();
@@ -25,7 +23,7 @@ if (form) {
 					return previousValue + currentValue.total;
 				}, 0) + +shipping.value;
 			console.log(totalAmount.value);
-			// localStorage.setItem("cart", JSON.stringify([]));
+			localStorage.setItem("cart", JSON.stringify([]));
 		}
 	};
 }

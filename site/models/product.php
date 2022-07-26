@@ -1,7 +1,18 @@
 <?php
 // lấy ra tất cả sản phẩm
+function get_all_products()
+{
+    $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+    $sql = "SELECT * FROM product ORDER BY price {$sort}";
+    return select_all_records($sql);
+}
+
+
+
+// lấy ra các sản phẩm mới nhập
 function get_new_products()
 {
+
     $sql = "SELECT product.*,manufacturer.name as manufacture FROM product
     INNER JOIN manufacturer ON product.man_id = manufacturer.id ORDER BY product.id DESC
     LIMIT 0,10";
@@ -10,8 +21,10 @@ function get_new_products()
 // lấy sản phẩm theo danh mục
 function get_products_by_cate($cate, $manu)
 {
-    $sql = "SELECT product.id, product.prod_name,product.price,product.image FROM product
-            WHERE product.cate_id = {$cate} AND product.man_id = {$manu}";
+    $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+    $sql = "SELECT product.id, product.prod_name,product.price,product.image,product.discount,product.warranty_time FROM product
+            WHERE product.cate_id = {$cate} AND product.man_id = {$manu}
+            ORDER BY product.price {$sort}";
     return select_all_records($sql);
 }
 // lấy chi tiết 1 sản phẩm

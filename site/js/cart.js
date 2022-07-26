@@ -1,8 +1,3 @@
-const $ = (selector) => {
-	const elements = document.querySelectorAll(selector);
-	return elements.length == 1 ? elements[0] : elements;
-};
-
 const cartList = $("#cart-list");
 const showEmptyCart = () => {
 	const cartItems = JSON.parse(localStorage.getItem("cart"));
@@ -73,6 +68,7 @@ const renderCart = (data) => {
 								</tr>`,
 		)
 		.join("");
+	countItems();
 	cartList.innerHTML = output;
 	getTotalAmount(JSON.parse(localStorage.getItem("cart")));
 	showEmptyCart();
