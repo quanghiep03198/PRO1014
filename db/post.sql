@@ -1,17 +1,17 @@
 -- thêm bài viết
-INSERT INTO posts (post_body,post_title,post_desc,user_id,pst_cate_id,post_img)
+INSERT INTO posts (body,title,short_desc,author_id,post_cate_id,img)
 VALUES (?,?,?,?,?,?);
 
 -- sửa thông tin bài viết
 UPDATE posts SET
-post_body = ?
-post_title = ?
-post_desc = ?
-user_id = ?
+body = ?
+title = ?
+short_desc = ?
+author_id = ?
 pst_cate_id = ?
-post_img = ?
-WHERE post_id = ?;
+img = ?
+WHERE id = ?;
 
 -- xóa bài viết
-DELETE FROM posts WHERE post_id = ?;
+DELETE FROM posts WHERE id = ?;
 
