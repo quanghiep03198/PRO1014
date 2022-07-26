@@ -1,11 +1,9 @@
-const $ = (selector) => {
-	const elements = document.querySelectorAll(selector);
-	return elements.length == 1 ? elements[0] : elements;
-};
 /**
  * Thêm sản phẩm vào giỏ hàng
  */
+
 const addCart = (button) => {
+	const cartItems = JSON.parse(localStorage.getItem("cart"));
 	const product = {
 		id: button.parentElement.querySelector(`input[name = "id"]`).value,
 		name: button.parentElement.querySelector(`input[name = "name"]`).value,
@@ -28,8 +26,8 @@ const addCart = (button) => {
 	else {
 		cartItems.push(product);
 		localStorage.setItem("cart", JSON.stringify(cartItems));
-		cartCounter.innerText = cartItems.length;
 	}
+	countItems();
 };
 /**
  *
