@@ -1,6 +1,6 @@
-  <div class='product-card card w-80 rounded-md relative'>
+  <div class='product-card card w-[22rem] rounded-md relative'>
       <?php if ($discount > 0) : ?>
-          <span class="badge badge-secondary badge-error px-4 py-3 text-xl absolute top-0 right-0"><?= $discount . '%' ?></span>
+          <span class="badge badge-secondary badge-error px-4 py-3 text-xl text-white absolute top-0 left-0"><?= $discount . '%' ?></span>
       <?php endif;  ?>
       <picture class="center">
           <a href=<?php echo "?page=prod_overview&id={$id}" ?>>
@@ -25,16 +25,16 @@
                   <!-- product information form -->
                   <input type='hidden' name='id' value=<?= $id ?>>
                   <input type='hidden' name='name' value="<?php echo $prod_name ?>">
-                  <input type='hidden' name='manu' value="<?php echo $manufacture ?>">
+                  <input type='hidden' name='manu' value="<?php echo $man_name ?>">
                   <input type='hidden' name='price' value=<?= $price ?>>
                   <input type='hidden' name='img' value=<?= $image ?>>
                   <input type='hidden' name='qty' value=1>
                   <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
                   <input type='hidden' name='total' value=<?= $price * 1 ?>>
                   <!-- product card button group -->
-                  <button type='submit' onclick="addCart(this)" class='flex-grow btn text-xl' name='add_btn'><i class="bi bi-cart3"></i></button>
-                  <button type="button" onclick="addCart(this)" class="flex-grow btn text-xl"><i class="bi bi-bag-plus"></i></button>
-                  <button type="button" onclick="addWishList(this)" class="flex-grow btn text-xl"><i class="bi bi-heart"></i></button>
+                  <button type='submit' onclick="addCart(this)" class='flex-grow btn text-xl hover:btn-primary' name='add_btn'><i class="bi bi-cart3"></i></button>
+                  <button type="button" onclick="addCart(this)" class="flex-grow btn text-xl hover:btn-primary"><i class="bi bi-bag-plus"></i></button>
+                  <button type="button" onclick="addWishList(this)" class="flex-grow btn text-xl hover:btn-primary"><i class="bi bi-heart"></i></button>
               </div>
           </form>
       </div>

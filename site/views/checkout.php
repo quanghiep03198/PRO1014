@@ -14,15 +14,15 @@
 
 <body>
     <?php include_once 'site/components/header.php';  ?>
-    <main>
-        <div class="bg-[#EDEDED] sm:py-0 lg:py-10">
+    <main class="px-5">
+        <div class="bg-[#EDEDED]  sm:py-0 lg:py-10">
             <div class="container mx-auto bg-white sm:p-3 lg:p-10">
                 <form action="?page=payment" method="POST" id="check-out__form">
                     <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-10">
                         <!-- form left -->
                         <div>
-                            <h2 class="text-3xl font-semibold text-blue-500 mb-5">1. Thông tin nhận hàng</h2>
-                            <div class="flex flex-col gap-5">
+                            <h2 class="sm:text-2xl lg:text-3xl font-semibold text-blue-500 mb-5">1. Thông tin nhận hàng</h2>
+                            <div class="flex flex-col gap-3">
                                 <div class="form-group">
                                     <label for="" class="label">Họ tên</label>
                                     <input type="text" name="customer_name" data-name="tên" class="input input-bordered w-full focus:outline-none">
@@ -46,9 +46,9 @@
                             </div>
                         </div>
                         <!-- form right -->
-                        <div class="flex flex-col justify-between">
+                        <div class="flex flex-col justify-between gap-10">
                             <div class="form-group">
-                                <h2 class="text-3xl font-semibold text-blue-500 mb-5">2. Phương thức giao hàng</h2>
+                                <h2 class="sm:text-2xl lg:text-3xl font-semibold text-blue-500 mb-5">2. Phương thức giao hàng</h2>
                                 <label for="" class="label">Phương thức giao hàng</label>
                                 <select class="select input-bordered w-full focus:outline-none" data-name="phương thức giao hàng" name="shipping_method">
                                     <option value="" selected>Chọn phương thức giao hàng</option>
@@ -60,7 +60,7 @@
 
                             </div>
                             <div class="form-group">
-                                <h2 class="text-3xl font-semibold text-blue-500 mb-5">3. Phương thức thanh toán</h2>
+                                <h2 class="sm:text-2xl lg:text-3xl font-semibold text-blue-500 mb-5">3. Phương thức thanh toán</h2>
                                 <label for="" class="label">Phương thức thanh toán</label>
                                 <select class="select input-bordered w-full focus:outline-none" data-name="phương thức thanh toán" name="payment_method">
                                     <option value="" selected>Chọn phương thức giao hàng</option>

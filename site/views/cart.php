@@ -55,7 +55,7 @@
 						<p class="text-[14px] bb-[30px] ">Số tiền này chưa bao gồm phí vận chuyển</p>
 					</div>
 					<form action="?page=checkout" method="POST" id="cart-form">
-						<button type="submit" name="check-out" id="check-out-submit" class="btn btn-block btn-lg">Đặt hàng</button>
+						<button type="submit" name="check-out" id="check-out-submit" class="btn btn-block btn-lg hover:btn-active hover:btn-primary">Đặt hàng</button>
 					</form>
 				</div>
 			</div>

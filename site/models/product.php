@@ -3,7 +3,9 @@
 function get_all_products()
 {
     $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
-    $sql = "SELECT * FROM product ORDER BY price {$sort}";
+    $sql = "SELECT product.* ,manufacturer.name AS man_name FROM product 
+            INNER JOIN manufacturer 
+            ON product.man_id = manufacturer.id ORDER BY price {$sort}";
     return select_all_records($sql);
 }
 
@@ -19,19 +21,29 @@ function get_new_products()
     return     select_all_records($sql);
 }
 // lấy sản phẩm theo danh mục
-function get_products_by_cate($cate, $manu)
+function get_products_by_cate()
 {
+    $args_list = func_get_args();
     $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
     $sql = "SELECT product.id, product.prod_name,product.price,product.image,product.discount,product.warranty_time FROM product
-            WHERE product.cate_id = {$cate} AND product.man_id = {$manu}
+            WHERE product.cate_id = {$args_list[0]} AND product.man_id = {$args_list[1]}
             ORDER BY product.price {$sort}";
+    return select_all_records($sql);
+}
+function get_related_product()
+{
+    $args_list = func_get_args();
+    $sql = "SELECT product.* FROM product
+            WHERE product.cate_id = {$args_list[0]}
+            GROUP BY product.id
+            ";
     return select_all_records($sql);
 }
 // lấy chi tiết 1 sản phẩm
 function get_one_product($id)
 {
     if (isset($id)) :
-        $sql = "SELECT * FROM product WHERE id={$id}";
+        $sql = "SELECT product.*, manufacturer.name AS man_name FROM product INNER JOIN manufacturer ON product.man_id = manufacturer.id WHERE product.id={$id}";
         return select_single_record($sql);
     endif;
 }
@@ -44,18 +56,18 @@ function get_feedback_counter($id)
 // tìm sản phẩm theo keyword
 function get_products_by_kw($kw)
 {
-    $sql = "SELECT * FROM product 
+    $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+    $sql = "SELECT product.* FROM product 
             INNER JOIN product_category ON product.cate_id = product.cate_id
-            INNER JOIN manufacturer ON product.manu_id = manufacturer.manu_id
-            WHERE product.product_name LIKE '%{$kw}%' OR 
-            product_category.cate_name LIKE '%{$kw}%' OR 
-            manufacturer.manu_name LIKE '%{$kw}%'";
+            INNER JOIN manufacturer ON product.man_id = manufacturer.id
+            WHERE product.prod_name LIKE '%{$kw}%' OR 
+            product_category.name LIKE '%{$kw}%' OR 
+            manufacturer.name LIKE '%{$kw}%'
+            GROUP BY product.id
+            ORDER BY product.price {$sort}";
     return select_all_records($sql);
 }
-// lọc sản phẩm theo giá
-function get_products_by_price($sort)
-{
-}
+
 // lấy ra sản phẩm được giảm giá
 function get_discount_products()
 {

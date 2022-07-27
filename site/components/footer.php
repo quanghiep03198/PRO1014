@@ -1,4 +1,4 @@
-<footer class="bg-[color:var(--primary-color)]">
+<footer class="bg-[color:var(--primary-color)] px-5">
     <div class="container mx-auto flex justify-between sm:flex-col md:flex-col lg:flex-row gap-10 items-start py-[80px] text-white ">
         <!-- footer logo -->
         <picture>
@@ -36,6 +36,3 @@
         <p class="text-[#fff] text-[20px] font-[400]">Đại lý được ủy quyền bỏi Sony Việt Nam</p>
     </div>
 </footer>
-<script type="text/javascript">
-    // khởi tạo giỏ hàng trên localstorage
-</script>

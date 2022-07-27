@@ -19,7 +19,7 @@ function select_one_value($sql)
             $result->free_result();
             $connection->close();
             if (!is_null($data))  return $data[0];
-            else throw new Exception("No Result");
+            // else throw new Exception("No Result");
         } else {
             throw new Exception("SQL Syntax Error!");
             return false;
