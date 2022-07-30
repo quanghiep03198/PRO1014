@@ -10,6 +10,8 @@ $wish_list_items = get_wishList_items();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách yêu thích</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -41,7 +43,7 @@ $wish_list_items = get_wishList_items();
                                         <form action="" method="POST" onsubmit="delWishlistItem(this,event)">
                                             <input type="hidden" name="product_id" value=<?= $product_id ?>>
                                             <input type="hidden" name="request" value="del_item">
-                                            <button type="submit" class="text-2xl text-zinc-400 hover:btn-ghost"><i class="bi bi-trash"></i></button>
+                                            <button type="submit" class="text-2xl text-zinc-400 hover:text-error"><i class="bi bi-trash"></i></button>
                                         </form>
                                     </td>
                                     <td>
@@ -85,10 +87,10 @@ $wish_list_items = get_wishList_items();
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
     <!--  -->
-    <script src="/site/js/common.js"></script>
-    <script src="/site/js/handle-cart.js"></script>
-    <script src="/site/js/handle-post-request.js"></script>
-    <script src="/site/js/handle-userdata.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/handle-cart.js"></script>
+    <script src="/js/handle-post-request.js"></script>
+    <script src="/js/handle-userdata.js"></script>
 
 </body>
 

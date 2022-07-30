@@ -6049,6 +6049,11 @@ body[dir="rtl"] .checkbox:checked,
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.hover\:text-error:hover {
+  --tw-text-opacity: 1;
+  color: hsl(var(--er) / var(--tw-text-opacity));
+}
+
 .hover\:underline:hover {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;

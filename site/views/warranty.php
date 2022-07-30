@@ -45,8 +45,8 @@
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="/site/js/common.js"></script>
-    <script src="site/js/checkout.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/checkout.js"></script>
     <script>
 
     </script>

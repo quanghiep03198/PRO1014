@@ -1,9 +1,5 @@
 <?php
 // add wishlist
-include_once "../../lib/db_execute.php";
-include_once "../models/wishlist.php";
-
-
 function add_wishlist_item($product_id)
 {
     $wish_list_items = get_wishList_items(); // lấy tất cả sản phẩm trong wishlist

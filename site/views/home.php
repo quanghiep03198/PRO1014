@@ -133,10 +133,10 @@
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="/site/js/common.js"></script>
-    <script src="/site/js/handle-cart.js"></script>
-    <script src="/site/js/handle-post-request.js"></script>
-    <script type="text/javascript" src="site/js/carousel.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/handle-cart.js"></script>
+    <script src="/js/handle-post-request.js"></script>
+    <script src="/js/carousel.js"></script>
     <script type="text/javascript">
         const panels = $('.tab-panel')
         const tabs = $('.tab');

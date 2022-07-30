@@ -21,8 +21,8 @@
     </main>
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
-    <script src="/site/js/handle-userdata.js"></script>
-    <script src="/site/js/handle-post-request.js"></script>
+    <script src="/js/handle-userdata.js"></script>
+    <script src="/js/handle-post-request.js"></script>
 </body>
 
 </html>

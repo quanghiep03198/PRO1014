@@ -1,5 +1,4 @@
 <?php
-include_once '../../lib/db_execute.php';
 
 if (isset($_POST['content']) && isset($_POST['product_id']) && isset($_POST['username']) && isset($_POST['user']) && isset($_COOKIE['auth'])) {
     $product = mysqli_real_escape_string(get_db_connection(), $_POST['product_id']);
