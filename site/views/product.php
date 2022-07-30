@@ -15,29 +15,41 @@
 
 <body>
     <?php include_once 'site/components/header.php'; ?>
-    <main class="w-full grid sm:grid-cols-1 lg:grid-cols-[1fr,3fr] gap-10">
+    <main class="w-full grid sm:grid-cols-1 lg:grid-cols-[1fr,3fr] gap-10 relative">
         <!-- side bar -->
 
         <?php include_once 'site/components/sidebar.php' ?>
 
         <!-- product -->
         <section class="px-5" id="price-filter">
+
             <!-- product filter -->
-            <div class="flex justify-start mb-8">
-                <select class="select select-lg select-bordered" onchange="window.location = this.value">
-                    <?php if (isset($_GET['cate'])) : ?>
-                        <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
-                        <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
-                    <?php endif; ?>
-                    <?php if (isset($_GET['kw'])) :  ?>
-                        <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
-                        <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
-                    <?php endif; ?>
-                    <?php if (!isset($_GET['cate']) && !isset($_GET['kw'])) :  ?>
-                        <option value=<?php echo "?page=product&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
-                        <option value=<?php echo "?page=product&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
-                    <?php endif; ?>
-                </select>
+            <div class="max-w-full mx-auto flex justify-start mb-8 gap-5">
+                <div class="flex flex-col gap-2">
+                    <label for="" class="text-xl">Lọc theo giá</label>
+                    <select class="select select-lg select-bordered" onchange="window.location = this.value">
+                        <?php if (isset($_GET['cate'])) : ?>
+                            <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
+                            <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
+                        <?php endif; ?>
+                        <?php if (isset($_GET['kw'])) :  ?>
+                            <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
+                            <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
+                        <?php endif; ?>
+                        <?php if (!isset($_GET['cate']) && !isset($_GET['kw'])) :  ?>
+                            <option value=<?php echo "?page=product&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
+                            <option value=<?php echo "?page=product&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
+                        <?php endif; ?>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="page-selection" class="text-xl">Hiển thị</label>
+                    <select name="" id="page-selection" class="select select-lg select-bordered">
+                        <option value="6" selected>6 sản phẩm</option>
+                        <option value="9">9 sản phẩm</option>
+                    </select>
+                </div>
             </div>
 
             <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative" id="title">
@@ -48,7 +60,7 @@
                     if (count($products) == 0)
                         echo '<div class="center flex flex-col justify-center items-center">
                                 <img src="/img/empty.png" alt="">
-                                <p class="text-xl text-center">Sản phẩm không tồn tại!</p>;
+                                <p class="text-xl text-center">Sản phẩm không tồn tại!</p>
                             </div>';
                     foreach ($products as $product) :
                         extract($product);
@@ -61,7 +73,7 @@
                     if (count($products) == 0) :
                         echo '<div class="center flex flex-col justify-center items-center">
                                 <img src="/img/empty.png" alt="">
-                                <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>;
+                                <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
                             </div>';
                     endif;
                     foreach ($products as $product) :
@@ -75,7 +87,7 @@
                     if (count($products) == 0) :
                         echo '<div class="center flex flex-col justify-center items-center">
                                 <img src="/img/empty.png" alt="">
-                                <p class="text-xl text-center">Sản phẩm không tồn tại!</p>;
+                                <p class="text-xl text-center">Sản phẩm không tồn tại!</p>
                             </div>';
                     endif;
                     foreach ($products as $product) :
@@ -87,20 +99,12 @@
 
             </div>
             <div class="pagination btn-group center p-10"></div>
-
-            <!-- message -->
-            <div class="absolute bottom-5 right-0 alert alert-success shadow-lg w-auto translate-x-[200%] hidden">
-                <div>
-                    <i class="bi bi-check2-circle"></i><span class="pl-3">Đã thêm vào giỏ hàng!</span>
-                </div>
-            </div>
         </section>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="/site/js/common.js"></script>
-    <script src="/site/js/add-cart.js"></script>
-    <script src="/site/js/product-pagination.js"></script>
-
+    <script src="site/js/common.js"></script>
+    <script src="site/js/add-cart.js"></script>
+    <script src="site/js/product-pagination.js"></script>
 </body>
 
 </html>
