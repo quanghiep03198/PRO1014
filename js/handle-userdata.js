@@ -46,3 +46,9 @@ const handleRegisterError = (form) => {
 	if (!isEmail(email)) return false;
 	if (!isPhoneNumber(phone)) return false;
 };
+const loadFile = (event) => {
+	const photo = $("#user-image");
+	photo.style.display = "block";
+	photo.src = URL.createObjectURL(event.target.files[0]);
+	console.log(photo.src);
+};

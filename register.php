@@ -14,12 +14,12 @@
 
 <body class="w-screen h-screen flex justify-center items-center bg-center bg-no-repeat bg-cover" style="background-image: url('/img/banners/register-bg.webp');">
     <div class="max-w-4xl mx-auto px-10 p-10 bg-white bg-opacity-80">
-        <form action="verify_account.php" method="POST" id="register-form">
+        <form action="verify_account.php" method="POST" onsubmit="return handleRegisterError(this)">
             <h1 class="sm:text-xl lg:text-4xl text-center font-semibold mb-5">Đăng ký tài khoản</h1>
             <!-- tài khoản -->
             <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-10">
                 <!-- form group left -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col gap-5 items-center">
                     <div class="form-group">
                         <input data-name="tài khoản" name="account" class="block outline-none bg-inherit appearance-none border-b  w-full py-2 px-3 focus:outline-none focus:shadow-outline" id="account" type="text" placeholder="Tài khoản">
                         <small class=" text-error error-message font-semibold"></small>
@@ -42,7 +42,7 @@
                 </div>
 
                 <!-- form group right -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col gap-5 items-center">
                     <!-- email  -->
                     <div class="form-group">
                         <input data-name="email" name="email" class="block outline-none  bg-inherit  appearance-none border-b  w-full py-2 px-3   focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
@@ -73,30 +73,7 @@
     <script src="site/js/common.js"></script>
     <script src="site/js/validate.js"></script>
     <script type="text/javascript">
-        const account = $("#account")
-        const password = $("#password")
-        const confirmPassword = $("#password2")
-        const username = $("#username")
-        const email = $("#email")
-        const address = $("#address")
-        const phone = $("#phone")
-        const form = $("#register-form")
-        if (form) {
-            form.onsubmit = () => {
-                if (!isRequired(account, password, confirmPassword, username, email, address, phone))
-                    return false
-                if (!checkLength(password, 8))
-                    return false
-                if (!ckMatchingValue(confirmPassword, password))
-                    return false
-                if (!isEmail(email))
-                    return false
-                if (!isPhoneNumber(phone))
-                    return false;
-                return true
 
-            }
-        }
     </script>
 </body>
 

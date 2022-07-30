@@ -32,13 +32,14 @@
                     <!-- submenu -->
                     <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-[300px]">
                         <li>
-                            <a href="?page=account" class="justify-between">Tài khoản <span class="badge badge-lg"><?= $_SESSION['user_name'] ?></span></a>
+                            <a href="?page=account-view_profile" class="justify-between">Tài khoản <span class="badge badge-lg"><?= $_SESSION['user_name'] ?></span></a>
                         </li>
                         <li><a href="./logout.php">Đăng xuất</a></li>
                     </ul>
                 </div>
-                <a href="?page=account&act=wishlist" class="text-xl"><i class="bi bi-heart"></i></a>
+                <a href="?page=account-wishlist" class="text-xl"><i class="bi bi-heart"></i></a>
             <?php endif; ?>
+
             <!-- nếu người dùng chưa đăng nhập sẽ hiển thị nút đăng nhập -->
             <?php if (!isset($_COOKIE['auth'])) : ?>
                 <label for="my-modal-3" class="modal-button text-2xl"><i class="bi bi-person"></i></label>

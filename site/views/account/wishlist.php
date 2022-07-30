@@ -1,0 +1,95 @@
+<?php
+$wish_list_items = get_wishList_items();
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách yêu thích</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <!-- import header component -->
+    <?php include_once "site/components/header.php" ?>
+    <!--  -->
+    <main class="w-full bg-slate-200 py-[50px]">
+        <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[1fr,2fr] items-stretch gap-10 px-5">
+            <?php include_once "site/components/account-sidebar.php" ?>
+            <!-- main interface -->
+            <div class="overflow-x-auto">
+                <div class="overflow-y-scroll hidden-scrollbar h-screen">
+                    <table class="table w-full table-compact">
+                        <!-- head -->
+
+                        <thead class="sticky top-0 z-50">
+                            <tr>
+                                <th></th>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Kho hàng</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($wish_list_items as $item) : extract($item) ?>
+                                <tr>
+                                    <td>
+                                        <form action="" method="POST" onsubmit="delWishlistItem(this,event)">
+                                            <input type="hidden" name="product_id" value=<?= $product_id ?>>
+                                            <input type="hidden" name="request" value="del_item">
+                                            <button type="submit" class="text-2xl text-zinc-400 hover:btn-ghost"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center gap-2">
+                                            <picture><img src=<?= ROOT_PRODUCT .  $image ?> alt="" class="max-w-[100px] h-[100px] object-contain"></picture>
+                                            <div class="flex flex-col gap-2">
+                                                <span class="text-lg font-semibold"><?= $product_name ?></span>
+                                                <span><?= get_product_manufacturer($product_id) ?></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex flex-col gap-2">
+                                            <span class="line-through text-zinc-400"><?= $price . "₫" ?></span>
+                                            <span class="text-lg"><?= $discount_price . "₫" ?></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <?php echo $stock > 0 ? '<span class="text-success">Còn hàng</span>' : '<span class="text-error">Hết hàng</span>' ?></td>
+                                    <td>
+                                        <form action="?page=cart" method="POST">
+                                            <input type='hidden' name='product_id' value=<?= $product_id ?>>
+                                            <input type='hidden' name='product_name' value="<?php echo $product_name ?>">
+                                            <input type='hidden' name='manu' value="<?php echo get_product_manufacturer($product_id) ?>">
+                                            <input type='hidden' name='price' value=<?= $price ?>>
+                                            <input type='hidden' name='product_img' value=<?= $image ?>>
+                                            <input type='hidden' name='qty' value=1>
+                                            <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
+                                            <input type='hidden' name='total' value=<?= $price * 1 ?>>
+                                            <button type="submit" onclick="addCart(this)" class="btn btn-md hover:btn-primary">mua ngay</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- import footer component -->
+    <?php include_once "site/components/footer.php" ?>
+    <!--  -->
+    <script src="/site/js/common.js"></script>
+    <script src="/site/js/handle-cart.js"></script>
+    <script src="/site/js/handle-post-request.js"></script>
+    <script src="/site/js/handle-userdata.js"></script>
+
+</body>
+
+</html>

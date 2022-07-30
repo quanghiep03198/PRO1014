@@ -146,7 +146,7 @@ if (isset($_GET['id'])) {
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="/site/js/carousel.js"></script>
     <script src="/site/js/common.js"></script>
-    <script src="/site/js/add-cart.js"></script>
+    <script src="/site/js/handle-cart.js"></script>
     <script src="/site/js/handle-post-request.js"></script>
     <script>
         const updateQty = (btn, unitVal) => {

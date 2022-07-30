@@ -64,7 +64,9 @@
 	<?php include_once 'site/components/footer.php'; ?>
 	<script type="text/javascript" src="site/js/common.js"></script>
 	<script type="text/javascript" src="site/js/handle-cart.js"></script>
-
+	<script>
+		if (cartList) renderCart(JSON.parse(localStorage.getItem("cart")));
+	</script>
 </body>
 
 </html>

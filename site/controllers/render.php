@@ -1,10 +1,7 @@
 <?php
 function page_render()
 {
-    // using models
-    include_once 'site/models/product.php';
-    include_once 'site/models/order.php';
-    include_once 'site/models/category.php';
+    global $auth;
     $page = isset($_GET['page']) ? str_replace("-", "/", $_GET['page']) : 'home';
     $file = "site/views/{$page}.php";
     if (file_exists($file))

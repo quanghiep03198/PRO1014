@@ -103,7 +103,8 @@
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="site/js/common.js"></script>
-    <script src="site/js/add-cart.js"></script>
+    <script src="site/js/handle-cart.js"></script>
+    <script src="site/js/handle-post-request.js"></script>
     <script src="site/js/product-pagination.js"></script>
 </body>
 

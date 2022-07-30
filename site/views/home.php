@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <!-- main style -->
     <link rel="stylesheet" href="styles/main.css">
 
 </head>
+
 
 <body class="relative">
     <?php include_once 'site/components/header.php';  ?>
@@ -60,7 +63,7 @@
         <!-- product-list -->
         <section class="w-auto py-[5rem]">
             <!-- nav-tabs -->
-            <div class="tabs justify-center items-center max-w-lg mx-auto ">
+            <div class="tabs justify-center items-center max-w-lg mx-auto mb-5">
                 <button onclick="showPanel(0)" class="tab sm:tab md:tab lg:tab-lg tab-bordered font-semibold text-2xl">Sản phẩm mới</button>
                 <button onclick="showPanel(1)" class="tab sm:tab md:tab lg:tab-lg tab-bordered font-semibold text-2xl">Giảm giá</button>
                 <button onclick="showPanel(2)" class="tab sm:tab md:tab lg:tab-lg tab-bordered font-semibold text-2xl">Mua nhiều</button>
@@ -69,7 +72,7 @@
             <div class="swiper product-slider tab-panel">
                 <div class="swiper-wrapper">
                     <?php foreach (get_new_products() as $product) : extract($product) ?>
-                        <div class="swiper-slide center">
+                        <div class="swiper-slide ">
                             <?php include("site/components/product-card.php") ?>
                         </div>
                     <?php endforeach ?>
@@ -81,7 +84,7 @@
             <div class="swiper product-slider tab-panel">
                 <div class="swiper-wrapper">
                     <?php foreach (get_discount_products() as $product) : extract($product) ?>
-                        <div class="swiper-slide center">
+                        <div class="swiper-slide">
                             <?php include("site/components/product-card.php") ?>
                         </div>
                     <?php endforeach ?>
@@ -93,15 +96,14 @@
             <div class="swiper product-slider tab-panel">
                 <div class="swiper-wrapper">
                     <?php foreach (get_best_seller_products() as $product) : extract($product) ?>
-                        <div class="swiper-slide center">
-                            <?php include("site/components/product-card.php") ?>
+                        <div class="swiper-slide">
+                            <?php include("site/components/product-card.php"); ?>
                         </div>
                     <?php endforeach ?>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
-
         </section>
 
         <!-- news -->
@@ -130,11 +132,11 @@
         </section>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script type="text/javascript" src="site/js/swiper.js"></script>
     <script src="/site/js/common.js"></script>
-    <script src="/site/js/add-cart.js"></script>
+    <script src="/site/js/handle-cart.js"></script>
+    <script src="/site/js/handle-post-request.js"></script>
+    <script type="text/javascript" src="site/js/carousel.js"></script>
     <script type="text/javascript">
         const panels = $('.tab-panel')
         const tabs = $('.tab');
