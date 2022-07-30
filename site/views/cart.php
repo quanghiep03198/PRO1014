@@ -26,7 +26,7 @@
 							</tbody>
 						</table>
 					</div>
-					<a href="" class="hover:underline"><i class="bi bi-arrow-left-short"></i> Continue Shopping</a>
+					<a href="?page=product" class="hover:underline"><i class="bi bi-arrow-left-short"></i>Tiếp tục mua hàng</a>
 				</div>
 				<!-- order summary  -->
 				<div class="bg-gray-200 p-5 max-w-full flex flex-col gap-5">
@@ -39,7 +39,7 @@
 					</div>
 					<div class="flex items-center justify-between">
 						<p class="text-lg">Tạm tính</p>
-						<p class="text-lg" id="temp-payment" data-cash></p>
+						<p class="text-lg" id="temp-payment" data-cash=0></p>
 					</div>
 					<div class="flex items-center justify-between border-b-2">
 						<p class="text-lg">Giảm giá</p>
@@ -54,7 +54,7 @@
 						</div>
 						<p class="text-[14px] bb-[30px] ">Số tiền này chưa bao gồm phí vận chuyển</p>
 					</div>
-					<form action="?page=checkout" method="POST" id="cart-form">
+					<form action="?page=payment_selection" method="POST" id="cart-form" onsubmit="return checkEmptyCart()">
 						<button type="submit" name="check-out" id="check-out-submit" class="btn btn-block btn-lg hover:btn-active hover:btn-primary">Đặt hàng</button>
 					</form>
 				</div>
@@ -63,7 +63,8 @@
 	</main>
 	<?php include_once 'site/components/footer.php'; ?>
 	<script type="text/javascript" src="site/js/common.js"></script>
-	<script type="text/javascript" src="site/js/cart.js"></script>
+	<script type="text/javascript" src="site/js/handle-cart.js"></script>
+
 </body>
 
 </html>
