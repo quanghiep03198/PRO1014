@@ -1,25 +1,49 @@
+const alert = {
+	success: {
+		style: "alert-success",
+		icon: "bi bi-check2-circle",
+	},
+
+	infor: {
+		style: "alert-infor",
+		icon: "bi bi-info-circle",
+	},
+
+	warning: {
+		style: "alert-warning",
+		icon: "bi bi-exclamation-triangle",
+	},
+
+	error: {
+		style: "alert-error",
+		icon: "bi bi-x-circle",
+	},
+};
+const showMessage = (style, icon, message) => {
+	const toast = document.createElement("div");
+	toast.classList.add("animate-[slip_500ms_ease-in-out]", "toast", "toast-bottom", "toast-end", "w-[300px]", "z-50");
+	toast.innerHTML = /*html */ ` <div class="alert ${style} text-gray-800 text-xl">
+									<div>
+										<i class="${icon}"></i>
+										<span>${message}</span>
+									</div>
+								</div>`;
+	const main = $("main");
+	main.appendChild(toast);
+	setTimeout(() => {
+		main.removeChild(toast);
+	}, 3000);
+};
 /**
  * Thêm sản phẩm vào giỏ hàng
  */
-
-`         <div class="absolute bottom-5 right-0 alert alert-success shadow-lg w-auto invisible">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Đã thêm vào giỏ hàng!</span>
-                </div>
-            </div>`;
-const alertCartMessage = () => {
-	setTimeout();
-};
 const addCart = (button) => {
 	const cartItems = JSON.parse(localStorage.getItem("cart"));
 	const product = {
-		id: button.parentElement.querySelector(`input[name = "id"]`).value,
-		name: button.parentElement.querySelector(`input[name = "name"]`).value,
+		id: button.parentElement.querySelector(`input[name = "product_id"]`).value,
+		name: button.parentElement.querySelector(`input[name = "product_name"]`).value,
 		manu: button.parentElement.querySelector(`input[name = "manu"]`).value,
-		img: button.parentElement.querySelector(`input[name = "img"]`).value,
+		img: button.parentElement.querySelector(`input[name = "product_img"]`).value,
 		price: +button.parentElement.querySelector(`input[name = "price"]`).value,
 		qty: +button.parentElement.querySelector(`input[name = "qty"]`).value,
 		warranty: +button.parentElement.querySelector(`input[name = "warranty"]`).value,
@@ -39,7 +63,5 @@ const addCart = (button) => {
 		localStorage.setItem("cart", JSON.stringify(cartItems));
 	}
 	countItems();
+	showMessage(alert.success.style, alert.success.icon, "Thêm vào giỏ hàng thành công!");
 };
-/**
- *
- */
