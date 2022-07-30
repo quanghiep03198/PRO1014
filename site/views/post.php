@@ -24,17 +24,9 @@
                 <!-- slider -->
                 <div class="relative">
                     <div class="carousel w-full">
-                        <?php for ($i = 1; $i <= 4; $i++) { ?>
-                            <div class="relative carousel-item w-full text-white" id=<?= "item{$i}" ?>>
-                                <img src="img/banners/cod.jpg" alt="" class="">
-                                <span class="absolute top-5 left-5">27/7/2022</span>
-                                <div class="absolute bottom-10 left-5 flex flex-col gap-3">
-                                    <span>Đăng bởi:<span class="indent-2"><?php echo "Author_name" ?></span></span>
-                                    <h3 class="text-2xl font-semibold"><?php echo "Call of Duty ghost Remaster" ?></h3>
-                                    <a href=<?php echo "?page=post_detail&id=?" ?> class="link">Đọc tiếp</a>
-                                </div>
-                            </div>
-                        <?php  } ?>
+                        <?php for ($i = 1; $i <= 4; $i++) {
+                            include("site/components/post-banner.php");
+                        } ?>
                     </div>
                     <div class="absolute bottom-4 flex justify-center w-full py-2 gap-2">
                         <?php for ($i = 1; $i <= 4; $i++) { ?>
