@@ -1,5 +1,5 @@
 <?php
-function page_render()
+function render()
 {
     // using models
     include_once 'admin/models/product.php';

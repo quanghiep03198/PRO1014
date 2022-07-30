@@ -1,9 +1,23 @@
-<section id="product-add__form">
-    <form action="" enctype="multipart/form-data" method="post">
-        <!-- product's name -->
-        <div class="form-control flex flex-col">
-            <label class="label block">Tên sản phẩm</label>
-            <input type="text" placeholder="Type here" class="input input-bordered input-md w-full max-w-xs" />
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="/path/or/uri/to/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Thêm sản phẩm</h1>
+    <form method="post">
+        <textarea id="mytextarea">Hello, World!</textarea>
     </form>
-</section>
+</body>
+
+</html>

@@ -37,7 +37,7 @@ if (isset($_POST['buy_now'])) {
                 <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
                 <input type='hidden' name='total' value=<?= $price * 1 ?>>
                 <!-- product card button group -->
-                <input type="hidden" name="request" value="add_wishlist">
+                <input type="hidden" name="REQUEST" value="POST">
                 <button type='submit' onclick="addCart(this)" class='flex-grow btn text-xl hover:btn-primary' name='buy_now'><i class="bi bi-cart3"></i></button>
                 <button type="button" onclick="addCart(this)" class="flex-grow btn text-xl hover:btn-primary"><i class="bi bi-bag-plus"></i></button>
                 <button type="submit" onclick="addWishlist(this,event)" class="flex-grow btn text-xl hover:btn-primary"><i class="bi bi-heart"></i></button>

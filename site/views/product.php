@@ -16,88 +16,88 @@
     <?php include_once 'site/components/header.php'; ?>
     <main class="w-full grid sm:grid-cols-1 lg:grid-cols-[1fr,3fr] gap-10 relative">
         <!-- side bar -->
-
         <?php include_once 'site/components/sidebar.php' ?>
 
         <!-- product -->
         <section class="px-5" id="price-filter">
+            <div class="container mx-auto">
+                <!-- product filter -->
+                <div class="max-w-full mx-auto flex justify-start mb-8 gap-5">
+                    <div class="flex flex-col gap-2">
+                        <label for="" class="text-xl">Lọc theo giá</label>
+                        <select class="select select-lg select-bordered" onchange="window.location = this.value">
+                            <?php if (isset($_GET['cate'])) : ?>
+                                <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
+                                <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
+                            <?php endif; ?>
+                            <?php if (isset($_GET['kw'])) :  ?>
+                                <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
+                                <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
+                            <?php endif; ?>
+                            <?php if (!isset($_GET['cate']) && !isset($_GET['kw'])) :  ?>
+                                <option value=<?php echo "?page=product&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
+                                <option value=<?php echo "?page=product&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
+                            <?php endif; ?>
+                        </select>
+                    </div>
 
-            <!-- product filter -->
-            <div class="max-w-full mx-auto flex justify-start mb-8 gap-5">
-                <div class="flex flex-col gap-2">
-                    <label for="" class="text-xl">Lọc theo giá</label>
-                    <select class="select select-lg select-bordered" onchange="window.location = this.value">
-                        <?php if (isset($_GET['cate'])) : ?>
-                            <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
-                            <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
-                        <?php endif; ?>
-                        <?php if (isset($_GET['kw'])) :  ?>
-                            <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
-                            <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
-                        <?php endif; ?>
-                        <?php if (!isset($_GET['cate']) && !isset($_GET['kw'])) :  ?>
-                            <option value=<?php echo "?page=product&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
-                            <option value=<?php echo "?page=product&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
-                        <?php endif; ?>
-                    </select>
+                    <div class="flex flex-col gap-2">
+                        <label for="page-selection" class="text-xl">Hiển thị</label>
+                        <select name="" id="page-selection" class="select select-lg select-bordered">
+                            <option value="6" selected>6 sản phẩm</option>
+                            <option value="9">9 sản phẩm</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="flex flex-col gap-2">
-                    <label for="page-selection" class="text-xl">Hiển thị</label>
-                    <select name="" id="page-selection" class="select select-lg select-bordered">
-                        <option value="6" selected>6 sản phẩm</option>
-                        <option value="9">9 sản phẩm</option>
-                    </select>
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative" id="title">
+                    <?php
+                    // lấy tất cả sản phảm
+                    if (!isset($_GET['cate']) && !isset($_GET['kw'])) :
+                        $products = get_all_products();
+                        if (count($products) == 0)
+                            echo '<div class="center flex flex-col justify-center items-center">
+                            <img src="/img/empty.png" alt="">
+                            <p class="text-xl text-center">Sản phẩm không tồn tại!</p>
+                        </div>';
+                        foreach ($products as $product) :
+                            extract($product);
+                            include("site/components/product-card.php");
+                        endforeach;
+                    endif;
+                    // lọc sản phẩm theo loại
+                    if (isset($_GET['cate'])) :
+                        $products = get_products_by_cate($_GET['cate'], $_GET['manu']);
+                        if (count($products) == 0) :
+                            echo '<div class="center flex flex-col justify-center items-center">
+                            <img src="/img/empty.png" alt="">
+                            <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
+                        </div>';
+                        endif;
+                        foreach ($products as $product) :
+                            extract($product);
+                            include("site/components/product-card.php");
+                        endforeach;
+                    endif;
+                    // lọc sản phẩm theo từ khóa tìm kiếm
+                    if (isset($_GET['kw']) && !isset($_GET['cate'])) :
+                        $products = get_products_by_kw($_GET['kw']);
+                        if (count($products) == 0) :
+                            echo '<div class="center flex flex-col justify-center items-center">
+                            <img src="/img/empty.png" alt="">
+                            <p class="text-xl text-center">Sản phẩm không tồn tại!</p>
+                        </div>';
+                        endif;
+                        foreach ($products as $product) :
+                            extract($product);
+                            include("site/components/product-card.php");
+                        endforeach;
+                    endif;
+                    ?>
+
                 </div>
+                <div class="pagination btn-group center p-10"></div>
             </div>
-
-            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative" id="title">
-                <?php
-                // lấy tất cả sản phảm
-                if (!isset($_GET['cate']) && !isset($_GET['kw'])) :
-                    $products = get_all_products();
-                    if (count($products) == 0)
-                        echo '<div class="center flex flex-col justify-center items-center">
-                                <img src="/img/empty.png" alt="">
-                                <p class="text-xl text-center">Sản phẩm không tồn tại!</p>
-                            </div>';
-                    foreach ($products as $product) :
-                        extract($product);
-                        include("site/components/product-card.php");
-                    endforeach;
-                endif;
-                // lọc sản phẩm theo loại
-                if (isset($_GET['cate'])) :
-                    $products = get_products_by_cate($_GET['cate'], $_GET['manu']);
-                    if (count($products) == 0) :
-                        echo '<div class="center flex flex-col justify-center items-center">
-                                <img src="/img/empty.png" alt="">
-                                <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
-                            </div>';
-                    endif;
-                    foreach ($products as $product) :
-                        extract($product);
-                        include("site/components/product-card.php");
-                    endforeach;
-                endif;
-                // lọc sản phẩm theo từ khóa tìm kiếm
-                if (isset($_GET['kw']) && !isset($_GET['cate'])) :
-                    $products = get_products_by_kw($_GET['kw']);
-                    if (count($products) == 0) :
-                        echo '<div class="center flex flex-col justify-center items-center">
-                                <img src="/img/empty.png" alt="">
-                                <p class="text-xl text-center">Sản phẩm không tồn tại!</p>
-                            </div>';
-                    endif;
-                    foreach ($products as $product) :
-                        extract($product);
-                        include("site/components/product-card.php");
-                    endforeach;
-                endif;
-                ?>
-
-            </div>
-            <div class="pagination btn-group center p-10"></div>
         </section>
     </main>
     <?php include_once 'site/components/footer.php'; ?>

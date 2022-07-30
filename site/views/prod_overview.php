@@ -131,6 +131,7 @@ if (isset($_GET['id'])) {
                                 <input type="hidden" name="avatar" value="<?php echo $auth['avatar'] ?>">
                                 <input type="hidden" name="username" value="<?php echo $auth['name'] ?>">
                                 <input type="hidden" name="product_id" value="<?php echo $_GET['id'] ?>">
+                                <input type="hidden" name="REQUEST" value="POST">
                                 <input type="text" name="content" id="content" placeholder="Nhập bình luận ..." class="input input-sm w-full border-none focus:outline-none">
                                 <button type="submit" name="create_comment">
                                     <i class="bi bi-send"></i>
@@ -148,6 +149,7 @@ if (isset($_GET['id'])) {
     <script src="/js/common.js"></script>
     <script src="/js/handle-cart.js"></script>
     <script src="/js/handle-post-request.js"></script>
+    <script src="/js/product-pagination.js"></script>
     <script>
         const updateQty = (btn, unitVal) => {
             const target = btn.parentElement.querySelector(".quantity");

@@ -18,7 +18,7 @@
     <!-- HEADER END  -->
     <main class="container mx-auto">
 
-        <div class="gr grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[2.5fr,1fr] gap-10">
+        <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[2.5fr,1fr] gap-10">
             <!-- main interface -->
             <div class="container">
                 <!-- slider -->
@@ -50,7 +50,7 @@
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="/site/js/common.js"></script>
+    <script src="/js/common.js"></script>
     <script>
         const paginationBtns = $(".pagination-button")
 
@@ -62,7 +62,7 @@
         }
         paginationBtns[0].classList.add("btn-primary");
     </script>
-    <script src="/site/js/product-pagination.js"></script>
+    <script src="/js/product-pagination.js"></script>
 </body>
 
 </html;

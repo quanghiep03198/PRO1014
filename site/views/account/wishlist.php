@@ -42,7 +42,7 @@ $wish_list_items = get_wishList_items();
                                     <td>
                                         <form action="" method="POST" onsubmit="delWishlistItem(this,event)">
                                             <input type="hidden" name="product_id" value=<?= $product_id ?>>
-                                            <input type="hidden" name="request" value="del_item">
+                                            <input type="hidden" name="REQUEST" value="DELETE">
                                             <button type="submit" class="text-2xl text-zinc-400 hover:text-error"><i class="bi bi-trash"></i></button>
                                         </form>
                                     </td>

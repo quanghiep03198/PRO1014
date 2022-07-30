@@ -47,11 +47,13 @@ const postCommentOnProduct = (form, event) => {
 	const productId = form["product_id"].value;
 	const content = form["content"];
 	const avatar = form["avatar"].value;
+	const request = form["REQUEST"].value;
+	console.log(request);
 	// khởi tạo request
 	const xhr = new XMLHttpRequest();
 	xhr.open("POST", "/site/controllers/handle_comment.php", true); // mở 1 kết nối đến comment controller
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // kiểu dữ liệu gửi đi/nhận về
-	const params = "user=" + user + "&username=" + username + "&product_id=" + productId + "&content=" + content.value + "&avatar=" + avatar;
+	const params = "REQUEST=" + request + "&user=" + user + "&username=" + username + "&product_id=" + productId + "&content=" + content.value + "&avatar=" + avatar;
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	if (content.value != "" && authCookie) {
 		// nếu có cookie của ng dùng đã đăng nhập -> push vào database và send response về
@@ -72,12 +74,12 @@ const addWishlist = (button, event) => {
 	const form = button.parentElement.parentElement;
 	// lấy các trường dữ liệu sản phẩm
 	const product_id = form["product_id"].value;
-	const request = form["request"].value;
+	const request = form["REQUEST"].value;
 	// mở kết nối đến controller
 	const xhr = new XMLHttpRequest();
 	xhr.open("POST", "/site/controllers/handle_wishlist.php", true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	const params = "product_id=" + product_id + "&request=" + request;
+	const params = "product_id=" + product_id + "&REQUEST=" + request;
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	// validate dữ liệu trước khi post request
 	if (authCookie) {
@@ -92,9 +94,10 @@ const addWishlist = (button, event) => {
 
 const delWishlistItem = (form, event) => {
 	const product_id = form["product_id"].value;
-	const request = form["request"].value;
+	const request = form["REQUEST"].value;
 	const xhr = new XMLHttpRequest();
 	xhr.open("POST", "/site/controllers/handle_wishlist.php", true);
-	xhr.setRequestHeader("Content-Type", "application");
-	const params = "request=" + request + "&product_id=" + product_id;
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	const params = "REQUEST=" + request + "&product_id=" + product_id;
+	xhr.send(params);
 };

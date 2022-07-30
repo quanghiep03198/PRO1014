@@ -1,4 +1,7 @@
 <?php
+include_once '../../lib/db_execute.php';
+include_once '../models/wishlist.php';
+
 // add wishlist
 function add_wishlist_item($product_id)
 {
@@ -35,8 +38,8 @@ function remove_wishlist_item($product_id)
     execute_query($sql);
 }
 
-if (isset($_POST['request']) && $_POST['request'] == 'add_wishlist' && isset($_POST['product_id']))
+if (isset($_POST['REQUEST']) && $_POST['REQUEST'] == 'POST' && isset($_POST['product_id']))
     add_wishlist_item($_POST['product_id']);
 
-if (isset($_POST['request']) && $_POST['request'] == 'del_item' && isset($_POST['product_id']))
+if (isset($_POST['REQUEST']) && $_POST['REQUEST'] == 'DELETE' && isset($_POST['product_id']))
     remove_wishlist_item($_POST['product_id']);

@@ -46,10 +46,9 @@
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="/js/common.js"></script>
-    <script src="/js/checkout.js"></script>
-    <script>
+    <script src="/js/validate.js"></script>
+    <script src="/js/handle-userdata.js"></script>
 
-    </script>
 </body>
 
 </html>

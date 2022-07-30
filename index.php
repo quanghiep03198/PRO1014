@@ -12,8 +12,7 @@ include_once 'site/models/comment.php';
 include_once 'site/models/user.php';
 // controllers xử lý request của người dùng
 include_once 'site/controllers/render.php';
-include_once 'site/controllers/handle_wishlist.php';
-include_once 'site/controllers/handle_comment.php';
+
 
 session_start();
 
