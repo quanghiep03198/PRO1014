@@ -1,79 +1,80 @@
 // get name of each field
-const getFieldName = (formControl) => {
-	return formControl.getAttribute("data-name");
+const getFieldName = (formCtrl) => {
+	return formCtrl.dataset.name;
 };
 // get input element
 
 // show error message
-const showError = (formControl, message) => {
+const showError = (formCtrl, message) => {
 	const errorIcon = /*html */ `<i class="bi bi-x align-center"></i>`;
-	const errorMessage = formControl.parentElement.querySelector(".error-message");
+	const errorMessage = formCtrl.parentElement.querySelector(".error-message");
 	errorMessage.innerHTML = errorIcon + message;
-	formControl.classList.add("input-error");
-	formControl.classList.toggle("input-success");
+	formCtrl.classList.add("input-error", "border-2");
+	formCtrl.classList.toggle("input-success", "border-2");
 };
 // show success if value of the field is valid
-const showSuccess = (formControl, message) => {
-	const successMessage = formControl.parentElement.querySelector(".error-message");
+const showSuccess = (formCtrl, message) => {
+	const successMessage = formCtrl.parentElement.querySelector(".error-message");
 	successMessage.innerHTML = message;
-	formControl.classList.add("input-success");
-	formControl.classList.remove("input-error");
+	formCtrl.classList.add("input-success", "border-2");
+	formCtrl.classList.remove("input-error", "border-2");
 };
 
 /**
  * các rule thực hiện check các trường input
  */
 const isRequired = (...formControls) => {
-	let errorCount = 0;
-	formControls.forEach((formControl) => {
-		if (formControl.value.trim() != "") showSuccess(formControl, null);
+	let isntError = true;
+	formControls.forEach((formCtrl) => {
+		if (formCtrl.value.trim() != "") showSuccess(formCtrl, null);
 		else {
-			errorCount++;
-			showError(formControl, `Bạn chưa nhập ${getFieldName(formControl)}`);
+			isntError = false;
+			showError(formCtrl, `Bạn chưa nhập ${getFieldName(formCtrl)}`);
 		}
-		formControl.oninput = () => {
-			if (formControl.value.trim() != "") showSuccess(formControl, null);
+		formCtrl.oninput = () => {
+			if (formCtrl.value.trim() != "") showSuccess(formCtrl, null);
 			else {
-				errorCount++;
-				showError(formControl, `Bạn chưa nhập ${getFieldName(formControl)}`);
+				isntError = false;
+				showError(formCtrl, `Bạn chưa nhập ${getFieldName(formCtrl)}`);
 			}
 		};
-		formControl.onchange = () => {
-			if (formControl.value.trim() != "") showSuccess(formControl, null);
-			else {
-				errorCount++;
-				showError(formControl, `Bạn chưa nhập ${getFieldName(formControl)}`);
+		formCtrl.onchange = () => {
+			if (formCtrl.value.trim() != "") {
+				showSuccess(formCtrl, null);
+			} else {
+				isntError = false;
+				showError(formCtrl, `Bạn chưa nhập ${getFieldName(formCtrl)}`);
 			}
 		};
 	});
-	return errorCount == 0 ? true : false;
+	return isntError;
 };
 
-const isEmail = (formControl) => {
+const isEmail = (formCtrl) => {
 	let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	formControl.oninput = () => {
-		regexEmail.test(formControl.value) ? showSuccess(formControl, null) : showError(formControl, "Email không hợp lệ");
+	formCtrl.oninput = () => {
+		regexEmail.test(formCtrl.value) ? showSuccess(formCtrl, null) : showError(formCtrl, "Email không hợp lệ");
 	};
-	return regexEmail.test(formControl.value) ? true : false;
+	return regexEmail.test(formCtrl.value);
 };
 
-const ckMatchingValue = (input1, input2) => {
-	input1.oninput = () => {
-		input1.value == input2.value ? showSuccess(input1, null) : showError(input1, `${getFieldName(input1)} doesn't match !`);
+const ckMatchingValue = (formCtrl1, formCtrl2) => {
+	formCtrl1.oninput = () => {
+		formCtrl1.value == formCtrl2.value ? showSuccess(formCtrl1, null) : showError(formCtrl1, `${getFieldName(formCtrl1)} doesn't match !`);
 	};
-	return input1.value == input2.value ? true : false;
+	return formCtrl1.value == formCtrl2.value;
 };
 
-const checkLength = (input, minLength) => {
-	input.oninput = () => {
-		input.value.length >= minLength ? showSuccess(input, null) : showError(input, `${getFieldName(input)} phải có tối thiểu ${minLength} ký tự`);
+const checkLength = (formCtrl, minLength) => {
+	formCtrl.oninput = () => {
+		formCtrl.value.length >= minLength ? showSuccess(formCtrl, null) : showError(formCtrl, `${getFieldName(formCtrl)} phải có tối thiểu ${minLength} ký tự`);
 	};
-	return input.value.length >= minLength ? true : false;
+	return formCtrl.value.length >= minLength;
 };
 
-const isPhoneNumber = (input) => {
-	input.oninput = () => {
-		input.value == +input.value && input.value.length == 10 ? showSuccess(input, null) : showError(input, `${getFieldName(input)} không hợp lệ`);
+const isPhoneNumber = (formCtrl) => {
+	formCtrl.oninput = () => {
+		formCtrl.value == +formCtrl.value && formCtrl.value.length == 10 ? showSuccess(formCtrl, null) : showError(formCtrl, `${getFieldName(formCtrl)} không hợp lệ`);
 	};
-	return input.value == +input.value && input.value.length == 10 ? true : false;
+	return formCtrl.value == +formCtrl.value && formCtrl.value.length == 10;
 };
