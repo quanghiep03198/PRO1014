@@ -1,36 +1,3 @@
-<?php
-// include './lib/validate.php';
-session_start();
-if (isset($_POST['login-submit'])) {
-    $account = $_POST['account'];
-    $password = $_POST['password'];
-    if (empty($account) || empty($password))
-        echo "<script>alert(`Hãy nhập đầy đủ thông tin!`);</script>";
-    if (!empty($account) && !empty($password)) :
-        $userData = select_single_record("SELECT * FROM users WHERE account = '{$account}'");
-        if (!is_null($userData)) {
-            if (password_verify($password, $userData['password'])) {
-                setcookie("auth", $userData['id']);
-                $_SESSION['user_name'] = $userData['name'];
-                if ($userData['role_id'] == 0 || $userData['role_id'] == 1) {
-                    echo  "<script>alert(`Đăng nhập thành công!`)</script>";
-                    echo  "<script>window.location = './admin.php'</script>";
-                } else {
-                    echo  "<script>alert(`Đăng nhập thành công!`)</script>";
-                    echo  "<script>window.location = './'</script>";
-                }
-            } else
-                echo "<script>alert(`Mật khẩu không chính xác!`)</script>";
-        }
-        // nếu kết quả trả về từ câu truy vẫn = null -> tài khoản không tồn tại
-        else
-            echo "<script>alert(`Tài khoản không tồn tại!`)</script>";
-    endif;
-}
-if (isset($_COOKIE['auth']))
-    $auth = select_single_record("SELECT * FROM users WHERE id = '{$_COOKIE['auth']}'");
-?>
-
 <header class="w-full bg-white" id="header">
     <div class="max-w-[90%] mx-auto navbar justify-between items-center">
         <!-- logo -->
@@ -40,9 +7,15 @@ if (isset($_COOKIE['auth']))
         <!-- nav-link  -->
         <div class="navbar-center hidden lg:flex">
             <ul class="flex justify-center items-center gap-8">
-                <li class="h-10 text-[20px] font-[600] hover:border-b-4 hover:border-gray-800"><a href="?page=home">Trang chủ</a></li>
-                <li class="h-10 text-[20px] font-[600] hover:border-b-4 hover:border-gray-800"><a href="?page=product">Cửa hàng</a></li>
-                <li class="h-10 text-[20px] font-[600] hover:border-b-4 hover:border-gray-800"><a href="?page=service">Dịch vụ</a></li>
+                <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800"><a href="?page=home">Trang chủ</a></li>
+                <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800"><a href="?page=product">Cửa hàng</a></li>
+                <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800 dropdown">
+                    <label tabindex="0" for="">Dịch vụ</label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li class="text-sm"><a href="?page=service">Bảng giá dịch vụ</a></li>
+                        <li class="text-sm"><a href="?page=warranty">Tra cứu bảo hành</a></li>
+                    </ul>
+                </li>
                 <li class="h-10 text-[20px] font-[600] hover:border-b-4 hover:border-gray-800"><a href="?page=post">Tin tức</a></li>
             </ul>
         </div>
@@ -64,7 +37,7 @@ if (isset($_COOKIE['auth']))
                         <li><a href="./logout.php">Đăng xuất</a></li>
                     </ul>
                 </div>
-                <a href="?page=wishlist" class="text-xl"><i class="bi bi-heart"></i></a>
+                <a href="?page=account&act=wishlist" class="text-xl"><i class="bi bi-heart"></i></a>
             <?php endif; ?>
             <!-- nếu người dùng chưa đăng nhập sẽ hiển thị nút đăng nhập -->
             <?php if (!isset($_COOKIE['auth'])) : ?>
@@ -82,10 +55,16 @@ if (isset($_COOKIE['auth']))
                             </div>
                             <div class="form-group">
                                 <label for="">Mật khẩu</label>
-                                <input class="input input-bordered w-full" type="text" name="password" id="">
+                                <input class="input input-bordered w-full" type="password" name="password" id="">
                                 <small class="text-base text-error error-message font-semibold"></small>
                             </div>
-                            <span>Chưa có tài khoản? <a href="/register.php" class="font-medium hover:link hover:text-primary">Đăng ký</a></span>
+                            <div class="form-group flex justify-between items-center">
+                                <label class="label cursor-pointer justify-start gap-5">
+                                    <span class="">Lưu tài khoản</span>
+                                    <input type="checkbox" class="toggle toggle-primary" checked />
+                                </label>
+                                <span>Chưa có tài khoản? <a href="/register.php" class="font-medium hover:link hover:text-primary">Đăng ký</a></span>
+                            </div>
                             <div class="form-group max-w-full mx-auto">
                                 <button type="submit" name="login-submit" class="btn hover:btn-primary">Đăng nhập</button>
                             </div>
