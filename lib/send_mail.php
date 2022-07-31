@@ -1,14 +1,14 @@
 <?php
-include "./PHPMailer/src/PHPMailer.php";
-include "./PHPMailer/src/SMTP.php";
-include "./PHPMailer/src/Exception.php";
+include "PHPMailer/src/PHPMailer.php";
+include "PHPMailer/src/SMTP.php";
+include "PHPMailer/src/Exception.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 //Load Composer's autoloader
 // require 'vendor/autoload.php';
-function send_verify_code($userEmail, $code)
+function send_verify_code($receiver, $subject, $body)
 {
     $mail = new PHPMailer(true);
     try {
@@ -25,18 +25,17 @@ function send_verify_code($userEmail, $code)
 
         //Recipients
         $mail->setFrom('quanghiep03198@gmail.com', 'Admin');
-        $mail->addAddress($userEmail);     //Add a recipient
+        $mail->addAddress($receiver);     //Add a recipient
 
         //Attachments
         // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
         // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Gửi bạn mã xác thực!';
-        $mail->Body    = "Sử dụng mã xác thực này để xác thực tài khoản: <b>{$code}</b><br/><b>Mã xác thực có hiệu lực trong 5 phút!</b>";
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         $mail->send();
-        echo "<script>alert(`Kiểm tra hòm mail của bạn để nhận mã xác thực!`)</script>";
     } catch (Exception $e) {
         echo "<script>alert(`Message could not be sent. Mailer Error: {$mail->ErrorInfo}`)</script>";
     }

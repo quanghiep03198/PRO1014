@@ -1,8 +1,17 @@
 <?php
-$products = select_all_records("SELECT * FROM product
-INNER JOIN manufacturer ON product.man_id = manufacturer.id");
-print_r($products)
+
+if (!isset($_GET['man_id']))
+    $products = get_all_products();
+else
+    $products = get_product_by_manu($_GET['man_id']);
+
 ?>
+<style>
+    td {
+        border: 1px solid black;
+        padding: 20px;
+    }
+</style>
 <div class="bg-[rgba(64, 124, 180, 1)] px-[50px] py-[30px] flex justify-between items-center">
     <h3 class="text-3xl text-white">Quản lý sản phẩm</h3>
     <div class="flex justify-end gap-2">
@@ -14,6 +23,14 @@ print_r($products)
     </div>
 </div>
 <div class="overflow-x-auto">
+    <select name="" onchange="window.location = this.value">
+        <option value=<?php echo "admin.php?page=product-list" ?>>Tất cả sản phẩm</option>
+        <?php foreach (get_all_manufacturer() as $item) : extract($item) ?>
+            <option value=<?php echo "admin.php?page=product-list&man_id={$id}" ?> <?php
+                                                                                    if (isset($_GET['man_id']) && $_GET['man_id'] == $id) echo "selected" ?>>
+                <?= $name ?></option>
+        <?php endforeach; ?>
+    </select>
     <table class="table table-compact w-full">
         <thead>
             <tr>
@@ -25,26 +42,19 @@ print_r($products)
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($products as $item) : extract($item) ?>
+            <!-- lấy ra tất cả -->
+            <?php
+            foreach ($products as $item) : extract($item) ?>
                 <tr>
-                    <td>
-                        <div class="flex items-center gap-2">
-                            <picture>
-                                <img src=<?= $ROOT_PRODUCT . $image ?> alt="">
-                            </picture>
-                            <div>
-                                <h3 class="text-xl"><?= $name ?></h3>
-                                <p class="text-base text-[color:var(--primary-color)]"><?= $price ?></p>
-                                <p class="text-base text-[color:var(--primary-color)]">Hãng sản xuất<?= $man_name ?></p>
-                            </div>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><img src=<?= ROOT_PRODUCT . $image ?> alt="" style="width: 100px; height:100px; object-fit:contain"></td>
+                    <td><?= $prod_name ?></td>
+                    <td><?= $price ?></td>
+                    <td><?= $manu_name ?></td>
+                    <td><a href=<?php echo "admin.php?page=product-delete&id={$id}" ?>>Xóa sản phẩm</a></td>
                 </tr>
-            <?php endforeach; ?>
+            <?php
+            endforeach; ?>
+            <!--  -->
         </tbody>
     </table>
 </div>

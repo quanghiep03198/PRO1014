@@ -13,7 +13,6 @@ include_once 'site/models/user.php';
 // controllers xử lý request của người dùng
 include_once 'site/controllers/render.php';
 
-
 session_start();
 
 if (isset($_POST['login-submit'])) {
@@ -42,7 +41,6 @@ if (isset($_POST['login-submit'])) {
             echo "<script>alert(`Tài khoản không tồn tại!`)</script>";
     endif;
 }
-// lây thông tin người dùng
-$auth = get_user_data();
 // render page
+// lấy thông tin người dùng
 page_render();

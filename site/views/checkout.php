@@ -42,6 +42,10 @@
                     <small class="text-base text-error error-message font-semibold"></small>
                 </div>
                 <div class="form-group">
+                    <label for="" class="label">Ghi chú</label>
+                    <input type="text" name="order_notice" data-name="ghi chú" class="input input-bordered w-full focus:outline-none" value="<?php echo isset($auth) ? $auth['address'] : '' ?>">
+                </div>
+                <div class="form-group">
                     <h2 class="sm:text-2xl lg:text-3xl font-semibold text-primary mb-5">2. Phương thức giao hàng</h2>
                     <label for="" class="label">Phương thức giao hàng</label>
                     <select class="select input-bordered w-full focus:outline-none" data-name="phương thức giao hàng" name="shipping_method">
