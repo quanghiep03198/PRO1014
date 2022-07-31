@@ -1,0 +1,11 @@
+
+$vnp_TmnCode = "9PH91URJ"; //Website ID in VNPAY System
+$vnp_HashSecret = "QXXUUYVZAXPPXTHMOAHECZDEHIFJYDZW"; //Secret key
+
+
+
+Ngân hàng	NCB
+Số thẻ	9704198526191432198
+Tên chủ thẻ	NGUYEN VAN A
+Ngày phát hành	07/15
+Mật khẩu OTP	123456

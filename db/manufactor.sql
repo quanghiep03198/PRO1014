@@ -1,8 +1,11 @@
 -- lấy ra nhà sản xuất
-SELECT * FROM manufactor;
+SELECT * FROM manufacturer;
+
 -- thêm nhà sản xuất
-INSERT INTO manufacturer (manu_name) VALUES (?);
+INSERT INTO manufacturer (name) VALUES (?);
+
 -- sửa nhà sản xuất
-UPDATE manufacturer SET manu_name = ? WHERE manu_id = ?;
+UPDATE manufacturer SET name = ? WHERE id= ?;
+
 -- xóa nhà sản xuất
-DELETE FROM manufacturer WHERE manu_id = ? ;
+DELETE FROM manufacturer WHERE id = ? ;

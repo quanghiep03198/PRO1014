@@ -1,72 +1,72 @@
-<main>
-	<form action="?page=checkout" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+	<?php include_once 'site/components/header.php';  ?>
+	<main>
 		<div class="w-full bg-[#EDEDED] flex justify-center items-center sm:py-0 lg:py-[50px]">
 			<div class="w-full flex justify-center items-stretch sm:flex-col md:flex-col lg:flex-row sm:border-t lg:border-none">
 				<!-- cart items -->
 				<div class="bg-white basis-4/6 flex flex-col justify-between p-4" style="height:inherit">
 					<h1 class="text-2xl font-medium mb-5">Giỏ hàng của bạn</h1>
-					<div class="container h-60">
-						<!-- cart items -->
-						<div class="container flex justify-between items-stretch flex-grow gap-5 border-b py-2">
-							<!-- product-infor -->
-							<div class="basis-3/4 flex justify-start items-center gap-4">
-								<img src=<?= $ROOT_PRODUCT . 'ps4-slim.webp' ?> alt="" class="sm:max-w-[80px] lg:max-w-[100px]">
-								<div class="flex justify-between basis-2/3 sm:flex-col md:flex-row lg:flex-row">
-									<div>
-										<input type="hidden" name="product-id" value=<?php echo "1" ?>>
-										<input type="hidden" name="unit-price" value=<?php echo "1" ?>>
-										<span class="block font-medium sm:text-base md:text-xl lg:text-xl mb-2" style="word-break:no-break">Playstation 4</span>
-										<span class=" block font-medium sm:text-sm md:text-base lg:text-lg text-blue-600">7000000đ</span>
-									</div>
-									<!-- quantity-counter -->
-									<div class="custom-number-input h-full">
-										<div class="flex items-center gap-0 w-full rounded-lg relative bg-transparent mt-1">
-											<button type="button" data-action="decrement" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">-</button>
-											<input type="number" min=1 value=1 class="quantity outline-none focus:outline-none text-center w-10 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number"></input>
-											<button type="button" data-action="increment" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">+</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--  -->
-							<div class="flex flex-col justify-around items-start">
-								<span class="block total-price sm:text-base md:text-xl lg:text-lg font-medium">7000000đ</span>
-								<button class="btn btn-ghost text-2xl text-gray-500 hover:text-gray-800"><i class="bi bi-trash"></i></button>
-							</div>
-						</div>
-
+					<!-- cart items are rendered here -->
+					<div class="overflow-y-auto w-full h-60" id="cart-container">
+						<table class="table table-compact w-full rounded-none">
+							<tbody id="cart-list">
+							</tbody>
+						</table>
 					</div>
-					<a href="" class="hover:underline"><i class="bi bi-arrow-left-short"></i> Continue Shopping</a>
+					<a href="?page=product" class="hover:underline"><i class="bi bi-arrow-left-short"></i>Tiếp tục mua hàng</a>
 				</div>
 				<!-- order summary  -->
 				<div class="bg-gray-200 p-5 max-w-full flex flex-col gap-5">
 					<div class="form-control w-full">
-						<label class="text-[16px] text-[#4A4A4A] font-[600]">Voucher giảm giá</label>
+						<label class="text-[16px]  font-[600]">Voucher giảm giá</label>
 						<div class="flex w-full items-stretch gap-2">
-							<input type="text" placeholder="Gift code ..." class="input focus:outline-none input-bordered" />
-							<button class="btn btn-active btn-md">Áp dụng</button>
+							<input type="text" placeholder="Gift code ..." class="input focus:outline-none input-bordered" id="gift-code" />
+							<button type="button" class="btn btn-outline btn-md">Áp dụng</button>
 						</div>
 					</div>
 					<div class="flex items-center justify-between">
-						<p class="text-[16px] text-[#4A4A4A] font-[600]">Tạm tính</p>
-						<p class="font-[600] text-[#4A4A4A]">3300000đ</p>
+						<p class="text-lg">Tạm tính</p>
+						<p class="text-lg" id="temp-payment" data-cash=0></p>
 					</div>
 					<div class="flex items-center justify-between border-b-2">
-						<p class="text-[16px] text-[#4A4A4A] font-[600]">Giảm giá</p>
-						<p class="font-[600] text-[#4A4A4A]">-100000đ</p>
+						<p class="text-lg">Giảm giá</p>
+						<p class="text-lg" id="discount" data-cash=0></p>
 					</div>
 					<!-- devider -->
 					<div class="border-t border-gray-600 py-4">
 						<div class=" flex items-center justify-between">
-							<p class="font-medium text-2xl text-[#4A4A4A]">Tổng tiền</p>
-							<p class="font-medium text-2xl text-[#4A4A4A]">3.200.000đ</p>
-							<input id="total-amount" type="hidden">
+							<p class="font-semibold text-xl">Tổng tiền</p>
+							<p class="font-semibold text-xl" id="total-amount" data-cash></p>
+							<input id="order-total-amount" type="hidden">
 						</div>
-						<p class="text-[14px] bb-[30px] text-[#4A4A4A]">Số tiền này chưa bao gồm phí vận chuyển</p>
+						<p class="text-[14px] bb-[30px] ">Số tiền này chưa bao gồm phí vận chuyển</p>
 					</div>
-					<button type="submit" class="mt-12 h-12 w-full bg-[#4A4A4A] py-[10px] rounded focus:outline-none text-[20px] hover:opacity-80 text-[#fff] font-[500] uppercase">Đặt hàng</button>
+					<form action="?page=payment_selection" method="POST" id="cart-form" onsubmit="return checkEmptyCart()">
+						<button type="submit" name="check-out" id="check-out-submit" class="btn btn-block btn-lg hover:btn-active hover:btn-primary">Đặt hàng</button>
+					</form>
 				</div>
 			</div>
 		</div>
-	</form>
-</main>
+	</main>
+	<?php include_once 'site/components/footer.php'; ?>
+	<script src="site/js/common.js"></script>
+	<script src="site/js/handle-cart.js"></script>
+	<script>
+		if (cartList) renderCart(JSON.parse(localStorage.getItem("cart")));
+	</script>
+</body>
+
+</html>

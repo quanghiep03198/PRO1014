@@ -1,88 +1,69 @@
-    <div class="bao bg-[#EDEDED] pt-[10px] pb-[80px]">
-        <div class="mt-20">
-            <!-- <h1 class="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">Tailwind CSS Ecommerce Checkout Page UI
-            </h1> -->
-        </div>
-        <div class="container p-12 mx-auto bg-[#fff] ">
-            <div class="flex flex-col w-full px-0 mx-auto md:flex-row gap-5 ">
-                <div class="flex flex-col md:w-full">
-                    <div class="dv lg:flex justify-start gap-[290px] ">
-                        <h2 class="mb-4 font-[500]  text-[40px] text-[#407CB4] block lg:hidden">Kiểm tra lại thông tin </h2>
-                        <div class="q">
-                            <h2 class="mb-4 font-[500]  text-[40px] text-[#407CB4] hidden lg:block">1. Thông tin nhận hàng </h2>
-                        </div>
-                        <div class="sdd">
-                            <h2 class="mb-4 font-[500]  text-[40px] text-[#407CB4] hidden lg:block">2. Giao hàng </h2>
-                        </div>
-                    </div>
-                    <form class="justify-center w-full mx-auto" method="post" action>
-                        <div class="">
-                            <div class="space-x-0 lg:flex lg:space-x-4">
-                                <div class="w-full lg:w-1/2">
-                                    <label for="firstName" class="block mb-3 text-xl font-semibold ">Họ tên</label>
-                                    <input name="firstName" type="text" placeholder="" class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
-                                </div>
+<?php
 
-                                <div class="w-full lg:w-1/2">
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-                                    <label for="giaohang" class="block mb-3 text-xl font-semibold mt-4 lg:mt-0">Phương thức giao hàng</label>
-                                    <select name="giaohang" id="giaohang" class="text-lg font-[400] w-full text-[#858585] border-2 py-3">
-                                        <option value="">Giao hàng nhanh</option>
-                                        <option value="">Giao hàng tiết kiệm</option>
-                                        <option value="">Giao hàng nhanh</option>
-                                        <option value="">Giao hàng nhanh</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <div class="w-full ">
-                                    <label for="Email" class="block mb-3 text-xl font-semibold ">Số điện thoại</label>
-                                    <input name="Last Name" type="text" placeholder="" class="lg:w-[49.3%] w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <div class="w-full">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận đặt hàng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
 
-                                    <label for="Address" class="block mb-3 text-xl font-semibold ">Địa chỉ</label>
-                                    <div class="as flex lg:justify-between">
+</head>
 
-                                        <div class="ba lg:w-[49.3%] w-full ">
-                                            <input name="Address" type="text" placeholder="" class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
-                                        </div>
-                                        <div class="lop text-left lg:w-[49.3%] ">
-                                            <h2 class="mb-4 font-[500] hidden lg:block text-[40px] text-[#407CB4] ">3. Thanh toán</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
-                                <div class="w-full lg:w-1/2">
-                                    <label for="note" class="block mb-3 text-xl font-semibold ">Ghi chú</label>
-                                    <input name="note" type="text" placeholder="" class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
-                                </div>
-
-                                <div class="w-full lg:w-1/2 ">
-
-                                    <label for="tt" class="block mb-3 text-xl font-semibold mt-4 lg:mt-0">
-                                        Phương thức thanh toán</label>
-                                    <select name="tt" id="tt" class="text-lg font-[400] w-full text-[#858585] border-2 py-3">
-                                        <option value="">Thanh toán khi nhận hàng</option>
-                                        <option value="">Giao hàng tiết kiệm</option>
-                                        <option value="">Giao hàng nhanh</option>
-                                        <option value="">Giao hàng nhanh</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="mt-[50px]">
-                                <button class="lg:w-1/5 px-6 text-[20px] text-[#fff] bg-[#4A4A4A] hover:opacity-80 py-[15px] rounded">Xác nhận đơn hàng</button>
-                            </div>
-                        </div>
-                    </form>
+<body>
+    <?php include_once 'site/components/header.php';  ?>
+    <main class="px-5">
+        <form action="?page=place_order" method="POST" class="max-w-3xl mx-auto" onsubmit="return handleCheckoutError(this)">
+            <h2 class="sm:text-2xl lg:text-3xl font-semibold text-primary mb-5">1. Thông tin nhận hàng</h2>
+            <div class="flex flex-col gap-6">
+                <div class="form-group">
+                    <label for="" class="label">Họ tên</label>
+                    <input type="text" name="customer_name" data-name="tên" class="input input-bordered w-full focus:outline-none" value="<?php echo isset($auth) ? $auth['name'] : '' ?>">
+                    <small class="text-base text-error error-message font-semibold"></small>
                 </div>
-
+                <div class="form-group">
+                    <label for="" class="label">Số điện thoại</label>
+                    <input type="text" name="phone" data-name="số điện thoại" class="input input-bordered w-full focus:outline-none" value=<?php echo isset($auth) ? $auth['phone'] : '' ?>>
+                    <small class="text-base text-error error-message font-semibold"></small>
+                </div>
+                <div class="form-group">
+                    <label for="" class="label">Email</label>
+                    <input type="email" name="email" data-name="email" class="input input-bordered w-full focus:outline-none" value=<?php echo isset($auth) ? $auth['email'] : '' ?>>
+                    <small class="text-base text-error error-message font-semibold"></small>
+                </div>
+                <div class="form-group">
+                    <label for="" class="label">Địa chỉ</label>
+                    <input type="text" name="address" data-name="địa chỉ" class="input input-bordered w-full focus:outline-none" value="<?php echo isset($auth) ? $auth['address'] : '' ?>">
+                    <small class="text-base text-error error-message font-semibold"></small>
+                </div>
+                <div class="form-group">
+                    <h2 class="sm:text-2xl lg:text-3xl font-semibold text-primary mb-5">2. Phương thức giao hàng</h2>
+                    <label for="" class="label">Phương thức giao hàng</label>
+                    <select class="select input-bordered w-full focus:outline-none" data-name="phương thức giao hàng" name="shipping_method">
+                        <option value="" selected>Chọn phương thức giao hàng</option>
+                        <?php foreach (get_all_shipping_methods() as $method) : extract($method) ?>
+                            <option value=<?= $id ?> data-cash=<?= $cost ?>><?php echo "{$name} - {$cost}₫" ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="text-base text-error error-message font-semibold"></small>
+                </div>
+                <div class="form-group my-10 flex justify-center items-center">
+                    <button type="submit" name="checkout" id="place-order" class="btn btn-wide btn-lg hover:btn-primary">Đặt hàng</button>
+                </div>
             </div>
-        </div>
-    </div>
+
+        </form>
+
+    </main>
+    <?php include_once 'site/components/footer.php'; ?>
+    <script src="site/js/common.js"></script>
+    <script src="site/js/validate.js"></script>
+    <script src="site/js/handle-userdata.js"></script>
+</body>
+
+</html>
