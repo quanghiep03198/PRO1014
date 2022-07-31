@@ -17,7 +17,7 @@
         <!-- import sidebar -->
         <?php include_once "./admin/components/sidebar.php" ?>
         <div>
-            <h1 class="text-primary text-3xl font-bold">Trang chủ</h1>
+            <h1 class="text-primary text-3xl font-medium">Tạo mới bài viết</h1>
             <textarea>
             Welcome to TinyMCE!
           </textarea>
