@@ -18,11 +18,11 @@
 }
 @layer utilities {
 	.swiper-wrapper {
-		width: inherit;
+		width: 100%;
 		height: fit-content;
 	}
 	.swiper {
-		width: inherit;
+		width: 100%;
 		height: fit-content;
 	}
 

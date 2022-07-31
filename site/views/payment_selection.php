@@ -14,15 +14,16 @@
     <?php include_once 'site/components/header.php';  ?>
     <main class="p-10">
         <h1 class="text-center text-3xl">Chọn hình thức thanh toán</h1>
-        <div class="max-w-3xl mx-auto rounded-box shadow-lg p-10 flex justify-center items-center gap-5">
+        <div class="max-w-3xl mx-auto rounded-box shadow-lg p-10 flex justify-center items-center gap-10">
 
             <form action="vnpay_php/">
-                <a href="?page=checkout" class="btn btn-lg hover:btn-primary">Thanh toán khi nhận hàng</a>
-                <button type="submit" class="btn btn-lg hover:btn-primary" name="redirect" id="redirect">Thanh toán qua cổng VNPay</button>
+                <a href="?page=checkout" class="btn sm:btn-sm lg:btn-lg hover:btn-primary">Thanh toán khi nhận hàng</a>
+                <button type="submit" class="btn sm:btn-sm lg:btn-lg hover:btn-primary" name="redirect" id="redirect">Thanh toán qua cổng VNPay</button>
             </form>
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
+    <script src="site/js/common.js"></script>
 </body>
 
 </html>

@@ -30,5 +30,8 @@ if (isset($_POST['checkout']) && !empty($_COOKIE['cart'])) {
     }
     // send_verify_code($email, $order_key_id);
 
-    echo "<script>alert(`Cảm ơn bạn đã mua hàng, check email để nhận mã đơn hàng!`);</script>";
+    echo "<script>
+            alert(`Cảm ơn bạn đã mua hàng, check email để nhận mã đơn hàng!`);
+            window.location = '?page=product'
+        </script>";
 }

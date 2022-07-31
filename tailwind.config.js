@@ -1,7 +1,7 @@
 module.exports = {
-	content: ["site/**/*.{html,js,php}", "admin/**/*.{html,js,php}", "register.php", "reset_password.php", "recover_password.php", "verify_account.php"],
+	content: ["js/**/*.{js}", "site/**/*.{html,js,php}", "admin/**/*.{html,js,php}", "register.php", "reset_password.php", "recover_password.php", "verify_account.php"],
 	mode: "jit",
-	purge: ["site/**/*.{html,js,php}", "admin/**/*.{html,js,php}", "register.php", "reset_password.php", "recover_password.php", "verify_account.php"],
+	purge: ["js/**/*.{js}", "site/**/*.{html,js,php}", "admin/**/*.{html,js,php}", "register.php", "reset_password.php", "recover_password.php", "verify_account.php"],
 	theme: {
 		extend: {
 			important: true,

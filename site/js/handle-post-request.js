@@ -1,4 +1,5 @@
 // render comment
+
 const renderComment = (responseData) => {
 	const commentBox = $("#comment-box");
 	if (commentBox) {

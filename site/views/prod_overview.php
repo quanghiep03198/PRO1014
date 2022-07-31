@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
 
 <body>
     <?php include_once 'site/components/header.php';  ?>
-    <main>
+    <main class="relative">
         <div class="grid gap-10 sm:grid-cols-1 lg:grid-cols-[1fr,3fr]">
             <div>
                 <?php include_once 'site/components/sidebar.php' ?>
@@ -83,6 +83,7 @@ if (isset($_GET['id'])) {
                 </section>
                 <!-- RELATED PRODUCTS  -->
                 <section>
+                    <h1 class="text-2xl font-semibold mb-10 underline underline-offset-8">Sản phẩm tương tự</h1>
                     <div class="swiper related-product-slider max-w-5xl">
                         <div class="swiper-wrapper">
                             <?php foreach (get_related_product($product['cate_id']) as $product) : extract($product); ?>
@@ -145,11 +146,11 @@ if (isset($_GET['id'])) {
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="/js/carousel.js"></script>
-    <script src="/js/common.js"></script>
-    <script src="/js/handle-cart.js"></script>
-    <script src="/js/handle-post-request.js"></script>
-    <script src="/js/product-pagination.js"></script>
+    <script src="site/js/carousel.js"></script>
+    <script src="site/js/common.js"></script>
+    <script src="site/js/handle-cart.js"></script>
+    <script src="site/js/handle-post-request.js"></script>
+    <script src="site/js/product-pagination.js"></script>
     <script>
         const updateQty = (btn, unitVal) => {
             const target = btn.parentElement.querySelector(".quantity");

@@ -30,6 +30,7 @@ const handleCheckoutError = (form) => {
 	if (!isPhoneNumber(phone)) return false;
 	// validata -> ok
 	localStorage.setItem("cart", JSON.stringify([]));
+	countItems();
 };
 // validate chức năng đăng ký
 const handleRegisterError = (form) => {

@@ -1,25 +1,3 @@
-const alert = {
-	success: {
-		style: "alert-success",
-		icon: "bi bi-check2-circle",
-	},
-
-	infor: {
-		style: "alert-infor",
-		icon: "bi bi-info-circle",
-	},
-
-	warning: {
-		style: "alert-warning",
-		icon: "bi bi-exclamation-triangle",
-	},
-
-	error: {
-		style: "alert-error",
-		icon: "bi bi-x-circle",
-	},
-};
-
 /**
  * Thêm sản phẩm vào giỏ hàng
  */
@@ -50,22 +28,6 @@ const addCart = (button) => {
 	}
 	countItems();
 	showMessage(alert.success.style, alert.success.icon, "Thêm vào giỏ hàng thành công!");
-};
-
-const showMessage = (style, icon, message) => {
-	const toast = document.createElement("div");
-	toast.classList.add("animate-[slip_500ms_ease-in-out]", "toast", "toast-bottom", "toast-end", "w-[300px]", "z-50");
-	toast.innerHTML = /*html */ ` <div class="alert ${style} text-gray-800 text-xl">
-									<div>
-										<i class="${icon}"></i>
-										<span>${message}</span>
-									</div>
-								</div>`;
-	const main = $("main");
-	main.appendChild(toast);
-	setTimeout(() => {
-		main.removeChild(toast);
-	}, 3000);
 };
 
 const showEmptyCart = () => {

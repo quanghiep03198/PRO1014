@@ -9,6 +9,7 @@ function get_wishList_items()
                 product.prod_name AS product_name,
 				product.image AS image,
                 product.price AS price,
+                product.discount AS discount,
                 (product.price*(100-product.discount)/100) AS discount_price,
                 product.stock AS stock,
                 product.warranty_time AS warranty_time
