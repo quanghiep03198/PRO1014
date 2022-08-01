@@ -77,7 +77,8 @@ $sql3 = "SELECT * FROM manufacturer order by id";
             <h2 class="text-[#fff] text-[40px] mx-[30px]">Quản lý sản phẩm</h2>
             </div>
             <div class="right flex gap-[30px] px-[30px]">
-                <div class="1"><a href="?page=product-list" class="text-[#fff] hover:underline"><i class="bi bi-folder text-[#fff]"></i> Danh mục sản phẩm</a> </div>
+              
+                <div class="1"><a href="?page=categories-list" class="text-[#fff] hover:underline"><i class="bi bi-folder text-[#fff]"></i> Danh mục sản phẩm</a> </div>
                 <div class="1"><a href="?page=product-create" class="text-[#fff] hover:underline"><i class="bi bi-file-earmark-plus"></i> Thêm sản phẩm</a> </div>
                 <div class="1"><a href="" class="text-[#fff] hover:underline"><i class="bi bi-house-door-fill"></i> Nhà sản xuất</a> </div>
                 

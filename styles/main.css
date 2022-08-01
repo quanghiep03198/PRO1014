@@ -4902,6 +4902,10 @@ body[dir="rtl"] .checkbox:checked,
   max-width: 20rem;
 }
 
+.max-w-\[200px\] {
+  max-width: 200px;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -5627,6 +5631,10 @@ body[dir="rtl"] .checkbox:checked,
   font-weight: 300;
 }
 
+.font-\[500\] {
+  font-weight: 500;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -5777,10 +5785,6 @@ body[dir="rtl"] .checkbox:checked,
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
-}
-
-.outline {
-  outline-style: solid;
 }
 
 .drop-shadow {
