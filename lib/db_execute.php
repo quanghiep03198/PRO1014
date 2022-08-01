@@ -1,7 +1,7 @@
 <?php
 function get_db_connection()
 {
-    $connection = new mysqli("localhost", "root", "", "pro1014");
+    $connection = new mysqli("localhost", "root", "", "duan1");
     if ($connection->connect_error) die($connection->connect_error);
     return $connection;
 }
