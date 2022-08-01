@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative" id="title">
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative h-50%" id="title">
                     <?php
                     // lấy tất cả sản phảm
                     if (!isset($_GET['cate']) && !isset($_GET['kw'])) :
@@ -98,8 +98,8 @@
     <script src="site/js/handle-post-request.js"></script>
     <script src="site/js/pagination.js"></script>
     <script>
-        const prodPagination = new Pagination('.card', 9);
-        const showPage = prodPagination.showPage.bind(this)
+        const pagination = new Pagination('.card', 3);
+        const showPage = pagination.showPage.bind(this)
         showPage(1)
     </script>
 </body>

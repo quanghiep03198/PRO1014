@@ -60,7 +60,7 @@
                                         <?php if ($stt_id == 1) : ?>
                                             <form action="" method="post" onsubmit="return confirm('Bạn thực sự muốn hủy đơn hàng này chứ ?')">
                                                 <input type="hidden" name="order_id">
-                                                <button type="submit" class="btn btn-sm hover:btn-error !capitalize">Hủy đơn</button>
+                                                <button type="submit" name="cancel_order" class="btn btn-sm hover:btn-error !capitalize">Hủy đơn</button>
                                             </form>
                                         <?php endif; ?>
                                     </td>
@@ -101,3 +101,9 @@
 </body>
 
 </html>
+<?php
+if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
+    $cancel_stt_id = select_one_value("SELECT id from order_status WHERE stt_name LIKE '%đã hủy%'");
+    $sql = "UPDATE orders SET order_stt_id = '{$cancel_stt_id}' WHERE orders.id = {$_POST['order_id']}";
+    execute_query($sql);
+}

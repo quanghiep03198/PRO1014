@@ -10,6 +10,7 @@ include_once 'site/models/category.php';
 include_once 'site/models/wishlist.php';
 include_once 'site/models/comment.php';
 include_once 'site/models/user.php';
+include_once 'site/models/service.php';
 // controllers xử lý request của người dùng
 include_once 'site/controllers/render.php';
 

@@ -25,8 +25,7 @@ function get_orders_group_by_user($user_id)
         order_status.stt_name AS stt_name,
         order_status.stt_icon AS stt_icon,
         payment_method.name AS payment_method,
-        orders.total_amount,
-        order.notice
+        orders.total_amount
         FROM orders 
         INNER JOIN order_items ON orders.id = order_items.order_id
         INNER JOIN order_status ON orders.order_stt_id = order_status.id
@@ -68,10 +67,24 @@ function get_all_order_items($order_id)
         orders.total_amount,
 		(orders.total_amount -SUM(order_items.unit_price)) AS shipping_cost,
          orders.order_notice,
-        DATE(order_items.warranty_time)
+        DATE(order_items.warranty_time) AS warranty_expire_date
 		FROM order_items
 		INNER JOIN orders ON orders.id = order_items.id
 		INNER JOIN product ON order_items.product_id = product.id
 		WHERE order_items.order_id = {$order_id}";
+    return select_all_records($sql);
+}
+function get_warranty_expired_date($customer_infor, $order_key_id)
+{
+    $sql = "SELECT orders.order_key_id ,
+            product.prod_name AS product_name,
+            product.image,
+            order_items.unit_price,
+            DATE(orders.create_date) AS create_date,
+            DATE(order_items.warranty_time) AS warranty_expire_date
+            FROM order_items
+            INNER JOIN orders ON orders.id = order_items.id
+            INNER JOIN product ON product.id = order_items.product_id
+            WHERE orders.order_key_id = '{$order_key_id}' AND orders.email = '{$customer_infor}' OR orders.phone = '{$customer_infor}'";
     return select_all_records($sql);
 }

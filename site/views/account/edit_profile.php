@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thay đổi thông tin tài khoản</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -20,7 +22,7 @@
             <!--  -->
             <div class="p-5 bg-white rounded-box shadow-2xl">
                 <h1 class="text-4xl font-normal mb-10">Thay đổi thông tin</h1>
-                <form action="" method="POST" class="flex flex-col gap-5" onsubmit="return handleErrorUpdateProfile(this,event)">
+                <form action="" method="POST" class="flex flex-col gap-5" onsubmit="handleErrorUpdateProfile(this,event)">
                     <div class="form-group">
                         <label for="">Tên người dùng</label>
                         <input type="text" data-name="tên của bạn" name="username" class="input input-bordered w-full">

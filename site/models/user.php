@@ -6,3 +6,8 @@ function get_user_data()
         return select_single_record($sql);
     }
 }
+function get_all_users()
+{
+    $sql = "SELECT * FROM users";
+    return select_all_records($sql);
+}

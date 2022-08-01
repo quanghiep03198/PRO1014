@@ -49,24 +49,27 @@
                         <label for="my-modal-3" class="btn btn-circle btn-ghost absolute right-2 top-2">✕</label>
                         <form action="" method="post" class="flex flex-col gap-5">
                             <h1 class="text-center text-3xl font-semibold">Đăng nhập</h1>
-                            <div class="form-group">
+                            <div class="form-control">
                                 <label for="">Tài khoản</label>
                                 <input class="input input-bordered w-full" type="text" name="account" id="">
                                 <small class="text-base text-error error-message font-semibold"></small>
                             </div>
-                            <div class="form-group">
+                            <div class="form-control">
                                 <label for="">Mật khẩu</label>
                                 <input class="input input-bordered w-full" type="password" name="password" id="">
                                 <small class="text-base text-error error-message font-semibold"></small>
                             </div>
-                            <div class="form-group flex justify-between items-center">
+                            <div class="form-control">
                                 <label class="label cursor-pointer justify-start gap-5">
                                     <span class="">Lưu tài khoản</span>
                                     <input type="checkbox" class="toggle toggle-primary" checked />
                                 </label>
-                                <span>Chưa có tài khoản? <a href="/register.php" class="font-medium hover:link hover:text-primary">Đăng ký</a></span>
                             </div>
-                            <div class="form-group max-w-full mx-auto">
+                            <div class="flex justify-between items-center gap-5">
+                                <span>Chưa có tài khoản? <a href="/register.php" class="font-medium hover:link hover:text-primary">Đăng ký</a></span>
+                                <span><a href="/recover_password.php" class="font-medium hover:link hover:text-primary">Quên mật khẩu</a></span>
+                            </div>
+                            <div class="form-control max-w-full mx-auto">
                                 <button type="submit" name="login-submit" class="btn hover:btn-primary">Đăng nhập</button>
                             </div>
                         </form>

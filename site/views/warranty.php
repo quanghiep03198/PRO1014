@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tra cứu bảo hành sản phẩm</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
@@ -23,24 +22,23 @@
 
             <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
-                    <form action="" method="post" class="flex flex-col gap-5">
+                    <form action="?page=warranty_result" method="POST" class="flex flex-col gap-5" onsubmit="return handleErrorWarrantySearch(this)">
                         <div class="form-group">
-                            <label class="text-xl" for="">Số điện thoại/email mua hàng</label>
-
-                            <input type="text" name="customer_infor" id="" class="input input-bordered  w-full">
+                            <label class="text-xl" for="">Email mua hàng</label>
+                            <input type="text" data-name="số điện thoại/email" name="customer_infor" id="" class="input input-bordered  w-full">
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
 
                         <div class="form-group">
                             <label class="text-xl" for="">Mã đơn hàng</label>
-                            <input type="text" name="order_key_id" id="" class="input input-bordered w-full">
+                            <input type="text" data-name="mã đơn hàng" name="order_key_id" id="" class="input input-bordered w-full">
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
 
-                        <button type="submit " class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]">Tra cứu</button>
+                        <button type="submit" name="search_warranty" class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]">Tra cứu</button>
                     </form>
                 </div>
-                <div class="w-full h-full object-cover"><img src="/img/banners/warranty-bg.png" class="max-w-lg " /></div>
+                <div class="w-full h-full object-cover"><img src="/img/warranty-banner.png" class="max-w-lg " /></div>
             </div>
         </div>
     </main>
@@ -52,3 +50,5 @@
 </body>
 
 </html>
+<?php
+// get_warranty_expired_date()
