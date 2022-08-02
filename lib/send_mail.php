@@ -18,13 +18,14 @@ function send_verify_code($receiver, $subject, $body)
         $mail->CharSet  = "utf-8";                                    //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'quanghiep03198@gmail.com';                     //SMTP username
-        $mail->Password   = 'ufjyvhwfggjufqig';                               //SMTP password
+        $mail->Username   = 'cholon031@gmail.com';                     //SMTP username
+        $mail->Password   = 'ffeehwkusagfldai
+';                               //SMTP password
         $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('quanghiep03198@gmail.com', 'Admin');
+        $mail->setFrom('cholon031@gmail.com', 'Admin');
         $mail->addAddress($receiver);     //Add a recipient
 
         //Attachments

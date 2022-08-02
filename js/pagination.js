@@ -1,4 +1,4 @@
-function Pagination(selector, perPage) {
+function Pagination(selector, perPage, displayType) {
 	this.elems = $(selector);
 	this.pagination = $("#pagination");
 	this.perPage = perPage;
@@ -21,7 +21,7 @@ function Pagination(selector, perPage) {
 			btns[tabindex - 1].classList.add("btn-active");
 			// mặc định tất cả item đều ẩn đi
 			this.elems.forEach((item) => {
-				item.classList.remove("!flex", "!block", "flex", "grid");
+				item.classList.remove("flex", "block", "table", "grid");
 				item.classList.add("hidden");
 			});
 			// show các item trang hiện tại
@@ -30,7 +30,7 @@ function Pagination(selector, perPage) {
 				if (i == this.elems.length) break;
 				console.log("các sản phẩm hiện tại: ", i);
 				this.elems[i].classList.remove("hidden");
-				this.elems[i].classList.add("!table");
+				this.elems[i].classList.add(displayType);
 			}
 		}
 	};
