@@ -93,12 +93,12 @@
         </section>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="site/js/common.js"></script>
-    <script src="site/js/handle-cart.js"></script>
-    <script src="site/js/handle-post-request.js"></script>
-    <script src="site/js/pagination.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/handle-cart.js"></script>
+    <script src="js/handle-post-request.js"></script>
+    <script src="js/pagination.js"></script>
     <script>
-        const pagination = new Pagination('.card', 3);
+        const pagination = new Pagination('.card', 6, "block");
         const showPage = pagination.showPage.bind(this)
         showPage(1)
     </script>

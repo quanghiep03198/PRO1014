@@ -51,7 +51,7 @@
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
     <!--  -->
-    <script src="site/js/handle-userdata.js"></script>
+    <script src="/js/handle-userdata.js"></script>
 </body>
 
 </html>

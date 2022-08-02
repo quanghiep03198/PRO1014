@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
                         <!-- product information -->
                         <div class="w-full flex flex-col gap-5">
                             <h2 class="text-3xl font-normal"><?= $prod_name ?></h2>
-                            <span class="font-semibold text-2xl"><?= $price  . 'đ' ?></span>
+                            <span class="font-semibold text-2xl"><?= $price  . '₫' ?></span>
                             <div class="rating">
                                 <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
                                 <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
@@ -146,12 +146,14 @@ if (isset($_GET['id'])) {
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="site/js/carousel.js"></script>
-    <script src="site/js/common.js"></script>
-    <script src="site/js/handle-cart.js"></script>
-    <script src="site/js/handle-post-request.js"></script>
-    <script src="site/js/product-pagination.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/handle-cart.js"></script>
+    <script src="js/handle-post-request.js"></script>
+    <script src="js/product-pagination.js"></script>
     <script>
+        const table = $("table")
+        table.classList.add("table");
         const updateQty = (btn, unitVal) => {
             const target = btn.parentElement.querySelector(".quantity");
             let value = +target.value; // ảo ma canada

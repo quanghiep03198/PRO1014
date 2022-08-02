@@ -50,7 +50,7 @@
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="site/js/common.js"></script>
+    <script src="js/common.js"></script>
     <script>
         const paginationBtns = $(".pagination-button")
 
@@ -62,7 +62,7 @@
         }
         paginationBtns[0].classList.add("btn-primary");
     </script>
-    <script src="site/js/product-pagination.js"></script>
+    <script src="js/product-pagination.js"></script>
 </body>
 
 </html;

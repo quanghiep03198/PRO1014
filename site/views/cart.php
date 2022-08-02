@@ -62,8 +62,8 @@
 		</div>
 	</main>
 	<?php include_once 'site/components/footer.php'; ?>
-	<script src="site/js/common.js"></script>
-	<script src="site/js/handle-cart.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/handle-cart.js"></script>
 	<script>
 		if (cartList) renderCart(JSON.parse(localStorage.getItem("cart")));
 	</script>

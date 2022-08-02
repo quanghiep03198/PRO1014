@@ -37,10 +37,10 @@
     </main>
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
-    <script src="/site/js/common.js"></script>
-    <script src="/site/js/pagination.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/pagination.js"></script>
     <script>
-        const tablePagination = new Pagination(".table-row", 5)
+        const tablePagination = new Pagination(".table-row", 5, "table")
         const showPage = tablePagination.showPage.bind(this)
         showPage(1)
     </script>

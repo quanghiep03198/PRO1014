@@ -23,7 +23,7 @@
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="site/js/common.js"></script>
+    <script src="js/common.js"></script>
 </body>
 
 </html>

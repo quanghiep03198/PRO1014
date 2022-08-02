@@ -43,9 +43,9 @@
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="site/js/common.js"></script>
-    <script src="site/js/validate.js"></script>
-    <script src="site/js/handle-userdata.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/handle-userdata.js"></script>
 
 </body>
 
