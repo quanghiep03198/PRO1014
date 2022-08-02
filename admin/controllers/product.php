@@ -45,16 +45,15 @@ if (isset($_POST['update_product'])) :
     $stock = $_POST['stock'];
     $warranty_time = $_POST['warranty_time'];
     $description = $_POST['description'];
-    $image = upload_file("../../img/products/", "product_image");
     // check lỗi phía server
-    check_empty($id, $product_name, $price, $category, $manufacturer, $stock, $warranty_time, $description, $image);
+    check_empty($id, $product_name, $price, $category, $manufacturer, $stock, $warranty_time, $description);
     check_image("product_image", 'update_product');
 
     if ($error_count != 0)
         echo "số lỗi: " . $error_count;
     // check tên sản phẩm đã tồn tại trong database hay chưa ?
     if ($error_count == 0) :
-
+        $image = upload_file("../../img/products/", "product_image");
         $sql = "UPDATE product SET 
                 prod_name = '{$product_name}',
                 cate_id = '{$category}',
