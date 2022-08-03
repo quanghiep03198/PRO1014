@@ -77,10 +77,19 @@ $sql3 = "SELECT * FROM manufacturer order by id";
             <h2 class="text-[#fff] text-[40px] mx-[30px]">Quản lý sản phẩm</h2>
             </div>
             <div class="right flex gap-[30px] px-[30px]">
-              
-                <div class="1"><a href="?page=categories-list" class="text-[#fff] hover:underline"><i class="bi bi-folder text-[#fff]"></i> Danh mục sản phẩm</a> </div>
-                <div class="1"><a href="?page=product-create" class="text-[#fff] hover:underline"><i class="bi bi-file-earmark-plus"></i> Thêm sản phẩm</a> </div>
-                <div class="1"><a href="" class="text-[#fff] hover:underline"><i class="bi bi-house-door-fill"></i> Nhà sản xuất</a> </div>
+              .
+              <div class="dropdown  dropdown-end">
+  <label tabindex="0" class="btn m-1 "><i class="bi bi-list mr-3"></i>menu</label>
+  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80">
+    <li>  <a href="?page=categories-list" class=" hover:underline"><i class="bi bi-folder "></i> Danh mục sản phẩm</a></li>
+    <li>  <a href="?page=product-create" class=" hover:underline"><i class="bi bi-file-earmark-plus"></i> Thêm sản phẩm</a></li>
+    <li>  <a href="?page=manufacturer-list" class=" hover:underline"><i class="bi bi-house-door-fill"></i> Nhà sản xuất</a></li>
+  </ul>
+</div>
+    
+      
+
+           
                 
             </div>
          </div>
