@@ -30,6 +30,7 @@ else
                     <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                         <li><a href="?page=product-list">Danh sách sản phẩm</a></li>
                         <li><a href="?page=categories-list">Danh mục sản phẩm</a></li>
+                        <li><a href="?page=manufacturer-list">Danh sách nhà sản xua</a></li>
                     </ul>
                 </div>
             </div>

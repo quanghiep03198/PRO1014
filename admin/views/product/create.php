@@ -24,14 +24,15 @@ $error = [];
             <div class="bg-primary p-10 w-full mb-10 flex justify-between">
                 <h1 class="text-white text-3xl">Thêm sản phẩm</h1>
                 <div class="dropdown dropdown-end ">
-                    <label tabindex="0" class="text-white"><i class="bi bi-list"></i> menu</label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <label tabindex="0" class="text-white"><i class="bi bi-list"></i></label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80">
                         <li><a href="?page=product-list">Danh sách sản phẩm</a></li>
                         <li><a href="?page=categories-list">Danh mục sản phẩm</a></li>
+                        <li><a href="?page=manufacturer-list">Danh sách nhà sản xuất</a></li>
                     </ul>
                 </div>
             </div>
-            <form action="./admin/controllers/product.php" method="post" enctype="multipart/form-data" class="container mx-auto" onsubmit="handleErrorCreateProduct(this,event)">
+            <form action="" method="post" enctype="multipart/form-data" class="w-full sm:p-5 md:p-10 lg:p-10 mx-auto" onsubmit="handleErrorCreateProduct(this,event)">
                 <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 items-stretch mb-10">
                     <div class="flex flex-col gap-5">
                         <!-- tên sản phẩm -->
