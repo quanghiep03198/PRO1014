@@ -1,10 +1,5 @@
 <?php
-// lấy ra tất cả danh muc sản phẩm
-function get_all_categories()
-{
-    $sql = "SELECT * FROM  product_category";
-    return select_all_records($sql);
-}
+
 
 // lấy ra tất cả nhà sản xuất
 function get_all_manufacturer()
@@ -37,11 +32,9 @@ function get_product_by_manu($man_id)
             WHERE product.man_id = {$man_id}";
     return select_all_records($sql);
 }
-
-// lấy ra lượt mua của 1 sản phẩm
-function get_bought_counter($product_id)
+// lấy sô lượng sản phẩm của mỗi danh mục
+function get_product_qty_each_cate($cate_id)
 {
-    $sql = "SELECT  COUNT(order_items.product_id) AS bought_counter FROM order_items 
-        WHERE order_items.product_id = {$product_id}";
+    $sql = "SELECT COUNT(product.id) FROM product WHERE cate_id = {$cate_id} GROUP BY cate_id";
     return select_one_value($sql);
 }
