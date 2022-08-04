@@ -1,4 +1,4 @@
-<aside class="sticky top-0 h-screen z-50">
+<aside class="sticky top-0 h-full z-50">
     <div class="md:h-screen lg:h-screen dropdown sm:dropdown-end lg:dropdown-right">
         <!-- nav-icon -->
         <nav class="sm:w-screen sm:h-auto md:h-screen lg:h-screen p-[30px] flex lg:flex-col justify-between items-center bg-[color:var(--primary-color)] " tabindex="0">
