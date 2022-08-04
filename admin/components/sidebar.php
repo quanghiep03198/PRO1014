@@ -36,7 +36,7 @@
             <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=product-list">Quản lý sản phẩm</a> </li>
             <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=order-list">Quản lý đơn hàng</a> </li>
             <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=post-list">Quản lý bài viết</a></li>
-            <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=service">Danh sách dịch vụ</a> </li>
+            <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=services-list">Danh sách dịch vụ</a> </li>
             <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=setting">Cài đặt website</a> </li>
         </ul>
         <div class="flex flex-col justify-center align-middle h-[60px]">
