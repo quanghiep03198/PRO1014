@@ -97,7 +97,7 @@ $error =[];
               ease-in-out
               m-0
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123" aria-describedby="emailHelp123" placeholder="" >
-                  <small><?php check_empty("tendm", "Tên danh mục") ?></small>
+                  <small><?php check_empty("cost", "Giá tiền") ?></small>
 </div>
 
 
