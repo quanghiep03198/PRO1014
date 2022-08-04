@@ -41,7 +41,6 @@ const getAllCookieObjs = () => {
 // post comment
 const postCommentOnProduct = (form, event) => {
 	event.preventDefault();
-	console.log(form);
 	// lấy các trường dữ liệu muốn gửi đi
 	const user = form["user"].value;
 	const username = form["username"].value;

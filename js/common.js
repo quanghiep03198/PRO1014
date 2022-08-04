@@ -36,12 +36,13 @@ const alert = {
 const showMessage = (style, icon, message) => {
 	const toast = document.createElement("div");
 	toast.classList.add("toast", "toast-bottom", "toast-end", "animate-[slip_500ms_ease-in-out]", "w-[300px]", "z-50");
-	toast.innerHTML = /*html */ ` <div class="alert ${style} text-gray-800 text-xl">
+	toast.innerHTML = /*html */ ` <div class="alert ${style} text-gray-800 !text-xl ">
 										<i class="${icon}"></i>
 										<span>${message}</span>
 								</div>`;
 	const main = $("main");
 	main.appendChild(toast);
+	console.log(toast);
 	setTimeout(() => {
 		main.removeChild(toast);
 	}, 3000);
