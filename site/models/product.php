@@ -23,9 +23,15 @@ function get_products_by_cate()
 {
     $args_list = func_get_args();
     $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
-    $sql = "SELECT product.id, product.prod_name,product.price,product.image,product.discount,product.warranty_time,manufacturer.name as man_name FROM product
+    if (count($args_list) > 1)
+        $sql = "SELECT product.id, product.prod_name,product.price,product.image,product.discount,product.warranty_time,manufacturer.name as man_name FROM product
             INNER JOIN manufacturer ON product.man_id = manufacturer.id
-            WHERE product.cate_id = {$args_list[0]} AND product.man_id = {$args_list[1]}
+            WHERE product.cate_id = {$args_list[0]} AND  product.man_id = {$args_list[1]}
+            ORDER BY product.price {$sort}";
+    else
+        $sql = "SELECT product.id, product.prod_name,product.price,product.image,product.discount,product.warranty_time,manufacturer.name as man_name FROM product
+            INNER JOIN manufacturer ON product.man_id = manufacturer.id
+            WHERE product.cate_id = {$args_list[0]} 
             ORDER BY product.price {$sort}";
     return select_all_records($sql);
 }

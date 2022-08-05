@@ -1,10 +1,5 @@
 <?php
-
-if (!isset($_GET['man_id']))
-    $products = get_all_products();
-else
-    $products = get_product_by_manu($_GET['man_id']);
-
+$products = !isset($_GET['man_id']) ? get_all_products() : get_product_by_manu($_GET['man_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,24 +14,24 @@ else
 </head>
 
 <body>
-    <div class="flex items-stretch">
+    <div class="flex sm:flex-col items-stretch">
         <!-- import sidebar component -->
         <?php include_once "./admin/components/sidebar.php" ?>
         <section class="w-full">
-            <div class="bg-primary px-[50px] py-[30px] flex justify-between items-center">
+            <div class="bg-primary px-[50px] py-[30px] flex  justify-between items-center">
                 <h3 class="text-3xl text-white">Danh sách sản phẩm</h3>
                 <div class="dropdown dropdown-end ">
                     <label tabindex="0" class="text-white text-xl"><i class="bi bi-list"></i></label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80">
                         <li><a href="?page=product-list">Danh sách sản phẩm</a></li>
                         <li><a href="?page=categories-list">Danh mục sản phẩm</a></li>
-                        <li><a href="?page=manufacturer-list">Danh sách nhà sản xua</a></li>
+                        <li><a href="?page=manufacturer-list">Danh sách nhà sản xuất</a></li>
                     </ul>
                 </div>
             </div>
             <div class="container mx-auto">
-                <div class="flex justify-between items-center">
-                    <select name="" onchange="window.location = this.value" class="select select-bordered my-5">
+                <div class="flex justify-between items-center my-5">
+                    <select name="" onchange="window.location = this.value" class="select select-bordered">
                         <option value=<?php echo "admin.php?page=product-list" ?>>Tất cả sản phẩm</option>
                         <?php foreach (get_all_manufacturer() as $item) : extract($item) ?>
                             <option value=<?php echo "admin.php?page=product-list&man_id={$id}" ?> <?php if (isset($_GET['man_id']) && $_GET['man_id'] == $id) echo "selected" ?>><?= $name ?></option>
@@ -76,7 +71,7 @@ else
                                 <td class="text-lg"><?= get_bought_counter($id)  ?></td>
                                 <td class="text-lg">
                                     <a href=<?php echo "?page=product-update&id={$id}" ?> class="font-medium hover:text-primary hover:link">Sửa</a>/
-                                    <a href=<?php echo "?page=product-delete&id={$id}" ?> class="font-medium hover:text-error hover:link" onclick="return confirm(`Bạn chắc chắn muốn xóa sản phẩm này?`)">Xóa</a>
+                                    <a href=<?php echo "./admin/controllers/product.php?id={$id}" ?> class="font-medium hover:text-error hover:link" onclick="return confirm(`Bạn chắc chắn muốn xóa sản phẩm này?`)">Xóa</a>
                                 </td>
                             </tr>
                         <?php

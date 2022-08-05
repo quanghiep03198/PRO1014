@@ -26,10 +26,10 @@ if (isset($_POST['create_product'])) :
         $sql = "INSERT INTO product (prod_name, cate_id, image, price, description, discount, stock, warranty_time, man_id) 
                 VALUES ('{$product_name}', '{$category}', '{$image}', {$price}, '{$description}', '{$discount}', {$stock}, {$warranty_time}, '{$manufacturer}')";
         execute_query($sql);
-        echo "<script>
-                alert(`Thêm sản phẩm thành công!`);
-                history.go(-1)
-            </script>";
+        echo "<script>alert(`Thêm sản phẩm thành công!`);</script>";
+        header("Location: ../../admin.php?page=product-list");
+
+
     endif;
 
 endif;
@@ -66,14 +66,13 @@ if (isset($_POST['update_product'])) :
                 man_id ='{$manufacturer}'
                 WHERE id = {$id}";
         execute_query($sql);
-        echo "<script>
-                alert(`Update sản phẩm thành công!`);
-                history.go(-1)
-            </script>";
+        echo "<script>alert(`Update sản phẩm thành công!`);</script>";
+        header("Location: ../../admin.php?page=product-list");
+
     endif;
 endif;
 // xóa sản phẩm
 if (isset($_GET['id'])) {
     execute_query("DELETE FROM product WHERE id = {$_GET['id']}");
-    header("Location: ?page=product-list");
+    header("Location: ../../admin.php?page=product-list");
 }

@@ -29,7 +29,9 @@ function get_product_by_manu($man_id)
             FROM product
             INNER JOIN manufacturer ON manufacturer.id = product.man_id
             INNER JOIN order_items ON product.id = order_items.product_id
-            WHERE product.man_id = {$man_id}";
+            WHERE product.man_id = {$man_id}
+            GROUP BY product.id;
+            ";
     return select_all_records($sql);
 }
 // lấy sô lượng sản phẩm của mỗi danh mục

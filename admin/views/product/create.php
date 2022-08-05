@@ -38,18 +38,14 @@ $error = [];
                         <!-- tên sản phẩm -->
                         <div class="form-control">
                             <label class="text-xl">Tên sản phẩm</label>
-                            <input type="text" dataa-name="tên sản phẩm" class="input input-bordered" name="product_name" id="">
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_empty("product_name", "tên sản phẩm") ?>
-                            </small>
+                            <input type="text" data-name="tên sản phẩm" class="input input-bordered" name="product_name" id="">
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                         <!-- giá sản phẩm -->
                         <div class="form-control">
                             <label class="text-xl">Giá</label>
                             <input type="text" data-name="giá sản phẩm" class="input input-bordered" name="price" id="">
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_empty("price", "giá sản phẩm") ?>
-                            </small>
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                         <!-- danh mục sản phẩm -->
                         <div class="form-control">
@@ -60,9 +56,7 @@ $error = [];
                                     <option value=<?= $id ?>><?= $name ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_empty("category", "danh mục sản phẩm") ?>
-                            </small>
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                         <!-- hãng sản xuất -->
                         <div class="form-control">
@@ -73,9 +67,7 @@ $error = [];
                                     <option value=<?= $id ?>><?= $name ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_empty("manufacturer", "nhà sản xuất") ?>
-                            </small>
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                         <!-- discount -->
                         <div class="form-control">
@@ -85,38 +77,28 @@ $error = [];
                         <!-- ảnh sản phẩm -->
                         <div class="form-control">
                             <label class="text-xl">Ảnh sản phẩm</label>
-                            <input type="file" data-name="product_image" class="file:hover:btn-primary file:btn" name="product_image">
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_image("product_image", "add_product") ?>
-                            </small>
-
+                            <input type="file" data-name="ảnh sản phẩm" class="file:hover:btn-primary file:btn" name="product_image">
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
-
                     </div>
                     <div class="flex flex-col gap-5">
                         <!-- stock -->
                         <div class="form-control">
                             <label class="text-xl">Kho hàng</label>
                             <input type="number" data-name="số sản phẩm trong kho" class="input input-bordered" name="stock" id="">
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_empty("stock", "kho hàng") ?>
-                            </small>
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                         <!-- thời gian bảo hành sản phẩm -->
                         <div class="form-control">
                             <label class="text-xl">Thời gian bảo hành</label>
                             <input type="number" data-name="thời gian bảo hành" class="input input-bordered" name="warranty_time" id="">
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_empty("warranty_time", "thời gian bảo hành") ?>
-                            </small>
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                         <!-- mô tả -->
                         <div class="form-control">
                             <label class="text-xl">Mô tả</label>
                             <textarea name="description" data-name="mô tả sản phẩm"></textarea>
-                            <small class="text-base text-error error-message font-semibold">
-                                <?php check_empty("description", "mô tả sản phẩm") ?>
-                            </small>
+                            <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                     </div>
                 </div>
