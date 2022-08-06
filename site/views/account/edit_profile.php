@@ -1,3 +1,29 @@
+<?php
+if (isset($_POST['update_profile'])) :
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $error_count = 0;
+
+    check_empty($username, $email, $phone, $address);
+    check_email($email);
+    check_phoneNumber($phone);
+    echo $error_count;
+
+    if ($error_count == 0) :
+        $sql = "UPDATE users SET name = '{$username}',
+                                 email = '{$email}',
+                                 phone = '{$phone}',
+                                 address = '{$address}'
+                WHERE users.id = {$auth['id']}";
+        execute_query($sql);
+        header("Location: ?page=account-edit_profile");
+
+    endif;
+
+endif;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,28 +51,28 @@
                 <form action="" method="POST" class="flex flex-col gap-5" onsubmit="handleErrorUpdateProfile(this,event)">
                     <div class="form-group">
                         <label for="">Tên người dùng</label>
-                        <input type="text" data-name="tên của bạn" name="username" class="input input-bordered w-full">
+                        <input type="text" data-name="tên của bạn" name="username" class="input input-bordered w-full" value="<?php echo $auth['name'] ?>">
                         <small class="text-base text-error error-message font-semibold"></small>
                     </div>
 
                     <div class="form-group">
                         <label for="">Email</label>
-                        <input type="email" data-name="email" name="email" class="input input-bordered w-full">
+                        <input type="email" data-name="email" name="email" class="input input-bordered w-full" value="<?php echo $auth['email'] ?>">
                         <small class="text-base text-error error-message font-semibold"></small>
                     </div>
 
                     <div class="form-group">
                         <label for="">Số điện thoại</label>
-                        <input type="text" data-name="số điện thoại" name="phone" class="input input-bordered w-full">
+                        <input type="text" data-name="số điện thoại" name="phone" class="input input-bordered w-full" value="<?php echo $auth['phone'] ?>">
                         <small class="text-base text-error error-message font-semibold"></small>
                     </div>
                     <div class="form-group">
                         <label for="">Địa chỉ</label>
-                        <input type="text" data-name="địa chỉ" name="address" class="input input-bordered w-full">
+                        <input type="text" data-name="địa chỉ" name="address" class="input input-bordered w-full" value="<?php echo $auth['address'] ?>">
                         <small class="text-base text-error error-message font-semibold"></small>
                     </div>
                     <div>
-                        <button type="submit " class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]">Cập nhật</button>
+                        <button type="submit" name="update_profile" class="btn hover:btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>

@@ -36,7 +36,7 @@ endif;
                     </ul>
                 </div>
             </div>
-            <form action="/admin/controllers/product.php" method="post" enctype="multipart/form-data" class="container mx-auto" onsubmit="handleErrorUpdateProduct(this,event)">
+            <form action="/admin/controllers/product.php" method="post" enctype="multipart/form-data" class="w-full sm:p-5 md:p-10 lg:p-10 mx-auto" onsubmit="handleErrorUpdateProduct(this,event)">
                 <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 items-stretch mb-10">
                     <div class="flex flex-col gap-5">
                         <!-- tên sản phẩm -->

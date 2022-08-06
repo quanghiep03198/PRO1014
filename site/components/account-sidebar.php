@@ -47,7 +47,7 @@ if (isset($_POST['update_avatar']) && isset($_COOKIE['auth'])) {
             </label>
         </div>
         <div class="info text-start">
-            <h3 class="text-lg hover:underline"> <a href=""><?= $_SESSION['user_name'] ?></a></h3>
+            <h3 class="text-lg hover:underline"> <a href=""><?= $auth['name'] ?></a></h3>
             <p class="text-gray-500"><?= $auth['email'] ?></p>
         </div>
         <div class="camera ml-10">

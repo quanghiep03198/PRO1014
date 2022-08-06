@@ -14,29 +14,34 @@
 
 <body>
     <main>
-        <div class="flex items-stretch">
+        <div class="flex sm:flex-col-reverse items-stretch h-screen overflow-y-auto">
             <!-- import sidebar from component -->
             <?php include_once "./admin/components/sidebar.php" ?>
-            <div class="flex flex-col gap-10 w-full">
+            <!-- dashboard -->
+            <div class="flex flex-col gap-10 w-full h-screen overflow-y-scroll">
+                <div class="bg-primary px-[50px] py-[30px] flex justify-between items-center w-full">
+                    <h1 class="text-3xl text-white">Thống kê doanh số</h1>
+                </div>
+
                 <section class="container mx-auto p-10">
                     <canvas id="myChart" class="w-screen"></canvas>
                 </section>
 
-                <section class="container mx-auto p-10">
-                    <div class="flex justify-between items-center mb-10">
-                        <h1 class="sm:text-lg md:text-xl lg:text-2xl text-2xl font-semibold">Doanh số sản phẩm hàng tháng</h1>
+                <section class="container mx-auto sm:p-2 md:p-4 lg:p-10">
+                    <div class="flex justify-between sm:flex-col sm:items-start md:items-center lg:items-center mb-10">
+                        <h1 class="sm:text-lg md:text-xl lg:text-2xl text-2xl font-semibold" id="stats-table">Doanh số sản phẩm hàng tháng</h1>
                         <select name="" id="" class="select select-bordered" onchange="window.location = this.value">
                             <?php for ($i = 1; $i <= 12; $i++) { ?>
-                                <option value=<?php echo "?page=statistic&month={$i}" ?> <?php
-                                                                                            if (isset($_GET['month']) && $_GET['month'] == $i) echo "selected";
-                                                                                            if (getdate()['mon'] == $i) echo "selected" ?>><?php echo "Tháng {$i}";
-                                                                                                                                            ?>
+                                <option value=<?php echo "?page=statistic&month={$i}#stats-table" ?> <?php
+                                                                                                        if (isset($_GET['month']) && $_GET['month'] == $i) echo "selected";
+                                                                                                        if (!isset($_GET['month']) && getdate()['mon'] == $i) echo "selected" ?>><?php echo "Tháng {$i}";
+                                                                                                                                                                                    ?>
                                 </option>
                             <?php    } ?>
                         </select>
                     </div>
-                    <table class="table w-full">
-                        <thead>
+                    <table class="table w-full overflow-x-auto" id="stats-table">
+                        <thead class="sm:hidden">
                             <tr>
                                 <th class="text-lg">Sản phẩm</th>
                                 <th class="text-lg">Số lượng bán ra</th>
@@ -52,23 +57,25 @@
                                 foreach ($turnover_stats as $product) : extract($product) ?>
                                     <tr>
                                         <td class="flex items-center gap-3">
-                                            <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="w-20 h-20 object-contain">
+                                            <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="sm:w-24 h-24 md:w-16 md:h-16  lg:w-20 lg:h-20  object-contain">
                                             <div class="flex flex-col gap-3">
-                                                <span class="text-xl font-medium"><?= $prod_name ?></span>
-                                                <span class="text-lg"><?= $unit_price . "₫" ?></span>
+                                                <span class="sm:text-sm md:text-lg lg:text-xl font-medium"><?= $prod_name ?></span>
+                                                <span class="sm:text-sm md:text-base lg:text-lg">Giá bán:<?= $unit_price . "₫" ?></span>
+                                                <span class="text-sm sm:block md:hidden lg:hidden">Bán ra: <?= $sold ?></span>
+                                                <span class="text-sm sm:block md:hidden lg:hidden">Doanh số: <?= $turnover . "₫" ?></span>
                                             </div>
                                         </td>
-
-                                        <td class="text-lg"><?= $sold ?></td>
-                                        <td class="text-lg"><?= $turnover . "₫" ?></td>
+                                        <td class="text-lg sm:hidden md:table-cell lg:table-cell"><?= $sold ?></td>
+                                        <td class="text-lg sm:hidden md:table-cell lg:table-cell"><?= $turnover . "₫" ?></td>
                                     </tr>
                             <?php
                                 endforeach;
                             endif; ?>
-                            <?php if (empty($turnover_stats)) ?>
-                            <tr>
-                                <td colspan="3" class="text-2xl text-center p-10 text-error">Chưa có dữ liệu doanh số nào !</td>
-                            </tr>
+                            <?php if (empty($turnover_stats)) : ?>
+                                <tr>
+                                    <td colspan="3" class="text-2xl text-center p-10 text-error">Chưa có dữ liệu doanh số nào !</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
 

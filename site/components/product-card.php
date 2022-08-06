@@ -32,6 +32,7 @@ if (isset($_POST['buy_now'])) {
                 <input type='hidden' name='product_name' value="<?php echo $prod_name ?>">
                 <input type='hidden' name='manu' value="<?php echo $man_name ?>">
                 <input type='hidden' name='price' value=<?= $price ?>>
+                <input type='hidden' name='stock' value=<?= $stock ?>>
                 <input type='hidden' name='product_img' value=<?= $image ?>>
                 <input type='hidden' name='qty' value=1>
                 <input type='hidden' name='warranty' value=<?= $warranty_time ?>>

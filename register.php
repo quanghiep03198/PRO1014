@@ -21,7 +21,7 @@
             <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-10">
                 <!-- form group left -->
                 <div class="flex flex-col gap-5 items-center">
-                    <div class="form-control w-full w-full">
+                    <div class="form-control w-full">
                         <label for="">Tài khoản</label>
                         <input data-name="tài khoản" name="account" class="input  input-bordered  w-full  focus:outline-none focus:shadow-outline" id="account" type="text" placeholder="Tài khoản">
                         <small class=" text-error error-message font-semibold"></small>
@@ -78,9 +78,9 @@
             </div>
         </form>
     </div>
-    <script src="./site/js/common.js"></script>
-    <script src="./site/js/validate.js"></script>
-    <script src="./site/js/handle-userdata.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/validate.js"></script>
+    <script src="/js/handle-userdata.js"></script>
 
 </body>
 

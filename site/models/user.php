@@ -1,10 +1,8 @@
 <?php
-function get_user_data()
+function get_user_data($user_id)
 {
-    if (isset($_COOKIE['auth'])) {
-        $sql = "SELECT * FROM users WHERE users.id = {$_COOKIE['auth']}";
-        return select_single_record($sql);
-    }
+    $sql = "SELECT * FROM users WHERE users.id = {$user_id}";
+    return select_single_record($sql);
 }
 function get_all_users()
 {

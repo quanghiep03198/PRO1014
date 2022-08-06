@@ -1,8 +1,10 @@
 <?php
 const ROOT_AVATAR = "img/avatars/";
 const ROOT_PRODUCT = 'img/products/';
+const ROOT_ICONS = 'img/icons/';
 const ROOT_BANNER =  "img/banners/";
 const ROOT_SITE = "img/settings/";
+const ROOT_POST = "img/posts/";
 
 // chuẩn hóa chuỗi
 function strStandardize($string)

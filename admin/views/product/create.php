@@ -1,6 +1,3 @@
-<?php
-$error = [];
-?>
 <!DOCTYPE html>
 <html lang="en">
 

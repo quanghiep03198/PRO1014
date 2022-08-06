@@ -17,6 +17,9 @@
 @layer components {
 }
 @layer utilities {
+	body {
+		scroll-behavior: smooth;
+	}
 	.swiper-wrapper {
 		width: 100%;
 		height: fit-content;

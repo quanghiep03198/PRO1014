@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
 
 <body>
     <?php include_once 'site/components/header.php';  ?>
-    <main class="relative">
+    <main class="relative bg-white">
         <div class="grid gap-10 sm:grid-cols-1 lg:grid-cols-[1fr,3fr]">
             <div>
                 <?php include_once 'site/components/sidebar.php' ?>
@@ -32,12 +32,12 @@ if (isset($_GET['id'])) {
                 <section>
                     <div class="container mx-auto grid sm:grid-cols-1 lg:grid-cols-[1fr,2.5fr] gap-10">
                         <!-- product image -->
-                        <picture class="center">
+                        <div class="">
                             <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="object-cover center">
-                        </picture>
+                        </div>
                         <!-- product information -->
                         <div class="w-full flex flex-col gap-5">
-                            <h2 class="text-3xl font-normal"><?= $prod_name ?></h2>
+                            <h2 class="text-3xl font-semibold"><?= $prod_name ?></h2>
                             <span class="font-semibold text-2xl"><?= $price  . '₫' ?></span>
                             <div class="rating">
                                 <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
@@ -62,6 +62,7 @@ if (isset($_GET['id'])) {
                                     <input type='hidden' name='product_name' value="<?php echo $prod_name ?>">
                                     <input type='hidden' name='manu' value="<?php echo $man_name ?>">
                                     <input type='hidden' name='price' value=<?= $price ?>>
+                                    <input type='hidden' name='stock' value=<?= $stock ?>>
                                     <input type='hidden' name='product_img' value=<?= $image ?>>
                                     <input type='hidden' name='qty' value=1>
                                     <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
@@ -75,6 +76,23 @@ if (isset($_GET['id'])) {
                                         <span class="indent-2">Thêm vào giỏ hàng</span>
                                     </button>
                                 </form>
+                            </div>
+                            <div class="my-5">
+                                <h3 class="text-2xl font-medium mb-5 ">Chính sách mua hàng tiện lợi!</h3>
+                                <ul class="flex flex-col gap-5">
+                                    <li class="text-xl">
+                                        <i class="bi bi-arrow-return-left"></i>
+                                        <span class="indent-2">Đổi trả trong 7 ngày</span>
+                                    </li>
+                                    <li class="text-xl">
+                                        <i class="bi bi-truck"></i>
+                                        <span class="indent-2">Giao hàng tận nơi: 3-5 ngày</span>
+                                    </li>
+                                    <li class="text-xl">
+                                        <i class="bi bi-credit-card"></i>
+                                        <span class="indent-2">Hỗ trợ thanh toán nhanh chóng qua cổng VNPay</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -145,15 +163,14 @@ if (isset($_GET['id'])) {
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
+    <script src="/js/common.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/common.js"></script>
+    <script src="/js/carousel.js"></script>
     <script src="js/handle-cart.js"></script>
-    <script src="js/handle-post-request.js"></script>
-    <script src="js/product-pagination.js"></script>
+    <script src="/js/handle-post-request.js"></script>
     <script>
-        const table = $("table")
-        table.classList.add("table");
+        // const table = $("table")
+        // table.classList.add("table");
         const updateQty = (btn, unitVal) => {
             const target = btn.parentElement.querySelector(".quantity");
             let value = +target.value; // ảo ma canada

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dịch vụ sửa chữa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
@@ -19,18 +20,18 @@
         </div>
         <div class="container mx-auto">
             <table class="table w-full">
-                <thead>
-                    <div class="grid">
-                        <th class="py-5 text-left">Dịch vụ</th>
-                        <th class="py-5 text-left">Chi phí sửa chữa</th>
-                    </div>
-                </thead>
-                <?php foreach (get_all_services() as $service) : extract($service) ?>
-                    <tr class="table-row">
-                        <td><?= $name ?></td>
-                        <td><?= $cost . "₫" ?></td>
-                    </tr>
-                <?php endforeach; ?>
+                <tr class="border-b">
+                    <th class="py-5 text-left">Dịch vụ</th>
+                    <th class="py-5 text-left">Chi phí sửa chữa</th>
+                </tr>
+                <tbody>
+                    <?php foreach (get_all_services() as $service) : extract($service) ?>
+                        <tr class="table-row">
+                            <td><?= $name ?></td>
+                            <td><?= $cost . "₫" ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
             <div id="pagination" class=" btn-group center p-10"></div>
         </div>

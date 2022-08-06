@@ -89,7 +89,15 @@ const checkLength = (formCtrl, minLength) => {
 	};
 	return formCtrl.value.length >= minLength;
 };
-
+const checkMaxLength = (formCtrl, minLength) => {
+	formCtrl.oninput = () => {
+		formCtrl.value.length <= minLength ? showSuccess(formCtrl, null) : showError(formCtrl, `${getFieldName(formCtrl)} phải có tối thiểu ${minLength} ký tự`);
+	};
+	formCtrl.onblur = () => {
+		formCtrl.value.length <= minLength ? showSuccess(formCtrl, null) : showError(formCtrl, `${getFieldName(formCtrl)} phải có tối thiểu ${minLength} ký tự`);
+	};
+	return formCtrl.value.length <= minLength;
+};
 const isPhoneNumber = (formCtrl) => {
 	formCtrl.oninput = () => {
 		formCtrl.value == +formCtrl.value && formCtrl.value.length == 10 ? showSuccess(formCtrl, null) : showError(formCtrl, `${getFieldName(formCtrl)} không hợp lệ`);

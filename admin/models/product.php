@@ -40,3 +40,9 @@ function get_product_qty_each_cate($cate_id)
     $sql = "SELECT COUNT(product.id) FROM product WHERE cate_id = {$cate_id} GROUP BY cate_id";
     return select_one_value($sql);
 }
+// lấy ra các sản phẩm hiện không thuộc danh mục nào
+function get_products_have_no_cate()
+{
+    $sql = "SELECT * FROM product WHERE cate_id NOT IN (SELECT id FROM product_category)";
+    return select_all_records($sql);
+}

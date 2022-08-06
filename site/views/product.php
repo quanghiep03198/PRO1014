@@ -26,9 +26,13 @@
                     <div class="flex flex-col gap-2">
                         <label for="" class="text-xl" id="#">Lọc theo giá</label>
                         <select class="select select-lg select-bordered" onchange="window.location = this.value">
-                            <?php if (isset($_GET['cate'])) : ?>
+                            <?php if (isset($_GET['cate']) && isset($_GET['manu'])) : ?>
                                 <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
                                 <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
+                            <?php endif; ?>
+                            <?php if (isset($_GET['cate'])) : ?>
+                                <option value=<?php echo "?page=product&cate={$_GET['cate']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
+                                <option value=<?php echo "?page=product&cate={$_GET['cate']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>
                             <?php endif; ?>
                             <?php if (isset($_GET['kw'])) :  ?>
                                 <option value=<?php echo "?page=product&kw={$_GET['kw']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
@@ -45,7 +49,7 @@
                 <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative h-50%" id="title">
                     <?php
                     // lấy tất cả sản phảm
-                    if (!isset($_GET['cate']) && !isset($_GET['kw'])) :
+                    if (!isset($_GET['cate']) && !isset($_GET['kw'])) {
                         $products = get_all_products();
                         if (count($products) == 0)
                             echo '<div class="center flex flex-col justify-center items-center">
@@ -56,23 +60,33 @@
                             extract($product);
                             include("site/components/product-card.php");
                         endforeach;
-                    endif;
-                    // lọc sản phẩm theo loại
-                    if (isset($_GET['cate'])) :
-                        $products = get_products_by_cate($_GET['cate'], $_GET['manu']);
-                        if (count($products) == 0) :
+                    } elseif (isset($_GET['cate'])) {
+                        $products = get_products_by_cate($_GET['cate']);
+                        if (count($products) == 0)
                             echo '<div class="center flex flex-col justify-center items-center">
-                            <img src="/img/empty.png" alt="">
-                            <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
-                        </div>';
-                        endif;
+                                <img src="/img/empty.png" alt="">
+                                <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
+                                </div>';
                         foreach ($products as $product) :
                             extract($product);
                             include("site/components/product-card.php");
                         endforeach;
-                    endif;
+                    }
+                    // lọc sản phẩm theo loại
+                    elseif (isset($_GET['cate']) && isset($_GET['manu'])) {
+                        $products = get_products_by_cate($_GET['cate'], $_GET['manu']);
+                        if (count($products) == 0)
+                            echo '<div class="center flex flex-col justify-center items-center">
+                                <img src="/img/empty.png" alt="">
+                                <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
+                                </div>';
+                        foreach ($products as $product) :
+                            extract($product);
+                            include("site/components/product-card.php");
+                        endforeach;
+                    }
                     // lọc sản phẩm theo từ khóa tìm kiếm
-                    if (isset($_GET['kw']) && !isset($_GET['cate'])) :
+                    elseif (isset($_GET['kw']) && !isset($_GET['cate'])) {
                         $products = get_products_by_kw($_GET['kw']);
                         if (count($products) == 0) :
                             echo '<div class="center flex flex-col justify-center items-center">
@@ -84,7 +98,7 @@
                             extract($product);
                             include("site/components/product-card.php");
                         endforeach;
-                    endif;
+                    }
                     ?>
 
                 </div>

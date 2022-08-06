@@ -22,19 +22,24 @@
         <?php include_once "/xampp/htdocs/PRO1014/admin/components/sidebar.php" ?>
         <!-- sidebar  end -->
         <section class="w-full">
-            <div class="bg-primary px-12 py-8 flex justify-between items-center mb-10">
-                <h1 class="text-3xl text-white">Danh mục sản phẩm</h1>
+            <div class="bg-primary px-[50px] py-[30px] flex justify-between items-center">
+                <h3 class="text-3xl text-white">Danh sách sản phẩm</h3>
                 <div class="dropdown dropdown-end ">
                     <label tabindex="0" class="text-white text-xl"><i class="bi bi-list"></i></label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80">
                         <li><a href="?page=product-list">Danh sách sản phẩm</a></li>
                         <li><a href="?page=categories-list">Danh mục sản phẩm</a></li>
+                        <li><a href="?page=manufacturer-list">Danh sách nhà sản xuất</a></li>
                     </ul>
                 </div>
             </div>
 
             <!-- form sp  -->
             <div class="container mx-auto">
+                <div class="flex justify-end items-center my-5">
+                    <a href="?page=categories-create" class="btn btn-ghost "><i class="bi bi-plus text-2xl"></i><span>Thêm mới</span></a>
+                </div>
+
                 <table class="table w-full">
                     <thead>
                         <tr>
@@ -52,12 +57,13 @@
                                 <td> <?= $productQtyEachCate = get_product_qty_each_cate($id) != null ? get_product_qty_each_cate($id) : 0 ?></td>
                                 <td>
                                     <a href="?page=categories-update&id=<?php echo $id ?>" class="font-medium hover:text-primary">Sửa</a> /
-                                    <a href="?page=categories-delete&id=<?php echo $id ?>" class="font-medium hover:text-error">Xóa
+                                    <a href="./admin/controllers/category.php?id=<?php echo $id ?>" class="font-medium hover:text-error" onclick="return confirm('Bạn chắc chắn muốn xóa danh mục sản phẩm này?')">Xóa
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+
             </div>
         </section>
         <!-- grid end  -->

@@ -9,6 +9,7 @@ const addCart = (button) => {
 		manu: button.parentElement.querySelector(`input[name = "manu"]`).value,
 		img: button.parentElement.querySelector(`input[name = "product_img"]`).value,
 		price: +button.parentElement.querySelector(`input[name = "price"]`).value,
+		stock: +button.parentElement.querySelector(`input[name = "stock"]`).value,
 		qty: +button.parentElement.querySelector(`input[name = "qty"]`).value,
 		warranty: +button.parentElement.querySelector(`input[name = "warranty"]`).value,
 	};
@@ -25,7 +26,9 @@ const addCart = (button) => {
 	else {
 		cartItems.push(product);
 		localStorage.setItem("cart", JSON.stringify(cartItems));
+		console.log(product.stock);
 	}
+
 	countItems();
 	showMessage(alert.success.style, alert.success.icon, "Thêm vào giỏ hàng thành công!");
 };
@@ -93,9 +96,10 @@ const renderCart = (data) => {
 										<input type="hidden" name="unit-price" value=${item.price}>
 										<input type="hidden" name="qty" value=${item.qty}>
 										<input type="hidden" name="total" value=${item.total}>
-											<button type="button" onclick="changeQty(this,-1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">-</button>
-											<input type="number" min=1 value=${item.qty} class="quantity outline-none focus:outline-none text-center w-10 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number">
-											<button type="button" onclick="changeQty(this,1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">+</button>
+										<input type="hidden" name="stock" value=${item.stock}>
+										<button type="button" onclick="changeQty(this,-1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">-</button>
+										<input type="number" min=1 max=${item.stock} value=${item.qty} class="quantity outline-none focus:outline-none text-center w-10 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number">
+										<button type="button" onclick="changeQty(this,1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">+</button>
 										</div>
 									</td>
 									<th>
@@ -124,9 +128,9 @@ const updateCartItem = (id, qty) => {
 		cartItems[cartItems.indexOf(item)] = item;
 		// update lại toàn bộ giỏ hàng
 		localStorage.setItem("cart", JSON.stringify(cartItems));
+		console.log(item.stock);
 		renderCart(JSON.parse(localStorage.getItem("cart"))); // update xong -> rerender ra ngoài
 	}
-	console.log(cartItems);
 };
 /**
  * delete cart item
@@ -144,11 +148,16 @@ const removeItem = (id) => {
 
 const changeQty = (btn, unitVal) => {
 	const id = btn.parentElement.querySelector(`input[name="id"]`).value;
-	console.log(id);
+	const stock = btn.parentElement.querySelector(`input[name="stock"]`).value;
 	const target = btn.parentElement.querySelector(".quantity");
+	console.log(stock);
 	let value = +target.value;
 	value += +unitVal;
 	if (value < 1) value = 1;
+	if (value > stock) {
+		showMessage(alert.warning.style, alert.warning.icon, "Số lượng sản phẩm trong kho hàng không đủ!");
+		value = stock;
+	}
 	target.value = value;
 	updateCartItem(id, target.value);
 };

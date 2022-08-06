@@ -38,9 +38,12 @@
                 <article>
                     <h2 class="container text-center text-[40px] font-[600] underline pb-[50px] pt-[50px] " id="title">TIN TỨC MỚI</h2>
                     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch gap-5">
-                        <?php for ($i = 0; $i < 9; $i++) {
-                            include "site/components/post-card.php";
-                        } ?>
+                        <?php
+                        foreach (get_all_posts() as $post)
+                            extract($post);
+                        include "site/components/post-card.php";
+                        ?>
+
                     </div>
                     <div class="pagination btn-group center p-10"></div>
                 </article>

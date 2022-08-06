@@ -14,11 +14,11 @@ $products = !isset($_GET['man_id']) ? get_all_products() : get_product_by_manu($
 </head>
 
 <body>
-    <div class="flex sm:flex-col items-stretch">
+    <div class="flex sm:flex-col-reverse items-stretch">
         <!-- import sidebar component -->
         <?php include_once "./admin/components/sidebar.php" ?>
         <section class="w-full">
-            <div class="bg-primary px-[50px] py-[30px] flex  justify-between items-center">
+            <div class="bg-primary px-[50px] py-[30px] flex justify-between items-center">
                 <h3 class="text-3xl text-white">Danh sách sản phẩm</h3>
                 <div class="dropdown dropdown-end ">
                     <label tabindex="0" class="text-white text-xl"><i class="bi bi-list"></i></label>

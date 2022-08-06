@@ -20,7 +20,7 @@
             <div class="collapse-title max-w-full text-xl border-b">
                 <a href=<?php echo "?page=product" ?>>Tất cả sản phẩm</a>
             </div>
-            <?php foreach (get_all_categories() as $cate) :  if ($cate['id'] == 5) continue  ?>
+            <?php foreach (get_all_categories() as $cate) :   if (strtolower($cate['name'])  == 'thẻ psn')  continue; ?>
                 <div tabindex="0" class="collapse collapse-arrow border-b bg-base-100 ">
                     <div class="collapse-title text-xl">
                         <?php echo $cate['name'] ?>
@@ -35,11 +35,12 @@
                         </ul>
                     </div>
                 </div>
+            <?php
 
-            <?php endforeach ?>
-            <?php $lastCate = get_all_categories()[4] ?>
+            endforeach ?>
+            <?php if (in_array(strStandardize($cate['name']), ['thẻ psn'])) ?>
             <div class="collapse-title max-w-full text-xl border-b">
-                <a href=<?php echo "?page=product&cate={$lastCate['id']}" ?>><?php echo $cate['name'] ?></a>
+                <a href=<?php echo "?page=product&cate={$cate['id']}" ?>><?php echo $cate['name'] ?></a>
             </div>
         </div>
     </div>

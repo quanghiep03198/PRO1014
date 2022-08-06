@@ -4,10 +4,17 @@ include_once 'lib/global.php';
 include_once 'lib/db_execute.php';
 include_once 'lib/validate.php';
 
-// using models
-include_once './admin/models/product.php';
-// include_once './admin/models/order.php';
-// using controllers
+
 include_once './admin/controllers/render.php';
 
-render();
+if (isset($_COOKIE['auth'])) {
+    $auth = get_user_data($_COOKIE['auth']);
+    if ($auth['role_id'] == 3) {
+        header("Location: index.php");
+        // nếu người dùng không phải admin yêu cầu quay lại
+    } else
+        render();
+}
+// nếu người dùng ko đăng nhập và cô tình truy cập vào trang sẽ yêu cầu người dùng quay lại
+else
+    header("Location: /index.php");

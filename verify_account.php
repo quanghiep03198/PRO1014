@@ -2,7 +2,11 @@
 include_once "./lib/db_execute.php";
 include_once "./lib/validate.php";
 include_once "./lib/send_mail.php";
+include_once "./site/models/user.php";
+
+
 session_start();
+
 
 if (isset($_POST['register_submit'])) {
 
@@ -12,20 +16,58 @@ if (isset($_POST['register_submit'])) {
     $email = $_POST['email'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
-    if (select_one_value("SELECT users.account FROM users WHERE users.account = '{$account}'") != $account) {
+    $error_count = 0;
+
+    check_empty($account, $password, $username, $email, $address, $phone);
+    check_email($email);
+    check_phoneNumber($phone);
+    check_length($password, 8);
+
+    if (!in_array($account, get_all_users()) && $error_count == 0) {
         // lưu tạm thông tin tài khoản vào cookie
         $verifyCode = substr(md5(rand(0, 999999)), 0, 8);
-        setcookie("account", json_encode([$account, $password, $username, $email, $address, $phone]), time() + 3000);
+        setcookie("account", json_encode([
+            "account" => $account,
+            "password" => $password,
+            "username" => $username,
+            "email" => $email,
+            "address" => $address,
+            "phone" => $phone
+        ]), time() + 3000);
         $_SESSION['verify_code'] = $verifyCode; // lưu verify code trong session
-        send_verify_code($_POST['email'], $verifyCode);
+        $email = $_POST['email'];
+        $subject = "Gửi bạn mã xác thực tài khoản";
+        $body = "Mã xác thực của bạn là : <b>{$verifyCode}</b>";
+        send_verify_code($email, $subject, $body);
     } else {
         echo '<script>
                 alert(`Tài khoản đã tồn tại trong hệ thống`);
-                history.go(-1);
+              
             </script>';
+        header("Location: index.php");
     }
 }
+if (isset($_POST['verify_account']) && isset($_COOKIE['account'])) {
+    $user = json_decode($_COOKIE['account'], true);
+    extract($user);
+    $error_count = 0;
 
+    if ($_POST['verify_code'] == $_SESSION['verify_code']) {
+        $role = select_one_value("SELECT user_role.id FROM user_role WHERE user_role.id = 3");
+        $sql = "INSERT INTO users (`account`,`password`,`name`,`email`,`address`,`phone`,`role_id`) 
+        VALUE('{$account}','{$password}','{$username}','{$email}','{$address}','{$phone}','{$role}')";
+        $user_id = execute_query($sql);
+        execute_query("INSERT INTO wishlist (user_id) VALUES ('{$user_id}')");
+        // xóa code verify lưu trên session
+        echo '<script>
+                alert(`Đăng ký thành công`);
+                </script>';
+        session_destroy();
+    } else
+        echo '<script>alert(`Mã xác thực không chính xác !`)</script>';
+}
+if (!isset($_SESSION['verify_code']))
+    header("Location: index.php");
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +77,7 @@ if (isset($_POST['register_submit'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="" rel="stylesheet" />
-    <title></title>
+    <title>Xác thực tài khoản</title>
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 
@@ -60,21 +102,3 @@ if (isset($_POST['register_submit'])) {
 
 </html>
 <?php
-
-if (isset($_POST['verify_account']) && isset($_COOKIE['account'])) {
-    $user = json_decode($_COOKIE['account']);
-    if ($_POST['verify_code'] == $_SESSION['verify_code']) {
-        $role = select_one_value("SELECT user_role.id FROM user_role WHERE user_role.name='client'");
-        $sql = "INSERT INTO users (`account`,`password`,`name`,`email`,`address`,`phone`,`role_id`) 
-        VALUE('{$user[0]}','{$user[1]}','{$user[2]}','{$user[3]}','{$user[4]}','{$user[5]}','{$role}')";
-        $user_id = execute_query($sql);
-        execute_query("INSERT INTO wishlist (user_id) VALUES ('{$user_id}')");
-        // xóa code verify lưu trên session
-        echo '<script>
-                alert(`Đăng ký thành công`);
-                history.go(-1)
-            </script>';
-        session_destroy();
-    } else
-        echo '<script>alert(`Mã xác thực không chính xác !`)</script>';
-}

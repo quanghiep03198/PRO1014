@@ -4,6 +4,8 @@ const $ = (selector) => {
 };
 
 const cartCounter = $("#cart-counter");
+const main = $("main");
+if (main) main.style.backgroundColor = "#fff";
 const countItems = () => {
 	if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
 	cartCounter.innerText = JSON.parse(localStorage.getItem("cart")).length;
@@ -42,7 +44,6 @@ const showMessage = (style, icon, message) => {
 								</div>`;
 	const main = $("main");
 	main.appendChild(toast);
-	console.log(toast);
 	setTimeout(() => {
 		main.removeChild(toast);
 	}, 3000);
