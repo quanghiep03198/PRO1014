@@ -10,7 +10,7 @@ function get_all_posts()
 // lấy ra 1 bài viết theo mã bài viết
 function get_one_post($post_id)
 {
-    $sql = "SELECT posts.title,
+    $sql = "SELECT posts.id,posts.title,
     posts.body,
     posts.short_desc,
     DATE(posted_date) AS posted_date,

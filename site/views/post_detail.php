@@ -2,7 +2,6 @@
 if (isset($_GET['id'])) {
     $post = get_one_post($_GET['id']);
     extract($post);
-    print_r($post);
 }
 ?>
 <!DOCTYPE html>
@@ -41,7 +40,7 @@ if (isset($_GET['id'])) {
                     <h5 class="font-semibold text-xl mb-10"><i class="bi bi-chat-left-dots"></i> <span>Bình luận</span></h5>
                     <!-- comment list -->
                     <div class="w-full flex flex-col gap-6 h-80 overflow-y-scroll hidden-scrollbar" id="comment-box">
-                        <?php foreach (get_all_post_comments($id) as $cmt) : extract($cmt) ?>
+                        <?php foreach (get_all_post_comments($_GET['id']) as $cmt) : extract($cmt) ?>
                             <div class="w-full mx-auto flex justify-start items-start gap-3">
                                 <!-- user infor -->
                                 <picture>
@@ -89,4 +88,5 @@ if (isset($_GET['id'])) {
     <script src="js/common.js"></script>
 </body>
 
-</html;
+</html>
+<?php
