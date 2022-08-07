@@ -44,7 +44,7 @@
                                     <li><a href="/admin/controllers/post.php?id=<?= $id ?>">Xóa</a></li>
                                 </ul>
                             </div>
-                            <img src=<?php echo ROOT_POST . $img ?> class="max-w-[200px] object-cover">
+                            <img src=<?php echo ROOT_POST . $img ?> class="max-w-200px object-cover">
                             <div class="card-body">
                                 <h2 class="card-title"><?php echo $title ?></h2>
                                 <p class="mb-5 text-ellipsis overflow-hidden"><?php echo $short_desc ?></p>

@@ -1,9 +1,8 @@
-<aside class="sticky top-0 h-full z-50 sm:hidden md:block lg:block">
+<aside class="sticky top-0 h-screen z-50 sm:hidden md:block lg:block">
     <div class="md:h-screen lg:h-screen dropdown dropdown-hover sm:dropdown-end lg:dropdown-right">
         <!-- nav-icon -->
-        <nav class="sm:w-screen sm:h-auto md:h-screen lg:h-screen p-[30px] flex lg:flex-col justify-between items-center bg-[color:var(--primary-color)] " tabindex="0">
+        <nav class="sm:w-screen sm:h-auto md:h-screen lg:h-screen p-[30px] flex md:flex-col lg:flex-col justify-between items-center bg-[color:var(--primary-color)] " tabindex="0">
             <ul class="flex md:flex-col lg:flex-col justify-center gap-4 items-center h-1/2">
-
                 <li class=" text-white text-2xl hover:animate-bounce">
                     <i class="bi bi-bar-chart-line "></i>
                 </li>
@@ -51,10 +50,10 @@
         </nav>
     </div>
 </aside>
-<nav class="sm:flex sm:justify-around sm:items-center md:hidden lg:hidden  w-screen h-auto bg-gray-800">
+<nav class="sm:flex sm:justify-around sm:items-center md:hidden lg:hidden  w-screen h-auto bg-gray-800 py-5">
     <button onclick="history.go(-1)"><i class="bi bi-caret-left text-white"></i></button>
     <a href="./admin.php"><i class="bi bi-house text-white"></i></a>
-    <label for="my-modal-3" class="btn modal-button"><i class="bi bi-list text-white"></i></label>
+    <label for="my-modal-3" class="modal-button"><i class="bi bi-list text-white"></i></label>
     <input type="checkbox" id="my-modal-3" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box relative">

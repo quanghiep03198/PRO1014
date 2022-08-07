@@ -11,7 +11,7 @@
                 <div class="form-control rounded-none">
                     <div class="input-group justify-between px-3 border-b">
                         <input type="hidden" name="page" value="product">
-                        <input type="text" name="kw" placeholder="Tìm kiếm sản phẩm..." class="input focus:outline-none" />
+                        <input type="text" name="kw" placeholder="Tìm kiếm sản phẩm..." class="input focus:outline-none bg-white" />
                         <button type="submit"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 <a href=<?php echo "?page=product" ?>>Tất cả sản phẩm</a>
             </div>
             <?php foreach (get_all_categories() as $cate) :   if (strtolower($cate['name'])  == 'thẻ psn')  continue; ?>
-                <div tabindex="0" class="collapse collapse-arrow border-b bg-base-100 ">
+                <div tabindex="0" class="collapse collapse-arrow border-b bg-white ">
                     <div class="collapse-title text-xl">
                         <?php echo $cate['name'] ?>
                     </div>

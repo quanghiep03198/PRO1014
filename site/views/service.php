@@ -18,15 +18,15 @@
         <div class="bg-[color:var(--primary-color)] text-white p-5">
             <h1 class="text-center sm:text-base md:text-xl lg:text-3xl">Bảng giá dịch vụ sửa chữa</h1>
         </div>
-        <div class="container mx-auto">
-            <table class="table w-full">
+        <div class="container mx-auto !bg-white">
+            <table class="table w-full !bg-white">
                 <tr class="border-b">
                     <th class="py-5 text-left">Dịch vụ</th>
                     <th class="py-5 text-left">Chi phí sửa chữa</th>
                 </tr>
                 <tbody>
                     <?php foreach (get_all_services() as $service) : extract($service) ?>
-                        <tr class="table-row">
+                        <tr class="table-row bg-white">
                             <td><?= $name ?></td>
                             <td><?= $cost . "₫" ?></td>
                         </tr>

@@ -11,12 +11,12 @@
                 <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800"><a href="?page=product">Cửa hàng</a></li>
                 <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800 dropdown">
                     <label tabindex="0" for="">Dịch vụ</label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-white rounded-box w-52">
                         <li class="text-sm"><a href="?page=service">Bảng giá dịch vụ</a></li>
                         <li class="text-sm"><a href="?page=warranty">Tra cứu bảo hành</a></li>
                     </ul>
                 </li>
-                <li class="h-10 text-[20px] font-[600] hover:border-b-4 hover:border-gray-800"><a href="?page=post">Tin tức</a></li>
+                <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800"><a href="?page=post">Tin tức</a></li>
             </ul>
         </div>
 

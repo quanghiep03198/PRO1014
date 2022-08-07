@@ -3,7 +3,7 @@
     <a href="?page=post_detail&id=<?php echo $id ?>">
         <img src="<?php echo ROOT_POST . $img ?>" alt="Shoes" class="center w-full h-72 object-fill" />
     </a>
-    <div class="card-body px-3">
+    <div class="card-body px-3 bg-white text-gray-800">
         <h2 class="card-title text-xl font-lg"><?= $title ?></h2>
         <p><?php echo $short_desc ?></p>
         <div class="flex justify-start items-center gap-5">

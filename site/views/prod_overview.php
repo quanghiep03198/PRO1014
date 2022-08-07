@@ -169,8 +169,9 @@ if (isset($_GET['id'])) {
     <script src="js/handle-cart.js"></script>
     <script src="/js/handle-post-request.js"></script>
     <script>
-        // const table = $("table")
-        // table.classList.add("table");
+        const table = $("table")
+        if (table)
+            table.classList.add("table");
         const updateQty = (btn, unitVal) => {
             const target = btn.parentElement.querySelector(".quantity");
             let value = +target.value; // ảo ma canada

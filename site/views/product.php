@@ -25,7 +25,7 @@
                 <div class="max-w-full mx-auto flex justify-start mb-8 gap-5">
                     <div class="flex flex-col gap-2">
                         <label for="" class="text-xl" id="#">Lọc theo giá</label>
-                        <select class="select select-lg select-bordered" onchange="window.location = this.value">
+                        <select class="select select-lg select-bordered bg-white" onchange="window.location = this.value">
                             <?php if (isset($_GET['cate']) && isset($_GET['manu'])) : ?>
                                 <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
                                 <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=desc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'desc' ? "selected" : "" ?>>Giá giảm dần</option>

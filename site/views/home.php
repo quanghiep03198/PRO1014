@@ -112,9 +112,9 @@
             <div class="grid sm:grid-cols-1 lg:grid-cols-[2fr,1fr] pb-[50px] gap-[50px]">
                 <!-- lastest news -->
                 <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 items-stretch gap-5 w-full">
-                    <?php for ($i = 0; $i < 3; $i++) {
+                    <?php foreach (get_new_posts(0, 3) as $post) : extract($post);
                         include "site/components/post-card.php";
-                    } ?>
+                    endforeach; ?>
                 </div>
 
                 <!-- hot news -->

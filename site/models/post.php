@@ -30,3 +30,11 @@ function get_posts_groupby_cate($cate_id)
             ORDER BY post.posted_date";
     return select_all_records($sql);
 }
+// lấy ra top 3 bài viết mới nhất
+function get_new_posts($start, $last)
+{
+    $sql = "SELECT posts.*,users.name AS author,users.avatar AS avatar, DATE(posted_date) AS create_date FROM posts 
+            INNER JOIN users ON posts.author_id = users.id
+            LIMIT {$start},{$last}";
+    return select_all_records($sql);
+}

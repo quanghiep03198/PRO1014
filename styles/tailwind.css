@@ -17,6 +17,14 @@
 @layer components {
 }
 @layer utilities {
+	.table,
+	.table > thead,
+	.table > body {
+		background-color: white !important;
+		background-opacity: 1;
+		color: black;
+	}
+
 	body {
 		scroll-behavior: smooth;
 	}

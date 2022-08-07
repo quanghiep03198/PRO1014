@@ -2,7 +2,11 @@ const $ = (selector) => {
 	const elements = document.querySelectorAll(selector);
 	return elements.length == 1 ? elements[0] : elements;
 };
-
+// nếu trình duyệt để chế độ
+const body = $("body");
+if (body) {
+	body.classList.add("bg-white", "text-gray-800");
+}
 const cartCounter = $("#cart-counter");
 const countItems = () => {
 	if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
