@@ -4,8 +4,6 @@ const $ = (selector) => {
 };
 
 const cartCounter = $("#cart-counter");
-const main = $("main");
-if (main) main.style.backgroundColor = "#fff";
 const countItems = () => {
 	if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
 	cartCounter.innerText = JSON.parse(localStorage.getItem("cart")).length;

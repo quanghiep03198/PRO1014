@@ -9,7 +9,17 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://cdn.tiny.cloud/1/xqzory9nvy597bn74b72f5de86nfknihmi10e9yfgi0fw699/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            content_css: 'styles/main.css',
+            plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+            toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+    </script>
 </head>
 
 <body>
@@ -29,7 +39,7 @@
                     </ul>
                 </div>
             </div>
-            <form action="" method="post" enctype="multipart/form-data" class="w-full sm:p-5 md:p-10 lg:p-10 mx-auto" onsubmit="handleErrorCreateProduct(this,event)">
+            <form action="./admin/controllers/product.php" method="POST" enctype="multipart/form-data" class="w-full sm:p-5 md:p-10 lg:p-10 mx-auto" onsubmit="handleErrorCreateProduct(this,event)">
                 <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 items-stretch mb-10">
                     <div class="flex flex-col gap-5">
                         <!-- tên sản phẩm -->
@@ -108,16 +118,7 @@
             <!-- code ở đây -->
         </section>
     </div>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-            toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-            toolbar_mode: 'floating',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-        });
-    </script>
+
     <script src="./js/common.js"></script>
     <script src="./js/validate.js"></script>
     <script>
@@ -131,6 +132,9 @@
             const manufacturer = form['manufacturer'];
             const warrantyTime = form['warranty_time'];
             const description = form['description'];
+            description.oninput = function() {
+                console.log('hihhi');
+            }
             if (isRequired(productName, price, category, image, stock, warrantyTime, description, manufacturer) == false)
                 event.preventDefault()
             if (isImage(image) == false)

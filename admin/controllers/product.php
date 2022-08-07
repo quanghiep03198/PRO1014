@@ -28,8 +28,6 @@ if (isset($_POST['create_product'])) :
         execute_query($sql);
         echo "<script>alert(`Thêm sản phẩm thành công!`);</script>";
         header("Location: ../../admin.php?page=product-list");
-
-
     endif;
 
 endif;

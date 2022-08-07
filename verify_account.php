@@ -40,10 +40,7 @@ if (isset($_POST['register_submit'])) {
         $body = "Mã xác thực của bạn là : <b>{$verifyCode}</b>";
         send_verify_code($email, $subject, $body);
     } else {
-        echo '<script>
-                alert(`Tài khoản đã tồn tại trong hệ thống`);
-              
-            </script>';
+        echo '<script>alert(`Tài khoản đã tồn tại trong hệ thống`);</script>';
         header("Location: index.php");
     }
 }
@@ -59,9 +56,7 @@ if (isset($_POST['verify_account']) && isset($_COOKIE['account'])) {
         $user_id = execute_query($sql);
         execute_query("INSERT INTO wishlist (user_id) VALUES ('{$user_id}')");
         // xóa code verify lưu trên session
-        echo '<script>
-                alert(`Đăng ký thành công`);
-                </script>';
+        echo '<script>alert(`Đăng ký thành công`);</script>';
         session_destroy();
     } else
         echo '<script>alert(`Mã xác thực không chính xác !`)</script>';
@@ -83,8 +78,8 @@ if (!isset($_SESSION['verify_code']))
 
 <body class="w-screen h-screen flex justify-center items-center bg-center bg-no-repeat bg-cover" style="background-image: url('/img/banners/register-bg.webp');">
     <div class="max-w-3xl mx-auto bg-opacity-80">
-        <form action="" method="POST" class=" flex flex-col gap-4 p-5 bg-white bg-opacity-70" id="verify-account__form">
-            <h1 class="text-4xl font-semibold">Xác thực tài khoản</h1>
+        <form action="" method="POST" class=" flex flex-col gap-10 p-5 bg-white bg-opacity-70" id="verify-account__form">
+            <h1 class="text-3xl font-semibold">Xác thực tài khoản</h1>
             <!-- tài khoản -->
             <div class="form-group">
                 <input class="outline-none bg-inherit appearance-none border-b  w-full py-2 px-3 focus:outline-none focus:shadow-outline" name="verify_code" type="text" placeholder="Nhập mã xác thực">

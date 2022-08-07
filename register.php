@@ -20,56 +20,56 @@
             <!-- tài khoản -->
             <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-10">
                 <!-- form group left -->
-                <div class="flex flex-col gap-5 items-center">
+                <div class="flex flex-col gap-10 justify-between items-stretch">
                     <div class="form-control w-full">
                         <label for="">Tài khoản</label>
                         <input data-name="tài khoản" name="account" class="input  input-bordered  w-full  focus:outline-none focus:shadow-outline" id="account" type="text" placeholder="Tài khoản">
-                        <small class=" text-error error-message font-semibold"></small>
+                        <small class=" text-base text-error error-message font-semibold"></small>
                     </div>
 
                     <div class="form-control w-full">
                         <label for="">Mật khẩu</label>
                         <input data-name="mật khẩu" name="password" class="input  input-bordered  w-full  focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Mật khẩu">
-                        <small class=" text-error error-message font-semibold"></small>
+                        <small class=" text-base text-error error-message font-semibold"></small>
                     </div>
                     <!-- nhập lại mk  -->
                     <div class="form-control w-full">
                         <label for="">Xác nhận mật khẩu</label>
                         <input data-name="mật khẩu xác thực" name="confirm_password" class="input  input-bordered  w-full  focus:outline-none focus:shadow-outline" id="password2" type="password" placeholder="Xác nhận mật khẩu">
-                        <small class=" text-error error-message font-semibold"></small>
+                        <small class=" text-base text-error error-message font-semibold"></small>
                     </div>
                     <!-- tên  -->
                     <div class="form-control w-full">
                         <label for="">Tên của bạn</label>
                         <input data-name="tên của bạn" name="username" class="input  input-bordered  w-full  focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tên của bạn ?">
-                        <small class=" text-error error-message font-semibold"></small>
+                        <small class=" text-base text-error error-message font-semibold"></small>
                     </div>
                 </div>
 
                 <!-- form group right -->
-                <div class="flex flex-col gap-5 items-center">
+                <div class="flex flex-col gap-10 justify-start items-stretch">
                     <!-- email  -->
                     <div class="form-control w-full">
                         <label for="">Email</label>
                         <input data-name="email" name="email" class="input  input-bordered  w-full    focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
-                        <small class=" text-error error-message font-semibold"></small>
+                        <small class=" text-base text-error error-message font-semibold"></small>
                     </div>
                     <!-- địa chỉ  -->
                     <div class="form-control w-full">
                         <label for="">Địa chỉ</label>
                         <input data-name="địa chỉ" name="address" class="input  input-bordered  w-full  focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Địa chỉ">
-                        <small class=" text-error error-message font-semibold"></small>
+                        <small class=" text-base text-error error-message font-semibold"></small>
                     </div>
                     <!-- sđt  -->
                     <div class="form-control w-full">
                         <label for="">Số điện thoại</label>
                         <input data-name="số điện thoại" name="phone" class="input  input-bordered  w-full  focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Số điện thoại">
-                        <small class=" text-error error-message font-semibold"></small>
+                        <small class=" text-base text-error error-message font-semibold"></small>
+                    </div>
+                    <div class="flex flex-col justify-center items-end">
+                        <span class="text-end">Đã có tài khoản? <a href="./?page=home" class="font-semibold hover:link">Đăng nhập</a></span>
                     </div>
                 </div>
-            </div>
-            <div class="form-control w-full flex flex-col justify-center absolute bottom-5 right-5">
-                <span class="block align-middle">Đã có tài khoản? <a href="./?page=home" class="font-semibold hover:link">Đăng nhập</a></span>
             </div>
             <div class="flex items-center justify-center">
                 <button type="submit" class="btn btn-lg hover:btn-primary my-10" name="register_submit">
