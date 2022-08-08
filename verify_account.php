@@ -4,9 +4,10 @@ include_once "./lib/validate.php";
 include_once "./lib/send_mail.php";
 include_once "./site/models/user.php";
 
-
+include "PHPMailer/src/PHPMailer.php";
+include "PHPMailer/src/SMTP.php";
+include "PHPMailer/src/Exception.php";
 session_start();
-
 
 if (isset($_POST['register_submit'])) {
 
@@ -41,7 +42,7 @@ if (isset($_POST['register_submit'])) {
         send_verify_code($email, $subject, $body);
     } else {
         echo '<script>alert(`Tài khoản đã tồn tại trong hệ thống`);</script>';
-        header("Location: index.php");
+        header("Location: ./");
     }
 }
 if (isset($_POST['verify_account']) && isset($_COOKIE['account'])) {
@@ -58,11 +59,12 @@ if (isset($_POST['verify_account']) && isset($_COOKIE['account'])) {
         // xóa code verify lưu trên session
         echo '<script>alert(`Đăng ký thành công`);</script>';
         session_destroy();
+        header("Location: ./");
     } else
         echo '<script>alert(`Mã xác thực không chính xác !`)</script>';
 }
 if (!isset($_SESSION['verify_code']))
-    header("Location: index.php");
+    header("Location: ./");
 ?>
 
 <!DOCTYPE html>
@@ -78,8 +80,8 @@ if (!isset($_SESSION['verify_code']))
 
 <body class="w-screen h-screen flex justify-center items-center bg-center bg-no-repeat bg-cover" style="background-image: url('/img/banners/register-bg.webp');">
     <div class="max-w-3xl mx-auto bg-opacity-80">
-        <form action="" method="POST" class=" flex flex-col gap-10 p-5 bg-white bg-opacity-70" id="verify-account__form">
-            <h1 class="text-3xl font-semibold">Xác thực tài khoản</h1>
+        <form action="" method="POST" class=" flex flex-col gap-10 p-10 bg-white bg-opacity-70" id="verify-account__form">
+            <h1 class="sm:text-xl md:text-2xl lg:text-3xl font-semibold">Xác thực tài khoản</h1>
             <!-- tài khoản -->
             <div class="form-group">
                 <input class="outline-none bg-inherit appearance-none border-b  w-full py-2 px-3 focus:outline-none focus:shadow-outline" name="verify_code" type="text" placeholder="Nhập mã xác thực">
@@ -92,7 +94,6 @@ if (!isset($_SESSION['verify_code']))
             </div>
         </form>
     </div>
-
 </body>
 
 </html>

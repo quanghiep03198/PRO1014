@@ -3,6 +3,10 @@ include_once './lib/db_execute.php';
 include_once './lib/send_mail.php';
 include_once './site/models/user.php';
 
+include "PHPMailer/src/PHPMailer.php";
+include "PHPMailer/src/SMTP.php";
+include "PHPMailer/src/Exception.php";
+
 if (isset($_POST['get_verify_code'])) :
     $account = select_single_record("SELECT * FROM users WHERE account = '{$_POST['account']}'");
     $all_users = get_all_users();
