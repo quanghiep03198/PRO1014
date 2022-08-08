@@ -17,7 +17,7 @@
 <body>
     <?php include_once 'site/components/header.php';  ?>
     <main class="px-5">
-        <form action="?page=place_order" method="POST" class="max-w-3xl mx-auto" onsubmit="return handleCheckoutError(this)">
+        <form action="" method="POST" class="max-w-3xl mx-auto" onsubmit="place_order(this,event)">
             <h2 class="sm:text-2xl lg:text-3xl font-semibold text-primary mb-5">1. Thông tin nhận hàng</h2>
             <div class="flex flex-col gap-6">
                 <div class="form-group">
@@ -66,7 +66,17 @@
     <?php include_once 'site/components/footer.php'; ?>
     <script src="js/common.js"></script>
     <script src="js/validate.js"></script>
-    <script src="js/handle-userdata.js"></script>
+    <script src="js/handle-post-request.js"></script>
+    <script type="text/javascript">
+        const cartItems = JSON.parse(localStorage.getItem("cart"));
+        if (cartItems.length == 0) {
+            showMessage(alert.error.style, alert.error.icon, "Bạn chưa có sản phẩm nào trong giỏ hàng!")
+            setTimeout(() => {
+                window.location = "?page=product";
+
+            }, 2000)
+        }
+    </script>
 </body>
 
 </html>

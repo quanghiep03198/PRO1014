@@ -4,24 +4,22 @@ const renderComment = (responseData) => {
 	const commentBox = $("#comment-box");
 	if (commentBox) {
 		commentBox.innerHTML += /*html */ `
-                <div class="w-full mx-auto flex justify-start items-start gap-3">
-                    <picture>
-                    <img src="/img/avatars/${responseData.avatar}" class="w-[3rem] h-[3rem] rounded-full object-contain center" />
-                    </picture>
-                    <div>
-                        <div class="alert flex-col justify-between py-2 items-start w-full">
-                            <div class="flex justify-start items-center gap-2">
-                                <span class="text-base font-medium">${responseData.username}</span>
-                                <span class="text-sm">${responseData.create_date}</span>
-                            </div>
-                            <p class="break-words truncate">${responseData.content}</p>
-                        </div>
-                        <a href="?page=prod_overview&id=${responseData.product_id}&comment_id=${responseData.comment_id}" class="text-primary">Phản hồi</a>
-                        </div>
-                </div>`;
+			<div class="card card-side bg-zinc-100 items-start">
+				<figure class="flex items-center gap-3 p-2">
+					<img src="${responseData.avatar}" class="w-[3rem] h-[3rem] rounded-full object-contain center" />
+				</figure>
+				<div class="card-body justify-start py-2">
+					<h2 class="card-title">${responseData.username}</h2>
+					<small>${responseData.posted_date}</small>
+					<p>${responseData.content}</p>
+					<div class="card-actions justify-end">
+						<input type="hidden" value=${responseData.commentId}>
+						<button onclick="reply(${responseData.username},${responseData.commentId})" class="btn btn-sm btn-ghost normal-case">Phản hồi <i class="bi bi-reply px-1"></i></button>
+					</div>
+				</div>
+			</div>`;
 	}
 };
-
 // lấy cookie
 const getAllCookieObjs = () => {
 	const allCookies = document.cookie.split(";");
@@ -37,8 +35,49 @@ const getAllCookieObjs = () => {
 		return result;
 	}
 };
+// send request
+const sendRequest = async (url, data) => {
+	const response = await (
+		await fetch(url, {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		})
+	).text();
+	return response;
+};
+// bình luận bài viết
+const postCommentOnPost = async (form, event) => {
+	event.preventDefault();
+	// lấy các trường dữ liệu muốn gửi đi
+	const userid = form["user"].value;
+	const username = form["username"].value;
+	const postId = form["post_id"].value;
+	const content = form["content"];
+	const avatar = form["avatar"].value;
+	const data = {
+		user: userid,
+		username: username,
+		post: postId,
+		content: content.value,
+		avatar: avatar,
+		create_date: posted_time,
+	};
 
-// post comment
+	// kiểm tra xem có cookie của người dùng đã đăng nhập ko ?
+	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
+	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để bình luận!");
+	if (content.value != "" && authCookie) {
+		const response = sendRequest("/site/controllers/handle_comment.php", data);
+		console.log(response);
+		await renderComment(JSON.parse(response));
+		content.value = "";
+	}
+};
+// bình luận sản phẩm
 const postCommentOnProduct = async (form, event) => {
 	event.preventDefault();
 	// lấy các trường dữ liệu muốn gửi đi
@@ -47,34 +86,34 @@ const postCommentOnProduct = async (form, event) => {
 	const productId = form["product_id"].value;
 	const content = form["content"];
 	const avatar = form["avatar"].value;
-	let today = new Date();
-	const posted_time = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDay()}`;
+	const commentId = form["comment_id"].value;
+	const data = {
+		user: userid,
+		username: username,
+		product: productId,
+		content: content.value,
+		avatar: avatar,
+	};
+	if (commentId != "") data.commentId = commentId;
 	// kiểm tra xem có cookie của người dùng đã đăng nhập ko ?
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để bình luận!");
 	if (content.value != "" && authCookie) {
-		const response = await (
-			await fetch("/site/controllers/handle_comment.php", {
-				method: "POST",
-				mode: "cors",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					user: userid,
-					username: username,
-					product: productId,
-					content: content.value,
-					avatar: avatar,
-					create_date: posted_time,
-				}),
-			})
-		).text();
-		await renderComment(JSON.parse(response));
+		const response = await sendRequest("/site/controllers/handle_comment.php", data);
+		// await renderComment(response);
+		console.log(response);
 		content.value = "";
 	}
 };
-
+// phản hồi bình luận sản phẩm
+const reply = (username, commentId) => {
+	console.log(username);
+	const commentInput = $("#comment-input");
+	const _commentId = $("#comment-id");
+	commentInput.placeholder = `Bạn đang trả lời ${username}`;
+	_commentId.value = commentId;
+};
+// thêm sản phẩm vào wishlist wishlist
 const addWishlist = async (button, event) => {
 	event.preventDefault();
 	const form = button.parentElement.parentElement;
@@ -100,7 +139,7 @@ const addWishlist = async (button, event) => {
 	await showMessage(alert.success.style, alert.success.icon, "1 sản phẩm được thêm vào danh sách!");
 	console.log(response);
 };
-
+// xóa sản phẩm khỏi wishlist
 const delWishlistItem = async (form, event) => {
 	// event.preventDefault();
 	const product_id = form["product_id"].value;
@@ -119,4 +158,35 @@ const delWishlistItem = async (form, event) => {
 	).text();
 	await showMessage(alert.success.style, alert.success.icon, "Đã xóa 1 sản phẩm khỏi danh sách!");
 	console.log(response);
+};
+// gửi thông tin đặt hàng
+const place_order = async (form, event) => {
+	event.preventDefault();
+	const customerName = form["customer_name"];
+	const phone = form["phone"];
+	const email = form["email"];
+	const address = form["address"];
+	const shipping = form["shipping_method"];
+	const orderNotice = form["order_notice"];
+	const cartItems = localStorage.getItem("cart");
+	// validate
+	if (!isRequired(customerName, phone, email, address, shipping)) return;
+	if (!isEmail(email)) return;
+	if (!isPhoneNumber(phone)) return;
+
+	// validata -> ok
+	const response = await sendRequest("/site/controllers/place_order.php", {
+		customer_name: customerName.value,
+		phone: phone.value,
+		email: email.value,
+		address: address.value,
+		shipping_method: shipping.value,
+		order_notice: orderNotice.value,
+		cart_items: cartItems,
+	});
+	console.log(response);
+	await showMessage(alert.success.style, alert.success.icon, "Đặt hàng thành công!");
+	await showMessage(alert.infor.style, alert.infor.icon, "Check email để nhận mã đơn hàng!");
+	await localStorage.setItem("cart", JSON.stringify([]));
+	await countItems();
 };

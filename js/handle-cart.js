@@ -73,7 +73,7 @@ const renderCart = (data) => {
 		<button type="button" class="btn btn-ghost text-2xl text-gray-500 hover:text-gray-800" onclick="removeItem(${item.id})"><i class="bi bi-trash"></i></button>
 									</th>
 									<td>
-										<div class="flex items-center space-x-3">
+										<div class="flex items-center gap-3">
 												<picture class="mask mask-squircle w-12 h-12">
 													<img src="img/products/${item.img}" alt="">
 												</picture>
@@ -98,7 +98,7 @@ const renderCart = (data) => {
 										<input type="hidden" name="total" value=${item.total}>
 										<input type="hidden" name="stock" value=${item.stock}>
 										<button type="button" onclick="changeQty(this,-1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">-</button>
-										<input type="number" min=1 max=${item.stock} value=${item.qty} class="quantity outline-none focus:outline-none text-center w-10 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number">
+										<input disabled type="number" min=1 max=${item.stock} value=${item.qty} class="quantity outline-none focus:outline-none text-center w-12 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number">
 										<button type="button" onclick="changeQty(this,1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">+</button>
 										</div>
 									</td>
@@ -128,7 +128,6 @@ const updateCartItem = (id, qty) => {
 		cartItems[cartItems.indexOf(item)] = item;
 		// update lại toàn bộ giỏ hàng
 		localStorage.setItem("cart", JSON.stringify(cartItems));
-		console.log(item.stock);
 		renderCart(JSON.parse(localStorage.getItem("cart"))); // update xong -> rerender ra ngoài
 	}
 };
@@ -150,7 +149,6 @@ const changeQty = (btn, unitVal) => {
 	const id = btn.parentElement.querySelector(`input[name="id"]`).value;
 	const stock = btn.parentElement.querySelector(`input[name="stock"]`).value;
 	const target = btn.parentElement.querySelector(".quantity");
-	console.log(stock);
 	let value = +target.value;
 	value += +unitVal;
 	if (value < 1) value = 1;
@@ -161,6 +159,7 @@ const changeQty = (btn, unitVal) => {
 	target.value = value;
 	updateCartItem(id, target.value);
 };
+
 /**
  * check
  */

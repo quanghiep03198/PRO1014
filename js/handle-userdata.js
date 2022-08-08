@@ -19,20 +19,7 @@ const handleErrorUpdateProfile = (form, event) => {
 	if (isEmail(email) === false) event.preventDefault();
 	if (isPhoneNumber(phone) === false) event.preventDefault();
 };
-// validate thông tin đặt hàng
-const handleCheckoutError = (form, event) => {
-	const customerName = form["customer_name"];
-	const phone = form["phone"];
-	const email = form["email"];
-	const address = form["address"];
-	const shipping = form["shipping_method"];
-	if (!isRequired(customerName, phone, email, address, shipping)) event.preventDefault();
-	if (!isEmail(email)) event.preventDefault();
-	if (!isPhoneNumber(phone)) event.preventDefault();
-	// validata -> ok
-	localStorage.setItem("cart", JSON.stringify([]));
-	countItems();
-};
+
 // validate chức năng đăng ký
 const handleRegisterError = (form, event) => {
 	const account = form["account"];
