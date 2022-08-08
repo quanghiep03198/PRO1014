@@ -7,13 +7,16 @@ const body = $("body");
 if (body) {
 	body.classList.add("bg-white", "text-gray-800");
 }
+//#region show số lượng sản phẩm trong giỏ hàng
 const cartCounter = $("#cart-counter");
 const countItems = () => {
 	if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
 	cartCounter.innerText = JSON.parse(localStorage.getItem("cart")).length;
 };
 if (cartCounter) countItems();
+//#endregion
 
+//#region show message
 // show message
 const alert = {
 	success: {
@@ -36,7 +39,6 @@ const alert = {
 		icon: "bi bi-x-circle",
 	},
 };
-
 const showMessage = (style, icon, message) => {
 	const toast = document.createElement("div");
 	toast.classList.add("toast", "toast-bottom", "toast-end", "animate-[slip_500ms_ease-in-out]", "w-[300px]", "z-50");
@@ -50,3 +52,4 @@ const showMessage = (style, icon, message) => {
 		main.removeChild(toast);
 	}, 3000);
 };
+//#endregion
