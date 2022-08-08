@@ -28,7 +28,7 @@ if (isset($_POST['login-submit'])) {
             if (password_verify($password, $auth['password'])) {
                 setcookie("auth", $auth['id']);
                 $_SESSION['user_name'] = $auth['name'];
-                if ($auth['role_id'] == 0 || $auth['role_id'] == 1) {
+                if ($auth['role_id'] == 9 || $auth['role_id'] == 1) {
                     echo  "<script>alert(`Đăng nhập thành công!`)</script>";
                     echo  "<script>window.location = './admin.php'</script>";
                 } else {

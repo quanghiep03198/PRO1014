@@ -9,9 +9,9 @@
     <script src="/path/or/uri/to/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
-        tinymce.init({
-            selector: '#mytextarea'
-        });
+    tinymce.init({
+        selector: '#mytextarea'
+    });
     </script>
 </head>
 
@@ -29,7 +29,8 @@
             <!-- main -->
             <div class="container mx-auto">
                 <div class="flex justify-end items-center my-5">
-                    <a href="?page=user-create" class="btn btn-ghost "><i class="bi bi-plus text-2xl"></i><span>Thêm mới</span></a>
+                    <a href="?page=user-create" class="btn btn-ghost "><i class="bi bi-plus text-2xl"></i><span>Thêm
+                            mới</span></a>
                 </div>
 
                 <form action="/admin/controllers/user.php" method="POST" onsubmit="handleCreateAccount(this,event)">
@@ -49,7 +50,8 @@
                         <!-- mât khẩu xác thực -->
                         <div class="form-control">
                             <label for="">Xác nhận mật khẩu</label>
-                            <input class="input input-bordered" type="password" data-name="mật khẩu xác nhận" name="confirm_password">
+                            <input class="input input-bordered" type="password" data-name="mật khẩu xác nhận"
+                                name="confirm_password">
                             <small class="text-error error-message font-semibold"></small>
                         </div>
                         <!-- tên người dùng -->
@@ -82,13 +84,14 @@
                             <select name="role" data-name="vai trò tài khoản" id="" class="select select-bordered">
                                 <option value="">Phân quyền cho tài khoản là</option>
                                 <?php foreach (get_all_user_roles() as $role) : extract($role) ?>
-                                    <option value=<?php echo  $id ?>><?= $name ?></option>
+                                <option value=<?php echo  $id ?>><?= $name ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-error error-message font-semibold"></small>
                         </div>
                         <div class="form-control">
-                            <button type="submit" name="create_account" class="btn hover:btn-primary">Tạo mới tài khoản</button>
+                            <button type="submit" name="create_account" class="btn hover:btn-primary">Tạo mới tài
+                                khoản</button>
                         </div>
                     </div>
                 </form>
@@ -97,21 +100,22 @@
         <script src="./js/common.js"></script>
         <script src="./js/validate.js"></script>
         <script>
-            const handleCreateAccount = (form, event) => {
-                const account = form["account"];
-                const password = form["password"];
-                const confirmPassword = form["confirm_password"];
-                const username = form["username"];
-                const email = form["email"];
-                const address = form["address"];
-                const phone = form["phone"];
-                const role = form['role']
-                if (isRequired(account, password, confirmPassword, username, email, address, phone, role) == false) event.preventDefault();
-                if (checkLength(password, 8) == false) event.preventDefault();
-                if (ckMatchingValue(confirmPassword, password) == false) event.preventDefault();
-                if (isEmail(email) == false) event.preventDefault();
-                if (isPhoneNumber(phone) == false) event.preventDefault();
-            }
+        const handleCreateAccount = (form, event) => {
+            const account = form["account"];
+            const password = form["password"];
+            const confirmPassword = form["confirm_password"];
+            const username = form["username"];
+            const email = form["email"];
+            const address = form["address"];
+            const phone = form["phone"];
+            const role = form['role']
+            if (isRequired(account, password, confirmPassword, username, email, address, phone, role) == false)
+                event.preventDefault();
+            if (checkLength(password, 8) == false) event.preventDefault();
+            if (ckMatchingValue(confirmPassword, password) == false) event.preventDefault();
+            if (isEmail(email) == false) event.preventDefault();
+            if (isPhoneNumber(phone) == false) event.preventDefault();
+        }
         </script>
 </body>
 

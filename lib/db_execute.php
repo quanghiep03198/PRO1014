@@ -2,6 +2,7 @@
 function get_db_connection()
 {
     $connection = new mysqli("localhost", "root", "", "pro1014");
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     if ($connection->connect_error) die($connection->connect_error);
     return $connection;
 }
