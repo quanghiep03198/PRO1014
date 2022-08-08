@@ -32,7 +32,7 @@ endif;
             <!--  -->
             <div class="p-5 bg-white rounded-box shadow-2xl">
                 <h1 class="text-[40px] font-light mb-[40px]">Đổi mật khẩu</h1>
-                <form action="?page=account&act=change_password" method="post" class="flex flex-col gap-5" onsubmit="return handleErrorChangePassword(this)">
+                <form action="" method="POST" class="flex flex-col gap-5" onsubmit="return handleErrorChangePassword(this,event)">
                     <div class="form-group">
                         <label for="">Mật khẩu hiện tại</label>
                         <div class="pass mt-[10px]">

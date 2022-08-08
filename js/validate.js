@@ -72,10 +72,10 @@ const isEmail = (formCtrl) => {
 
 const ckMatchingValue = (formCtrl1, formCtrl2) => {
 	formCtrl1.oninput = () => {
-		formCtrl1.value == formCtrl2.value ? showSuccess(formCtrl1, null) : showError(formCtrl1, `${getFieldName(formCtrl1)} doesn't match !`);
+		formCtrl1.value == formCtrl2.value ? showSuccess(formCtrl1, null) : showError(formCtrl1, `${getFieldName(formCtrl1)} không trùng khớp !`);
 	};
 	formCtrl1.onblur = () => {
-		formCtrl1.value == formCtrl2.value ? showSuccess(formCtrl1, null) : showError(formCtrl1, `${getFieldName(formCtrl1)} doesn't match !`);
+		formCtrl1.value == formCtrl2.value ? showSuccess(formCtrl1, null) : showError(formCtrl1, `${getFieldName(formCtrl1)} không trùng khớp !`);
 	};
 	return formCtrl1.value == formCtrl2.value;
 };
