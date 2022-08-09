@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <!-- main style -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/swal.css">
 
 </head>
 
@@ -132,6 +133,7 @@
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/handle-cart.js"></script>
     <script src="js/handle-post-request.js"></script>

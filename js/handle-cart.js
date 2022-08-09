@@ -1,20 +1,21 @@
 /**
  * Thêm sản phẩm vào giỏ hàng
  */
-const addCart = (button) => {
-	const cartItems = JSON.parse(localStorage.getItem("cart"));
+const addCart = async (button) => {
+	const form = button.parentElement.parentElement;
 	const product = {
-		id: button.parentElement.querySelector(`input[name = "product_id"]`).value,
-		name: button.parentElement.querySelector(`input[name = "product_name"]`).value,
-		manu: button.parentElement.querySelector(`input[name = "manu"]`).value,
-		img: button.parentElement.querySelector(`input[name = "product_img"]`).value,
-		price: +button.parentElement.querySelector(`input[name = "price"]`).value,
-		stock: +button.parentElement.querySelector(`input[name = "stock"]`).value,
-		qty: +button.parentElement.querySelector(`input[name = "qty"]`).value,
-		warranty: +button.parentElement.querySelector(`input[name = "warranty"]`).value,
+		id: form["product_id"].value,
+		name: form["product_name"].value,
+		manu: form["manu"].value,
+		img: form["product_img"].value,
+		price: +form["price"].value,
+		stock: +form["stock"].value,
+		qty: +form["qty"].value,
+		warranty: +form["warranty"].value,
 	};
 	product.total = product.price * product.qty;
 	// kiểm tra sản phẩm đã có trong giỏ hàng chưa? nếu đã tồn tại => update lại số lượng, thành tiền
+	const cartItems = JSON.parse(localStorage.getItem("cart"));
 	const duplicatedItem = cartItems?.find((item) => item.id == product.id);
 	if (duplicatedItem) {
 		duplicatedItem.qty += product.qty;
@@ -30,7 +31,22 @@ const addCart = (button) => {
 	}
 
 	countItems();
-	showMessage(alert.success.style, alert.success.icon, "Thêm vào giỏ hàng thành công!");
+	if (button.hasAttribute("actions"))
+		swal({
+			icon: "success",
+			title: "Thêm vào giỏ hàng thành công",
+			timer: 2000,
+			button: false,
+		}).then(() => {
+			window.location = "?page=cart";
+		});
+	else
+		swal({
+			icon: "success",
+			title: "Thêm vào giỏ hàng thành công",
+			timer: 2000,
+			button: false,
+		});
 };
 
 const showEmptyCart = () => {

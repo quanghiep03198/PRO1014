@@ -165,6 +165,7 @@ const delWishlistItem = async (form, event) => {
 	await showMessage(alert.success.style, alert.success.icon, "Đã xóa 1 sản phẩm khỏi danh sách!");
 	console.log(response);
 };
+
 // gửi thông tin đặt hàng
 const place_order = async (form, event) => {
 	event.preventDefault();
@@ -177,9 +178,9 @@ const place_order = async (form, event) => {
 	const cartItems = localStorage.getItem("cart");
 
 	// validate
-	if (!isRequired(customerName, phone, email, address, shipping)) return;
-	if (!isEmail(email)) return;
-	if (!isPhoneNumber(phone)) return;
+	if (isRequired(customerName, phone, email, address, shipping) == false) return;
+	if (isEmail(email) == false) return;
+	if (isPhoneNumber(phone) == false) return;
 
 	// validata -> ok
 	const response = await sendRequest("/site/controllers/place_order.php", {
@@ -192,12 +193,22 @@ const place_order = async (form, event) => {
 		cart_items: cartItems,
 	});
 	console.log(response);
-	await showMessage(alert.success.style, alert.success.icon, "Đặt hàng thành công!");
-	await showMessage(alert.infor.style, alert.infor.icon, "Check email để nhận mã đơn hàng!");
+	/**
+	 * ! không thể sử dụng alert đoạn này
+	 */
 	// reset số lượng sản phẩm trong giỏ hàng
 	await localStorage.setItem("cart", JSON.stringify([]));
 	await countItems();
-	// clear form data
-	// [customerName, phone, email, address, shipping].forEach((input) => (input.value = ""));
-	if (JSON.parse(localStorage.getItem("cart")).length == 0) window.location = "?page=product";
+
+	// nếu có response trả về (dữ liệu được gửi đi thành công)
+	if (response != "") {
+		await swal({
+			title: "Đặt hàng thành công",
+			text: "Check email để nhận mã đơn hàng!",
+			icon: "success",
+			button: "Ok!",
+		}).then(() => {
+			window.location = "?page=product";
+		});
+	}
 };
