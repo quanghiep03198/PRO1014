@@ -71,7 +71,7 @@ if (isset($_GET['id'])) {
                             <select name="role" data-name="vai trò tài khoản" id="" class="select select-bordered">
                                 <option value="">Phân quyền cho tài khoản là</option>
                                 <?php foreach (get_all_user_roles() as $role) : extract($role) ?>
-                                <option value=<?php echo  $id ?>><?= $name ?></option>
+                                <option value="<?php echo  $id ?>"><?= $name ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-error error-message font-semibold"></small>
