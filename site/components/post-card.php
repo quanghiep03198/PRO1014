@@ -1,10 +1,12 @@
-<div class="card bg-base-100 shadow-xl">
+<div class="card bg-base-100 shadow-xl max-w-xs h-fit">
     <a href="?page=post_detail&id=<?php echo $id ?>">
-        <img src="<?php echo ROOT_POST . $img ?>" alt="Shoes" class="center w-full h-72 object-cover" />
+        <img src="<?php echo ROOT_POST . $img ?>" alt="Shoes" class="center max-w-full h-72 object-cover" />
     </a>
     <div class="card-body px-3 bg-white text-gray-800">
-        <h2 class="card-title text-xl font-lg"><?= $title ?></h2>
-        <p><?php echo $short_desc ?></p>
+        <h2 class="card-title text-xl font-lg">
+            <p class="truncate"><?= $title ?></p>
+        </h2>
+        <p class="truncate"> <?php echo $short_desc ?></p>
         <div class="flex justify-start items-center gap-5">
             <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="avatar w-12 h-12 rounded-full" />
             <div>
