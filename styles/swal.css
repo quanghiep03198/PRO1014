@@ -1,0 +1,13 @@
+/* swal alert */
+.swal-modal {
+	padding: 20px;
+}
+.swal-title {
+	font-size: 20px;
+}
+.swal-button {
+	padding: 10px 20px;
+	border-radius: 2px;
+	background-color: #570df8;
+	font-size: 12px;
+}
