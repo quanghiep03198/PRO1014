@@ -6,7 +6,7 @@ function get_all_products()
     $sql = "SELECT product.* ,manufacturer.name AS man_name FROM product 
             INNER JOIN manufacturer 
             ON product.man_id = manufacturer.id
-            WHERE product.stock > 0
+    
             ORDER BY price {$sort}";
     return select_all_records($sql);
 }
@@ -74,22 +74,13 @@ function get_one_product($id)
     if (isset($id)) :
         $sql = "SELECT product.*, manufacturer.name AS man_name FROM product 
         INNER JOIN manufacturer ON product.man_id = manufacturer.id 
-        WHERE product.id={$id} AND product.stock > 0";
+        WHERE product.id={$id}";
         return select_single_record($sql);
     endif;
 }
 
 
-// lấy số lượt đánh giá sản phẩm
-#region
-function get_feedback_counter($id)
-{
-    $sql = "SELECT COUNT(product_feedback.id) FROM product_feedback
-            INNER JOIN order_items ON product_feedback.order_item_id = order_items.id
-            WHERE product_id = $id";
-    return select_one_value($sql);
-}
-#endregion
+
 
 
 // tìm sản phẩm theo keyword
@@ -99,7 +90,7 @@ function get_products_by_kw($kw)
     $sql = "SELECT product.* FROM product 
             INNER JOIN product_category ON product.cate_id = product.cate_id
             INNER JOIN manufacturer ON product.man_id = manufacturer.id
-            WHERE product.stock > 0 AND product.prod_name LIKE '%{$kw}%' OR 
+            WHERE product.prod_name LIKE '%{$kw}%' OR 
             product_category.name LIKE '%{$kw}%' OR 
             manufacturer.name LIKE '%{$kw}%'
             GROUP BY product.id
@@ -113,7 +104,7 @@ function get_discount_products()
 {
     $sql = "SELECT product.*,manufacturer.name AS man_name FROM product
     INNER JOIN manufacturer ON product.man_id = manufacturer.id
-    WHERE discount>0 AND product.stock > 0";
+    WHERE discount>0 ";
     return select_all_records($sql);
 }
 
@@ -126,8 +117,7 @@ function get_best_seller_products()
     $sql = "SELECT product.id, product.prod_name, product.price,product.image,product.discount,manufacturer.name AS man_name,
             COUNT(order_items.product_id) AS bought_counter FROM product
             INNER JOIN order_items ON product.id = order_items.product_id
-            INNER JOIN manufacturer ON product.man_id = manufacturer.id
-            WHERE product.stock > 0
+            INNER JOIN manufacturer ON product.man_id = manufacturer.id   
             GROUP BY order_items.product_id
             ORDER BY bought_counter DESC 
             LIMIT 0,10";
@@ -141,7 +131,7 @@ function get_best_seller_products()
 function get_product_manufacturer($product_id)
 {
     $sql = "SELECT manufacturer.name FROM product
-        INNER JOIN manufacturer ON product.man_id = manufacturer.id
-        WHERE product.id = {$product_id} AND product.stock > 0";
+            INNER JOIN manufacturer ON product.man_id = manufacturer.id
+            WHERE product.id = {$product_id}";
     return select_one_value($sql);
 }
