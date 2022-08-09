@@ -1,7 +1,7 @@
 /**
  * Thêm sản phẩm vào giỏ hàng
  */
-const addCart = async (button) => {
+const addCart = (button) => {
 	const form = button.parentElement.parentElement;
 	const product = {
 		id: form["product_id"].value,
@@ -14,39 +14,51 @@ const addCart = async (button) => {
 		warranty: +form["warranty"].value,
 	};
 	product.total = product.price * product.qty;
-	// kiểm tra sản phẩm đã có trong giỏ hàng chưa? nếu đã tồn tại => update lại số lượng, thành tiền
-	const cartItems = JSON.parse(localStorage.getItem("cart"));
-	const duplicatedItem = cartItems?.find((item) => item.id == product.id);
-	if (duplicatedItem) {
-		duplicatedItem.qty += product.qty;
-		duplicatedItem.total = duplicatedItem.price * duplicatedItem.qty;
-		cartItems[cartItems.indexOf(duplicatedItem)] = duplicatedItem;
-		localStorage.setItem("cart", JSON.stringify(cartItems));
-	}
-	// nếu sản phẩm ko tồn tại trong giỏ hàng thì thêm mới
-	else {
-		cartItems.push(product);
-		localStorage.setItem("cart", JSON.stringify(cartItems));
-		console.log(product.stock);
-	}
 
-	countItems();
-	if (button.hasAttribute("actions"))
-		swal({
-			icon: "success",
-			title: "Thêm vào giỏ hàng thành công",
-			timer: 2000,
-			button: false,
-		}).then(() => {
-			window.location = "?page=cart";
-		});
+	// -> nếu sản số lượng sản phẩm trong kho > 0 mới thêm vào giỏ hàng
+	if (product.stock > 0) {
+		const cartItems = JSON.parse(localStorage.getItem("cart"));
+		const duplicatedItem = cartItems?.find((item) => item.id == product.id);
+		// -> kiểm tra sản phẩm đã có trong giỏ hàng chưa ? nếu đã tồn tại => update lại số lượng, thành tiền
+		if (duplicatedItem) {
+			duplicatedItem.qty += product.qty;
+			duplicatedItem.total = duplicatedItem.price * duplicatedItem.qty;
+			cartItems[cartItems.indexOf(duplicatedItem)] = duplicatedItem;
+			localStorage.setItem("cart", JSON.stringify(cartItems));
+		}
+		// -> nếu sản phẩm ko tồn tại trong giỏ hàng thì thêm mới
+		else {
+			cartItems.push(product);
+			localStorage.setItem("cart", JSON.stringify(cartItems));
+			console.log(product.stock);
+		}
+		if (button.hasAttribute("actions"))
+			swal({
+				icon: "success",
+				title: "Thêm vào giỏ hàng thành công",
+				timer: 2000,
+				button: false,
+			}).then(() => {
+				window.location = "?page=cart";
+			});
+		else
+			swal({
+				icon: "success",
+				title: "Thêm vào giỏ hàng thành công",
+				timer: 2000,
+				button: false,
+			});
+	}
+	// nếu số lượng sản phẩm trong kho = 0 -> show message cho người dùng
 	else
 		swal({
-			icon: "success",
-			title: "Thêm vào giỏ hàng thành công",
-			timer: 2000,
+			icon: "warning",
+			title: "Sản phẩm đã hết hàng",
 			button: false,
+			timer: 2000,
 		});
+	// reset lại tổng số sản phẩm trong giỏ hàng
+	countItems();
 };
 
 const showEmptyCart = () => {
