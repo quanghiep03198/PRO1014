@@ -58,20 +58,32 @@ function get_all_order_stt()
 function get_all_order_items($order_id)
 {
     $sql = "SELECT order_items.product_id ,
+		orders.user_name,
+		orders.shipping_address,
+		shipping_method.name AS shipping_method,
+		payment_method.name AS payment_method,
+        orders.order_key_id,
 		product.prod_name AS product_name,
-		product.image,
+		product.image ,
+		order_items.id AS order_item_id,
 		order_items.unit_price,
 		order_items.quantity ,
 		order_items.total,
-		SUM(order_items.unit_price) AS temp_amount,
         orders.total_amount,
-		(orders.total_amount -SUM(order_items.unit_price)) AS shipping_cost,
-         orders.order_notice,
-        DATE(order_items.warranty_time) AS warranty_expire_date
-		FROM order_items
-		INNER JOIN orders ON orders.id = order_items.id
+        orders.order_notice,
+        orders.order_stt_id AS order_status,
+		SUM(order_items.unit_price) AS temp_amount,
+		(orders.total_amount - SUM(order_items.unit_price)) AS shipping_cost,
+        DATE(orders.create_date) AS create_date,
+        DATE(order_items.warranty_time) AS warranty_expired_date
+		FROM orders
+		INNER JOIN order_items ON orders.id = order_items.id
 		INNER JOIN product ON order_items.product_id = product.id
-		WHERE order_items.order_id = {$order_id}";
+		INNER JOIN shipping_method ON orders.shipping_method_id= shipping_method.id
+		INNER JOIN payment_method ON orders.payment_method_id = payment_method.id
+        INNER JOIN order_status ON orders.order_stt_id = order_status.id
+        WHERE orders.id = {$order_id}
+        GROUP BY order_items.id";
     return select_all_records($sql);
 }
 function get_warranty_expired_date($customer_infor, $order_key_id)
@@ -87,4 +99,35 @@ function get_warranty_expired_date($customer_infor, $order_key_id)
             INNER JOIN product ON product.id = order_items.product_id
             WHERE orders.order_key_id = '{$order_key_id}' AND orders.email = '{$customer_infor}' OR orders.phone = '{$customer_infor}'";
     return select_all_records($sql);
+}
+// lấy tất cả đầu mục feedback sản phẩm
+function get_reviews_label()
+{
+    $sql = "SELECT * FROM  product_review";
+    return select_all_records($sql);
+}
+// lấy số lượt đánh giá sản phẩm
+function get_feedback_counter($id)
+{
+    $sql = "SELECT COUNT(product_feedback.id) FROM product_feedback
+            INNER JOIN order_items ON product_feedback.order_item_id = order_items.id
+            WHERE product_id = $id";
+    return select_one_value($sql);
+}
+// lấy tất cả feedback 
+function get_feedback_by_order_item($order_item_id)
+{
+    $sql = "SELECT * FROM product_feedback WHERE order_item_id = {$order_item_id}";
+    return select_all_records($sql);
+}
+// lấy ra review được nhiều người chọn nhất
+function get_most_feedback($product_id)
+{
+    $sql = "SELECT product_feedback.pr_review_id FROM order_items
+            INNER JOIN product_feedback ON order_items.id = product_feedback.order_item_id
+            WHERE order_items.product_id = {$product_id}
+            GROUP BY product_feedback.pr_review_id
+            ORDER BY COUNT(product_feedback.pr_review_id) DESC
+            LIMIT 0,1";
+    return select_one_value($sql);
 }

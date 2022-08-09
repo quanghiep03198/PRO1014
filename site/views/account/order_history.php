@@ -52,7 +52,7 @@
                                     <td><?php echo $create_date  ?></td>
                                     <td><?php echo $payment_method ?></td>
                                     <td><?php echo $total_amount  . "₫" ?></td>
-                                    <td data-status=<?= $stt_id ?> class="order-stt">
+                                    <td data-status="<?php echo $stt_id ?>" class="order-stt">
                                         <span><?= $stt_icon ?></span>
                                         <span class="indent-2"><?= $stt_name ?></span>
                                     </td>
