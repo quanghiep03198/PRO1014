@@ -40,3 +40,14 @@ var swiper = new Swiper(".related-product-slider", {
 		},
 	},
 });
+var swiper = new Swiper(".post-slider", {
+	rewind: true,
+	pagination: {
+		el: ".swiper-pagination",
+		clickable: true,
+	},
+	navigation: {
+		nextEl: ".swiper-button-next",
+		prevEl: ".swiper-button-prev",
+	},
+});

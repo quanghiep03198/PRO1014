@@ -59,7 +59,6 @@
                     <button type="submit" name="checkout" id="place-order" class="btn btn-wide btn-lg hover:btn-primary">Đặt hàng</button>
                 </div>
             </div>
-
         </form>
 
     </main>
@@ -71,10 +70,7 @@
         const cartItems = JSON.parse(localStorage.getItem("cart"));
         if (cartItems.length == 0) {
             showMessage(alert.error.style, alert.error.icon, "Bạn chưa có sản phẩm nào trong giỏ hàng!")
-            setTimeout(() => {
-                window.location = "?page=product";
-
-            }, 2000)
+            window.location = "?page=product";
         }
     </script>
 </body>

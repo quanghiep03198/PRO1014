@@ -87,7 +87,7 @@
                     <li><a href="?page=home">Trang chủ</a></li>
                     <li><a href="?page=product">Cửa hàng</a></li>
                     <li><a href="?page=service">Dịch vụ</a></li>
-                    <li><a href="?page=news">Tin tức</a></li>
+                    <li><a href="?page=post">Tin tức</a></li>
                 </ul>
             </div>
         </div>

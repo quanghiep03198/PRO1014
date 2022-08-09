@@ -36,7 +36,6 @@
                     </div>
                 </div>
             <?php
-
             endforeach ?>
             <?php if (in_array(strStandardize($cate['name']), ['thẻ psn'])) ?>
             <div class="collapse-title max-w-full text-xl border-b">

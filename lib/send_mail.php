@@ -1,7 +1,4 @@
 <?php
-include "PHPMailer/src/PHPMailer.php";
-include "PHPMailer/src/SMTP.php";
-include "PHPMailer/src/Exception.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

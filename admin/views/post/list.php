@@ -34,17 +34,17 @@
                     <a href="?page=post-create" class="btn btn-ghost "><i class="bi bi-plus text-2xl"></i><span>Thêm mới</span></a>
                 </div>
                 <!-- danh sách bài viết -->
-                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     <?php foreach (get_all_posts() as $post) : extract($post) ?>
-                        <div class="card lg:card-side bg-base-100 border">
-                            <div class="absolute top-1 right-2 dropdown dropdown-end">
-                                <label tabindex="0" class=""><i class="bi bi-three-dots"></i></label>
+                        <div class="card bg-base-100 border w-96">
+                            <div class="absolute top-1 right-2 dropdown dropdown-end z-50">
+                                <label tabindex="0" class="text-white text-xl"><i class="bi bi-three-dots"></i></label>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                     <li><a href="?page=post-update&id=<?= $id ?>">Sửa</a></li>
-                                    <li><a href="/admin/controllers/post.php?id=<?= $id ?>">Xóa</a></li>
+                                    <li><a href="/admin/controllers/spost.php?id=<?= $id ?>">Xóa</a></li>
                                 </ul>
                             </div>
-                            <img src=<?php echo ROOT_POST . $img ?> class="max-w-200px object-cover">
+                            <img src=<?php echo ROOT_POST . $img ?> class="w-full h-60 object-cover">
                             <div class="card-body">
                                 <h2 class="card-title"><?php echo $title ?></h2>
                                 <p class="mb-5 text-ellipsis overflow-hidden"><?php echo $short_desc ?></p>

@@ -64,16 +64,15 @@ const postCommentOnPost = async (form, event) => {
 		post: postId,
 		content: content.value,
 		avatar: avatar,
-		create_date: posted_time,
 	};
 
 	// kiểm tra xem có cookie của người dùng đã đăng nhập ko ?
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để bình luận!");
 	if (content.value != "" && authCookie) {
-		const response = sendRequest("/site/controllers/handle_comment.php", data);
-		console.log(response);
+		const response = await sendRequest("/site/controllers/handle_comment.php", data);
 		await renderComment(JSON.parse(response));
+		console.log(response);
 		content.value = "";
 	}
 };
@@ -86,7 +85,8 @@ const postCommentOnProduct = async (form, event) => {
 	const productId = form["product_id"].value;
 	const content = form["content"];
 	const avatar = form["avatar"].value;
-	const commentId = form["comment_id"].value;
+	const commentId = form["comment_id"];
+	const req = form["REQUEST"];
 	const data = {
 		user: userid,
 		username: username,
@@ -94,13 +94,22 @@ const postCommentOnProduct = async (form, event) => {
 		content: content.value,
 		avatar: avatar,
 	};
-	if (commentId != "") data.commentId = commentId;
+	if (commentId.value != "" && req.value != "") {
+		data.commentId = commentId.value;
+		data.req = req.value;
+	}
+	console.log(data);
 	// kiểm tra xem có cookie của người dùng đã đăng nhập ko ?
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để bình luận!");
 	if (content.value != "" && authCookie) {
 		const response = await sendRequest("/site/controllers/handle_comment.php", data);
-		// await renderComment(response);
+		try {
+			await renderComment(JSON.parse(response));
+		} catch (error) {
+			console.log(error);
+		}
+
 		console.log(response);
 		content.value = "";
 	}
@@ -110,8 +119,11 @@ const reply = (username, commentId) => {
 	console.log(username);
 	const commentInput = $("#comment-input");
 	const _commentId = $("#comment-id");
+	const request = $("#req");
+	request.value = "reply";
 	commentInput.placeholder = `Bạn đang trả lời ${username}`;
 	_commentId.value = commentId;
+	console.log(_commentId.value);
 };
 // thêm sản phẩm vào wishlist wishlist
 const addWishlist = async (button, event) => {
@@ -124,38 +136,32 @@ const addWishlist = async (button, event) => {
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	// validate dữ liệu trước khi post request
 	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để sử dụng chức năng này");
-	const response = await (
-		await fetch("/site/controllers/handle_wishlist.php", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				product_id: product_id,
-				request: request,
-			}),
-		})
-	).text();
-	await showMessage(alert.success.style, alert.success.icon, "1 sản phẩm được thêm vào danh sách!");
-	console.log(response);
+	else {
+		const response = await (
+			await fetch("/site/controllers/handle_wishlist.php", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					product_id: product_id,
+					request: request,
+				}),
+			})
+		).text();
+		await showMessage(alert.success.style, alert.success.icon, "1 sản phẩm được thêm vào danh sách!");
+		console.log(response);
+	}
 };
 // xóa sản phẩm khỏi wishlist
 const delWishlistItem = async (form, event) => {
 	// event.preventDefault();
 	const product_id = form["product_id"].value;
 	const request = form["REQUEST"].value;
-	const response = await (
-		await fetch("/site/controllers/handle_wishlist.php", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				product_id: product_id,
-				request: request,
-			}),
-		})
-	).text();
+	const response = await sendRequest("/site/controllers/handle_wishlist.php", {
+		product_id: product_id,
+		request: request,
+	});
 	await showMessage(alert.success.style, alert.success.icon, "Đã xóa 1 sản phẩm khỏi danh sách!");
 	console.log(response);
 };
@@ -169,6 +175,7 @@ const place_order = async (form, event) => {
 	const shipping = form["shipping_method"];
 	const orderNotice = form["order_notice"];
 	const cartItems = localStorage.getItem("cart");
+
 	// validate
 	if (!isRequired(customerName, phone, email, address, shipping)) return;
 	if (!isEmail(email)) return;
@@ -187,6 +194,10 @@ const place_order = async (form, event) => {
 	console.log(response);
 	await showMessage(alert.success.style, alert.success.icon, "Đặt hàng thành công!");
 	await showMessage(alert.infor.style, alert.infor.icon, "Check email để nhận mã đơn hàng!");
+	// reset số lượng sản phẩm trong giỏ hàng
 	await localStorage.setItem("cart", JSON.stringify([]));
 	await countItems();
+	// clear form data
+	// [customerName, phone, email, address, shipping].forEach((input) => (input.value = ""));
+	if (JSON.parse(localStorage.getItem("cart")).length == 0) window.location = "?page=product";
 };

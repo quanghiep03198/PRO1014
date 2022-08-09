@@ -1,7 +1,6 @@
 <div class="card bg-base-100 shadow-xl">
-
     <a href="?page=post_detail&id=<?php echo $id ?>">
-        <img src="<?php echo ROOT_POST . $img ?>" alt="Shoes" class="center w-full h-72 object-fill" />
+        <img src="<?php echo ROOT_POST . $img ?>" alt="Shoes" class="center w-full h-72 object-cover" />
     </a>
     <div class="card-body px-3 bg-white text-gray-800">
         <h2 class="card-title text-xl font-lg"><?= $title ?></h2>
@@ -13,6 +12,6 @@
                 <p class="text-[12px]"><?php echo $posted_date ?></p>
             </div>
         </div>
-        <a href="?page=post&id=" class="btn btn-block hover:btn-primary">Xem thêm</a>
+        <a href="?page=post_detail&id=<?= $id ?>" class="btn btn-block hover:btn-primary">Xem thêm</a>
     </div>
 </div>

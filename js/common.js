@@ -50,6 +50,6 @@ const showMessage = (style, icon, message) => {
 	main.appendChild(toast);
 	setTimeout(() => {
 		main.removeChild(toast);
-	}, 3000);
+	}, 2000);
 };
 //#endregion

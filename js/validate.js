@@ -115,5 +115,8 @@ const isImage = (formCtrl) => {
 	formCtrl.onchange = () => {
 		allowedExtensions.test(filePath) ? showSuccess(formCtrl, null) : showError(formCtrl, "File không đúng định dạng ảnh");
 	};
+	formCtrl.onblur = () => {
+		allowedExtensions.test(filePath) ? showSuccess(formCtrl, null) : showError(formCtrl, "File không đúng định dạng ảnh");
+	};
 	return allowedExtensions.test(filePath);
 };

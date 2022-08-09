@@ -22,7 +22,7 @@
 
             <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
-                    <form action="?page=warranty_result" method="POST" class="flex flex-col gap-5" onsubmit="return handleErrorWarrantySearch(this)">
+                    <form action="?page=warranty_result" method="POST" class="flex flex-col gap-5" onsubmit="return handleErrorWarrantySearch(this,event)">
                         <div class="form-group">
                             <label class="text-xl" for="">Email mua hàng</label>
                             <input type="text" data-name="số điện thoại/email" name="customer_infor" id="" class="input input-bordered  w-full">

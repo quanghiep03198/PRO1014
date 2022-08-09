@@ -25,7 +25,7 @@ if (isset($_POST['create_account'])) {
     if ($error_count == 0) :
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (`account`,`password`,`name`,`email`,`address`,`phone`,`role_id`) 
-        VALUES('{$account}','{$password}','{$username}','{$email}','{$address}','{$phone}','{$role}')";
+        VALUES('{$account}','{$password}','{$username}','{$email}','{$address}','{$phone}',{$role})";
         $user_id = execute_query($sql);
         if ($role == 3)
             execute_query("INSERT INTO wishlist (user_id) VALUES ('{$user_id}')");
@@ -64,5 +64,5 @@ if (isset($_POST['update_account'])) {
 // xóa người dùng
 if (isset($_GET['id'])) {
     execute_query("DELETE FROM users WHERE id = {$_GET['id']}");
-    header("Location: ../../admin.php?page=product-list");
+    header("Location: ../../admin.php?page=user-list");
 }
