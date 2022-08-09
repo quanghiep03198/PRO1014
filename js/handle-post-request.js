@@ -225,7 +225,7 @@ const place_order = async (form, event) => {
 
 	// nếu có response trả về (dữ liệu được gửi đi thành công)
 	if (response != "") {
-		await swal({
+		swal({
 			title: "Đặt hàng thành công!",
 			text: "Check email để nhận mã đơn hàng!",
 			icon: "success",
@@ -234,4 +234,30 @@ const place_order = async (form, event) => {
 			window.location = "?page=product";
 		});
 	}
+};
+
+// send feedback về sản phẩm
+const sendFeedback = async (form, event) => {
+	event.preventDefault();
+	const feedbackLabels = form["feedback"];
+	const userId = form["user_id"].value;
+	const orderItemId = form["order_item_id"].value;
+	let reviewId;
+	feedbackLabels.forEach((input) => {
+		if (input.checked == true) reviewId = input.value;
+	});
+	const feedback = {
+		pr_review_id: reviewId,
+		user_id: userId,
+		order_item_id: orderItemId,
+	};
+	await sendRequest("/site/controllers/handle_feedback.php", feedback);
+	swal({
+		icon: "success",
+		title: "Cảm ơn bạn đã gửi feedback về sản phẩm!",
+		button: false,
+		timer: 2000,
+	}).then(() => {
+		location.reload();
+	});
 };
