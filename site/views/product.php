@@ -60,12 +60,12 @@
                             extract($product);
                             include("site/components/product-card.php");
                         endforeach;
-                    } elseif (isset($_GET['cate'])) {
+                    } elseif (isset($_GET['cate']) && !isset($_GET['manu'])) {
                         $products = get_products_by_cate($_GET['cate']);
                         if (count($products) == 0)
                             echo '<div class="center flex flex-col justify-center items-center">
-                                <img src="/img/empty.png" alt="">
-                                <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
+                                    <img src="/img/empty.png" alt="">
+                                    <p class="text-xl text-center">Sản phẩm hiện đang được cập nhật hoặc đã hết hàng!</p>
                                 </div>';
                         foreach ($products as $product) :
                             extract($product);
