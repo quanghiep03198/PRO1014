@@ -4,14 +4,17 @@ if (isset($_POST['buy_now'])) {
 }
 ?>
 <div class='product-card card px-0 w-[20rem] rounded-md relative'>
-    <?php if ($discount > 0) : ?>
-        <span class="badge badge-secondary badge-error px-4 py-3 text-xl text-white absolute top-0 left-0"><?= $discount . '%' ?></span>
+    <?php if ($discount > 0 && $stock > 0) : ?>
+        <span class="badge badge-secondary badge-error !p-4 text-xl text-white absolute top-0 left-0"><?= $discount . '%' ?></span>
     <?php endif;  ?>
 
-    <picture class="center max-w-full h-64">
+    <picture class="max-w-full h-64 relative center">
         <a href=<?php echo "?page=prod_overview&id={$id}" ?>>
             <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="card-img max-w-sm h-60 object-contain">
         </a>
+        <?php if ($stock == 0) : ?>
+            <span class="badge badge-lg badge-error !p-4 absolute top-0 left-0 text-xl text-white ">Hết hàng</span>
+        <?php endif ?>
     </picture>
     <div class="card-body w-full h-full !not-sr-onlyflex-col-reverse">
         <div class="flex flex-col justify-start items-start gap-0">
