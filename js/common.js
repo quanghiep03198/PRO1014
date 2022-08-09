@@ -19,37 +19,33 @@ if (cartCounter) countItems();
 //#region show message
 // show message
 const alert = {
-	success: {
-		style: "alert-success",
-		icon: "bi bi-check2-circle",
+	style: {
+		success: "alert-success",
+		infor: "alert-info",
+		warning: "alert-warning",
+		error: "alert-error",
 	},
-
-	infor: {
-		style: "alert-infor",
-		icon: "bi bi-info-circle",
-	},
-
-	warning: {
-		style: "alert-warning",
-		icon: "bi bi-exclamation-triangle",
-	},
-
-	error: {
-		style: "alert-error",
-		icon: "bi bi-x-circle",
+	icon: {
+		success: "bi bi-check2-circle",
+		infor: "bi bi-info-circle",
+		warning: "bi bi-exclamation-triangle",
+		error: "bi bi-x-circle",
 	},
 };
-const showMessage = (style, icon, message) => {
-	const toast = document.createElement("div");
-	toast.classList.add("toast", "toast-bottom", "toast-end", "animate-[slip_500ms_ease-in-out]", "w-[300px]", "z-50");
+
+const showMessage = async (style, icon, message) => {
+	const toast = await document.createElement("div");
+	await toast.classList.add("toast", "toast-bottom", "toast-end", "animate-[slip_500ms_ease-in-out]", "w-[300px]", "z-50");
 	toast.innerHTML = /*html */ ` <div class="alert ${style} text-gray-800 !text-xl ">
 										<i class="${icon}"></i>
 										<span>${message}</span>
 								</div>`;
 	const main = $("main");
-	main.appendChild(toast);
-	setTimeout(() => {
-		main.removeChild(toast);
-	}, 2000);
+	await main.appendChild(toast);
+	(() => {
+		setTimeout(() => {
+			main.removeChild(toast);
+		}, 2000);
+	})();
 };
 //#endregion

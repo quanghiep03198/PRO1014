@@ -18,6 +18,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/swal.css">
 </head>
 
 <body>
@@ -194,6 +195,7 @@ if (isset($_GET['id'])) {
     <?php include_once 'site/components/footer.php'; ?>
     <script src="/js/common.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/carousel.js"></script>
     <script src="js/handle-cart.js"></script>
     <script src="/js/handle-post-request.js"></script>

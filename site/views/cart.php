@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/swal.css">
 </head>
 
 <body>
@@ -62,6 +63,7 @@
 		</div>
 	</main>
 	<?php include_once 'site/components/footer.php'; ?>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/handle-cart.js"></script>
 	<script>

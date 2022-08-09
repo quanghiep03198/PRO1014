@@ -169,7 +169,12 @@ const changeQty = (btn, unitVal) => {
 	value += +unitVal;
 	if (value < 1) value = 1;
 	if (value > stock) {
-		showMessage(alert.warning.style, alert.warning.icon, "Số lượng sản phẩm trong kho hàng không đủ!");
+		swal({
+			title: "Số lượng sản phẩm trong kho hàng không đủ!",
+			icon: "warning",
+			timer: 2000,
+			button: false,
+		});
 		value = stock;
 	}
 	target.value = value;

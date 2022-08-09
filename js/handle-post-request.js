@@ -68,7 +68,13 @@ const postCommentOnPost = async (form, event) => {
 
 	// kiểm tra xem có cookie của người dùng đã đăng nhập ko ?
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
-	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để bình luận!");
+	if (!authCookie)
+		await swal({
+			title: "Đăng nhập để sử dụng tính năng này!",
+			icon: "error",
+			timer: 2000,
+			button: false,
+		});
 	if (content.value != "" && authCookie) {
 		const response = await sendRequest("/site/controllers/handle_comment.php", data);
 		await renderComment(JSON.parse(response));
@@ -101,7 +107,13 @@ const postCommentOnProduct = async (form, event) => {
 	console.log(data);
 	// kiểm tra xem có cookie của người dùng đã đăng nhập ko ?
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
-	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để bình luận!");
+	if (!authCookie)
+		await swal({
+			title: "Đăng nhập để sử dụng tính năng này!",
+			icon: "error",
+			timer: 2000,
+			button: false,
+		});
 	if (content.value != "" && authCookie) {
 		const response = await sendRequest("/site/controllers/handle_comment.php", data);
 		try {
@@ -135,7 +147,13 @@ const addWishlist = async (button, event) => {
 
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	// validate dữ liệu trước khi post request
-	if (!authCookie) showMessage(alert.error.style, alert.error.icon, "Bạn chưa đăng nhập để sử dụng chức năng này");
+	if (!authCookie)
+		await swal({
+			title: "Đăng nhập để sử dụng tính năng này!",
+			icon: "error",
+			timer: 2000,
+			button: false,
+		});
 	else {
 		const response = await (
 			await fetch("/site/controllers/handle_wishlist.php", {
@@ -149,7 +167,12 @@ const addWishlist = async (button, event) => {
 				}),
 			})
 		).text();
-		await showMessage(alert.success.style, alert.success.icon, "1 sản phẩm được thêm vào danh sách!");
+		await swal({
+			title: "Đã thêm vào danh sách yêu thích!",
+			icon: "success",
+			timer: 2000,
+			button: false,
+		});
 		console.log(response);
 	}
 };
@@ -203,7 +226,7 @@ const place_order = async (form, event) => {
 	// nếu có response trả về (dữ liệu được gửi đi thành công)
 	if (response != "") {
 		await swal({
-			title: "Đặt hàng thành công",
+			title: "Đặt hàng thành công!",
 			text: "Check email để nhận mã đơn hàng!",
 			icon: "success",
 			button: "Ok!",
