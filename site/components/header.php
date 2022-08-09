@@ -47,7 +47,7 @@
                 <div class="modal">
                     <div class="modal-box relative">
                         <label for="my-modal-3" class="btn btn-circle btn-ghost absolute right-2 top-2">✕</label>
-                        <form action="" method="post" class="flex flex-col gap-5">
+                        <form action="" method="post" class="flex flex-col gap-5" onsubmit="handleLoginError(this,event)">
                             <h1 class="text-center text-3xl font-semibold">Đăng nhập</h1>
                             <div class="form-control">
                                 <label for="">Tài khoản</label>

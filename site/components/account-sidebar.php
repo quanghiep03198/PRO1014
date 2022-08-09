@@ -8,7 +8,7 @@ if (isset($_POST['update_avatar']) && isset($_COOKIE['auth'])) {
 }
 ?>
 <!-- sidebar -->
-<aside class="flex flex-col justify-between bg-white h-screen sticky top-0 rounded-box shadow-2xl p-5 " aria-label="Sidebar">
+<aside class="flex flex-col justify-between bg-white h-screen sticky top-0 rounded-box shadow-2xl p-5 w-auto" aria-label="Sidebar">
     <nav>
         <ul class="space-y-2">
             <li>
