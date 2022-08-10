@@ -31,7 +31,7 @@ const place_order = async (form, event) => {
 
 	// nếu có response trả về (dữ liệu được gửi đi thành công)
 	if (response != "") {
-		swal({
+		await swal({
 			title: "Đặt hàng thành công!",
 			text: "Check email để nhận mã đơn hàng!",
 			icon: "success",
