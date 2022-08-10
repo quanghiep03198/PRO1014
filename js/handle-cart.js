@@ -197,11 +197,15 @@ const changeQty = (btn, unitVal) => {
 /**
  * check
  */
-const checkEmptyCart = () => {
+const checkEmptyCart = (event) => {
 	const cartItems = JSON.parse(localStorage.getItem("cart"));
 	if (cartItems.length == 0) {
-		showMessage(alert.error.style, alert.error.icon, "Bạn chưa có sản phẩm nào trong giở hàng");
-		return false;
+		swal({
+			title: "Bạn chưa có sản phẩm nào trong giỏ hàng!",
+			icon: "error",
+			button: false,
+			timer: 1500,
+		});
+		event.preventDefault();
 	}
-	document.cookie = `cart=${localStorage.getItem("cart")}`;
 };

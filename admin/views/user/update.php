@@ -87,7 +87,7 @@ if (isset($_GET['id'])) {
                 const address = form["address"];
                 const phone = form["phone"];
                 const role = form['role']
-                if (isRequired(username, email, address, phone, role) == false) event.preventDefault();
+                if (areRequired(username, email, address, phone, role) == false) event.preventDefault();
                 if (isEmail(email) == false) event.preventDefault();
                 if (isPhoneNumber(phone) == false) event.preventDefault();
             }

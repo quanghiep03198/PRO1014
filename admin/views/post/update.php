@@ -107,7 +107,7 @@ if (isset($_GET['id'])) {
             const post_cate = form['post_category'];
             const thumbnail = form['thumbnail'];
             const body = form['body'];
-            if (isRequired(title, shortDesc, post_cate, thumbnail, body) == false)
+            if (areRequired(title, shortDesc, post_cate, thumbnail, body) == false)
                 event.preventDefault();
             if (checkLength(body, 100) == false)
                 event.preventDefault();

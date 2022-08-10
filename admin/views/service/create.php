@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-control">
                             <label class="text-xl">Giá</label>
-                            <input type="text" data-name="giá dịch vụ" class="input input-bordered" name="cost" id="">
+                            <input type="number" data-name="giá dịch vụ" class="input input-bordered" name="cost" id="">
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
                         <div class="">
@@ -51,13 +51,14 @@
     <!-- code ở đây -->
     </section>
     </div>
-
     <script src="./js/common.js"></script>
     <script src="./js/validate.js"></script>
     <script>
         const handleErrorCreatService = (form, event) => {
-
-
+            const serviceName = form['service_name']
+            const cost = form['cost']
+            if (areRequired(serviceName, cost) == false)
+                event.preventDefault();
         }
     </script>
 

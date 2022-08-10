@@ -131,7 +131,7 @@ endif;
             const manufacturer = form['manufacturer'];
             const warrantyTime = form['warranty_time'];
             const description = form['description'];
-            if (isRequired(productName, price, category, image, stock, warrantyTime, description, manufacturer) == false)
+            if (areRequired(productName, price, category, image, stock, warrantyTime, description, manufacturer) == false)
                 event.preventDefault()
             if (isImage(image) == false)
                 event.preventDefault()

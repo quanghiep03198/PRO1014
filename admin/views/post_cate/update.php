@@ -56,7 +56,7 @@ endif;
         <script>
             const handleUpdatePostCateErr = (form, event) => {
                 const cate_name = form['cate_name']
-                if (isRequired(cate_name) == false) event.preventDefault()
+                if (areRequired(cate_name) == false) event.preventDefault()
             }
         </script>
 </body>

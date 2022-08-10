@@ -106,7 +106,7 @@
                 const address = form["address"];
                 const phone = form["phone"];
                 const role = form['role']
-                if (isRequired(account, password, confirmPassword, username, email, address, phone, role) == false) event.preventDefault();
+                if (areRequired(account, password, confirmPassword, username, email, address, phone, role) == false) event.preventDefault();
                 if (checkLength(password, 8) == false) event.preventDefault();
                 if (ckMatchingValue(confirmPassword, password) == false) event.preventDefault();
                 if (isEmail(email) == false) event.preventDefault();

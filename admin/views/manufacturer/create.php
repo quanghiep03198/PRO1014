@@ -74,7 +74,7 @@
     <script>
         const handleCreateManError = (form, event) => {
             const man_name = form['man_name']
-            if (isRequired(man_name) == false) event.preventDefault()
+            if (areRequired(man_name) == false) event.preventDefault()
         }
     </script>
 </body>

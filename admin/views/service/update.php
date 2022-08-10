@@ -27,7 +27,7 @@ if (isset($_GET['id']))
                 <h1 class="text-white text-3xl">Update dịch vụ</h1>
 
             </div>
-            <form action="" method="post" enctype="multipart/form-data" class="w-full sm:p-5 md:p-10 lg:p-10 mx-auto" onsubmit="handleErrorCreatService(this,event)">
+            <form action="" method="post" enctype="multipart/form-data" class="w-full sm:p-5 md:p-10 lg:p-10 mx-auto" onsubmit="handleErrorUpdateService(this,event)">
                 <div class="max-w-3xl mx-auto">
                     <div class="flex flex-col gap-5">
                         <div class="form-control">
@@ -60,9 +60,11 @@ if (isset($_GET['id']))
     <script src="./js/common.js"></script>
     <script src="./js/validate.js"></script>
     <script>
-        const handleErrorCreatService = (form, event) => {
-
-
+        const handleErrorUpdateService = (form, event) => {
+            const serviceName = form['service_name']
+            const cost = form['cost']
+            if (areRequired(serviceName, cost) == false)
+                event.preventDefault();
         }
     </script>
 
