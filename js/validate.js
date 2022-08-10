@@ -23,7 +23,7 @@ const showSuccess = (formCtrl, message) => {
 /**
  * các rule thực hiện check các trường input
  */
-const isRequired = (...formControls) => {
+const areRequired = (...formControls) => {
 	let isntError = true;
 	formControls.forEach((formCtrl) => {
 		if (formCtrl.value.trim() != "") showSuccess(formCtrl, null);
