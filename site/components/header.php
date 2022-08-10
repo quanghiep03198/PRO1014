@@ -62,7 +62,7 @@
                             <div class="form-control">
                                 <label class="label cursor-pointer justify-start gap-5">
                                     <span class="">Lưu tài khoản</span>
-                                    <input type="checkbox" class="toggle toggle-primary" checked />
+                                    <input type="checkbox" class="toggle toggle-primary" onchange="saveAccount()" />
                                 </label>
                             </div>
                             <div class="flex justify-between items-center gap-5">

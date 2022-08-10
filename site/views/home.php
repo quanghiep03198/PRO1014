@@ -136,7 +136,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/handle-cart.js"></script>
-    <script src="js/handle-post-request.js"></script>
+    <script src="js/handle-wishlist.js"></script>
     <script src="js/carousel.js"></script>
     <script>
         const panels = $('.tab-panel')

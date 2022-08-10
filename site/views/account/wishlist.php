@@ -94,10 +94,10 @@ $wish_list_items = get_wishList_items();
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
     <!--  -->
-    <script src="/js/common.js"></script>
-    <script src="/js/handle-cart.js"></script>
-    <script src="/js/handle-post-request.js"></script>
-    <script src="/js/handle-userdata.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/handle-cart.js"></script>
+    <script src="js/handle-userdata.js"></script>
+    <script src="js/handle-wishlist"></script>
 
 </body>
 

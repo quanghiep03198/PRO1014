@@ -57,3 +57,10 @@ const handleGetVerifyCode = (form, event) => {
 	if (!isEmail(email)) event.preventDefault();
 };
 const handleResetPassword = (form) => {};
+
+const handleLoginError = (form, event) => {
+	event.preventDefault()
+	const account = form['account'];
+	const password = form['password']
+	sendRequest("")
+};

@@ -33,7 +33,7 @@ if (isset($_POST['login-submit'])) {
                     echo  "<script>window.location = './admin.php'</script>";
                 } else {
                     echo  "<script>alert(`Đăng nhập thành công!`)</script>";
-                    echo  "<script>window.location = './'</script>";
+                    echo  "<script>window.location = window.location.href</script>";
                 }
             } else
                 echo "<script>alert(`Mật khẩu không chính xác!`)</script>";

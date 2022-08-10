@@ -1,8 +1,3 @@
-<?php
-if (isset($_POST['buy_now'])) {
-    echo '<script>window.location = "?page=cart"</script>';
-}
-?>
 <div class='product-card card px-0 w-[20rem] rounded-md relative'>
     <?php if ($discount > 0 && $stock > 0) : ?>
         <span class="badge badge-secondary badge-error !p-4 text-xl text-white absolute top-0 left-0"><?= $discount . '%' ?></span>
@@ -21,13 +16,11 @@ if (isset($_POST['buy_now'])) {
             <h4 class='text-left text-[20px] w-full truncate '><?= $prod_name ?></h4>
             <span class='text-[#407CB4] text-xl font-medium'><?= $price . '₫' ?></span>
             <div class='rating block'>
-                <input type='radio' name='rating-1' class='mask mask-star-2 bg-orange-400' disabled />
-                <input type='radio' name='rating-1' class='mask mask-star-2 bg-orange-400' disabled />
-                <input type='radio' name='rating-1' class='mask mask-star-2 bg-orange-400' disabled checked />
-                <input type='radio' name='rating-1' class='mask mask-star-2 bg-orange-400' disabled />
-                <input type='radio' name='rating-1' class='mask mask-star-2 bg-orange-400' disabled />
+                <?php foreach (get_reviews_label() as $review) : ?>
+                    <input type="radio" value=<?= $review['id'] ?> <?php if ($review['id'] == get_most_feedback($id)) echo "checked" ?> class="mask mask-star-2 bg-warning" disabled>
+                <?php endforeach; ?>
             </div>
-            <sapn><?= get_feedback_counter($id) . ' reviews' ?></sapn>
+            <span><?= get_feedback_counter($id) . ' reviews' ?></span>
         </div>
         <form action='' method='POST' class="w-full card-action">
             <div class="btn-group">

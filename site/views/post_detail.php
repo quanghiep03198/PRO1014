@@ -89,7 +89,7 @@ if (isset($_GET['id'])) {
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="js/common.js"></script>
-    <script src="js/handle-post-request.js"></script>
+    <script src="js/handle-comment.js"></script>
 </body>
 
 </html>

@@ -16,36 +16,32 @@ const countItems = () => {
 if (cartCounter) countItems();
 //#endregion
 
-//#region show message
-// show message
-const alert = {
-	style: {
-		success: "alert-success",
-		infor: "alert-info",
-		warning: "alert-warning",
-		error: "alert-error",
-	},
-	icon: {
-		success: "bi bi-check2-circle",
-		infor: "bi bi-info-circle",
-		warning: "bi bi-exclamation-triangle",
-		error: "bi bi-x-circle",
-	},
+// lấy cookie
+const getAllCookieObjs = () => {
+	const allCookies = document.cookie.split(";");
+	const result = [];
+	if (allCookies) {
+		allCookies.forEach((ck) => {
+			const cookieElem = ck.split("=");
+			result.push({
+				key: cookieElem[0].trim(),
+				value: cookieElem[1].trim(),
+			});
+		});
+		return result;
+	}
 };
-
-const showMessage = async (style, icon, message) => {
-	const toast = await document.createElement("div");
-	await toast.classList.add("toast", "toast-bottom", "toast-end", "animate-[slip_500ms_ease-in-out]", "w-[300px]", "z-50");
-	toast.innerHTML = /*html */ ` <div class="alert ${style} text-gray-800 !text-xl ">
-										<i class="${icon}"></i>
-										<span>${message}</span>
-								</div>`;
-	const main = $("main");
-	await main.appendChild(toast);
-	(() => {
-		setTimeout(() => {
-			main.removeChild(toast);
-		}, 2000);
-	})();
+// send request
+const sendRequest = async (url, data) => {
+	const response = await (
+		await fetch(url, {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		})
+	).text();
+	return response;
 };
-//#endregion

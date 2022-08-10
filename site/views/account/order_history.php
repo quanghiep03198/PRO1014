@@ -78,7 +78,7 @@
     <?php include_once "site/components/footer.php" ?>
     <script src="js/common.js"></script>
     <script src="js/handle-userdata.js"></script>
-    <script src="js/handle-post-request.js"></script>
+    <script src="js/handle-order.js"></script>
     <script>
         const ordersStatus = $(".order-stt")
         const defineStatus = (stt) => {

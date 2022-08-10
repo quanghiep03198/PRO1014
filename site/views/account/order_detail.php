@@ -142,7 +142,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/handle-userdata.js"></script>
-    <script src="js/handle-post-request.js"></script>
+    <script src="/js/handle-order.js"></script>
 </body>
 
 </html>

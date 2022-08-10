@@ -111,7 +111,7 @@ function get_feedback_counter($id)
 {
     $sql = "SELECT COUNT(product_feedback.id) FROM product_feedback
             INNER JOIN order_items ON product_feedback.order_item_id = order_items.id
-            WHERE product_id = $id";
+            WHERE order_items.product_id = {$id}";
     return select_one_value($sql);
 }
 // lấy tất cả feedback 
