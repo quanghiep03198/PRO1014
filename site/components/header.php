@@ -32,9 +32,9 @@
                     <!-- submenu -->
                     <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-[300px]">
                         <li>
-                            <a href="?page=account-view_profile" class="justify-between">Tài khoản <span class="badge badge-lg"><?= $_SESSION['user_name'] ?></span></a>
+                            <a href="?page=account-view_profile" class="justify-between">Tài khoản <span class="badge badge-lg"><?= $auth['name'] ?></span></a>
                         </li>
-                        <li><a href="./logout.php">Đăng xuất</a></li>
+                        <li><a href="" onclick="logout()">Đăng xuất</a> </li>
                     </ul>
                 </div>
                 <a href="?page=account-wishlist" class="text-xl"><i class="bi bi-heart"></i></a>
@@ -47,22 +47,22 @@
                 <div class="modal">
                     <div class="modal-box relative">
                         <label for="my-modal-3" class="btn btn-circle btn-ghost absolute right-2 top-2">✕</label>
-                        <form action="" method="post" class="flex flex-col gap-5" onsubmit="handleLoginError(this,event)">
+                        <form action="" method="POST" class="flex flex-col gap-5" onsubmit="handleLoginError(this,event)">
                             <h1 class="text-center text-3xl font-semibold">Đăng nhập</h1>
                             <div class="form-control">
                                 <label for="">Tài khoản</label>
-                                <input class="input input-bordered w-full" type="text" name="account" id="">
+                                <input class="input input-bordered w-full" type="text" name="account" data-name="tài khoản">
                                 <small class="text-base text-error error-message font-semibold"></small>
                             </div>
                             <div class="form-control">
                                 <label for="">Mật khẩu</label>
-                                <input class="input input-bordered w-full" type="password" name="password" id="">
+                                <input class="input input-bordered w-full" type="password" name="password" data-name="mật khẩu">
                                 <small class="text-base text-error error-message font-semibold"></small>
                             </div>
                             <div class="form-control">
                                 <label class="label cursor-pointer justify-start gap-5">
                                     <span class="">Lưu tài khoản</span>
-                                    <input type="checkbox" class="toggle toggle-primary" onchange="saveAccount()" />
+                                    <input type="checkbox" class="toggle toggle-primary" name="save-account__checkbox" />
                                 </label>
                             </div>
                             <div class="flex justify-between items-center gap-5">
