@@ -2,19 +2,20 @@ const $ = (selector) => {
 	const elements = document.querySelectorAll(selector);
 	return elements.length == 1 ? elements[0] : elements;
 };
-// nếu trình duyệt để chế độ
-const body = $("body");
-if (body) {
-	body.classList.add("bg-white", "text-gray-800");
-}
-//#region show số lượng sản phẩm trong giỏ hàng
+
+// show số lượng sản phẩm trong giỏ hàng
 const cartCounter = $("#cart-counter");
 const countItems = () => {
 	if (!localStorage.getItem("cart")) localStorage.setItem("cart", JSON.stringify([]));
 	cartCounter.innerText = JSON.parse(localStorage.getItem("cart")).length;
 };
 if (cartCounter) countItems();
-//#endregion
+
+// kiểm tra xem người dùng có lưu tài khoản trong localstorge
+window.onload = () => {
+	const userId = localStorage.getItem("account");
+	if (userId) document.cookie = `auth=${userId}`;
+};
 
 // lấy cookie
 const getAllCookieObjs = () => {
