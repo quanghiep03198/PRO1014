@@ -16,24 +16,24 @@ const addWishlist = async (button, event) => {
 			button: false,
 		});
 	else {
-		const response = await (
-			await fetch("/site/controllers/handle_wishlist.php", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					product_id: product_id,
-					request: request,
-				}),
-			})
-		).text();
-		swal({
-			title: "Đã thêm vào danh sách yêu thích!",
-			icon: "success",
-			timer: 2000,
-			button: false,
+		const response = await sendRequest("/site/controllers/handle_wishlist.php", {
+			product_id: product_id,
+			request: request,
 		});
+		if (response != "")
+			await swal({
+				title: "Đã thêm vào danh sách yêu thích!",
+				icon: "success",
+				timer: 2000,
+				button: false,
+			});
+		else
+			await swal({
+				title: "Sản phẩm đã tồn tại trong danh sách!",
+				icon: "info",
+				timer: 2000,
+				button: false,
+			});
 		console.log(response);
 	}
 };
@@ -42,10 +42,10 @@ const delWishlistItem = async (form, event) => {
 	event.preventDefault();
 	const product_id = form["product_id"].value;
 	const request = form["REQUEST"].value;
-	const response = await sendRequest("/site/controllers/handle_wishlist.php", {
+	await sendRequest("/site/controllers/handle_wishlist.php", {
 		product_id: product_id,
 		request: request,
+	}).then(() => {
+		location.reload();
 	});
-	await showMessage(alert.success.style, alert.success.icon, "Đã xóa 1 sản phẩm khỏi danh sách!");
-	console.log(response);
 };

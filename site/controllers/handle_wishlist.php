@@ -10,9 +10,10 @@ extract($data);
 switch ($request) {
     case 'POST':
         $wish_list_items = get_wishList_items(); // lấy tất cả sản phẩm trong wishlist
-        $product =  get_one_product($product_id);
+        $product =  get_one_wishlist_item($_COOKIE['auth'], $product_id);
         if (in_array($product, $wish_list_items))
-            echo "Sản phẩm đã tồn tại trong danh sách!";
+            echo "";
+
         else {
             $list_id = get_wishList_id();
             $sql = "INSERT INTO wishlist_item (wishlist_id,product_id) VALUES ('{$list_id}',{$product_id})";

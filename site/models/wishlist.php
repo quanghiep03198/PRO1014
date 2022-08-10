@@ -56,3 +56,21 @@ function del_wishList_item()
     if (isset($_GET['id']))
         execute_query("DELETE FROM wishlist_item WHERE product_id = '{$_GET['id']}'");
 }
+// lấy ra 1 sản phẩm trong danh sách yêu thích
+function get_one_wishlist_item($auth_id, $product_id)
+{
+    $sql = "SELECT wishlist_item.*, 
+                product.id AS product_id,
+                product.prod_name AS product_name,
+				product.image AS image,
+                product.price AS price,
+                product.discount AS discount,
+                (product.price*(100-product.discount)/100) AS discount_price,
+                product.stock AS stock,
+                product.warranty_time AS warranty_time
+                FROM  wishlist_item
+                INNER JOIN wishlist ON wishlist.id = wishlist_item.wishlist_id 
+                INNER JOIN product ON wishlist_item.product_id = product.id
+                WHERE wishlist.user_id = {$auth_id} AND wishlist_item.product_id = {$product_id}";
+    return select_single_record($sql);
+}

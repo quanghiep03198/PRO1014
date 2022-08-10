@@ -97,7 +97,7 @@ $wish_list_items = get_wishList_items();
     <script src="js/common.js"></script>
     <script src="js/handle-cart.js"></script>
     <script src="js/handle-userdata.js"></script>
-    <script src="js/handle-wishlist"></script>
+    <script src="js/handle-wishlist.js"></script>
 
 </body>
 
