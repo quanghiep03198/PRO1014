@@ -1,13 +1,12 @@
 <?php
-if (isset($_GET['id']))
+if (isset($_GET['id'])) {
     $order_details = get_order_details($_GET['id']);
+    $thisOrderStt = $order_details[0]['order_stt_id'];
+}
 
-foreach (get_all_order_stt() as $stt) : extract($stt);
-    if (!in_array($order_details[0]['order_stt_id'], [1, 3, 4])  && $id != 1) :
-        echo $stt_name;
 
-    endif;
-endforeach;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,20 +32,19 @@ endforeach;
                     <span class="text-zinc-300">Ngày đặt hàng: <?php echo $order_details[0]['create_date'] ?></span>
                 </div>
                 <form action="./admin/controllers/order.php" method="POST">
-                    <label for="" class="text-xl text-white">Trạng thái: </label>
                     <input type="hidden" name="order_id" value=<?= $_GET['id'] ?>>
-                    <select name="order_status" id="" class="select select-bordered">
-                        <option value="">Chọn</option>
-                        <?php
-                        foreach (get_all_order_stt() as $stt) : extract($stt); ?>
-                            <?php if ($order_details[0]['order_stt_id'] != 3 || $id != 1) : ?>
+
+                    <?php if (!in_array($thisOrderStt, [3, 4])) : ?>
+                        <label for="" class="text-xl text-white">Trạng thái: </label>
+                        <select name="order_status" id="" class="select select-bordered">
+                            <option value="">Chọn</option>
+                            <?php foreach (get_all_order_stt() as $stt) : extract($stt);
+                                if ($id == 1) continue ?>
                                 <option value=<?php echo $id ?>> <?= $stt_name ?></option>
-                            <?php endif; ?>
-                        <?php
-                        endforeach;
-                        ?>
-                    </select>
-                    <button class="btn" name="update_order_stt">Xác nhận</button>
+                            <?php endforeach; ?>
+                        </select>
+                        <button class="btn" name="update_order_stt">Xác nhận</button>
+                    <?php endif; ?>
                 </form>
             </div>
 

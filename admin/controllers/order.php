@@ -8,5 +8,5 @@ if (isset($_POST['update_order_stt'])) {
     $order_id = $_POST['order_id'];
     $sql = "UPDATE orders SET order_stt_id = {$stt_id} WHERE id = {$order_id}";
     execute_query($sql);
-    header("Location: ../../admin.php?page=order-list");
+    header("Location: ../../admin.php?page=order-read&id={$order_id}");
 }
