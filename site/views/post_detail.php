@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
     <title><?= $title ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/swal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 </head>
 <style>
@@ -88,8 +89,11 @@ if (isset($_GET['id'])) {
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
     <script src="js/handle-comment.js"></script>
+    <script src="js/handle-userdata.js"></script>
 </body>
 
 </html>

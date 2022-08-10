@@ -196,9 +196,11 @@ if (isset($_GET['id'])) {
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/common.js"></script>
+    <script src="js/validate.js"></script>
     <script src="/js/carousel.js"></script>
     <script src="js/handle-cart.js"></script>
     <script src="js/handle-comment.js"></script>
+    <script src="js/handle-userdata.js"></script>
     <script>
         const table = document.querySelector("table")
         if (table)

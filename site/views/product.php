@@ -110,8 +110,10 @@
     <?php include_once 'site/components/footer.php'; ?>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
     <script src="js/handle-cart.js"></script>
     <script src="js/handle-wishlist.js"></script>
+    <script src="js/handle-userdata.js"></script>
     <script src="js/pagination.js"></script>
     <script>
         const pagination = new Pagination('.card', 6, "block");

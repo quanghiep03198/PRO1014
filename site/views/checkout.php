@@ -72,6 +72,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/validate.js"></script>
+    <script src="js/handle-userdata.js"></script>
     <script src="js/handle-order.js"></script>
     <script type="text/javascript">
         const cartItems = JSON.parse(localStorage.getItem("cart"));

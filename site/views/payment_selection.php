@@ -24,6 +24,11 @@
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="js/common.js"></script>
+    <script src="js/handle-userdata.js"></script>
+    <script>
+        if (JSON.parse(localStorage.getItem("cart")).length == 0)
+            window.location = "?page=product";
+    </script>
 </body>
 
 </html>

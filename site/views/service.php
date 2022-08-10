@@ -39,6 +39,8 @@
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
     <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/handle-userdata.js"></script>
     <script src="js/pagination.js"></script>
     <script>
         const tablePagination = new Pagination(".table-row", 5, "table")

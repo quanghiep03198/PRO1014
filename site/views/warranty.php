@@ -8,6 +8,8 @@
     <title>Tra cứu bảo hành sản phẩm</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/swal.css">
+
 </head>
 
 <body>
@@ -22,7 +24,7 @@
 
             <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
-                    <form action="?page=warranty_result" method="POST" class="flex flex-col gap-5" onsubmit="return handleErrorWarrantySearch(this,event)">
+                    <form action="" method="POST" class="flex flex-col gap-5">
                         <div class="form-group">
                             <label class="text-xl" for="">Email mua hàng</label>
                             <input type="text" data-name="số điện thoại/email" name="customer_infor" id="" class="input input-bordered  w-full">
@@ -35,7 +37,19 @@
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
 
-                        <button type="submit" name="search_warranty" class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]">Tra cứu</button>
+                        <!-- <button type="submit" name="search_warranty" class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]"></button> -->
+                        <!-- The button to open modal -->
+                        <label class="btn hover:btn-primary" onclick="handleErrorWarrantySearch(this)">Tra cứu</label>
+
+                        <!-- Put this part before </body> tag -->
+                        <input type="checkbox" id="warranty-info" class="modal-toggle" />
+                        <div class="modal">
+                            <div class="modal-box relative !max-w-[1024px]">
+                                <label for="warranty-info" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <h1 class="text-xl font-bold text-center mb-10">Chi tiết đơn hàng</h1>
+                                <div id="order-items-list" class="flex sm:flex-col items-center max-w-5xl"></div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="w-full h-full object-cover"><img src="/img/warranty-banner.png" class="max-w-lg " /></div>
@@ -43,6 +57,7 @@
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/validate.js"></script>
     <script src="js/handle-userdata.js"></script>
