@@ -9,8 +9,42 @@ include "PHPMailer/src/SMTP.php";
 include "PHPMailer/src/Exception.php";
 session_start();
 
-if (isset($_POST['register_submit'])) {
+?>
 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="" rel="stylesheet" />
+    <title>Xác thực tài khoản</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body class="w-screen h-screen flex justify-center items-center bg-center bg-no-repeat bg-cover" style="background-image: url('/img/banners/register-bg.webp');">
+    <div class="max-w-3xl mx-auto bg-opacity-80">
+        <form action="" method="POST" class=" flex flex-col gap-10 p-10 bg-white bg-opacity-70" id="verify-account__form">
+            <h1 class="sm:text-xl md:text-2xl lg:text-3xl font-semibold">Xác thực tài khoản</h1>
+            <!-- tài khoản -->
+            <div class="form-group">
+                <input class="outline-none bg-inherit appearance-none border-b  w-full py-2 px-3 focus:outline-none focus:shadow-outline" name="verify_code" type="text" placeholder="Nhập mã xác thực">
+                <small class="text-base text-error error-message font-semibold"></small>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-block hover:btn-primary" name="verify_account">
+                    Xác thực tài khoản
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+</html>
+<?php
+
+if (isset($_POST['register_submit'])) {
     $account = $_POST['account'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $username = $_POST['username'];
@@ -66,35 +100,3 @@ if (isset($_POST['verify_account']) && isset($_COOKIE['account'])) {
 if (!isset($_SESSION['verify_code']))
     header("Location: ./");
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="" rel="stylesheet" />
-    <title>Xác thực tài khoản</title>
-    <link rel="stylesheet" href="/styles/main.css">
-</head>
-
-<body class="w-screen h-screen flex justify-center items-center bg-center bg-no-repeat bg-cover" style="background-image: url('/img/banners/register-bg.webp');">
-    <div class="max-w-3xl mx-auto bg-opacity-80">
-        <form action="" method="POST" class=" flex flex-col gap-10 p-10 bg-white bg-opacity-70" id="verify-account__form">
-            <h1 class="sm:text-xl md:text-2xl lg:text-3xl font-semibold">Xác thực tài khoản</h1>
-            <!-- tài khoản -->
-            <div class="form-group">
-                <input class="outline-none bg-inherit appearance-none border-b  w-full py-2 px-3 focus:outline-none focus:shadow-outline" name="verify_code" type="text" placeholder="Nhập mã xác thực">
-                <small class="text-base text-error error-message font-semibold"></small>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-block hover:btn-primary" name="verify_account">
-                    Xác thực tài khoản
-                </button>
-            </div>
-        </form>
-    </div>
-</body>
-
-</html>
-<?php
