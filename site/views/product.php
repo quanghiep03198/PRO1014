@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles/swal.css">
 </head>
 
-<body>
+<body class="scroll-smooth overscroll-contain">
     <?php include_once 'site/components/header.php'; ?>
     <main class="w-full grid sm:grid-cols-1 lg:grid-cols-[1fr,3fr] gap-10 relative">
         <!-- side bar -->
@@ -25,7 +25,7 @@
                 <!-- product filter -->
                 <div class="max-w-full mx-auto flex justify-start mb-8 gap-5">
                     <div class="flex flex-col gap-2">
-                        <label for="" class="text-xl" id="#">Lọc theo giá</label>
+                        <label for="" class="text-xl">Lọc theo giá</label>
                         <select class="select select-lg select-bordered bg-white" onchange="window.location = this.value">
                             <?php if (isset($_GET['cate']) && isset($_GET['manu'])) : ?>
                                 <option value=<?php echo "?page=product&cate={$_GET['cate']}&manu={$_GET['manu']}&sort=asc" ?> <?php echo isset($_GET['sort']) && $_GET['sort'] == 'asc' ? "selected" : "" ?>>Giá tăng dần</option>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative h-50%" id="title">
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative h-50% .scroll-smooth">
                     <?php
                     // lấy tất cả sản phảm
                     if (!isset($_GET['cate']) && !isset($_GET['kw'])) {
@@ -116,8 +116,14 @@
     <script src="js/handle-userdata.js"></script>
     <script src="js/pagination.js"></script>
     <script>
-        const pagination = new Pagination('.card', 6, "block");
-        const showPage = pagination.showPage.bind(this)
+        const pagination = new Pagination({
+            selector: ".card",
+            perPage: 9,
+            style: "block"
+        })
+        const {
+            showPage
+        } = pagination;
         showPage(1)
     </script>
 </body>
