@@ -77,7 +77,6 @@
     <script type="text/javascript">
         const cartItems = JSON.parse(localStorage.getItem("cart"));
         if (cartItems.length == 0) {
-            showMessage(alert.error.style, alert.error.icon, "Bạn chưa có sản phẩm nào trong giỏ hàng!")
             window.location = "?page=product";
         }
     </script>

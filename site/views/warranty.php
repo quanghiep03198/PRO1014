@@ -26,8 +26,8 @@
                 <div>
                     <form action="" method="POST" class="flex flex-col gap-5">
                         <div class="form-group">
-                            <label class="text-xl" for="">Email mua hàng</label>
-                            <input type="text" data-name="số điện thoại/email" name="customer_infor" id="" class="input input-bordered  w-full">
+                            <label class="text-xl" for="">Email</label>
+                            <input type="text" data-name="email" name="email" id="" class="input input-bordered  w-full">
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
 
@@ -39,14 +39,14 @@
 
                         <!-- <button type="submit" name="search_warranty" class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]"></button> -->
                         <!-- The button to open modal -->
-                        <label class="btn hover:btn-primary" onclick="handleErrorWarrantySearch(this)">Tra cứu</label>
+                        <label class="btn hover:btn-primary" onclick="handleSearchWarranty(this)">Tra cứu</label>
 
                         <!-- Put this part before </body> tag -->
                         <input type="checkbox" id="warranty-info" class="modal-toggle" />
                         <div class="modal">
                             <div class="modal-box relative !max-w-[1024px]">
-                                <label for="warranty-info" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                <h1 class="text-xl font-bold text-center mb-10">Chi tiết đơn hàng</h1>
+                                <label for="warranty-info" class="btn btn-sm btn-circle absolute right-2 top-2" id="close-modal__btn">✕</label>
+                                <h1 class="text-2xl font-bold text-center mb-10">Chi tiết đơn hàng</h1>
                                 <div id="order-items-list" class="flex sm:flex-col items-center max-w-5xl"></div>
                             </div>
                         </div>
@@ -65,5 +65,3 @@
 </body>
 
 </html>
-<?php
-// get_warranty_expired_date()

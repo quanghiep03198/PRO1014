@@ -44,7 +44,7 @@
                 <div class="flex flex-col justify-center gap-2">
                     <span class="px-2 text-white text-xl"><?= $auth['name'] ?></span>
                     <span class="px-2 text-gray-300"><?= $auth['email'] ?></span>
-                    <a href="./logout.php" class="text-sm text-white"><i class="bi bi-arrow-bar-left"></i> Đăng xuất</a>
+                    <a href="" class="text-sm text-white" onclick="logout()"><i class="bi bi-arrow-bar-left"></i> Đăng xuất</a>
                 </div>
             </div>
         </nav>
@@ -69,5 +69,5 @@
             </ul>
         </div>
     </div>
-
 </nav>
+<script src="js/handle-userdata.js"></script>
