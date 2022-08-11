@@ -54,6 +54,7 @@
     <?php include_once "site/components/footer.php" ?>
     <!--  -->
     <script src="/js/common.js"></script>
+    <script src="js/handle-userdata"></script>
 </body>
 
 </html>

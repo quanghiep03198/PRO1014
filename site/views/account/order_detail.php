@@ -1,3 +1,12 @@
+<?php
+if (isset($_GET['id'])) :
+    $order_items = get_all_order_items($_GET['id']);
+    // print_r($order_items);
+    $order_summary = get_order_details($_GET['id']);
+    extract($order_summary);
+endif;
+?>;
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,12 +37,12 @@
                 <!-- order items list -->
                 <div class="flex flex-col items-stretch gap-5 border-b border-zinc-500 mb-10">
                     <?php if (isset($_GET['id'])) :
-                        foreach (get_all_order_items($_GET['id']) as $item) : extract($item) ?>
+                        foreach ($order_items as $item) : extract($item) ?>
                             <div class="flex flex-nowrap justify-around items-center gap-5 w-full">
                                 <div class="flex items-center gap-4">
                                     <img src=<?php echo ROOT_PRODUCT . $image ?> alt="" class="w-[100px] h-[100px] object-contain">
                                     <div class="flex flex-col gap-3">
-                                        <span class="text-xl font-semibold"><?= $product_name ?></span>
+                                        <span class="text-xl font-semibold"><?= $prod_name ?></span>
                                         <span class="text-primary font-semibold"><?= $unit_price . "₫" ?></span>
                                     </div>
                                 </div>
@@ -68,7 +77,7 @@
                     <div>
                         <p>
                             <span class="text-error">Ghi chú:</span>
-                            <span class="indent-2 italic"><?= $order_notice ?></span>
+                            <span class="indent-2 italic"><?php echo $order_notice ?></span>
                         </p>
                     </div>
                     <div>
@@ -79,7 +88,7 @@
                             </tr>
                             <tr>
                                 <td class="text-primary font-medium"><span></span> Phí ship</td>
-                                <td> <?= $shipping_cost ?></td>
+                                <td> <?= $cost ?></td>
                             </tr>
                             <tr>
                                 <th><span class="text-xl text-primary">Tổng tiền</span> </th>
@@ -91,8 +100,6 @@
                 <!-- order information -->
                 <div>
                     <?php
-                    $order_summary = get_one_order_by_user($auth['id'], $_GET['id']);
-                    extract($order_summary);
 
                     ?>
                     <table class="table w-full">
@@ -142,7 +149,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/handle-userdata.js"></script>
-    <script src="/js/handle-order.js"></script>
+    <script src="js/handle-order.js"></script>
 </body>
 
 </html>

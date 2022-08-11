@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_POST['update_profile'])) :
     $username = $_POST['username'];
     $email = $_POST['email'];
