@@ -10,7 +10,7 @@ const place_order = async (form, event) => {
 	const cartItems = localStorage.getItem("cart");
 
 	// validate
-	if (isRequired(customerName, phone, email, address, shipping) == false) return;
+	if (areRequired(customerName, phone, email, address, shipping) == false) return;
 	if (isEmail(email) == false) return;
 	if (isPhoneNumber(phone) == false) return;
 
@@ -24,6 +24,7 @@ const place_order = async (form, event) => {
 		order_notice: orderNotice.value,
 		cart_items: cartItems,
 	});
+	// loading present
 
 	// reset số lượng sản phẩm trong giỏ hàng
 	await localStorage.setItem("cart", JSON.stringify([]));
