@@ -59,41 +59,56 @@ const handleRegisterError = (form, event) => {
 };
 // validate form tra cứu đơn hàng
 
-const handleErrorWarrantySearch = async (button) => {
+const handleSearchWarranty = async (button) => {
 	const form = button.parentElement;
-	const customer_infor = form["customer_infor"];
+	const email = form["email"];
 	const order_key_id = form["order_key_id"];
-	let isSuccess = true;
-	if (areRequired(customer_infor, order_key_id) == false) isSuccess = false;
-	if (isEmail(customer_infor) == false) isSuccess = false;
+
 	// nếu validate thông tin ng dùng nhập hợp lệ -> check xem thông tin đơn hàng ng dùng nhập có tồn tại
-	if (isSuccess) {
-		button.setAttribute("for", "warranty-info");
-		const response = await sendRequest("/site/controllers/handle_warranty.php", {
-			customer_infor: customer_infor.value,
-			order_key_id: order_key_id.value,
-		});
-		const result = JSON.parse(response);
-		const orderItemsList = $("#order-items-list");
-		orderItemsList.innerHTML = result
-			.map(
-				(item) => /*html */ `
+	if (areRequired(email, order_key_id) == false) return;
+	if (isEmail(email) == false) return;
+
+	// nếu pass qua validate form -> send request
+	const response = await sendRequest("/site/controllers/handle_warranty.php", {
+		email: email.value,
+		order_key_id: order_key_id.value,
+	});
+	const warrantyInfo = await JSON.parse(response);
+
+	// kiểm tra response gửi về có hợp lệ
+	let isValidInfo = true;
+	if (warrantyInfo.hasOwnProperty("invalid_email")) {
+		showError(email, warrantyInfo.invalid_email);
+		isValidInfo = false;
+	}
+
+	if (warrantyInfo.hasOwnProperty("invalid_order_key")) {
+		showError(order_key_id, warrantyInfo.invalid_order_key);
+		isValidInfo = false;
+	}
+	if (isValidInfo == false) return;
+	// show modal & render dữ liệu trả về nếu pass qua các điều kiện
+	button.setAttribute("for", "warranty-info");
+	const orderItemsList = $("#order-items-list");
+	orderItemsList.innerHTML = warrantyInfo
+		.map(
+			(item) => /*html */ `
 				<div class="flex items-center gap-3">
 					<img src="/img/products/${item.image}" alt="" class="w-24 h-24 object-cover">
 					<div class="flex flex-col justify-center gap-2">
-						<span class="font-semibold">${item.product_name}</span>
-						<span class="font-semibold">${item.unit_price}</span>
-						<span class="font-normal">Ngày tạo đơn: ${item.create_date}</span>
-						<span class="font-normal">Bảo hành đến: ${item.warranty_expire_date}</span>
+						<span class="font-semibold">${item.prod_name}</span>
+						<span class="font-semibold">${item.unit_price}₫</span>
+						<span><span class="font-semibold">Ngày tạo đơn: </span>${item.create_date}</span>
+						<span><span class="font-semibold">Bảo hành đến: </span>${item.warranty_expire_date}</span>
 						</div>
 				</div>`,
-			)
-			.join("");
-		console.log(result);
-	}
+		)
+		.join("");
+	$("#close-modal__btn").onclick = () => {
+		button.removeAttribute("for");
+	};
 };
-// nguyenngochoang2121998@gmail.com
-// f5f96025
+
 const loadFile = (event) => {
 	const photo = $("#user-image");
 	photo.style.display = "block";
@@ -142,5 +157,5 @@ const handleLoginError = async (form, event) => {
 const logout = () => {
 	document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 	localStorage.clear();
-	sessionStorage.clear();
+	location.reload();
 };
