@@ -17,14 +17,7 @@
         <section class="w-full">
             <div class="bg-primary px-12 py-8 flex justify-between items-center mb-10">
                 <h1 class="text-3xl text-white">Danh sách đơn hàng</h1>
-                <div class="dropdown dropdown-end ">
-                    <label tabindex="0" class="text-white text-xl"><i class="bi bi-list"></i></label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a href="?page=product-list">Danh sách sản phẩm</a></li>
-                        <li><a href="?page=categories-list">Danh mục sản phẩm</a></li>
-                        <li><a href="?page=manufacturer-list">Danh mục sản phẩm</a></li>
-                    </ul>
-                </div>
+
             </div>
 
             <div class="container mx-auto">
