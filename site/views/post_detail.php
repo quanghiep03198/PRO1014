@@ -2,8 +2,10 @@
 if (isset($_GET['id'])) {
     $post = get_one_post($_GET['id']);
     extract($post);
+    $comments = get_all_post_comments($_GET['id']);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,41 +46,83 @@ if (isset($_GET['id'])) {
                 <!-- comments  -->
                 <section class="border-1 border-[#B9B9B9] rounded my-[30px] p-5">
                     <h5 class="font-semibold text-xl mb-10"><i class="bi bi-chat-left-dots"></i> <span>Bình luận</span></h5>
+
                     <!-- comment list -->
-                    <div class="w-full flex flex-col gap-6 max-h-80 overflow-y-scroll hidden-scrollbar" id="comment-box">
-                        <?php foreach (get_all_post_comments($_GET['id']) as $cmt) : extract($cmt) ?>
-                            <div class="w-full mx-auto flex justify-start items-start gap-3">
-                                <!-- user infor -->
-                                <picture>
-                                    <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="w-[3rem] h-[3rem] rounded-full object-contain center" />
-                                </picture>
-                                <div>
-                                    <div class="alert flex-col justify-between py-2 items-start w-full">
-                                        <div class="flex justify-start items-center gap-2">
-                                            <span class="text-base font-medium"><?php echo $username ?></span>
-                                            <span class="text-sm"><?php echo $posted_date ?></span>
+                    <div class="flex flex-col gap-6 max-h-80 overflow-y-auto hidden-scrollbar" id="comment-box">
+                        <!-- comment list-->
+                        <?php foreach ($comments as $cmt) : extract($cmt) ?>
+                            <div id="<?= $cmt['id'] ?>">
+                                <!-- comment -->
+                                <div class="comment card card-side bg-zinc-300 items-start w-auto mb-3" id="">
+                                    <figure class="p-2">
+                                        <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="w-[3rem] h-[3rem] rounded-full object-cover center" />
+                                    </figure>
+                                    <div class="card-body justify-start py-2">
+                                        <h2 class="card-title text-lg"><?php echo $username ?></h2>
+                                        <small><?php echo $posted_date ?></small>
+                                        <p><?php echo $content ?></p>
+                                        <div class="card-actions justify-end items-center">
+                                            <label class="swap">
+                                                <input type="checkbox" />
+                                                <div class="swap-on btn btn-sm btn-ghost normal-case" onclick="showReps(document.getElementById('<?= $cmt['id'] ?>'))">Ẩn</div>
+                                                <div class="swap-off btn btn-sm btn-ghost normal-case" onclick="hiddenReps(document.getElementById('<?= $cmt['id'] ?>'))"><?php echo get_post_reply_counter($cmt['id']) . " phản hồi" ?></div>
+                                            </label>
+                                            <input type="hidden" value=<?= $cmt["id"] ?>>
+                                            <button onclick='reply("<?= $username ?>","<?= $cmt["id"] ?>")' class="btn btn-sm btn-ghost normal-case">
+                                                Phản hồi <i class="bi bi-reply px-1"></i>
+                                            </button>
                                         </div>
-                                        <p class="break-words truncate "><?php echo $content ?></p>
                                     </div>
-                                    <input type="hidden" value=<?= $_GET['id'] ?>>
                                 </div>
+                                <!-- reply -->
+                                <?php
+                                $replies = get_post_reply_comment($cmt['id']);
+                                if (!empty($replies)) :
+                                    foreach ($replies as $reply) : extract($reply)
+                                ?>
+                                        <div class="reply card card-side items-start ml-10 mb-2 bg-gray-200 hidden">
+                                            <figure class="p-2">
+                                                <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="w-[3rem] h-[3rem] rounded-full object-cover center" />
+                                            </figure>
+                                            <div class="card-body justify-start py-2">
+                                                <h2 class="card-title text-lg"><?php echo $username ?></h2>
+                                                <small><?php echo $rep_date ?></small>
+                                                <p><?php echo $content ?></p>
+                                                <div class="card-actions justify-end">
+                                                    <input type="hidden" value=<?= $cmt['id'] ?>>
+                                                    <button onclick='reply("<?= $username ?>","<?= $cmt["id"] ?>")' class="btn btn-sm btn-ghost normal-case">
+                                                        Phản hồi <i class="bi bi-reply px-1"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <?php
+                                    endforeach;
+                                endif;
+                                ?>
                             </div>
                         <?php endforeach; ?>
                         <!-- show comment reply -->
                     </div>
+
                     <!-- post comment form -->
                     <form action="" method="POST" onsubmit="postCommentOnPost(this,event)">
-                        <div class="flex justify-start gap-[30px] items-center py-6 px-5">
-                            <img src="<?php echo isset($_COOKIE['auth']) ? ROOT_AVATAR . $auth['avatar'] : ROOT_AVATAR . 'default.png' ?>" class="w-[4rem] h-[4rem] rounded-full object-contain" />
-                            <div class="border px-3 py-2 flex justify-between items-center w-full rounded-md">
-                                <input type="hidden" name="user" value="<?php echo $auth['id'] ?>">
-                                <input type="hidden" name="avatar" value="<?php echo ROOT_AVATAR . $auth['avatar'] ?>">
-                                <input type="hidden" name="username" value="<?php echo $auth['name'] ?>">
-                                <input type="hidden" name="post_id" value="<?php echo $_GET['id'] ?>">
-                                <input type="text" name="content" id="content" placeholder="Nhập bình luận ..." class="input input-sm w-full border-none focus:outline-none">
-                                <button type="submit" name="create_comment">
-                                    <i class="bi bi-send"></i>
-                                </button>
+                        <div class="flex justify-start gap-[30px] items-center py-6 px-5 h-32 relative">
+                            <img src="<?php echo isset($_COOKIE['auth']) ? ROOT_AVATAR . $auth['avatar'] : ROOT_AVATAR . 'default.png' ?>" class="w-[4rem] h-[4rem] rounded-full object-cover" />
+                            <div class="w-full ">
+                                <div class="border px-3 py-2 flex justify-between items-center w-full rounded-md">
+                                    <input type="hidden" name="user" value="<?php echo $auth['id'] ?>">
+                                    <input type="hidden" name="avatar" value="<?php echo ROOT_AVATAR . $auth['avatar'] ?>">
+                                    <input type="hidden" name="username" value="<?php echo $auth['name'] ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $_GET['id'] ?>">
+                                    <input type="hidden" name="comment_id" id="comment-id">
+                                    <input type="hidden" name="REQUEST" id="req">
+                                    <input type="text" name="content" id="comment-input" placeholder="Nhập bình luận ..." class="input input-sm w-full border-none focus:outline-none">
+                                    <button type="submit" name="create_comment">
+                                        <i class="bi bi-send"></i>
+                                    </button>
+                                </div>
+                                <button type="button" onclick="cancelReply(this)" class="btn btn-sm btn-ghost hidden absolute bottom-0" id="cancel-rep__btn"><i class="bi bi-x"></i> Hủy</button>
                             </div>
                         </div>
                     </form>

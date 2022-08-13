@@ -25,7 +25,7 @@
 		color: black;
 	}
 
-	body {
+	.scroll-smooth {
 		scroll-behavior: smooth;
 	}
 	.swiper-wrapper {

@@ -25,9 +25,9 @@ if (isset($_GET['id'])) {
     <?php include_once 'site/components/header.php';  ?>
     <main class="relative bg-white">
         <div class="grid gap-10 sm:grid-cols-1 lg:grid-cols-[1fr,3fr]">
-            <div>
-                <?php include_once 'site/components/sidebar.php' ?>
-            </div>
+            <!-- import side bar from components -->
+            <?php include_once 'site/components/sidebar.php' ?>
+
             <div class="max-w-full flex flex-col gap-10 px-5">
                 <!-- product overview -->
                 <section>
@@ -41,11 +41,9 @@ if (isset($_GET['id'])) {
                             <h2 class="text-3xl font-semibold"><?= $prod_name ?></h2>
                             <span class="font-semibold text-2xl"><?= $price  . '₫' ?></span>
                             <div class="rating">
-                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                                <?php foreach (get_reviews_label() as $review) : ?>
+                                    <input type="radio" value=<?= $review['id'] ?> <?php if ($review['id'] == get_most_feedback($id)) echo "checked" ?> class="mask mask-star-2 bg-warning" disabled>
+                                <?php endforeach; ?>
                             </div>
                             <span class="font-medium text-2xl">Bảo hành : <span class="font-normal"><?= $warranty_time . ' tháng' ?></span></span>
                             <span class="font-medium text-2xl">Kho hàng : <span class="font-normal"><?php echo $stock > 0 ? "Còn hàng" : "Hết hàng" ?></span></span>
@@ -59,7 +57,7 @@ if (isset($_GET['id'])) {
                                         <button type="button" onclick="updateQty(this,1)" data-action="increment" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">+</button>
                                     </div>
                                     <!-- product information form -->
-                                    <input type='hidden' name='product_id' value=<?= $id ?>>
+                                    <input type='hidden' name='product_id' value=<?= $_GET['id'] ?>>
                                     <input type='hidden' name='product_name' value="<?php echo $prod_name ?>">
                                     <input type='hidden' name='manu' value="<?php echo $man_name ?>">
                                     <input type='hidden' name='price' value=<?= $price ?>>
@@ -68,14 +66,16 @@ if (isset($_GET['id'])) {
                                     <input type='hidden' name='qty' value=1>
                                     <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
                                     <!-- submit action -->
-                                    <button type='submit' onclick="addCart(this)" class='btn sm:btn-sm hover:btn-primary hover:btn-active'>
-                                        <i class="bi bi-cart3 text-2xl"></i>
-                                        <span class="indent-2">Mua ngay</span>
-                                    </button>
-                                    <button type="button" onclick="addCart(this)" class="btn sm:btn-sm hover:btn-primary hover:btn-active">
-                                        <i class="bi bi-bag-plus text-2xl"></i>
-                                        <span class="indent-2">Thêm vào giỏ hàng</span>
-                                    </button>
+                                    <div class="flex sm:flex-col items-center gap-5">
+                                        <button type='submit' onclick="addCart(this)" class='btn sm:btn-sm hover:btn-primary hover:btn-active'>
+                                            <i class="bi bi-cart3 text-2xl"></i>
+                                            <span class="indent-2">Mua ngay</span>
+                                        </button>
+                                        <button type="button" onclick="addCart(this)" class="btn sm:btn-sm hover:btn-primary hover:btn-active">
+                                            <i class="bi bi-bag-plus text-2xl"></i>
+                                            <span class="indent-2">Thêm vào giỏ hàng</span>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="my-5">
@@ -103,7 +103,7 @@ if (isset($_GET['id'])) {
                 <!-- RELATED PRODUCTS  -->
                 <section>
                     <h1 class="text-2xl font-semibold mb-10 underline underline-offset-8">Sản phẩm tương tự</h1>
-                    <div class="swiper related-product-slider max-w-5xl">
+                    <div class="swiper related-product-slider max-w-6xl">
                         <div class="swiper-wrapper">
                             <?php foreach (get_related_product($product['cate_id']) as $product) : extract($product); ?>
                                 <div class="swiper-slide">
@@ -117,22 +117,29 @@ if (isset($_GET['id'])) {
                 </section>
 
                 <!-- comments  -->
-                <section class="border-1 border-zinc-500 rounded my-[30px] p-5">
+                <section class="max-w-5xl mb-10">
                     <h5 class="font-semibold text-xl mb-10"><i class="bi bi-chat-left-dots"></i> <span>Bình luận</span></h5>
+
                     <!-- comment list -->
-                    <div class="w-full flex flex-col gap-6 max-h-96 overflow-y-scroll hidden-scrollbar" id="comment-box">
+                    <div class="flex flex-col gap-6 max-h-80 overflow-y-auto hidden-scrollbar" id="comment-box">
+                        <!-- comment list-->
                         <?php foreach ($comments as $cmt) : extract($cmt) ?>
-                            <div class="flex flex-col gap-5">
+                            <div id="<?= $pr_comment_id ?>">
                                 <!-- comment -->
-                                <div class="card card-side bg-zinc-100 items-start">
-                                    <figure class="flex items-center gap-3 p-2">
-                                        <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="w-[3rem] h-[3rem] rounded-full object-contain center" />
+                                <div class="comment card card-side bg-zinc-300 items-start w-auto mb-3" id="">
+                                    <figure class="p-2">
+                                        <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="w-[3rem] h-[3rem] rounded-full object-cover center" />
                                     </figure>
                                     <div class="card-body justify-start py-2">
                                         <h2 class="card-title text-lg"><?php echo $username ?></h2>
                                         <small><?php echo $comment_date ?></small>
                                         <p><?php echo $cmt_content ?></p>
-                                        <div class="card-actions justify-end">
+                                        <div class="card-actions justify-end items-center">
+                                            <label class="swap">
+                                                <input type="checkbox" />
+                                                <div class="swap-on btn btn-sm btn-ghost normal-case" onclick="showReps(document.getElementById('<?= $pr_comment_id ?>'))">Ẩn</div>
+                                                <div class="swap-off btn btn-sm btn-ghost normal-case" onclick="hiddenReps(document.getElementById('<?= $pr_comment_id ?>'))"><?php echo get_reply_counter($pr_comment_id) . " phản hồi" ?></div>
+                                            </label>
                                             <input type="hidden" value=<?= $pr_comment_id ?>>
                                             <button onclick='reply("<?= $username ?>","<?= $pr_comment_id ?>")' class="btn btn-sm btn-ghost normal-case">
                                                 Phản hồi <i class="bi bi-reply px-1"></i>
@@ -142,18 +149,18 @@ if (isset($_GET['id'])) {
                                 </div>
                                 <!-- reply -->
                                 <?php
-                                $replies = get_all_rep_comment($pr_comment_id);
+                                $replies = get_product_reply_comments($pr_comment_id);
                                 if (!empty($replies)) :
                                     foreach ($replies as $reply) : extract($reply)
                                 ?>
-                                        <div class="card card-side bg-zinc-100 items-start ml-10">
-                                            <figure class="flex items-center gap-3 p-2">
-                                                <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="w-[3rem] h-[3rem] rounded-full object-contain center" />
+                                        <div class="reply card card-side items-start ml-10 mb-2 bg-gray-200 hidden">
+                                            <figure class="p-2">
+                                                <img src="<?php echo ROOT_AVATAR . $avatar ?>" class="w-[3rem] h-[3rem] rounded-full object-cover center" />
                                             </figure>
                                             <div class="card-body justify-start py-2">
                                                 <h2 class="card-title text-lg"><?php echo $username ?></h2>
                                                 <small><?php echo $comment_date ?></small>
-                                                <p><?php echo $cmt_content ?></p>
+                                                <p><?php echo $content ?></p>
                                                 <div class="card-actions justify-end">
                                                     <input type="hidden" value=<?= $pr_comment_id ?>>
                                                     <button onclick='reply("<?= $username ?>","<?= $pr_comment_id ?>")' class="btn btn-sm btn-ghost normal-case">
@@ -170,21 +177,25 @@ if (isset($_GET['id'])) {
                         <?php endforeach; ?>
                         <!-- show comment reply -->
                     </div>
+
                     <!-- post comment form -->
                     <form action="" method="POST" onsubmit="postCommentOnProduct(this,event)">
-                        <div class="flex justify-start gap-[30px] items-center py-6 px-5">
-                            <img src="<?php echo isset($_COOKIE['auth']) ? ROOT_AVATAR . $auth['avatar'] : ROOT_AVATAR . 'default.png' ?>" class="w-[4rem] h-[4rem] rounded-full object-contain" />
-                            <div class="border px-3 py-2 flex justify-between items-center w-full rounded-md">
-                                <input type="hidden" name="user" value="<?php echo $auth['id'] ?>">
-                                <input type="hidden" name="avatar" value="<?php echo ROOT_AVATAR . $auth['avatar'] ?>">
-                                <input type="hidden" name="username" value="<?php echo $auth['name'] ?>">
-                                <input type="hidden" name="product_id" value="<?php echo $_GET['id'] ?>">
-                                <input type="hidden" name="comment_id" id="comment-id">
-                                <input type="hidden" name="REQUEST" id="req">
-                                <input type="text" name="content" id="comment-input" placeholder="Nhập bình luận ..." class="input input-sm w-full border-none focus:outline-none">
-                                <button type="submit" name="create_comment">
-                                    <i class="bi bi-send"></i>
-                                </button>
+                        <div class="flex justify-start gap-[30px] items-center py-6 px-5 h-32 relative">
+                            <img src="<?php echo isset($_COOKIE['auth']) ? ROOT_AVATAR . $auth['avatar'] : ROOT_AVATAR . 'default.png' ?>" class="w-[4rem] h-[4rem] rounded-full object-cover" />
+                            <div class="w-full ">
+                                <div class="border px-3 py-2 flex justify-between items-center w-full rounded-md">
+                                    <input type="hidden" name="user" value="<?php echo $auth['id'] ?>">
+                                    <input type="hidden" name="avatar" value="<?php echo ROOT_AVATAR . $auth['avatar'] ?>">
+                                    <input type="hidden" name="username" value="<?php echo $auth['name'] ?>">
+                                    <input type="hidden" name="product_id" value="<?php echo $_GET['id'] ?>">
+                                    <input type="hidden" name="comment_id" id="comment-id">
+                                    <input type="hidden" name="REQUEST" id="req">
+                                    <input type="text" name="content" id="comment-input" placeholder="Nhập bình luận ..." class="input input-sm w-full border-none focus:outline-none">
+                                    <button type="submit" name="create_comment">
+                                        <i class="bi bi-send"></i>
+                                    </button>
+                                </div>
+                                <button type="button" onclick="cancelReply(this)" class="btn btn-sm btn-ghost hidden absolute bottom-0" id="cancel-rep__btn"><i class="bi bi-x"></i> Hủy</button>
                             </div>
                         </div>
                     </form>
@@ -212,6 +223,19 @@ if (isset($_GET['id'])) {
             if (value < 1) value = 1;
             target.value = value;
         };
+
+
+        const comments = document.querySelectorAll(".comment")
+        comments.forEach(cmt => {
+            const showRepBtn = cmt.querySelector(".swap-on")
+            const hiddenRepBtn = cmt.querySelector(".swap-off")
+            showRepBtn.onclick = function() {
+                showReps(cmt)
+            }
+            hiddenRepBtn.onclick = function() {
+                hiddenReps(cmt)
+            }
+        })
     </script>
 </body>
 
