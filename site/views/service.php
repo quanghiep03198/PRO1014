@@ -43,8 +43,14 @@
     <script src="js/handle-userdata.js"></script>
     <script src="js/pagination.js"></script>
     <script>
-        const tablePagination = new Pagination(".table-row", 5, "table")
-        const showPage = tablePagination.showPage.bind(this)
+        const tablePagination = new Pagination({
+            selector: ".table-row",
+            perPage: 5,
+            style: "table"
+        })
+        const {
+            showPage
+        } = tablePagination
         showPage(1)
     </script>
 </body>
