@@ -15,7 +15,19 @@ const place_order = async (form, event) => {
 	if (isPhoneNumber(phone) == false) return;
 
 	// validata -> ok
-	const response = await sendRequest("/site/controllers/place_order.php", {
+	// loading present
+
+	Swal.fire({
+		title: "Đang xử lý đơn hàng!",
+		html: "Vui lòng chờ trong giây lát ...",
+		allowEscapeKey: false,
+		showConfirmButton: false,
+		showLoaderOnConfirm: true,
+		willOpen: () => {
+			Swal.showLoading();
+		},
+	});
+	await sendRequest("/site/controllers/place_order.php", {
 		customer_name: customerName.value,
 		phone: phone.value,
 		email: email.value,
@@ -24,23 +36,19 @@ const place_order = async (form, event) => {
 		order_notice: orderNotice.value,
 		cart_items: cartItems,
 	});
-	// loading present
+	await Swal.fire({
+		title: "Đặt hàng thành công!",
+		icon: "success",
+		button: true,
+	}).then(() => {
+		location.reload();
+	});
 
 	// reset số lượng sản phẩm trong giỏ hàng
 	await localStorage.setItem("cart", JSON.stringify([]));
 	await countItems();
 
 	// nếu có response trả về (dữ liệu được gửi đi thành công)
-	if (response != "") {
-		await swal({
-			title: "Đặt hàng thành công!",
-			text: "Check email để nhận mã đơn hàng!",
-			icon: "success",
-			button: "Ok!",
-		}).then(() => {
-			window.location = "?page=product";
-		});
-	}
 };
 
 // send feedback về sản phẩm
