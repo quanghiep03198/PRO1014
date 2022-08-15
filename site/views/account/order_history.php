@@ -58,8 +58,8 @@
                                     </td>
                                     <td>
                                         <?php if ($stt_id == 1) : ?>
-                                            <form action="" method="post" onsubmit="return confirm('Bạn thực sự muốn hủy đơn hàng này chứ ?')">
-                                                <input type="hidden" name="order_id">
+                                            <form action="" method="post" onsubmit="confirmCancelOrder(event)">
+                                                <input type="hidden" name="order_id" value=<?= $id ?>>
                                                 <button type="submit" name="cancel_order" class="btn btn-sm hover:btn-error !capitalize">
                                                     <i class="bi bi-x"></i>
                                                     <span class="indent-1">Hủy đơn</span>
@@ -80,11 +80,11 @@
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
     <script src="js/common.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/handle-userdata.js"></script>
     <script src="js/handle-order.js"></script>
     <script>
         const ordersStatus = document.querySelectorAll(".order-stt")
-        console.log(ordersStatus);
         const defineStatus = (stt) => {
             if (stt.dataset.status == 1)
                 stt.classList.add("text-warning")
@@ -108,13 +108,39 @@
                     stt.parentElement.classList.remove("hidden");
             })
         }
+        const confirmCancelOrder = async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const order_id = form['order_id']
+
+            Swal.fire({
+                text: 'Bạn muốn chắc chắn muốn hủy đơn hàng này?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Tôi đồng ý!',
+                cancelButtonText: "Bỏ"
+            }).then((result) => {
+                if (result.isConfirmed)
+                    return sendRequest("/site/controllers/cancel_order.php", {
+                        order_id: order_id.value
+                    })
+
+            }).then((res) => {
+                console.log(res);
+            }).then(() => {
+                Swal.fire({
+                    title: "Đơn hàng đã được hủy!",
+                    icon: "success",
+                    timer: 2000
+                })
+            }).then(() => {
+                location.reload();
+            })
+
+        }
     </script>
 </body>
 
 </html>
-<?php
-if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
-    $cancel_stt_id = select_one_value("SELECT id from order_status WHERE stt_name LIKE '%đã hủy%'");
-    $sql = "UPDATE orders SET order_stt_id = '{$cancel_stt_id}' WHERE orders.id = {$_POST['order_id']}";
-    execute_query($sql);
-}
