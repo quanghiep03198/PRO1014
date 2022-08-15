@@ -13,27 +13,53 @@
 </head>
 
 <body>
-    <div class="flex justify-start items-stretch gap-5">
+    <div class="flex sm:flex-col-reverse justify-start items-stretch ">
         <!-- import sidebar -->
         <?php include_once "./admin/components/sidebar.php" ?>
-        <div>
-            <h1 class="text-primary text-3xl font-medium">Tạo mới bài viết</h1>
-            <textarea>
-            Welcome to TinyMCE!
-          </textarea>
-            <!-- code ở đây -->
-        </div>
+        <section class="w-full h-screen overflow-y-scroll">
+            <div class="bg-primary px-[50px] py-[30px] flex justify-between items-center">
+                <h3 class="sm:text-xl md:text-2xl lg:text-3xl text-white">Danh sách bài viết</h3>
+                <div class="dropdown dropdown-end ">
+                    <label tabindex="0" class="text-white text-xl"><i class="bi bi-list"></i></label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80">
+                        <li><a href="?page=post-list">Danh sách bài viết</a></li>
+                        <li><a href="?page=post_cate-list">Danh mục bài viết</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="container mx-auto">
+                <div class="flex justify-end items-center my-5">
+                    <a href="?page=post-create" class="btn btn-ghost "><i class="bi bi-plus text-2xl"></i><span>Thêm mới</span></a>
+                </div>
+                <!-- danh sách bài viết -->
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <?php foreach (get_all_posts() as $post) : extract($post) ?>
+                        <div class="card bg-base-100 border w-96">
+                            <div class="absolute top-1 right-2 dropdown dropdown-end z-50">
+                                <label tabindex="0" class="text-white text-xl"><i class="bi bi-three-dots"></i></label>
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li><a href="?page=post-update&id=<?= $id ?>">Sửa</a></li>
+                                    <li><a href="/admin/controllers/spost.php?id=<?= $id ?>">Xóa</a></li>
+                                </ul>
+                            </div>
+                            <img src=<?php echo ROOT_POST . $img ?> class="w-full h-60 object-cover">
+                            <div class="card-body">
+                                <h2 class="card-title"><?php echo $title ?></h2>
+                                <p class="mb-5 text-ellipsis overflow-hidden"><?php echo $short_desc ?></p>
+                                <div class="card-actions justify-between">
+                                    <span class="font-medium"><?php echo $create_date ?></span>
+                                    <span>Đăng bởi: <span class="font-medium"><?php echo $author ?></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
     </div>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-            toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-            toolbar_mode: 'floating',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-        });
-    </script>
 </body>
 
 </html>

@@ -1,27 +1,51 @@
 <?php
 include_once '../../lib/db_execute.php';
+include_once '../../site/models/comment.php';
 
-function post_comment()
-{
-
-    $product = mysqli_real_escape_string(get_db_connection(), $_POST['product_id']);
-    $user = mysqli_real_escape_string(get_db_connection(), $_POST['user']);
-    $username = mysqli_real_escape_string(get_db_connection(), $_POST['username']);
-    $avatar = mysqli_real_escape_string(get_db_connection(), $_POST['avatar']);
-    $content    = mysqli_real_escape_string(get_db_connection(), $_POST['content']);
-    $create_date = mysqli_real_escape_string(get_db_connection(), date("Y-m-d"));
-    $comment_id = execute_query("INSERT INTO product_comment (user_id,product_id,cmt_content,comment_date) 
-                                VALUE ('{$user}',{$product},'{$content}',DATE(NOW()))");
-    $response =   json_encode([
-        "user" => $user,
-        "username" => $username,
-        "avatar" => $avatar,
-        "content" => $content,
-        "create_date" =>   $create_date,
-        "comment_id" => $comment_id,
-        "product_id" => $product
-    ]);
-    echo $response;
+$json = file_get_contents("php://input");
+$data = json_decode($json, true);
+/**
+ * bình luận và phản hồi bình luận về sản phẩm
+ */
+if (!array_key_exists("req", $data) && array_key_exists("productId", $data)) {
+    extract($data);
+    $commentId = execute_query("INSERT INTO product_comment (user_id,product_id,cmt_content,comment_date) 
+                                VALUES ('{$user}',{$product},'{$content}',DATE(NOW()))");
+    $data['commentId'] = $commentId;
+    $data['posted_date'] = date('Y-m-d');
+    $data['rep_counter'] = get_reply_counter($commentId);
+    echo json_encode($data);
 }
-if (isset($_POST['REQUEST']) && $_POST['REQUEST'] == 'POST')
-    post_comment();
+
+if (array_key_exists("req", $data) && array_key_exists("productId", $data)) {
+    extract($data);
+    execute_query(
+        "INSERT INTO product_comment_reply (user_id, content, rep_date, cmt_id) VALUES ({$user}, '{$content}', DATE(NOW()), {$commentId})"
+    );
+    $data['posted_date'] = date('Y-m-d');
+    $data['rep_counter'] = get_reply_counter($commentId);
+
+    echo json_encode($data);
+}
+/**
+ * bình luận và phản hồi bình luận về bài viết
+ */
+if (!array_key_exists("req", $data) && array_key_exists("postId", $data)) {
+    extract($data);
+    $commentId = execute_query("INSERT INTO post_comment (user_id,post_id,content,posted_date) 
+                    VALUES ({$user},{$postId},'{$content}',DATE(NOW()))");
+    $data['posted_date'] = date('Y-m-d');
+    $data['commentId'] = $commentId;
+    $data['rep_counter'] = get_post_reply_counter($commentId);
+    echo json_encode($data);
+}
+
+if (array_key_exists("req", $data) && array_key_exists("postId", $data)) {
+    extract($data);
+    execute_query(
+        "INSERT INTO post_comment_reply (user_id, content, rep_date, cmt_id) VALUES ({$user}, '{$content}', DATE(NOW()), {$commentId})"
+    );
+    $data['posted_date'] = date('Y-m-d');
+    $data['rep_counter'] = get_post_reply_counter($commentId);
+    echo json_encode($data);
+}

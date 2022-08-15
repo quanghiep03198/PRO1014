@@ -11,14 +11,17 @@
     <title>Xác nhận đặt hàng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/main.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
+    <link rel="stylesheet" href="styles/swal.css">
 
 </head>
+<style>
+
+</style>
 
 <body>
     <?php include_once 'site/components/header.php';  ?>
     <main class="px-5">
-        <form action="?page=place_order" method="POST" class="max-w-3xl mx-auto" onsubmit="return handleCheckoutError(this)">
+        <form action="" method="POST" class="max-w-3xl mx-auto" onsubmit="place_order(this,event)">
             <h2 class="sm:text-2xl lg:text-3xl font-semibold text-primary mb-5">1. Thông tin nhận hàng</h2>
             <div class="flex flex-col gap-6">
                 <div class="form-group">
@@ -42,6 +45,10 @@
                     <small class="text-base text-error error-message font-semibold"></small>
                 </div>
                 <div class="form-group">
+                    <label for="" class="label">Ghi chú</label>
+                    <input type="text" name="order_notice" data-name="ghi chú" class="input input-bordered w-full focus:outline-none">
+                </div>
+                <div class="form-group">
                     <h2 class="sm:text-2xl lg:text-3xl font-semibold text-primary mb-5">2. Phương thức giao hàng</h2>
                     <label for="" class="label">Phương thức giao hàng</label>
                     <select class="select input-bordered w-full focus:outline-none" data-name="phương thức giao hàng" name="shipping_method">
@@ -56,14 +63,21 @@
                     <button type="submit" name="checkout" id="place-order" class="btn btn-wide btn-lg hover:btn-primary">Đặt hàng</button>
                 </div>
             </div>
-
         </form>
 
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="site/js/common.js"></script>
-    <script src="site/js/validate.js"></script>
-    <script src="site/js/handle-userdata.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/handle-userdata.js"></script>
+    <script src="js/handle-order.js"></script>
+    <script type="text/javascript">
+        const cartItems = JSON.parse(localStorage.getItem("cart"));
+        if (cartItems.length == 0) {
+            window.location = "?page=product";
+        }
+    </script>
 </body>
 
 </html>

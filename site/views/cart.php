@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/swal.css">
 </head>
 
 <body>
@@ -54,7 +55,7 @@
 						</div>
 						<p class="text-[14px] bb-[30px] ">Số tiền này chưa bao gồm phí vận chuyển</p>
 					</div>
-					<form action="?page=payment_selection" method="POST" id="cart-form" onsubmit="return checkEmptyCart()">
+					<form action="?page=payment_selection" method="POST" id="cart-form" onsubmit="checkEmptyCart(event)">
 						<button type="submit" name="check-out" id="check-out-submit" class="btn btn-block btn-lg hover:btn-active hover:btn-primary">Đặt hàng</button>
 					</form>
 				</div>
@@ -62,8 +63,12 @@
 		</div>
 	</main>
 	<?php include_once 'site/components/footer.php'; ?>
-	<script src="site/js/common.js"></script>
-	<script src="site/js/handle-cart.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/validate.js"></script>
+	<script src="js/handle-userdata.js"></script>
+	<script src="js/handle-cart.js"></script>
 	<script>
 		if (cartList) renderCart(JSON.parse(localStorage.getItem("cart")));
 	</script>

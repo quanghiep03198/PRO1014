@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tra cứu bảo hành sản phẩm</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/swal.css">
+
 </head>
 
 <body>
@@ -23,31 +24,44 @@
 
             <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
-                    <form action="" method="post" class="flex flex-col gap-5">
+                    <form action="" method="POST" class="flex flex-col gap-5">
                         <div class="form-group">
-                            <label class="text-xl" for="">Số điện thoại/email mua hàng</label>
-
-                            <input type="text" name="customer_infor" id="" class="input input-bordered  w-full">
+                            <label class="text-xl" for="">Email</label>
+                            <input type="text" data-name="email" name="email" id="" class="input input-bordered  w-full">
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
 
                         <div class="form-group">
                             <label class="text-xl" for="">Mã đơn hàng</label>
-                            <input type="text" name="order_key_id" id="" class="input input-bordered w-full">
+                            <input type="text" data-name="mã đơn hàng" name="order_key_id" id="" class="input input-bordered w-full">
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
 
-                        <button type="submit " class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]">Tra cứu</button>
+                        <!-- <button type="submit" name="search_warranty" class="btn min-h-[45px] min-w-[180px] bg-[#4A4A4A] mt-[30px]"></button> -->
+                        <!-- The button to open modal -->
+                        <label class="btn hover:btn-primary" onclick="handleSearchWarranty(this)">Tra cứu</label>
+
+                        <!-- Put this part before </body> tag -->
+                        <input type="checkbox" id="warranty-info" class="modal-toggle" />
+                        <div class="modal">
+                            <div class="modal-box relative !max-w-[1024px]">
+                                <label for="warranty-info" class="btn btn-sm btn-circle absolute right-2 top-2" id="close-modal__btn">✕</label>
+                                <h1 class="text-2xl font-bold text-center mb-10">Chi tiết đơn hàng</h1>
+                                <div id="order-items-list" class="flex sm:flex-col items-center max-w-5xl"></div>
+                            </div>
+                        </div>
                     </form>
                 </div>
-                <div class="w-full h-full object-cover"><img src="/img/banners/warranty-bg.png" class="max-w-lg " /></div>
+                <div class="w-full h-full object-cover"><img src="/img/warranty-banner.png" class="max-w-lg " /></div>
             </div>
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="site/js/common.js"></script>
-    <script src="site/js/validate.js"></script>
-    <script src="site/js/handle-userdata.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/handle-userdata.js"></script>
 
 </body>
 

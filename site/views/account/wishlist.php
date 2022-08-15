@@ -23,7 +23,7 @@ $wish_list_items = get_wishList_items();
             <?php include_once "site/components/account-sidebar.php" ?>
             <!-- main interface -->
             <div class="overflow-x-auto bg-white rounded-box shadow-2xl">
-                <div class="overflow-y-scroll hidden-scrollbar h-screen">
+                <div class="max-h-[1024px] overflow-y-scroll hidden-scrollbar">
                     <table class="table w-full table-compact">
                         <!-- head -->
 
@@ -94,10 +94,10 @@ $wish_list_items = get_wishList_items();
     <!-- import footer component -->
     <?php include_once "site/components/footer.php" ?>
     <!--  -->
-    <script src="site/js/common.js"></script>
-    <script src="site/js/handle-cart.js"></script>
-    <script src="site/js/handle-post-request.js"></script>
-    <script src="site/js/handle-userdata.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/handle-cart.js"></script>
+    <script src="js/handle-userdata.js"></script>
+    <script src="js/handle-wishlist.js"></script>
 
 </body>
 

@@ -11,7 +11,7 @@
                 <div class="form-control rounded-none">
                     <div class="input-group justify-between px-3 border-b">
                         <input type="hidden" name="page" value="product">
-                        <input type="text" name="kw" placeholder="Tìm kiếm sản phẩm..." class="input focus:outline-none" />
+                        <input type="text" name="kw" placeholder="Tìm kiếm sản phẩm..." class="input focus:outline-none bg-white" />
                         <button type="submit"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
@@ -20,8 +20,8 @@
             <div class="collapse-title max-w-full text-xl border-b">
                 <a href=<?php echo "?page=product" ?>>Tất cả sản phẩm</a>
             </div>
-            <?php foreach (get_all_categories() as $cate) :  if ($cate['id'] == 5) continue  ?>
-                <div tabindex="0" class="collapse collapse-arrow border-b bg-base-100 ">
+            <?php foreach (get_all_categories() as $cate) :   if (strtolower($cate['name'])  == 'thẻ psn')  continue; ?>
+                <div tabindex="0" class="collapse collapse-arrow border-b bg-white ">
                     <div class="collapse-title text-xl">
                         <?php echo $cate['name'] ?>
                     </div>
@@ -35,11 +35,11 @@
                         </ul>
                     </div>
                 </div>
-
-            <?php endforeach ?>
-            <?php $lastCate = get_all_categories()[4] ?>
+            <?php
+            endforeach ?>
+            <?php if (in_array(strStandardize($cate['name']), ['thẻ psn'])) ?>
             <div class="collapse-title max-w-full text-xl border-b">
-                <a href=<?php echo "?page=product&cate={$lastCate['id']}" ?>><?php echo $cate['name'] ?></a>
+                <a href=<?php echo "?page=product&cate={$cate['id']}" ?>><?php echo $cate['name'] ?></a>
             </div>
         </div>
     </div>

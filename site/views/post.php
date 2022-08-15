@@ -1,3 +1,18 @@
+<?php
+if (!isset($_GET['cate']) && !isset($_GET['kw'])) {
+    $posts = get_all_posts(0, 6);
+    $heading = "Tin tức mới";
+}
+if (isset($_GET['cate'])) {
+    $posts = get_posts_groupby_cate($_GET['cate']);
+    $heading = count($posts) > 0 ? $posts[0]['cate_name'] : "Danh mục hiện chưa có bài viết nào!";
+}
+
+if (isset($_GET['kw'])) {
+    $posts = get_posts_by_kw($_GET['kw']);
+    $heading = count($posts) > 0 ? $posts[0]['cate_name'] : "Không có kết quả nào phù hợp!";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,62 +22,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tin tức</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/swal.css">
 </head>
 <style>
+    .swiper-pagination-bullet {
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid white;
+        background-color: #570df8;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #570df8;
+    }
 </style>
 
 <body class="relative">
+    <!-- import header from component -->
     <?php include_once 'site/components/header.php';  ?>
-    <!-- HEADER END  -->
-    <main class="container mx-auto">
-
+    <!--  -->
+    <main class="container mx-auto py-10">
         <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[2.5fr,1fr] gap-10">
             <!-- main interface -->
-            <div class="container">
+            <div class="container mx-auto">
                 <!-- slider -->
-                <div class="relative">
-                    <div class="carousel w-full">
-                        <?php for ($i = 1; $i <= 4; $i++) {
-                            include("site/components/post-banner.php");
-                        } ?>
+                <div class="swiper post-slider max-w-4xl">
+                    <div class="swiper-wrapper">
+                        <?php foreach (get_new_posts(0, 3) as $post) : extract($post); ?>
+                            <div class="swiper-slide h-96">
+                                <div class="hero w-full h-full !place-items-stretch" style="background-image: url(<?php echo ROOT_POST . $img ?>)">
+                                    <div class="hero-overlay bg-opacity-60"></div>
+                                    <div class="hero-content !justify-start text-left text-neutral-content px-8">
+                                        <div class="max-w-md">
+                                            <h1 class="mb-5 text-2xl font-bold"><?php echo  $title ?></h1>
+                                            <p class="mb-5"><?php echo $short_desc ?></p>
+                                            <a href="?page=post_detail&id=<?= $id ?>" class="btn btn-primary">Đọc tiếp</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                    <div class="absolute bottom-4 flex justify-center w-full py-2 gap-2">
-                        <?php for ($i = 1; $i <= 4; $i++) { ?>
-                            <a href=<?= "#item{$i}" ?> class="pagination-button border-2 w-4 h-4 rounded-full " onclick="visited(this)"></a>
-                        <?php  } ?>
-                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
+
                 <!-- tin tức mới  -->
                 <article>
-                    <h2 class="container text-center text-[40px] font-[600] underline pb-[50px] pt-[50px] " id="title">TIN TỨC MỚI</h2>
+                    <h2 class="text-center sm:text-2xl md:text-3xl lg:text-4xl font-bold my-10" id="title"><?= $heading ?></h2>
                     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch gap-5">
-                        <?php for ($i = 0; $i < 9; $i++) {
+                        <?php
+                        foreach ($posts as $post) :
+                            extract($post);
                             include "site/components/post-card.php";
-                        } ?>
+                        endforeach;
+                        ?>
                     </div>
                     <div class="pagination btn-group center p-10"></div>
+
                 </article>
             </div>
-            <!-- sidebar -->
+            <!-- import sidebar -->
             <?php include_once "site/components/post-sidebar.php" ?>
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="site/js/common.js"></script>
-    <script>
-        const paginationBtns = $(".pagination-button")
 
-        function visited(button) {
-            paginationBtns.forEach((btn) => {
-                btn.classList.remove("btn-primary");
-            })
-            button.classList.add("btn-primary")
-        }
-        paginationBtns[0].classList.add("btn-primary");
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/handle-userdata.js"></script>
+    <script src="js/product-pagination.js"></script>
+    <script src="js/carousel.js"></script>
+    <script>
+        // const paginationBtns = $(".pagination-button")
+
+        // function visited(button) {
+        //     paginationBtns.forEach((btn) => {
+        //         btn.classList.remove("btn-primary");
+        //     })
+        //     button.classList.add("btn-primary")
+        // }
+        // paginationBtns[0].classList.add("btn-primary");
     </script>
-    <script src="site/js/product-pagination.js"></script>
 </body>
 
-</html;
+</html>

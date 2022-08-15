@@ -2,7 +2,7 @@
     <div class="max-w-[90%] mx-auto navbar justify-between items-center">
         <!-- logo -->
         <div class="navbar-start">
-            <a href=""><img class="sm:max-w-[7rem] lg:max-w-[10rem]" src=<?= ROOT_SITE . 'logo.png' ?> alt=""></a>
+            <a href="?page=home"><img class="sm:max-w-[7rem] lg:max-w-[10rem]" src=<?= ROOT_SITE . 'logo.png' ?> alt=""></a>
         </div>
         <!-- nav-link  -->
         <div class="navbar-center hidden lg:flex">
@@ -11,12 +11,12 @@
                 <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800"><a href="?page=product">Cửa hàng</a></li>
                 <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800 dropdown">
                     <label tabindex="0" for="">Dịch vụ</label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-white rounded-box w-52">
                         <li class="text-sm"><a href="?page=service">Bảng giá dịch vụ</a></li>
                         <li class="text-sm"><a href="?page=warranty">Tra cứu bảo hành</a></li>
                     </ul>
                 </li>
-                <li class="h-10 text-[20px] font-[600] hover:border-b-4 hover:border-gray-800"><a href="?page=post">Tin tức</a></li>
+                <li class="h-10 text-xl font-medium hover:border-b-4 hover:border-gray-800"><a href="?page=post">Tin tức</a></li>
             </ul>
         </div>
 
@@ -32,9 +32,9 @@
                     <!-- submenu -->
                     <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-[300px]">
                         <li>
-                            <a href="?page=account-view_profile" class="justify-between">Tài khoản <span class="badge badge-lg"><?= $_SESSION['user_name'] ?></span></a>
+                            <a href="?page=account-view_profile" class="justify-between">Tài khoản <span class="badge badge-lg"><?= $auth['name'] ?></span></a>
                         </li>
-                        <li><a href="./logout.php">Đăng xuất</a></li>
+                        <li><a href="" onclick="logout()">Đăng xuất</a> </li>
                     </ul>
                 </div>
                 <a href="?page=account-wishlist" class="text-xl"><i class="bi bi-heart"></i></a>
@@ -47,26 +47,29 @@
                 <div class="modal">
                     <div class="modal-box relative">
                         <label for="my-modal-3" class="btn btn-circle btn-ghost absolute right-2 top-2">✕</label>
-                        <form action="" method="post" class="flex flex-col gap-5">
+                        <form action="" method="POST" class="flex flex-col gap-5" onsubmit="handleLoginError(this,event)">
                             <h1 class="text-center text-3xl font-semibold">Đăng nhập</h1>
-                            <div class="form-group">
+                            <div class="form-control">
                                 <label for="">Tài khoản</label>
-                                <input class="input input-bordered w-full" type="text" name="account" id="">
+                                <input class="input input-bordered w-full" type="text" name="account" data-name="tài khoản">
                                 <small class="text-base text-error error-message font-semibold"></small>
                             </div>
-                            <div class="form-group">
+                            <div class="form-control">
                                 <label for="">Mật khẩu</label>
-                                <input class="input input-bordered w-full" type="password" name="password" id="">
+                                <input class="input input-bordered w-full" type="password" name="password" data-name="mật khẩu">
                                 <small class="text-base text-error error-message font-semibold"></small>
                             </div>
-                            <div class="form-group flex justify-between items-center">
+                            <div class="form-control">
                                 <label class="label cursor-pointer justify-start gap-5">
                                     <span class="">Lưu tài khoản</span>
-                                    <input type="checkbox" class="toggle toggle-primary" checked />
+                                    <input type="checkbox" class="toggle toggle-primary" name="save-account__checkbox" />
                                 </label>
-                                <span>Chưa có tài khoản? <a href="/register.php" class="font-medium hover:link hover:text-primary">Đăng ký</a></span>
                             </div>
-                            <div class="form-group max-w-full mx-auto">
+                            <div class="flex justify-between items-center gap-5">
+                                <span>Chưa có tài khoản? <a href="/register.php" class="font-medium hover:link hover:text-primary">Đăng ký</a></span>
+                                <span><a href="/recover_password.php" class="font-medium hover:link hover:text-primary">Quên mật khẩu</a></span>
+                            </div>
+                            <div class="form-control max-w-full mx-auto">
                                 <button type="submit" name="login-submit" class="btn hover:btn-primary">Đăng nhập</button>
                             </div>
                         </form>
@@ -84,7 +87,7 @@
                     <li><a href="?page=home">Trang chủ</a></li>
                     <li><a href="?page=product">Cửa hàng</a></li>
                     <li><a href="?page=service">Dịch vụ</a></li>
-                    <li><a href="?page=news">Tin tức</a></li>
+                    <li><a href="?page=post">Tin tức</a></li>
                 </ul>
             </div>
         </div>

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <!-- main style -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/swal.css">
 
 </head>
 
@@ -112,9 +113,9 @@
             <div class="grid sm:grid-cols-1 lg:grid-cols-[2fr,1fr] pb-[50px] gap-[50px]">
                 <!-- lastest news -->
                 <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 items-stretch gap-5 w-full">
-                    <?php for ($i = 0; $i < 3; $i++) {
+                    <?php foreach (get_new_posts(0, 3) as $post) : extract($post);
                         include "site/components/post-card.php";
-                    } ?>
+                    endforeach; ?>
                 </div>
 
                 <!-- hot news -->
@@ -124,7 +125,6 @@
                         <?php for ($i = 0; $i < 3; $i++) {
                             include "site/components/post-sidecard.php";
                         } ?>
-
                     </div>
                 </div>
             </div>
@@ -133,11 +133,15 @@
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="site/js/common.js"></script>
-    <script src="site/js/handle-cart.js"></script>
-    <script src="site/js/handle-post-request.js"></script>
-    <script src="site/js/carousel.js"></script>
-    <script type="text/javascript">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="js/common.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/handle-cart.js"></script>
+    <script src="js/handle-userdata.js"></script>
+    <script src="js/handle-wishlist.js"></script>
+    <script src="js/carousel.js"></script>
+    <script>
         const panels = $('.tab-panel')
         const tabs = $('.tab');
 
