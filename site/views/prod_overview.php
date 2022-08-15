@@ -49,25 +49,24 @@ if (isset($_GET['id'])) {
                             <span class="font-medium text-2xl">Kho hàng : <span class="font-normal"><?php echo $stock > 0 ? "Còn hàng" : "Hết hàng" ?></span></span>
 
                             <div class="flex justify-start items-center gap-8 text-capitalize">
-                                <form action="?page=cart" method="POST">
+                                <form method="POST">
                                     <div class="flex items-center gap-0 w-full rounded-lg relative bg-transparent my-5">
                                         <label for="" class="text-xl font-medium pr-5">Số lượng:</label>
-                                        <button type="button" onclick="changeQty(this,-1)" data-action="decrement" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">-</button>
+                                        <button type="button" onclick="updateQty(this,-1)" data-action="decrement" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">-</button>
                                         <input type="number" name="qty" min=1 value=1 class="quantity outline-none focus:outline-none text-center w-10 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number"></input>
                                         <button type="button" onclick="updateQty(this,1)" data-action="increment" class="btn btn-ghost btn-square btn-md text-2xl align-middle cursor-pointer">+</button>
                                     </div>
-                                    <!-- product information form -->
-                                    <input type='hidden' name='product_id' value=<?= $_GET['id'] ?>>
-                                    <input type='hidden' name='product_name' value="<?php echo $prod_name ?>">
-                                    <input type='hidden' name='manu' value="<?php echo $man_name ?>">
-                                    <input type='hidden' name='price' value=<?= $price ?>>
-                                    <input type='hidden' name='stock' value=<?= $stock ?>>
-                                    <input type='hidden' name='product_img' value=<?= $image ?>>
-                                    <input type='hidden' name='qty' value=1>
-                                    <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
                                     <!-- submit action -->
                                     <div class="flex sm:flex-col items-center gap-5">
-                                        <button type='submit' onclick="addCart(this)" class='btn sm:btn-sm hover:btn-primary hover:btn-active'>
+                                        <!-- product information form -->
+                                        <input type='hidden' name='product_id' value=<?= $_GET['id'] ?>>
+                                        <input type='hidden' name='product_name' value="<?php echo $prod_name ?>">
+                                        <input type='hidden' name='manu' value="<?php echo $man_name ?>">
+                                        <input type='hidden' name='price' value=<?= $price ?>>
+                                        <input type='hidden' name='stock' value=<?= $stock ?>>
+                                        <input type='hidden' name='product_img' value=<?= $image ?>>
+                                        <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
+                                        <button type='button' actions="goToCart" onclick="addCart(this)" class='btn sm:btn-sm hover:btn-primary hover:btn-active'>
                                             <i class="bi bi-cart3 text-2xl"></i>
                                             <span class="indent-2">Mua ngay</span>
                                         </button>
@@ -100,6 +99,8 @@ if (isset($_GET['id'])) {
                     <!-- product description -->
                     <div class="max-w-full mx-auto my-5"><?= $description ?></div>
                 </section>
+
+
                 <!-- RELATED PRODUCTS  -->
                 <section>
                     <h1 class="text-2xl font-semibold mb-10 underline underline-offset-8">Sản phẩm tương tự</h1>
@@ -209,9 +210,9 @@ if (isset($_GET['id'])) {
     <script src="/js/common.js"></script>
     <script src="js/validate.js"></script>
     <script src="/js/carousel.js"></script>
-    <script src="js/handle-cart.js"></script>
     <script src="js/handle-comment.js"></script>
     <script src="js/handle-userdata.js"></script>
+    <script src="js/handle-cart.js"></script>
     <script>
         const table = document.querySelector("table")
         if (table)

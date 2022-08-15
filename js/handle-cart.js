@@ -17,8 +17,8 @@ const addCart = (button) => {
 	product.total = product.price * product.qty;
 
 	// -> nếu sản số lượng sản phẩm trong kho > 0 mới thêm vào giỏ hàng
+	const cartItems = JSON.parse(localStorage.getItem("cart"));
 	if (product.stock > 0) {
-		const cartItems = JSON.parse(localStorage.getItem("cart"));
 		const duplicatedItem = cartItems?.find((item) => item.id == product.id);
 		// -> kiểm tra sản phẩm đã có trong giỏ hàng chưa ? nếu đã tồn tại => update lại số lượng, thành tiền
 		if (duplicatedItem) {
@@ -31,10 +31,9 @@ const addCart = (button) => {
 		else {
 			cartItems.push(product);
 			localStorage.setItem("cart", JSON.stringify(cartItems));
-			console.log(product.stock);
 		}
 		if (button.hasAttribute("actions"))
-			swal({
+			Swal.fire({
 				icon: "success",
 				title: "Thêm vào giỏ hàng thành công",
 				timer: 2000,
@@ -43,7 +42,7 @@ const addCart = (button) => {
 				window.location = "?page=cart";
 			});
 		else
-			swal({
+			Swal.fire({
 				icon: "success",
 				title: "Thêm vào giỏ hàng thành công",
 				timer: 2000,
@@ -52,7 +51,7 @@ const addCart = (button) => {
 	}
 	// nếu số lượng sản phẩm trong kho = 0 -> show message cho người dùng
 	else
-		swal({
+		Swal.fire({
 			icon: "warning",
 			title: "Sản phẩm đã hết hàng",
 			button: false,
@@ -60,6 +59,7 @@ const addCart = (button) => {
 		});
 	// reset lại tổng số sản phẩm trong giỏ hàng
 	countItems();
+	console.log(cartItems);
 };
 
 const showEmptyCart = () => {
@@ -182,7 +182,7 @@ const changeQty = (btn, unitVal) => {
 	value += +unitVal;
 	if (value < 1) value = 1;
 	if (value > stock) {
-		swal({
+		Swal.fire({
 			title: "Số lượng sản phẩm trong kho hàng không đủ!",
 			icon: "warning",
 			timer: 2000,
@@ -200,8 +200,9 @@ const changeQty = (btn, unitVal) => {
 const checkEmptyCart = (event) => {
 	const cartItems = JSON.parse(localStorage.getItem("cart"));
 	if (cartItems.length == 0) {
-		swal({
-			title: "Bạn chưa có sản phẩm nào trong giỏ hàng!",
+		Swal.fire({
+			title: "Opps!",
+			text: "Bạn chưa có sản phẩm nào trong giỏ hàng!",
 			icon: "error",
 			button: false,
 			timer: 1500,

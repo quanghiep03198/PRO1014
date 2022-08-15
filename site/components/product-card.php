@@ -1,4 +1,4 @@
-<div class='product-card card px-0 w-[20rem] rounded-md relative'>
+<div class='product-card card px-0 w-[20rem] rounded-box relative shadow-xl'>
     <?php if ($discount > 0 && $stock > 0) : ?>
         <span class="badge badge-secondary badge-error !p-4 text-xl text-white absolute top-0 left-0"><?= $discount . '%' ?></span>
     <?php endif;  ?>
@@ -35,7 +35,6 @@
                 <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
                 <input type='hidden' name='total' value=<?= $price * 1 ?>>
                 <!-- product card button group -->
-                <input type="hidden" name="REQUEST" value="POST">
                 <button type='button' actions="goToCart" onclick="addCart(this)" class='flex-grow btn text-xl hover:btn-primary'><i class="bi bi-cart3"></i></button>
                 <button type="button" onclick="addCart(this)" class="flex-grow btn text-xl hover:btn-primary"><i class="bi bi-bag-plus"></i></button>
                 <button type="submit" onclick="addWishlist(this,event)" class="flex-grow btn text-xl hover:btn-primary"><i class="bi bi-heart"></i></button>
