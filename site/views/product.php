@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative h-50% .scroll-smooth">
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative h-50% ">
                     <?php
                     // lấy tất cả sản phảm
                     if (!isset($_GET['cate']) && !isset($_GET['kw'])) {
@@ -108,7 +108,8 @@
         </section>
     </main>
     <?php include_once 'site/components/footer.php'; ?>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="js/common.js"></script>
     <script src="js/validate.js"></script>
     <script src="js/handle-cart.js"></script>
@@ -118,7 +119,7 @@
     <script>
         const pagination = new Pagination({
             selector: ".card",
-            perPage: 9,
+            perPage: 6,
             style: "block"
         })
         const {

@@ -8,7 +8,7 @@ if (isset($_POST['update_avatar']) && isset($_COOKIE['auth'])) {
 }
 ?>
 <!-- sidebar -->
-<aside class="flex flex-col justify-between bg-white h-screen sticky top-0 rounded-box shadow-2xl p-5 w-auto" aria-label="Sidebar">
+<aside class="flex sm:flex-row flex-col justify-between bg-white h-screen sticky top-0 rounded-box shadow-2xl p-5 w-auto" aria-label="Sidebar">
     <nav>
         <ul class="space-y-2">
             <li>
@@ -41,7 +41,11 @@ if (isset($_POST['update_avatar']) && isset($_COOKIE['auth'])) {
     </nav>
     <form action="" enctype="multipart/form-data" method="POST" class="flex justify-start items-center gap-3">
         <div class="avatar relative">
-            <img class="max-w-[60px] h-[60px] rounded-full" id="user-image" src=<?= ROOT_AVATAR . $auth['avatar'] ?> alt="">
+            <div class="avatar online">
+                <div class="w-12 rounded-full">
+                    <img src=<?= ROOT_AVATAR . $auth['avatar'] ?> class="max-w-[80px] object-cover" id="user-image" alt="">
+                </div>
+            </div>
             <label for="avatar" class="absolute center w-full h-full rounded-full bg-black bg-opacity-50 text-white text-xl center opacity-0 hover:opacity-100 hover:duration-300">
                 <i class="bi bi-cloud-upload"></i>
             </label>

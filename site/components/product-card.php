@@ -34,6 +34,7 @@
                 <input type='hidden' name='qty' value=1>
                 <input type='hidden' name='warranty' value=<?= $warranty_time ?>>
                 <input type='hidden' name='total' value=<?= $price * 1 ?>>
+                <input type="hidden" name="REQUEST" value="POST">
                 <!-- product card button group -->
                 <button type='button' actions="goToCart" onclick="addCart(this)" class='flex-grow btn text-xl hover:btn-primary'><i class="bi bi-cart3"></i></button>
                 <button type="button" onclick="addCart(this)" class="flex-grow btn text-xl hover:btn-primary"><i class="bi bi-bag-plus"></i></button>

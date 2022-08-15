@@ -21,7 +21,7 @@
             <!-- import sidebar component -->
             <?php include_once "site/components/account-sidebar.php" ?>
             <!--  -->
-            <div class="p-5 bg-white rounded-box shadow-2xl">
+            <div class="max-h-[1024px] p-5 bg-white rounded-box shadow-2xl">
                 <h1 class="text-4xl font-normal mb-10">Thông tin cá nhân</h1>
                 <div class="flex flex-col gap-6">
                     <div class="grid grid-cols-2 border-b">

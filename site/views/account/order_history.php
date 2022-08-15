@@ -18,11 +18,11 @@
         <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[1fr,2fr] items-stretch gap-5 px-10">
             <!-- import sidebar component -->
             <?php include_once "site/components/account-sidebar.php" ?>
-            <div class="bg-white rounded-box shadow-2xl p-5">
+            <div class=" bg-white rounded-box shadow-2xl p-5">
                 <!-- user's order interface top -->
                 <div class="flex justify-between items-center mb-10">
                     <h1 class="text-3xl font-medium">Đơn hàng của bạn</h1>
-                    <select name="" id="" class="select select-lg select-bordered">
+                    <select name="" id="" class="select select-lg select-bordered" onchange="filterOrder(this)">
                         <?php foreach (get_all_order_stt() as $stt) : extract($stt) ?>
                             <option value=<?php echo $id ?>> <span><?= $stt_name ?></span> </option>
                         <?php endforeach; ?>
@@ -52,7 +52,7 @@
                                     <td><?php echo $create_date  ?></td>
                                     <td><?php echo $payment_method ?></td>
                                     <td><?php echo $total_amount  . "₫" ?></td>
-                                    <td data-status="<?php echo $stt_id ?>" class="order-stt">
+                                    <td data-status="<?php echo $stt_id ?>" class="order-stt font-medium">
                                         <span><?= $stt_icon ?></span>
                                         <span class="indent-2"><?= $stt_name ?></span>
                                     </td>
@@ -60,7 +60,10 @@
                                         <?php if ($stt_id == 1) : ?>
                                             <form action="" method="post" onsubmit="return confirm('Bạn thực sự muốn hủy đơn hàng này chứ ?')">
                                                 <input type="hidden" name="order_id">
-                                                <button type="submit" name="cancel_order" class="btn btn-sm hover:btn-error !capitalize">Hủy đơn</button>
+                                                <button type="submit" name="cancel_order" class="btn btn-sm hover:btn-error !capitalize">
+                                                    <i class="bi bi-x"></i>
+                                                    <span class="indent-1">Hủy đơn</span>
+                                                </button>
                                             </form>
                                         <?php endif; ?>
                                     </td>
@@ -80,7 +83,8 @@
     <script src="js/handle-userdata.js"></script>
     <script src="js/handle-order.js"></script>
     <script>
-        const ordersStatus = $(".order-stt")
+        const ordersStatus = document.querySelectorAll(".order-stt")
+        console.log(ordersStatus);
         const defineStatus = (stt) => {
             if (stt.dataset.status == 1)
                 stt.classList.add("text-warning")
@@ -91,11 +95,18 @@
             if (stt.dataset.status == 4)
                 stt.classList.add("text-error")
         }
-        if (ordersStatus) {
-            if (Array.isArray(ordersStatus))
-                ordersStatus.forEach(stt => defineStatus(stt))
-            else
-                defineStatus(ordersStatus)
+        if (ordersStatus)
+            ordersStatus.forEach(stt => defineStatus(stt))
+        // lọc đơn hàng
+
+        const filterOrder = (select) => {
+            ordersStatus.forEach(stt => {
+                stt.parentElement.classList.add("hidden");
+                if (select.value != "" && stt.dataset.status == select.value)
+                    stt.parentElement.classList.remove("hidden")
+                if (select.value == "")
+                    stt.parentElement.classList.remove("hidden");
+            })
         }
     </script>
 </body>

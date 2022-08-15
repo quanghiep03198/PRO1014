@@ -88,7 +88,7 @@ endif;
                             </tr>
                             <tr>
                                 <td class="text-primary font-medium"><span></span> Phí ship</td>
-                                <td> <?= $cost ?></td>
+                                <td> <?= $cost . "₫" ?></td>
                             </tr>
                             <tr>
                                 <th><span class="text-xl text-primary">Tổng tiền</span> </th>

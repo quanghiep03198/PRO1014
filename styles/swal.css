@@ -6,8 +6,13 @@
 	font-size: 20px;
 }
 .swal-button {
-	padding: 10px 20px;
+	padding: 15px 25px;
 	border-radius: 2px;
-	background-color: #570df8;
+	background-color: #3d4451;
 	font-size: 12px;
+	border: none;
+	outline: none;
+}
+.swal-button:hover {
+	background-color: #570df8;
 }
