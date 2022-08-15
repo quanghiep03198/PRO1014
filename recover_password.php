@@ -1,38 +1,3 @@
-<?php
-include_once './lib/db_execute.php';
-include_once './lib/send_mail.php';
-include_once './site/models/user.php';
-
-include "PHPMailer/src/PHPMailer.php";
-include "PHPMailer/src/SMTP.php";
-include "PHPMailer/src/Exception.php";
-
-if (isset($_POST['get_verify_code'])) :
-    $account = select_single_record("SELECT * FROM users WHERE account = '{$_POST['account']}'");
-    $all_users = get_all_users();
-    if (!in_array($account, $all_users)) {
-        echo '<script>alert(`Tài khoản không tồn tại!`)</script>';
-    }
-    if ($_POST['email'] != $account['email'])
-        echo '<script>alert(`Email đăng ký không đúng!`)</script>';
-    if (in_array($account, $all_users) && $_POST['email'] == $account['email']) {
-        $verify_code = substr(md5(rand(0, 9999)), 0, 6);
-        $receiver = $_POST['email'];
-        $subject = "Gửi bạn mã xác nhận đổi mật khẩu mới!";
-        $body = "Mã xác thực của bạn là: <b>{$verify_code}</b>
-                <br>Mã xác thực có hiệu lực trong 5 phút!";
-
-        // gửi mail và lưu tài khoản trong vòng 5 phút
-        setcookie("account", $_POST['account'], time() + 300);
-        execute_query("UPDATE users SET password = '{$verify_code}' WHERE account = '{$_POST['account']}'");
-        echo '<script>alert(`Kiểm tra email để lấy mã xác thực`)</script>';
-        send_verify_code($receiver, $subject, $body);
-        header("Location: ./reset_password.php");
-    }
-endif;
-
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -40,37 +5,42 @@ endif;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="" rel="stylesheet" />
-    <title>Đăng ký</title>
+    <title>Quên mật khẩu</title>
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 </head>
 
-<body class="w-screen h-screen flex justify-center items-center bg-center bg-no-repeat bg-cover" style="background-image: url('/img/banners/recover-password.webp');">
-    <div class="container  mx-auto bg-white bg-opacity-80 rounded-box p-10">
-        <h1 class="sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-10">Lấy lại mật khẩu</h1>
-        <form action="" method="POST" class="max-w-3xl mx-auto " onsubmit="handleGetVerifyCode(this,event)">
-            <div class="flex flex-col gap-5">
-                <!-- tài khoản -->
-                <div class="form-control">
-                    <input data-name="tài khoản" name="account" class="input input-bordered w-full py-2 px-3 focus:outline-none focus:shadow-outline" id="account" type="text" placeholder="Tài khoản">
-                    <small class=" text-error error-message font-semibold"></small>
-                </div>
-                <!-- email đăng ký -->
-                <div class="form-control">
-                    <input data-name="email đăng ký" name="email" type="email" class="input input-bordered w-full py-2 px-3 focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Email đăng ký">
-                    <small class=" text-error error-message font-semibold"></small>
-                </div>
+<body>
+    <div class="fixed w-full h-full bg-center bg-no-repeat bg-cover bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <div class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 w-5xl bg-slate-700 bg-opacity-20 p-10 w-[-webkit-fill-available] max-w-5xl rounded-box shadow-2xl">
+            <h1 class="sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-10 text-white">Lấy lại mật khẩu</h1>
+            <form action="" method="POST" class="max-w-5xl mx-auto " onsubmit="handleGetVerifyCode(this,event)">
+                <div class="flex flex-col gap-5">
+                    <!-- tài khoản -->
+                    <div class="form-control h-24">
+                        <label for="">Tài khoản</label>
+                        <input data-name="tài khoản" name="account" class="input input-bordered" id="account" type="text" placeholder="Tài khoản">
+                        <small class=" text-error error-message font-semibold"></small>
+                    </div>
+                    <!-- email đăng ký -->
+                    <div class="form-control h-24">
+                        <label for="">Email đăng ký</label>
+                        <input data-name="email đăng ký" name="email" type="email" class="input input-bordered" id="password" type="password" placeholder="Email đăng ký">
+                        <small class=" text-error error-message font-semibold"></small>
+                    </div>
 
-                <div class="flex items-center justify-center mt-[10px]">
-                    <button type="submit" class="btn btn-md hover:btn-primary" name="get_verify_code">Lấy mã xác thực</button>
+                    <div class="flex items-center justify-center mt-[10px]">
+                        <input type="submit" class="btn btn-md hover:btn-primary" data-name="get_code" name="get_verify_code" value="Lấy mã xác thực">
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/common.js"></script>
     <script src="js/validate.js"></script>
-    <script src="js/handle-userdata.js"></script>
+    <script src="js/handle-reset-password.js"></script>
 </body>
 
 </html>
