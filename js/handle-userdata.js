@@ -1,12 +1,42 @@
 // validate form đổi mật khẩu
-const handleErrorChangePassword = (form, event) => {
+const handleErrorChangePassword = async (form, event) => {
+	event.preventDefault();
 	const curPassword = form["current_password"];
 	const newPassword = form["new_password"];
 	const cfmPassword = form["cfm_new_password"];
-	if (!areRequired(curPassword, newPassword, cfmPassword)) event.preventDefault();
-	if (isMatchingValue(newPassword, cfmPassword) == false) event.preventDefault();
-	if (checkLength(newPassword, 8) == false) event.preventDefault();
-	return true;
+	const account = form["account"];
+	console.log(account.value);
+	if (areRequired(curPassword, newPassword, cfmPassword) == false) return;
+	if (ckMatchingValue(newPassword, cfmPassword) == false) return;
+	if (checkLength(newPassword, 8) == false) return;
+	const response = await sendRequest("/site/controllers/hande_change_password.php", {
+		current_password: curPassword.value,
+		new_password: newPassword.value,
+		account: +account.value,
+	});
+	try {
+		const result = JSON.parse(response);
+		console.log(result);
+		if (result.hasOwnProperty("invalid_cur_password")) {
+			await showError(curPassword, result.invalid_cur_password);
+			Swal.fire({
+				title: "Đổi mật khẩu thất bại!",
+				icon: "error",
+				timer: 2000,
+			});
+		} else {
+			Swal.fire({
+				title: "Đổi mật khẩu thành công!",
+				icon: "success",
+				timer: 2000,
+				button: false,
+			}).then(() => {
+				location.reload();
+			});
+		}
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 // validate form update thông tin người dùng
