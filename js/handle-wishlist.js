@@ -9,7 +9,7 @@ const addWishlist = async (button, event) => {
 	const authCookie = getAllCookieObjs().find((obj) => obj.key == "auth");
 	// validate dữ liệu trước khi post request
 	if (!authCookie)
-		swal({
+		Swal.fire({
 			title: "Đăng nhập để sử dụng tính năng này!",
 			icon: "error",
 			timer: 2000,
@@ -21,14 +21,14 @@ const addWishlist = async (button, event) => {
 			request: request,
 		});
 		if (response != "")
-			await swal({
+			await Swal.fire({
 				title: "Đã thêm vào danh sách yêu thích!",
 				icon: "success",
 				timer: 2000,
 				button: false,
 			});
 		else
-			await swal({
+			await Swal.fire({
 				title: "Sản phẩm đã tồn tại trong danh sách!",
 				icon: "info",
 				timer: 2000,
