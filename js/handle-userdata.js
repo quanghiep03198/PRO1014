@@ -8,6 +8,7 @@ const handleErrorChangePassword = (form, event) => {
 	if (checkLength(newPassword, 8) == false) event.preventDefault();
 	return true;
 };
+
 // validate form update thông tin người dùng
 const handleErrorUpdateProfile = (form, event) => {
 	const userName = form["username"];
@@ -20,45 +21,7 @@ const handleErrorUpdateProfile = (form, event) => {
 	if (isPhoneNumber(phone) === false) event.preventDefault();
 };
 
-// validate chức năng đăng ký
-const handleRegisterError = (form, event) => {
-	const account = form["account"];
-	const password = form["password"];
-	const confirmPassword = form["confirm_password"];
-	const username = form["username"];
-	const email = form["email"];
-	const address = form["address"];
-	const phone = form["phone"];
-	let isSuccess = true;
-	if (areRequired(account, password, confirmPassword, username, email, address, phone) == false) {
-		event.preventDefault();
-		isSuccess = false;
-	}
-	if (checkLength(password, 8) == false) {
-		event.preventDefault();
-		isSuccess = false;
-	}
-	if (ckMatchingValue(confirmPassword, password) == false) {
-		event.preventDefault();
-		isSuccess = false;
-	}
-	if (isEmail(email) == false) {
-		event.preventDefault();
-		isSuccess = false;
-	}
-	if (isPhoneNumber(phone) == false) {
-		event.preventDefault();
-		isSuccess = false;
-	}
-	if (isSuccess)
-		swal({
-			title: "Check email để nhận mã xác thực!",
-			icon: "info",
-			button: true,
-		});
-};
 // validate form tra cứu đơn hàng
-
 const handleSearchWarranty = async (button) => {
 	const form = button.parentElement;
 	const email = form["email"];
@@ -109,21 +72,14 @@ const handleSearchWarranty = async (button) => {
 	};
 };
 
+// show image while uploading file
 const loadFile = (event) => {
 	const photo = $("#user-image");
 	photo.style.display = "block";
 	photo.src = URL.createObjectURL(event.target.files[0]);
 };
-// validate form gửi mã xác thực lấy lại mật khẩu
-const handleGetVerifyCode = (form, event) => {
-	const account = form["account"];
-	const email = form["email"];
-	console.log(email);
-	if (areRequired(account, email) == false) event.preventDefault();
-	if (isEmail(email) == false) event.preventDefault();
-};
-const handleResetPassword = (form) => {};
 
+// login
 const handleLoginError = async (form, event) => {
 	event.preventDefault();
 	const account = form["account"];
@@ -139,7 +95,7 @@ const handleLoginError = async (form, event) => {
 	if (resUserData.hasOwnProperty("err_account")) await showError(account, resUserData.err_account);
 	if (resUserData.hasOwnProperty("err_password")) await showError(password, resUserData.err_password);
 	if (resUserData.hasOwnProperty("account"))
-		swal({
+		Swal.fire({
 			title: "Đăng nhập thành công!",
 			icon: "success",
 			button: false,
@@ -154,6 +110,8 @@ const handleLoginError = async (form, event) => {
 				else window.location = "admin.php";
 			});
 };
+
+//  đăng xuất
 const logout = () => {
 	document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 	localStorage.clear();
