@@ -1,3 +1,7 @@
+<?php
+include_once "../lib/db_execute.php";
+include_once "../lib/send_mail.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,9 +86,9 @@
                     <?php
                     if ($secureHash == $vnp_SecureHash) {
                         if ($_GET['vnp_ResponseCode'] == '00') {
-                            echo "<span style='color:blue'>GD Thanh cong</span>";
+                            echo "<span style='color:blue'>GD thanh cong</span>";
                         } else {
-                            echo "<span style='color:red'>GD Khong thanh cong</span>";
+                            echo "<span style='color:red'>GD khong thanh cong</span>";
                         }
                     } else {
                         echo "<span style='color:red'>Chu ky khong hop le</span>";
@@ -94,6 +98,7 @@
                 </label>
             </div>
         </div>
+        <a href="../index.php">Quay về trang chủ</a>
         <p>
             &nbsp;
         </p>
@@ -101,6 +106,72 @@
             <p>&copy; VNPAY <?php echo date('Y') ?></p>
         </footer>
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/common.js"></script>
+    <script>
+        if (localStorage.getItem("cart") == null || localStorage.getItem("bill") == null)
+            window.location = "../?page=home";
+
+        const place_order = async () => {
+            // lấy thông tin mua hàng từ localstorage
+            const orderDetails = JSON.parse(localStorage.getItem("bill"))
+            console.log("thông tin hóa đơn: ", orderDetails);
+            Swal.fire({
+                title: "Đang xử lý đơn hàng!",
+                html: "Vui lòng chờ trong giây lát ...",
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                showLoaderOnConfirm: true,
+                willOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+            const response = await sendRequest("../site/controllers/place_order.php", orderDetails)
+            console.log(response);
+
+            await Swal.fire({
+                title: "Đặt hàng thành công!",
+                icon: "success",
+                button: true,
+            }).then(() => {
+                window.location = "../index.php";
+            });
+
+            // reset số lượng sản phẩm trong giỏ hàng + thông tin đặt hàng
+            await localStorage.clear()
+            return JSON.parse(response)
+        };
+        <?php
+        // nếu trạng thái giao dịch thành công -> request insert đơn hàng vào database
+        if ($secureHash == $vnp_SecureHash) :
+            if ($_GET['vnp_ResponseCode'] == '00') {
+        ?>
+                    (async function() {
+                        try {
+                            // submit đơn hàng
+                            const response = await place_order();
+                            console.log(response);
+                            // lấy thông tin giao dịch
+                            const params = new URLSearchParams(window.location.search)
+                            const transaction = {}
+                            params.forEach((value, key) => {
+                                transaction[key] = value
+                            })
+                            if (response.hasOwnProperty("order_id")) {
+                                transaction.order_id = response.order_id;
+                                await sendRequest("../site/controllers/create_transaction.php", transaction);
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    })()
+        <?php
+
+            } else
+                echo "<script>alert(`Giao dịch không thành công`)</script>";
+        endif;
+        ?>
+    </script>
 </body>
 
 </html>

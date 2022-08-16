@@ -34,6 +34,8 @@ const place_order = async (form, event) => {
 		address: address.value,
 		shipping_method: shipping.value,
 		order_notice: orderNotice.value,
+		payment: 1,
+		order_stt: 1,
 		cart_items: cartItems,
 	});
 	await Swal.fire({
@@ -66,7 +68,8 @@ const sendFeedback = async (form, event) => {
 		user_id: userId,
 		order_item_id: orderItemId,
 	};
-	await sendRequest("/site/controllers/handle_feedback.php", feedback);
+	const response = await sendRequest("/site/controllers/handle_feedback.php", feedback);
+	console.log(response);
 	swal({
 		icon: "success",
 		title: "Cảm ơn bạn đã gửi feedback về sản phẩm!",
@@ -75,4 +78,40 @@ const sendFeedback = async (form, event) => {
 	}).then(() => {
 		location.reload();
 	});
+};
+
+// hủy đơn hàng
+const confirmCancelOrder = async (event) => {
+	event.preventDefault();
+	const form = event.target;
+	const order_id = form["order_id"];
+
+	Swal.fire({
+		text: "Bạn muốn chắc chắn muốn hủy đơn hàng này?",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Tôi đồng ý!",
+		cancelButtonText: "Bỏ",
+	})
+		.then((result) => {
+			if (result.isConfirmed)
+				return sendRequest("/site/controllers/cancel_order.php", {
+					order_id: order_id.value,
+				});
+		})
+		.then((res) => {
+			console.log(res);
+		})
+		.then(() => {
+			Swal.fire({
+				title: "Đơn hàng đã được hủy!",
+				icon: "success",
+				timer: 2000,
+			});
+		})
+		.then(() => {
+			location.reload();
+		});
 };

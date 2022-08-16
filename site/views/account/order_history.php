@@ -108,38 +108,6 @@
                     stt.parentElement.classList.remove("hidden");
             })
         }
-        const confirmCancelOrder = async (event) => {
-            event.preventDefault();
-            const form = event.target;
-            const order_id = form['order_id']
-
-            Swal.fire({
-                text: 'Bạn muốn chắc chắn muốn hủy đơn hàng này?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Tôi đồng ý!',
-                cancelButtonText: "Bỏ"
-            }).then((result) => {
-                if (result.isConfirmed)
-                    return sendRequest("/site/controllers/cancel_order.php", {
-                        order_id: order_id.value
-                    })
-
-            }).then((res) => {
-                console.log(res);
-            }).then(() => {
-                Swal.fire({
-                    title: "Đơn hàng đã được hủy!",
-                    icon: "success",
-                    timer: 2000
-                })
-            }).then(() => {
-                location.reload();
-            })
-
-        }
     </script>
 </body>
 

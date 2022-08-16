@@ -49,12 +49,13 @@ function get_orders_group_by_user($user_id)
 // lấy ra các sản phẩm đã đặt mua trong đơn hàng
 function get_all_order_items($order_id)
 {
-    $sql = "SELECT product.prod_name,
-		product.image,
-		order_items.unit_price,
-        order_items.quantity,
-        order_items.total,
-		order_items.warranty_time AS warranty_expired_date
+    $sql = "SELECT order_items.id,
+                    product.prod_name,
+                    product.image,
+                    order_items.unit_price,
+                    order_items.quantity,
+                    order_items.total,
+                    order_items.warranty_time AS warranty_expired_date
         FROM order_items
         JOIN product ON order_items.product_id = product.id
         JOIN orders ON order_items.order_id = orders.id
@@ -126,7 +127,7 @@ function get_feedback_counter($id)
 function get_feedback_by_order_item($order_item_id)
 {
     $sql = "SELECT * FROM product_feedback WHERE order_item_id = {$order_item_id}";
-    return select_all_records($sql);
+    return select_single_record($sql);
 }
 
 
