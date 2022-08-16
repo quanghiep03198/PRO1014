@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative h-50% ">
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative h-50% ">
                     <?php
                     // lấy tất cả sản phảm
                     if (!isset($_GET['cate']) && !isset($_GET['kw'])) {
@@ -109,7 +109,6 @@
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script src="js/common.js"></script>
     <script src="js/validate.js"></script>
     <script src="js/handle-cart.js"></script>

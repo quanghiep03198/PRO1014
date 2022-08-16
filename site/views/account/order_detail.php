@@ -1,6 +1,7 @@
 <?php
 if (isset($_GET['id'])) :
     $order_items = get_all_order_items($_GET['id']);
+
     // print_r($order_items);
     $order_summary = get_order_details($_GET['id']);
     extract($order_summary);
@@ -35,10 +36,10 @@ endif;
             <div class="p-5 bg-white rounded-box shadow-2xl">
                 <h1 class="text-2xl font-semibold mb-5">Sản phẩm đã đặt</h1>
                 <!-- order items list -->
-                <div class="flex flex-col items-stretch gap-5 border-b border-zinc-500 mb-10">
+                <div class="flex flex-col items-stretch gap-5  border-b-zinc-500 mb-10">
                     <?php if (isset($_GET['id'])) :
                         foreach ($order_items as $item) : extract($item) ?>
-                            <div class="flex flex-nowrap justify-around items-center gap-5 w-full">
+                            <div class="flex flex-nowrap justify-around items-center gap-10 w-full">
                                 <div class="flex items-center gap-4">
                                     <img src=<?php echo ROOT_PRODUCT . $image ?> alt="" class="w-[100px] h-[100px] object-contain">
                                     <div class="flex flex-col gap-3">
@@ -51,7 +52,8 @@ endif;
                                     <span>Số lượng: <?= $quantity ?></span>
                                     <span class="text-2xl font-semibold"><?= $total . "₫" ?></span>
                                 </div>
-                                <?php if ($order_status == 3 && empty(get_feedback_by_order_item($order_item_id))) : ?>
+                                <?php
+                                if ($order_summary["order_stt_id"] == 3 && empty(get_feedback_by_order_item($item["id"]))) : ?>
                                     <div>
                                         <form action="" onsubmit="sendFeedback(this,event)" class="flex flex-col gap-5">
                                             <div class="rating">
@@ -59,7 +61,7 @@ endif;
                                                     <input type="radio" name="feedback" value=<?= $id ?> <?php if ($id == 5) echo "checked" ?> class="mask mask-star-2 bg-warning" onchange="console.log(this.value)">
                                                 <?php endforeach; ?>
                                                 <input type="hidden" name="user_id" value=<?= $auth['id'] ?>>
-                                                <input type="hidden" name="order_item_id" value=<?= $order_item_id ?>>
+                                                <input type="hidden" name="order_item_id" value=<?= $item["id"] ?>>
                                             </div>
                                             <button type="submit" class="btn hover:btn-primary">Đánh giá sản phẩm</button>
                                         </form>

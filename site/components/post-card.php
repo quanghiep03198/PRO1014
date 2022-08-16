@@ -1,4 +1,4 @@
-<div class="card bg-base-100 shadow-xl max-w-xs h-fit">
+<div class="card bg-base-100 shadow-2xl max-w-xs h-fit">
     <a href="?page=post_detail&id=<?php echo $id ?>">
         <img src="<?php echo ROOT_POST . $img ?>" alt="Shoes" class="center max-w-full h-72 object-cover" />
     </a>

@@ -10,7 +10,7 @@ if (isset($_GET['cate'])) {
 
 if (isset($_GET['kw'])) {
     $posts = get_posts_by_kw($_GET['kw']);
-    $heading = count($posts) > 0 ? $posts[0]['cate_name'] : "Không có kết quả nào phù hợp!";
+    $heading = count($posts) > 0 ? count($posts) . " bài viết" : "Không có kết quả nào phù hợp!";
 }
 ?>
 <!DOCTYPE html>
@@ -44,10 +44,11 @@ if (isset($_GET['kw'])) {
     <?php include_once 'site/components/header.php';  ?>
     <!--  -->
     <main class="container mx-auto py-10">
-        <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[2.5fr,1fr] gap-10">
+        <div class="flex flex-grow sm:flex-col-reverse md:flex-col-reverse lg:flex-row gap-10">
             <!-- main interface -->
-            <div class="container mx-auto">
+            <div class="basis-2/3 container mx-auto">
                 <!-- slider -->
+
                 <div class="swiper post-slider max-w-4xl">
                     <div class="swiper-wrapper">
                         <?php foreach (get_new_posts(0, 3) as $post) : extract($post); ?>
@@ -70,7 +71,7 @@ if (isset($_GET['kw'])) {
                     <div class="swiper-pagination"></div>
                 </div>
 
-                <!-- tin tức mới  -->
+                <!-- tin tức mới -->
                 <article>
                     <h2 class="text-center sm:text-2xl md:text-3xl lg:text-4xl font-bold my-10" id="title"><?= $heading ?></h2>
                     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch gap-5">
@@ -86,7 +87,10 @@ if (isset($_GET['kw'])) {
                 </article>
             </div>
             <!-- import sidebar -->
-            <?php include_once "site/components/post-sidebar.php" ?>
+            <div class="basis-1/3">
+                <?php include_once "site/components/post-sidebar.php" ?>
+
+            </div>
         </div>
     </main>
     <?php include_once 'site/components/footer.php'; ?>

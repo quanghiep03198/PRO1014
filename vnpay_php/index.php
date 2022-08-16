@@ -1,8 +1,10 @@
 <?php
-$order_key_id = substr(md5(rand(0, 9999)), 0, 8);
-$total_amount
+include_once "../lib/db_execute.php";
+include_once "../site/models/order.php";
+include_once "../site/models/user.php";
 
 
+$order_key_id = strtoupper(substr(md5(rand(0, 9999)), 0, 8));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +19,8 @@ $total_amount
 
     <link rel="stylesheet" href="../styles/main.css">
     <script src="/vnpay_php/assets/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -24,36 +28,29 @@ $total_amount
     <div class="max-w-5xl mx-auto">
         <h3 class="text-3xl font-semibold my-5">Tạo mới đơn hàng</h3>
         <div class="table-responsive">
-            <form action="/vnpay_php/vnpay_create_payment.php" id="create_form" method="post">
+            <form action="/vnpay_php/vnpay_create_payment.php" id="create_form" method="post" onsubmit="createPayment(event)">
 
-                <!-- hidden -->
-                <div class="hidden">
-                    <label for="language">Loại hàng hóa </label>
-                    <select name="order_type" id="order_type" class="input input-bordered">
-                        <option value="topup">Nạp tiền điện thoại</option>
-                        <option value="billpayment" selected>Thanh toán hóa đơn</option>
-                        <option value="fashion">Thời trang</option>
-                        <option value="other">Khác - Xem thêm tại VNPAY</option>
-                    </select>
-                </div>
-                <!-- hidden -->
+                <!-- order summary -->
+                <input type="hidden" name="order_type" value="billpayment">
+                <input type="hidden" class="input input-bordered" id="txtexpire" name="txtexpire" type="text" value=<?= $expire; ?> />
 
                 <div class="form-control gap-5">
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <label for="order_id">Mã hóa đơn</label>
-                        <input class="input input-bordered" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>" />
+                        <input class="input input-bordered" id="order_id" name="order_id" type="text" value="<?php echo $order_key_id ?>" />
                     </div>
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <label for="amount">Số tiền</label>
-                        <input class="input input-bordered" id="amount" name="amount" type="number" value="10000" />
+                        <input class="input input-bordered" id="amount" name="amount" type="number" />
                     </div>
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <label for="order_desc">Nội dung thanh toán</label>
                         <textarea class="input input-bordered" cols="20" id="order_desc" name="order_desc" rows="2"></textarea>
+
                     </div>
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <label for="bank_code">Ngân hàng</label>
-                        <select name="bank_code" id="bank_code" class="select select-bordered">
+                        <select name="bank_code" id="bank_code" data-name="ngân hàng" class="select select-bordered">
                             <option value="">Không chọn</option>
                             <option value="NCB" selected> Ngan hang NCB</option>
                             <option value="AGRIBANK"> Ngan hang Agribank</option>
@@ -78,151 +75,68 @@ $total_amount
                             <option value="IVB"> Ngan hang IVB</option>
                             <option value="VISA"> Thanh toan qua VISA/MASTER</option>
                         </select>
+                        <small class="text-base text-error error-message font-semibold"></small>
+
                     </div>
+                    <input type="hidden" name="language" id="language" value="vn">
                 </div>
-
-                <!-- hidden -->
-                <div class="hidden">
-                    <label for="language">Ngôn ngữ</label>
-                    <select name="language" id="language" class="input input-bordered">
-                        <option value="vn">Tiếng Việt</option>
-                        <option value="en">English</option>
-                    </select>
-                </div>
-                <div class="hidden">
-                    <label>Thời hạn thanh toán</label>
-                    <input class="input input-bordered" id="txtexpire" name="txtexpire" type="text" value="<?php echo $expire; ?>" />
-                </div>
-
-                <!-- hidden -->
-                <!-- bill -->
-
-                <div class="flex flex-col gap-3">
-                    <h3>Thông tin hóa đơn (Billing)</h3>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <label>Họ tên (*)</label>
-                    <input class="input input-bordered" id="txt_billing_fullname" name="txt_billing_fullname" type="text" />
-                </div>
-                <div class="flex flex-col gap-3">
-                    <label>Email (*)</label>
-                    <input class="input input-bordered" id="txt_billing_email" name="txt_billing_email" type="text" value="xonv@vnpay.vn" />
-                </div>
-                <div class="flex flex-col gap-3">
-                    <label>Số điện thoại (*)</label>
-                    <input class="input input-bordered" id="txt_billing_mobile" name="txt_billing_mobile" type="text" value="0934998386" />
-                </div>
-                <div class="flex flex-col gap-3">
-                    <label>Địa chỉ (*)</label>
-                    <input class="input input-bordered" id="txt_billing_addr1" name="txt_billing_addr1" type="text" value="22 Lang Ha" />
-                </div>
-
-
-
-
-                <div class="hidden">
-                    <div class="flex flex-col gap-3 ">
-                        <label>Mã bưu điện (*)</label>
-                        <input class="input input-bordered" id="txt_postalcode" name="txt_postalcode" type="text" value="100000" />
-                    </div>
-                    <div class="flex flex-col gap-3 ">
-                        <label>Tỉnh/TP (*)</label>
-                        <input class="input input-bordered" id="txt_bill_city" name="txt_bill_city" type="text" value="Hà Nội" />
-                    </div>
-                    <div class="flex flex-col gap-3 ">
-                        <label>Bang (Áp dụng cho US,CA)</label>
-                        <input class="input input-bordered" id="txt_bill_state" name="txt_bill_state" type="text" value="" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Quốc gia (*)</label>
-                        <input class="input input-bordered" id="txt_bill_country" name="txt_bill_country" type="text" value="VN" />
-                    </div>
-                </div>
-
 
                 <!-- Thông tin giao hàng -->
                 <div class="form-control gap-5">
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <h3 class="text-3xl font-semibold my-5">Thông tin giao hàng</h3>
                     </div>
-                    <div class="form-control gap-2">
+
+                    <?php
+                    if (isset($_COOKIE['auth'])) :
+                        $auth = get_user_data($_COOKIE['auth']);
+                        extract($auth);
+
+                    endif;
+                    ?>
+                    <div class="form-control gap-1">
                         <label>Họ tên (*)</label>
-                        <input class="input input-bordered" id="txt_ship_fullname" name="txt_ship_fullname" type="text" />
+                        <input class="input input-bordered" id="txt_ship_fullname" value="<?php echo isset($_COOKIE['auth']) ? $name : "" ?>" data-name="tên của bạn" name="txt_ship_fullname" type="text" />
+                        <small class="text-base text-error error-message font-semibold"></small>
+
                     </div>
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <label>Email (*)</label>
-                        <input class="input input-bordered" id="txt_ship_email" name="txt_ship_email" type="text" />
+                        <input class="input input-bordered" id="txt_ship_email" data-name="email" value="<?php echo isset($_COOKIE['auth']) ? $email : "" ?>" name="txt_ship_email" type="text" />
+                        <small class="text-base text-error error-message font-semibold"></small>
+
                     </div>
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <label>Số điện thoại (*)</label>
-                        <input class="input input-bordered" id="txt_ship_mobile" name="txt_ship_mobile" type="text" />
+                        <input class="input input-bordered" id="txt_ship_mobile" value="<?php echo isset($_COOKIE['auth']) ? $phone : "" ?>" data-name="số điện thoại" name="txt_ship_mobile" type="text" />
+                        <small class="text-base text-error error-message font-semibold"></small>
+
                     </div>
-                    <div class="form-control gap-2">
+                    <div class="form-control gap-1">
                         <label>Địa chỉ (*)</label>
-                        <input class="input input-bordered" id="txt_ship_addr1" name="txt_ship_addr1" type="text" />
-                    </div>
-                </div>
+                        <input class="input input-bordered" id="txt_ship_addr1" value="<?php echo isset($_COOKIE['auth']) ? $address : "" ?>" data-name="địa chỉ" name="txt_ship_addr1" type="text" />
+                        <small class="text-base text-error error-message font-semibold"></small>
 
-
-                <!-- hidden -->
-                <div class="hidden">
-                    <div class="flex flex-col gap-3">
-                        <label>Mã bưu điện (*)</label>
-                        <input class="input input-bordered" id="txt_ship_postalcode" name="txt_ship_postalcode" type="text" value="1000000" />
                     </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Tỉnh/TP (*)</label>
-                        <input class="input input-bordered" id="txt_ship_city" name="txt_ship_city" type="text" value="Hà Nội" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Bang (Áp dụng cho US,CA)</label>
-                        <input class="input input-bordered" id="txt_ship_state" name="txt_ship_state" type="text" value="" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Quốc gia (*)</label>
-                        <input class="input input-bordered" id="txt_ship_country" name="txt_ship_country" type="text" value="VN" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <h3>Thông tin gửi Hóa đơn điện tử (Invoice)</h3>
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Tên khách hàng</label>
-                        <input class="input input-bordered" id="txt_inv_customer" name="txt_inv_customer" type="text" value="Lê Văn Phổ" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Công ty</label>
-                        <input class="input input-bordered" id="txt_inv_company" name="txt_inv_company" type="text" value="Công ty Cổ phần giải pháp Thanh toán Việt Nam" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Địa chỉ</label>
-                        <input class="input input-bordered" id="txt_inv_addr1" name="txt_inv_addr1" type="text" value="22 Láng Hạ, Phường Láng Hạ, Quận Đống Đa, TP Hà Nội" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Mã số thuế</label>
-                        <input class="input input-bordered" id="txt_inv_taxcode" name="txt_inv_taxcode" type="text" value="0102182292" />
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Loại hóa đơn</label>
-                        <select name="cbo_inv_type" id="cbo_inv_type" class="input input-bordered">
-                            <option value="I">Cá Nhân</option>
-                            <option value="O">Công ty/Tổ chức</option>
+                    <div class="form-control gap-1">
+                        <label for="" class="label">Phương thức giao hàng</label>
+                        <select class="select input-bordered w-full focus:outline-none" id="shipping_method" data-name="phương thức giao hàng" name="shipping_method" onchange="getTotalAmount(this)">
+                            <option value="" selected>Chọn phương thức giao hàng</option>
+                            <?php foreach (get_all_shipping_methods() as $method) : extract($method) ?>
+                                <option value=<?= $id ?> data-cash=<?= $cost ?>> <?php echo "{$name} - {$cost}₫" ?></option>
+                            <?php endforeach; ?>
                         </select>
+                        <small class="text-base text-error error-message font-semibold"></small>
                     </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Email</label>
-                        <input class="input input-bordered" id="txt_inv_email" name="txt_inv_email" type="text" value="pholv@vnpay.vn" />
+                    <div class="form-control gap-1">
+                        <label for="">Ghi chú</label>
+                        <input type="text" class="input input-bordered" name="order_notice">
                     </div>
-                    <div class="flex flex-col gap-3">
-                        <label>Điện thoại</label>
-                        <input class="input input-bordered" id="txt_inv_mobile" name="txt_inv_mobile" type="text" value="02437764668" />
+                    <!-- submit payment method -->
+                    <div class="my-10">
+                        <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Post</button>
+                        <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán Redirect</button>
                     </div>
-                </div>
-                <!-- hidden -->
-
-                <div class="my-10">
-                    <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Post</button>
-                    <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán Redirect</button>
-                </div>
 
             </form>
         </div>
@@ -233,11 +147,71 @@ $total_amount
             <p>&copy; VNPAY <?php echo date('Y') ?></p>
         </footer>
     </div>
-
-    <script type="text/javascript">
+    <script src="../js/common.js"></script>
+    <script src="../js/validate.js"></script>
+    <script>
+        // check giỏ hàng có sản phẩm không, nếu không -> bắn về trang sản phẩm
         const cartItems = JSON.parse(localStorage.getItem("cart"));
         if (cartItems.length == 0) {
             window.location = "?page=product";
+        }
+
+        //  tổng tiền tạm tính
+        const tempAmount = cartItems.reduce((firstValue, currentValue) => {
+            return firstValue + currentValue.total
+        }, 0)
+        console.log(tempAmount);
+        const totalAmount = $("#amount")
+
+        // tính phí ship        
+        let shippingCost = 0
+        const getTotalAmount = (select) => {
+            const options = select.querySelectorAll("option")
+            options.forEach(opt => {
+                if (opt.selected == true) {
+                    shippingCost = +opt.dataset.cash
+                    totalAmount.value = +tempAmount + +shippingCost;
+                    console.log(totalAmount.value);
+                }
+            })
+        }
+        totalAmount.value = +tempAmount + shippingCost;
+        const createPayment = (event) => {
+            const form = event.target
+
+            const bankCode = form["bank_code"];
+            const orderId = form["order_id"];
+            const customerName = form["txt_ship_fullname"];
+            const email = form["txt_ship_email"];
+            const address = form["txt_ship_addr1"];
+            const phone = form["txt_ship_mobile"];
+            const shippingMethod = form["shipping_method"];
+            const orderDesc = form["order_desc"]
+            const cartItems = localStorage.getItem("cart");
+            const orderNotice = form["order_notice"];
+
+            if (areRequired(bankCode, customerName, email, address, phone, shippingMethod) == false)
+                event.preventDefault();
+            if (isEmail(email) == false)
+                event.preventDefault();
+            if (isPhoneNumber(phone) == false)
+                event.preventDefault();
+
+            const bill = {
+                order_key_id: orderId.value,
+                customer_name: customerName.value,
+                email: email.value,
+                address: address.value,
+                phone: phone.value,
+                shipping_method: shippingMethod.value,
+                order_notice: orderNotice.value,
+                payment: 2,
+                cart_items: cartItems
+            }
+            if (shippingMethod.value == 0)
+                bill.order_stt = 3
+            else bill.order_stt = 5
+            localStorage.setItem("bill", JSON.stringify(bill))
         }
     </script>
 

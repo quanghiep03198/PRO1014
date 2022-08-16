@@ -31,10 +31,10 @@ if (isset($_GET['id'])) {
             <div class="max-w-full flex flex-col gap-10 px-5">
                 <!-- product overview -->
                 <section>
-                    <div class="container mx-auto grid sm:grid-cols-1 lg:grid-cols-[1fr,2.5fr] gap-10">
+                    <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-[1fr,1.5fr] md:mx-0 lg:grid-cols-[1fr,2.5fr] gap-10">
                         <!-- product image -->
                         <div class="">
-                            <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="object-cover center">
+                            <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="max-w-full object-cover center">
                         </div>
                         <!-- product information -->
                         <div class="w-full flex flex-col gap-5">
@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
                 <!-- RELATED PRODUCTS  -->
                 <section>
                     <h1 class="text-2xl font-semibold mb-10 underline underline-offset-8">Sản phẩm tương tự</h1>
-                    <div class="swiper related-product-slider max-w-6xl">
+                    <div class="swiper related-product-slider sm:max-w-sm md:container lg:max-w-7xl mx-auto md:p-5 lg:p-10">
                         <div class="swiper-wrapper">
                             <?php foreach (get_related_product($product['cate_id']) as $product) : extract($product); ?>
                                 <div class="swiper-slide">
@@ -206,7 +206,7 @@ if (isset($_GET['id'])) {
     </main>
     <?php include_once 'site/components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/common.js"></script>
     <script src="js/validate.js"></script>
     <script src="/js/carousel.js"></script>

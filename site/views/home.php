@@ -70,7 +70,7 @@
                 <button onclick="showPanel(2)" class="tab sm:tab md:tab lg:tab-lg tab-bordered font-semibold text-2xl">Mua nhiều</button>
             </div>
             <!-- new products-->
-            <div class="swiper product-slider tab-panel">
+            <div class="swiper product-slider tab-panel p-10">
                 <div class="swiper-wrapper">
                     <?php foreach (get_new_products() as $product) : extract($product) ?>
                         <div class="swiper-slide ">
@@ -82,7 +82,7 @@
                 <div class="swiper-button-prev"></div>
             </div>
             <!-- sale off products -->
-            <div class="swiper product-slider tab-panel">
+            <div class="swiper product-slider tab-panel p-10">
                 <div class="swiper-wrapper">
                     <?php foreach (get_discount_products() as $product) : extract($product) ?>
                         <div class="swiper-slide">
@@ -94,7 +94,7 @@
                 <div class="swiper-button-prev"></div>
             </div>
             <!-- best seller -->
-            <div class="swiper product-slider tab-panel">
+            <div class="swiper product-slider tab-panel p-10">
                 <div class="swiper-wrapper">
                     <?php foreach (get_best_seller_products() as $product) : extract($product) ?>
                         <div class="swiper-slide">
@@ -108,9 +108,9 @@
         </section>
 
         <!-- news -->
-        <section>
-            <h2 class="container text-center text-4xl font-semibold underline mb-10 ">TIN TỨC MỚI</h2>
-            <div class="grid sm:grid-cols-1 lg:grid-cols-[2fr,1fr] pb-[50px] gap-[50px]">
+        <section class="mb-10">
+            <h2 class="container text-center text-4xl font-semibold underline underline-offset-8 mb-10 ">TIN TỨC MỚI</h2>
+            <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[1.5fr,1fr] gap-10">
                 <!-- lastest news -->
                 <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 items-stretch gap-5 w-full">
                     <?php foreach (get_new_posts(0, 3) as $post) : extract($post);
@@ -120,11 +120,11 @@
 
                 <!-- hot news -->
                 <div>
-                    <h3 class="text-[30px] font-[600] mb-[20px] mt-[50px] lg:mt-[0px]">Bài viết nổi bật</h3>
-                    <div class="flex flex-col justify-between gap-[30px]">
-                        <?php for ($i = 0; $i < 3; $i++) {
+                    <h3 class="text-3xl font-semibold mb-5">Bài viết nổi bật</h3>
+                    <div class="flex flex-col justify-between gap-5">
+                        <?php foreach (get_most_comment_post() as $post) : extract($post);
                             include "site/components/post-sidecard.php";
-                        } ?>
+                        endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -145,11 +145,11 @@
         const panels = $('.tab-panel')
         const tabs = $('.tab');
 
-        function showPanel(index) {
+        function showPanel(tabindex) {
             panels.forEach(panel => panel.classList.add("hidden"))
             tabs.forEach(tab => tab.classList.remove("tab-active"))
-            panels[index].classList.remove("hidden")
-            tabs[index].classList.add("tab-active");
+            panels[tabindex].classList.remove("hidden")
+            tabs[tabindex].classList.add("tab-active");
         }
         showPanel(0)
     </script>

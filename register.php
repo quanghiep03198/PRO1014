@@ -13,9 +13,9 @@
 <body>
     <div class="fixed center top-0 right-0 left-0 bottom-0 w-screen h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-center bg-no-repeat bg-cover">
 
-        <div class="container mx-auto px-10 p-10 bg-slate-700 bg-opacity-20 rounded-box shadow-2xl">
+        <div class="container mx-auto px-10 p-10 bg-slate-700 bg-opacity-30 rounded-box shadow-2xl">
             <form action="verify_account.php" method="POST" class="relative max-w-5xl mx-auto" onsubmit="handleRegister(this,event)">
-                <h1 class="sm:text-xl lg:text-4xl text-center font-semibold mb-5">Đăng ký tài khoản</h1>
+                <h1 class="sm:text-xl lg:text-4xl text-center font-semibold mb-5 text-white">Đăng ký tài khoản</h1>
                 <!-- tài khoản -->
                 <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-10">
                     <!-- form group left -->

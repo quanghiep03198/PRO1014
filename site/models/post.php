@@ -56,3 +56,19 @@ function get_posts_by_kw($keyword)
              posts.short_desc LIKE '%{$keyword}%'";
     return select_all_records($sql);
 }
+// lấy ra các bài viết có lượt bình luận cao nhất
+function get_most_comment_post()
+{
+    $sql = "SELECT 	posts.* ,
+                    users.name AS author_name,
+                    users.avatar AS avatar, 
+                    DATE(posts.posted_date) AS create_date,
+                    COUNT(post_comment.id) AS comment_counter
+            FROM posts
+            JOIN users ON posts.author_id = users.id
+            JOIN post_comment ON posts.id = post_comment.post_id
+            GROUP BY posts.id
+            ORDER BY COUNT(post_comment.id) DESC
+            LIMIT 0,3";
+    return select_all_records($sql);
+}

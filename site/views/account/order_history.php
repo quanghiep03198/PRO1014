@@ -94,6 +94,8 @@
                 stt.classList.add("text-success")
             if (stt.dataset.status == 4)
                 stt.classList.add("text-error")
+            if (stt.dataset.status == 5)
+                stt.classList.add("text-blue-400")
         }
         if (ordersStatus)
             ordersStatus.forEach(stt => defineStatus(stt))

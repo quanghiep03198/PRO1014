@@ -1,11 +1,14 @@
-<div class="grid grid-cols-[1fr,2fr] items-stretch gap-2">
-    <picture class="f">
-        <a href="?page=post&id="><img src="/img/posts/cod-cold-war.png" alt="" class="w-full object-cover"></a>
-    </picture>
-    <div>
-        <h3 class="text-xl font-semibold">Call Of Duty - Ghost Remaster</h3>
-        <p class="font-normal">Phiên bản remake của tựa game đình đám này hứa hẹn ...</p>
-        <p class="text-sm font-bold">Đăng ngày: <span class="font-normal">6/7/2022</span></p>
-        <p class="text-sm font-bold">Bởi: <span class="font-normal"> quanghiep03198</span></p>
+<div class="card card-side rounded-box shadow-xl">
+    <figure class="basis-1/3">
+        <a href="?page=post&id=<?= $post['id'] ?>"><img src=<?php echo ROOT_POST . $img ?> alt="" class="rounded-tl-2xl rounded-bl-2xl w-[300px] h-full object-cover"></a>
+    </figure>
+    <div class="basis-2/3 p-5 card-body max-w-md">
+        <h2 class="font-semibold text-xl truncate"><?php echo $title ?></h2>
+        <p class="font-normal truncate"><?php echo $short_desc ?></p>
+        <p class="text-sm font-bold">Đăng ngày: <span class="font-normal"><?php echo $create_date ?></span></p>
+        <p class="text-sm font-bold">Bởi: <span class="font-normal"><?php echo $author_name ?></span></p>
+        <div class="card-actions justify-end">
+            <a href="?page=post&id=<?= $post['id'] ?>" class="btn hover:btn-primary">Đọc tiếp</a>
+        </div>
     </div>
 </div>
