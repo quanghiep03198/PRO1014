@@ -55,7 +55,7 @@
                             $turnover_stats =  get_turnover_groupby_product($month);
                             if (!empty($turnover_stats)) :
                                 foreach ($turnover_stats as $product) : extract($product) ?>
-                                    <tr>
+                                    <tr class="turnover">
                                         <td class="flex items-center gap-3">
                                             <img src=<?= ROOT_PRODUCT . $image ?> alt="" class="sm:w-24 h-24 md:w-16 md:h-16  lg:w-20 lg:h-20  object-contain">
                                             <div class="flex flex-col gap-3">
@@ -79,6 +79,7 @@
                         </tbody>
                     </table>
 
+                    <div class="btn-group my-10 center" id="pagination"></div>
 
                 </section>
             </div>
@@ -93,7 +94,7 @@
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: [
                     <?php
@@ -144,6 +145,19 @@
                 }
             }
         });
+    </script>
+    <script src="/js/common.js"></script>
+    <script src="/js/pagination.js"></script>
+    <script>
+        const pagination = new Pagination({
+            selector: ".turnover",
+            perPage: 5,
+            style: "table-row"
+        })
+        const {
+            showPage
+        } = pagination;
+        showPage(1)
     </script>
 
 </body>

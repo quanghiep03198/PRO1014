@@ -1,11 +1,5 @@
 <?php
-
 $cate_list =  select_all_records("SELECT * FROM  manufacturer order by id");
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>

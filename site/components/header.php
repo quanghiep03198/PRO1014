@@ -1,8 +1,8 @@
-<header class="w-full bg-white" id="header">
+<header class="w-full bg-transparent relative top-0 z-50" id="header">
     <div class="max-w-[90%] mx-auto navbar justify-between items-center">
         <!-- logo -->
         <div class="navbar-start">
-            <a href="?page=home"><img class="sm:max-w-[7rem] lg:max-w-[10rem]" src=<?= ROOT_SITE . 'logo.png' ?> alt=""></a>
+            <a href="?page=home"><img class="sm:max-w-[7rem] lg:max-w-[10rem]" src=<?= ROOT_SITE . $logo1 ?> alt=""></a>
         </div>
         <!-- nav-link  -->
         <div class="navbar-center hidden lg:flex">

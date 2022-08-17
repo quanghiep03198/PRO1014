@@ -30,15 +30,15 @@
             </div>
         </nav>
         <!-- submenu -->
-        <nav class="dropdown-content flex flex-col justify-between w-96 sm:h-auto md:h-screen lg:h-screen bg-[#858585] px-2 py-[30px]" tabindex="0">
+        <nav class="dropdown-content flex flex-col justify-between w-96 sm:h-auto md:h-screen lg:h-screen bg-slate-600 px-2 py-[30px]" tabindex="0">
             <ul class="flex flex-col justify-center gap-2 h-1/2">
-                <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=statistic">Thống kê doanh số</a> </li>
-                <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=user-list">Quản lý tài khoản</a> </li>
-                <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=product-list">Quản lý sản phẩm</a> </li>
-                <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=order-list">Quản lý đơn hàng</a> </li>
-                <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=post-list">Quản lý bài viết</a></li>
-                <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=service-list">Danh sách dịch vụ</a> </li>
-                <li class="w-full p-2 text-white text-base hover:bg-white/30 hover:rounded-lg"><a href="?page=setting">Cài đặt website</a> </li>
+                <li class="w-full p-2 text-white text-base hover:bg-white/20 hover:rounded-lg"><a href="?page=statistic">Thống kê doanh số</a> </li>
+                <li class="w-full p-2 text-white text-base hover:bg-white/20 hover:rounded-lg"><a href="?page=user-list">Quản lý tài khoản</a> </li>
+                <li class="w-full p-2 text-white text-base hover:bg-white/20 hover:rounded-lg"><a href="?page=product-list">Quản lý sản phẩm</a> </li>
+                <li class="w-full p-2 text-white text-base hover:bg-white/20 hover:rounded-lg"><a href="?page=order-list">Quản lý đơn hàng</a> </li>
+                <li class="w-full p-2 text-white text-base hover:bg-white/20 hover:rounded-lg"><a href="?page=post-list">Quản lý bài viết</a></li>
+                <li class="w-full p-2 text-white text-base hover:bg-white/20 hover:rounded-lg"><a href="?page=service-list">Danh sách dịch vụ</a> </li>
+                <li class="w-full p-2 text-white text-base hover:bg-white/20 hover:rounded-lg"><a href="?page=setting">Cài đặt website</a> </li>
             </ul>
             <div class="sm:hidden md:flex lg:flex md:flex-col lg:flex-col justify-center align-middle h-[60px]">
                 <div class="flex flex-col justify-center gap-2">

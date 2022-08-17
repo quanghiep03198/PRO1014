@@ -20,7 +20,7 @@
 
             </div>
 
-            <div class="container mx-auto">
+            <div class="container mx-auto min-h-screen">
                 <table class="table w-full">
                     <thead>
                         <tr>
@@ -36,7 +36,7 @@
                     </thead>
                     <tbody>
                         <?php foreach (get_all_orders() as $order) : extract($order) ?>
-                            <tr>
+                            <tr class="order">
                                 <td><a href=<?php echo "?page=order-read&id={$id}" ?>><i class="bi bi-box-arrow-in-up-left"></i></a></td>
                                 <td><span class="text-lg"><?= $order_key_id ?></span></td>
                                 <td><span class="text-lg"><?= $user_name ?></span></td>
@@ -52,10 +52,24 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div id="pagination" class=" btn-group center p-10"></div>
+
             </div>
         </section>
     </div>
-    <script src="js/common.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/pagination.js"></script>
+    <script>
+        const pagination = new Pagination({
+            selector: ".order",
+            perPage: 10,
+            style: "table-row"
+        })
+        const {
+            showPage
+        } = pagination;
+        showPage(1)
+    </script>
 </body>
 
 </html>

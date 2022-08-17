@@ -41,7 +41,7 @@
                     </tr>
                     <tbody>
                         <?php foreach (get_all_users()  as $user) : extract($user) ?>
-                            <tr>
+                            <tr class="user">
                                 <td>
                                     <div class="flex items-center gap-3">
                                         <img src=<?php echo ROOT_AVATAR . $avatar ?> alt="" class="w-16 h-16 rounded-full">
@@ -62,9 +62,23 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="btn-group my-10 center" id="pagination"></div>
+
             </div>
         </section>
-        <!-- grid end  -->
+        <script src="/js/common.js"></script>
+        <script src="/js/pagination.js"></script>
+        <script>
+            const pagination = new Pagination({
+                selector: ".user",
+                perPage: 10,
+                style: "table-row"
+            })
+            const {
+                showPage
+            } = pagination;
+            showPage(1)
+        </script>
 </body>
 
 </html>

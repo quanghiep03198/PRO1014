@@ -108,7 +108,7 @@ const isPhoneNumber = (formCtrl) => {
 	return formCtrl.value == +formCtrl.value && formCtrl.value.length == 10;
 };
 const isImage = (formCtrl) => {
-	const allowedExtensions = /(\.png|\.jpg|\.jiff|\.webp|\.bmp|\.jpeg)$/i;
+	const allowedExtensions = /(\.png|\.jpg|\.jiff|\.webp|\.bmp|\.jpeg|\.avif)$/i;
 	const filePath = formCtrl.value;
 	allowedExtensions.test(filePath) ? showSuccess(formCtrl, null) : showError(formCtrl, "File không đúng định dạng ảnh");
 	// Allowing file type

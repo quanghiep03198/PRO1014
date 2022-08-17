@@ -36,7 +36,7 @@
                 <!-- danh sách bài viết -->
                 <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     <?php foreach (get_all_posts() as $post) : extract($post) ?>
-                        <div class="card bg-base-100 border w-96">
+                        <div class="post card bg-base-100 border w-96">
                             <div class="absolute top-1 right-2 dropdown dropdown-end z-50">
                                 <label tabindex="0" class="text-white text-xl"><i class="bi bi-three-dots"></i></label>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -56,10 +56,25 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <div class="btn-group my-10 center" id="pagination"></div>
+
             </div>
         </section>
 
     </div>
+    <script src="/js/common.js"></script>
+    <script src="/js/pagination.js"></script>
+    <script>
+        const pagination = new Pagination({
+            selector: ".post",
+            perPage: 6,
+            style: "flex"
+        })
+        const {
+            showPage
+        } = pagination;
+        showPage(1)
+    </script>
 </body>
 
 </html>

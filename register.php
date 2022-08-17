@@ -11,15 +11,17 @@
 </head>
 
 <body>
-    <div class="fixed center top-0 right-0 left-0 bottom-0 w-screen h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-center bg-no-repeat bg-cover">
-
-        <div class="container mx-auto px-10 p-10 bg-slate-700 bg-opacity-30 rounded-box shadow-2xl">
-            <form action="verify_account.php" method="POST" class="relative max-w-5xl mx-auto" onsubmit="handleRegister(this,event)">
-                <h1 class="sm:text-xl lg:text-4xl text-center font-semibold mb-5 text-white">Đăng ký tài khoản</h1>
+    <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 items-stretch flex-grow min-h-screen ">
+        <div class="h-screen sticky top-0 sm:hidden md:hidden ">
+            <img src="/img/banners/contact-image.png" class="w-full h-full object-cover object-center" alt="">
+        </div>
+        <div class="container mx-auto p-10">
+            <form action="verify_account.php" method="POST" class=" max-w-5xl h-auto sm:p-5 md:p-5 lg:p-10  drop-shadow-xl" onsubmit="handleRegister(this,event)">
+                <h1 class="sm:text-xl md:text-2xl lg:text-4xl text-center font-semibold mb-5 ">Đăng ký tài khoản</h1>
                 <!-- tài khoản -->
                 <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-10">
                     <!-- form group left -->
-                    <div class="flex flex-col gap-10 justify-between items-stretch">
+                    <div class="flex flex-col gap-5 justify-between items-stretch">
                         <div class="form-control h-24 w-full">
                             <label for="">Tài khoản</label>
                             <input data-name="tài khoản" name="account" class="input  input-bordered  w-full  " id="account" type="text" placeholder="Tài khoản">
@@ -46,7 +48,7 @@
                     </div>
 
                     <!-- form group right -->
-                    <div class="relative flex flex-col gap-10 justify-start items-stretch">
+                    <div class="relative flex flex-col gap-5 justify-start items-stretch">
                         <!-- email  -->
                         <div class="form-control h-24 w-full">
                             <label for="">Email</label>
@@ -65,13 +67,13 @@
                             <input data-name="số điện thoại" name="phone" class="input  input-bordered  w-full  " id="phone" type="text" placeholder="Số điện thoại">
                             <small class=" text-base text-error error-message font-semibold"></small>
                         </div>
-                        <div class="flex flex-col justify-center items-end absolute bottom-0 right-0">
-                            <span class="text-end">Đã có tài khoản? <a href="index.php" class="font-semibold hover:link">Đăng nhập</a></span>
-                        </div>
                     </div>
                 </div>
+                <div class="flex flex-col justify-center items-end">
+                    <span class="text-end">Đã có tài khoản? <a href="index.php" class="font-semibold hover:link">Đăng nhập</a></span>
+                </div>
                 <div class="flex items-center justify-center">
-                    <input type="submit" class="btn btn-lg hover:btn-primary my-10 normal-case" data-name="register" name="register_submit" value="Đăng ký">
+                    <input type="submit" class="btn btn-lg btn-primary my-10 normal-case" data-name="register" name="register_submit" value="Đăng ký">
                 </div>
             </form>
         </div>

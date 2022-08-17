@@ -24,10 +24,22 @@
         <!-- footer col -->
         <div class="flex flex-col justify-start gap-4">
             <h3 class="text-3xl font-[600] text-[#fff] mb-8">Liên hệ</h3>
-            <a class="link link-hover text-lg font-normal"><i class="bi bi-telephone"></i> 033 608 9988</a>
-            <a class="link link-hover text-lg font-normal"><i class="bi bi-envelope"></i> pshnstore@gmail.com</a>
-            <a class="link link-hover text-lg font-normal"><i class="bi bi-geo-alt"></i> Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</a>
-            <a class="link link-hover text-lg font-normal"><i class="bi bi-geo-alt"></i> https://fb.me/psstorevn</a>
+            <a class="link link-hover text-lg font-normal">
+                <i class="bi bi-telephone"></i>
+                <span class="indent-3"><?= $hotline ?></span>
+            </a>
+            <a class="link link-hover text-lg font-normal">
+                <i class="bi bi-envelope"></i>
+                <span class="indent-3"><?= $email ?></span>
+            </a>
+            <a class="link link-hover text-lg font-normal">
+                <i class="bi bi-geo-alt"></i>
+                <span class="indent-3"><?php echo $address ?></span>
+            </a>
+            <a class="link link-hover text-lg font-normal">
+                <i class="bi bi-facebook"></i>
+                <span class="indent-3"><?php echo $facebook ?></span>
+            </a>
         </div>
     </div>
     <hr class="border-1 border-[#fff] w-full">

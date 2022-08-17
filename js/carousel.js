@@ -1,4 +1,4 @@
-var swiper = new Swiper(".product-slider", {
+const productSlider = new Swiper(".product-slider", {
 	slidesPerView: 1,
 	spaceBetween: 10,
 	navigation: {
@@ -20,7 +20,7 @@ var swiper = new Swiper(".product-slider", {
 		},
 	},
 });
-var swiper = new Swiper(".related-product-slider", {
+const relatedProductSlider = new Swiper(".related-product-slider", {
 	navigation: {
 		nextEl: ".swiper-button-next",
 		prevEl: ".swiper-button-prev",
@@ -40,7 +40,7 @@ var swiper = new Swiper(".related-product-slider", {
 		},
 	},
 });
-var swiper = new Swiper(".post-slider", {
+const postSlider = new Swiper(".post-slider", {
 	rewind: true,
 	pagination: {
 		el: ".swiper-pagination",
@@ -49,5 +49,21 @@ var swiper = new Swiper(".post-slider", {
 	navigation: {
 		nextEl: ".swiper-button-next",
 		prevEl: ".swiper-button-prev",
+	},
+});
+const productVariantSlider = new Swiper(".product_image", {
+	spaceBetween: 10,
+	slidesPerView: 4,
+	freeMode: true,
+	watchSlidesProgress: true,
+});
+const gallery = new Swiper(".gallery", {
+	spaceBetween: 10,
+	navigation: {
+		nextEl: ".swiper-button-next",
+		prevEl: ".swiper-button-prev",
+	},
+	thumbs: {
+		swiper: swiper,
 	},
 });

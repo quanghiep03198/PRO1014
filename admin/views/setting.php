@@ -11,18 +11,17 @@
 
 <body>
     <div class="flex items-stretch">
-
         <!-- import sidebar from component  -->
-        <?php include_once "/xampp/htdocs/PRO1014/admin/components/sidebar.php" ?>
+        <?php include_once "./admin/components/sidebar.php" ?>
         <!-- sidebar  end -->
         <section class="w-full">
             <!-- top -->
             <div class="bg-primary px-[50px] py-[30px] flex justify-between items-center">
-                <h3 class="text-3xl text-white">SETTING</h3>
+                <h3 class="text-3xl text-white">Cài đặt website</h3>
             </div>
             <!-- main -->
-            <div class="container mx-auto">
-                <form action="/admin/controllers/site_setting.php" method="POST" onsubmit="handleUpdateSite(this,event)">
+            <div class="container mx-auto my-10">
+                <form action="./admin/controllers/site_setting.php" method="POST" enctype="multipart/form-data" onsubmit="handleUpdateSite(this,event)">
                     <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5">
                         <!-- Logo 1 -->
                         <div class="form-control">
@@ -32,7 +31,7 @@
                         </div>
                         <!-- Logo 2 -->
                         <div class="form-control">
-                            <label for="">Logo footer</label>
+                            <label for="">Logo Footer</label>
                             <input type="file" data-name="logo footer" class=" input input-bordered file:hover:btn-primary file:btn px-0" name="logo_footer">
                             <small class="text-error error-message font-semibold"></small>
                         </div>
@@ -67,8 +66,8 @@
                 </form>
             </div>
         </section>
-        <script src="./js/common.js"></script>
-        <script src="./js/validate.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/validate.js"></script>
         <script>
             const handleUpdateSite = (form, event) => {
                 // event.preventDefault();
@@ -78,10 +77,9 @@
                 const facebook = form['facebook'];
                 const hotline = form['phone'];
                 const address = form['address'];
-                if (isRequired(logoHeader, logoFooter, email, facebook, hotline, address) ==
-                    false)
+                if (areRequired(logoHeader, logoFooter, email, facebook, hotline, address) == false)
                     event.preventDefault()
-                if (isImage(logoHeader) && isImage(logoFooter) == false)
+                if (isImage(logoHeader) == false && isImage(logoFooter) == false)
                     event.preventDefault()
             }
         </script>

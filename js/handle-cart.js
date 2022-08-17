@@ -37,7 +37,6 @@ const addCart = (button) => {
 				icon: "success",
 				title: "Thêm vào giỏ hàng thành công",
 				timer: 2000,
-				button: false,
 			}).then(() => {
 				window.location = "?page=cart";
 			});
@@ -81,12 +80,12 @@ const getTotalAmount = (data) => {
 		tempPayment.dataset.cash = data.reduce((previousValue, currentValue) => {
 			return previousValue + currentValue.total;
 		}, 0);
-		discount.innerText = `${discount.dataset.cash}₫`;
+		discount.innerText = `${formatNumber(discount.dataset.cash)}₫`;
 		// tổng tiền tạm tính
-		tempPayment.innerText = `${tempPayment.dataset.cash}₫`;
+		tempPayment.innerText = `${formatNumber(tempPayment.dataset.cash)}₫`;
 		// tổng tiền thanh toán chưa bao gồm phí ship
 		totalAmount.dataset.cash = +tempPayment.dataset.cash + +discount.dataset.cash;
-		totalAmount.innerText = `${totalAmount.dataset.cash}₫`;
+		totalAmount.innerText = `${formatNumber(totalAmount.dataset.cash)}₫`;
 	}
 };
 
@@ -98,12 +97,12 @@ const renderCart = (data) => {
 	const output = data
 		?.map(
 			(item) => /*html */ `<tr>
-		<th>
-		<button type="button" class="btn btn-ghost text-2xl text-gray-500 hover:text-gray-800" onclick="removeItem(${item.id})"><i class="bi bi-trash"></i></button>
+									<th>
+										<button type="button" class="btn btn-ghost text-2xl text-gray-500 hover:text-gray-800" onclick="removeItem(${item.id})"><i class="bi bi-trash"></i></button>
 									</th>
 									<td>
 										<div class="flex items-center gap-3">
-												<picture class="mask mask-squircle w-12 h-12">
+												<picture class="mask mask-squircle w-16 h-16">
 													<img src="img/products/${item.img}" alt="">
 												</picture>
 												<div>
@@ -117,7 +116,7 @@ const renderCart = (data) => {
 											</div>
 											</td>
 									<td>
-										<span class=" block font-medium text-blue-600">${item.price}₫</span>
+										<span class=" block font-medium text-blue-600">${formatNumber(item.price)}₫</span>
 									</td>
 									<td>
 										<div class="col-span-1 flex justify-start items-center gap-0 w-full rounded-lg relative bg-transparent mt-1">
@@ -127,12 +126,14 @@ const renderCart = (data) => {
 										<input type="hidden" name="total" value=${item.total}>
 										<input type="hidden" name="stock" value=${item.stock}>
 										<button type="button" onclick="changeQty(this,-1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">-</button>
-										<input disabled type="number" min=1 max=${item.stock} value=${item.qty} class="quantity outline-none focus:outline-none text-center w-12 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number">
+										<input disabled type="number" min=1 max=${item.stock} value=${
+				item.qty
+			} class="quantity outline-none focus:outline-none text-center w-12 h-10 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number">
 										<button type="button" onclick="changeQty(this,1)" class="btn btn-ghost btn-square btn-sm text-base align-middle cursor-pointer">+</button>
 										</div>
 									</td>
 									<th>
-										<span class="block total-price font-medium">${item.total}₫</span>
+										<span class="block total-price font-medium">${formatNumber(item.total)}₫</span>
 									</th>
 								</tr>`,
 		)

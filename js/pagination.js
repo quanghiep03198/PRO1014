@@ -7,7 +7,7 @@ class Pagination {
 		// tổng số phần tử > số phần từ mỗi trang mới thực hiện phân trang
 		if (elems.length > perPage)
 			for (let i = 1; i <= totalPage; i++) {
-				pagination.innerHTML += /* html */ `<a href="#" onclick ="showPage(${i})" class="btn btn-square pagination-btn">${i}</a>`;
+				pagination.innerHTML += /* html */ `<button  onclick ="showPage(${i})" class="btn btn-square pagination-btn">${i}</button>`;
 			}
 
 		// show page

@@ -8,11 +8,10 @@
     <title>Thêm mới sản phẩm</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <script src="https://cdn.tiny.cloud/1/xqzory9nvy597bn74b72f5de86nfknihmi10e9yfgi0fw699/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/j72v1bxoup0p8smx3muamohgb7z34w54m57q6zs54nopmcpa/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: 'textarea',
-            content_css: 'styles/main.css',
             plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
             toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
             toolbar_mode: 'floating',
@@ -21,6 +20,7 @@
         });
     </script>
 </head>
+
 
 <body>
     <div class="flex justify-start items-stretch">
@@ -101,13 +101,13 @@
                             <input type="number" data-name="thời gian bảo hành" class="input input-bordered" name="warranty_time" id="">
                             <small class="text-base text-error error-message font-semibold"></small>
                         </div>
-                        <!-- mô tả -->
-                        <div class="form-control">
-                            <label class="text-xl">Mô tả</label>
-                            <textarea name="description" data-name="mô tả sản phẩm"></textarea>
-                            <small class="text-base text-error error-message font-semibold"></small>
-                        </div>
                     </div>
+                </div>
+                <!-- mô tả -->
+                <div class="form-control">
+                    <label class="text-xl">Mô tả</label>
+                    <textarea name="description" class="w-full" data-name="mô tả sản phẩm"></textarea>
+                    <small class="text-base text-error error-message font-semibold"></small>
                 </div>
                 <!--  -->
                 <div>

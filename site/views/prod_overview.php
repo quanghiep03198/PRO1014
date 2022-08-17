@@ -24,11 +24,11 @@ if (isset($_GET['id'])) {
 <body>
     <?php include_once 'site/components/header.php';  ?>
     <main class="relative bg-white">
-        <div class="grid gap-10 sm:grid-cols-1 lg:grid-cols-[1fr,3fr]">
+        <div class="w-full grid sm:grid-cols-1 lg:grid-cols-[1fr,3fr] gap-10 relative">
             <!-- import side bar from components -->
             <?php include_once 'site/components/sidebar.php' ?>
 
-            <div class="max-w-full flex flex-col gap-10 px-5">
+            <div class="flex flex-col gap-10 px-5">
                 <!-- product overview -->
                 <section>
                     <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-[1fr,1.5fr] md:mx-0 lg:grid-cols-[1fr,2.5fr] gap-10">
@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
                         <!-- product information -->
                         <div class="w-full flex flex-col gap-5">
                             <h2 class="text-3xl font-semibold"><?= $prod_name ?></h2>
-                            <span class="font-semibold text-2xl"><?= $price  . '₫' ?></span>
+                            <span class="font-semibold text-2xl text-accent"><?php echo number_format($price, 0, ',', '.') . '₫' ?></span>
                             <div class="rating">
                                 <?php foreach (get_reviews_label() as $review) : ?>
                                     <input type="radio" value=<?= $review['id'] ?> <?php if ($review['id'] == get_most_feedback($id)) echo "checked" ?> class="mask mask-star-2 bg-warning" disabled>
@@ -97,14 +97,17 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                     <!-- product description -->
-                    <div class="max-w-full mx-auto my-5"><?= $description ?></div>
+                    <div class="max-w-full mx-auto my-5">
+                        <h3 class="text-2xl font-semibold underline underline-offset-8 mb-10">Chi tiết sản phẩm</h3>
+                        <div><?= $description ?></div>
+                    </div>
                 </section>
 
 
                 <!-- RELATED PRODUCTS  -->
                 <section>
                     <h1 class="text-2xl font-semibold mb-10 underline underline-offset-8">Sản phẩm tương tự</h1>
-                    <div class="swiper related-product-slider sm:max-w-sm md:container lg:max-w-7xl mx-auto md:p-5 lg:p-10">
+                    <div class="swiper related-product-slider sm:max-w-sm md:container lg:max-w-5xl mx-auto md:p-5 lg:p-10 h-auto">
                         <div class="swiper-wrapper">
                             <?php foreach (get_related_product($product['cate_id']) as $product) : extract($product); ?>
                                 <div class="swiper-slide">

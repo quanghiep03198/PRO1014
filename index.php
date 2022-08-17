@@ -21,5 +21,7 @@ session_start();
 // nếu người dùng có đăng nhập -> lấy thông tin người dùng
 if (isset($_COOKIE['auth']))
     $auth = get_user_data($_COOKIE['auth']);
+
+
 // render page
 page_render();

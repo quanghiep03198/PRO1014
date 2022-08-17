@@ -55,13 +55,13 @@ $products = !isset($_GET['man_id']) ? get_all_products() : get_product_by_manu($
                         <!-- lấy ra tất cả -->
                         <?php
                         foreach ($products as $item) : extract($item) ?>
-                            <tr>
+                            <tr class="product">
                                 <td>
                                     <div class="flex items-center gap-3">
                                         <img src=<?= ROOT_PRODUCT . $image ?> alt="" style="width: 100px; height:100px; object-fit:contain">
                                         <div class="flex flex-col justify-center gap-3">
                                             <span class="text-xl font-medium"><?= $prod_name ?> </span>
-                                            <span class="text-lg"><?= $price . "₫" ?> </span>
+                                            <span class="text-lg"><?php echo number_format($price, 0, '', '.') . '₫' ?></span>
                                         </div>
 
                                     </div>
@@ -79,10 +79,24 @@ $products = !isset($_GET['man_id']) ? get_all_products() : get_product_by_manu($
                         <!--  -->
                     </tbody>
                 </table>
+                <div class="btn-group my-10 center" id="pagination"></div>
             </div>
         </section>
 
     </div>
+    <script src="/js/common.js"></script>
+    <script src="/js/pagination.js"></script>
+    <script>
+        const pagination = new Pagination({
+            selector: ".product",
+            perPage: 10,
+            style: "table-row"
+        })
+        const {
+            showPage
+        } = pagination;
+        showPage(1)
+    </script>
 </body>
 
 </html>

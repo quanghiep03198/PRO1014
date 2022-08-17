@@ -20,12 +20,25 @@
     <main class="px-4">
         <!-- banner -->
         <section class="w-full py-[5rem]">
-            <?php include_once 'site/components/banner.php' ?>
+            <div class="max-w-full mx-auto p-10 text-[color:(--var(primary-color))]">
+                <div class="flex flex-grow justify-center gap-10 items-center sm:flex-col-reverse md:flex-col-reverse lg:flex-row">
+                    <div class="flex basis-3/5 flex-col gap-5">
+                        <h2 class="sm:text-2xl md:text-4xl lg:text-6xl font-extrabold">Playstation 5 - Digtal Edtion</h2>
+                        <p class="sm:text-sm md:text-base lg:text-3xl">Khám phá sức mạnh ấn tượng <br> của AMD Ryzen “Zen 2”</p>
+                        <div class="mt-5">
+                            <a href="?page=product" class="btn btn-outline hover:btn-primary sm:btn-md sm:btn-block lg:btn-lg lg:btn-wide ">Xem ngay</a>
+                        </div>
+                    </div>
+                    <picture>
+                        <img class="lg:w-full" src=<?= ROOT_BANNER . 'banner-homepage.png' ?> alt="">
+                    </picture>
+                </div>
+            </div>
         </section>
 
         <!-- explore new product -->
         <section class="container mx-auto py-[5rem]">
-            <h2 class="lg:text-6xl text-3xl font-medium text-center mb-5"> Khám phá Playstation®4</h2>
+            <h2 class="lg:text-5xl text-3xl font-medium text-center mb-5"> Khám phá Playstation®4</h2>
             <p class="lg:text-xl text-base font-medium text-center mb-5">Những tựa games hấp dẫn, giải trí bất tận. Cùng PS Store tận hưởng ngày nghỉ với Playstation 4</p>
             <div class="flex flex-grow justify-center items-stretch gap-16 sm:flex-col md:flex-col lg:flex-row">
                 <div class="flex flex-col items-center gap-5">
@@ -35,7 +48,7 @@
                     <div>
                         <h3 class="text-3xl font-semibold mb-3">Playstation 4</h3>
                         <p class="text-lg mb-5">Cửa hàng game trực tuyến đa dạng, với<br> 1TB dụng lượng</p>
-                        <a href="?page=prod_overview&id=12" class="btn btn-outline sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
+                        <a href="?page=prod_overview&id=12" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
                 <div class="flex flex-col items-center gap-5">
@@ -45,7 +58,7 @@
                     <div class="text-left">
                         <h3 class="text-3xl font-semibold mb-3">Playstation VR</h3>
                         <p class="text-lg  mb-5">Trải nghiệm thế giới ảo với kính VR của<br> Sony</p>
-                        <a href="" class="btn btn-outline sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
+                        <a href="" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
                 <div class="flex flex-col items-center gap-5">
@@ -55,7 +68,7 @@
                     <div class="text-left ">
                         <h3 class="text-3xl font-semibold mb-3"><a href=""> Dualshock 4</a></h3>
                         <p class="text-lg  mb-5">Tay cầm chơi game cực chất với<br> bluetooth 5.0 và touchpad cảm biến</p>
-                        <a href="?page=product&cate=2&manu=1" class="btn btn-outline sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
+                        <a href="?page=product&cate=2&manu=1" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
             </div>
@@ -64,10 +77,10 @@
         <!-- product-list -->
         <section class="w-auto py-[5rem]">
             <!-- nav-tabs -->
-            <div class="tabs justify-center items-center max-w-lg mx-auto mb-5">
-                <button onclick="showPanel(0)" class="tab sm:tab md:tab lg:tab-lg tab-bordered font-semibold text-2xl">Sản phẩm mới</button>
-                <button onclick="showPanel(1)" class="tab sm:tab md:tab lg:tab-lg tab-bordered font-semibold text-2xl">Giảm giá</button>
-                <button onclick="showPanel(2)" class="tab sm:tab md:tab lg:tab-lg tab-bordered font-semibold text-2xl">Mua nhiều</button>
+            <div class="flex flex-nowrap justify-center items-center flex-grow max-w-3xl mx-auto mb-5">
+                <button onclick="showPanel(0)" class="tab !basis-1/3 !flex-nowrap sm:tab md:tab lg:tab-lg tab-bordered font-semibold md:text-xl lg:text-xl">Sản phẩm mới</button>
+                <button onclick="showPanel(1)" class="tab !basis-1/3 !flex-nowrap sm:tab md:tab lg:tab-lg tab-bordered font-semibold md:text-xl lg:text-xl">Giảm giá</button>
+                <button onclick="showPanel(2)" class="tab !basis-1/3 !flex-nowrap sm:tab md:tab lg:tab-lg tab-bordered font-semibold md:text-xl lg:text-xl">Mua nhiều</button>
             </div>
             <!-- new products-->
             <div class="swiper product-slider tab-panel p-10">
@@ -110,9 +123,9 @@
         <!-- news -->
         <section class="mb-10">
             <h2 class="container text-center text-4xl font-semibold underline underline-offset-8 mb-10 ">TIN TỨC MỚI</h2>
-            <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[1.5fr,1fr] gap-10">
+            <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[1.8fr,1fr] lg:gap-10">
                 <!-- lastest news -->
-                <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 items-stretch gap-5 w-full">
+                <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 items-stretch gap-5 container mx-auto">
                     <?php foreach (get_new_posts(0, 3) as $post) : extract($post);
                         include "site/components/post-card.php";
                     endforeach; ?>
@@ -122,9 +135,24 @@
                 <div>
                     <h3 class="text-3xl font-semibold mb-5">Bài viết nổi bật</h3>
                     <div class="flex flex-col justify-between gap-5">
-                        <?php foreach (get_most_comment_post() as $post) : extract($post);
-                            include "site/components/post-sidecard.php";
-                        endforeach; ?>
+                        <?php foreach (get_most_comment_post() as $post) : extract($post); ?>
+                            <div class="card card-side rounded-box shadow-xl w-fit">
+                                <figure class="basis-1/3">
+                                    <a href="?page=post&id=<?= $post['id'] ?>"><img src=<?php echo ROOT_POST . $img ?> alt="" class="w-full h-full object-cover"></a>
+                                </figure>
+                                <div class="basis-2/3 p-5 card-body ">
+                                    <div class="max-w-[240px]">
+                                        <h2 class="font-semibold text-xl truncate"><?php echo $title ?></h2>
+                                        <p class="font-normal truncate"><?php echo $short_desc ?></p>
+                                    </div>
+                                    <p class="text-sm font-bold">Đăng ngày: <span class="font-normal"><?php echo $create_date ?></span></p>
+                                    <p class="text-sm font-bold">Bởi: <span class="font-normal"><?php echo $author_name ?></span></p>
+                                    <div class="card-actions justify-end">
+                                        <a href="?page=post&id=<?= $post['id'] ?>" class="btn hover:btn-primary">Đọc tiếp</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

@@ -71,7 +71,7 @@ function check_phoneNumber($form_ctrl)
 function check_image($name_attr, $submitType)
 {
     global $error_count;
-    $allowedFile = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'jfif'];
+    $allowedFile = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'jfif', 'avif'];
     if (isset($_POST[$submitType]) && empty($_FILES[$name_attr]['name'])) :
         $error_count++;
     endif;

@@ -2,7 +2,9 @@ const $ = (selector) => {
 	const elements = document.querySelectorAll(selector);
 	return elements.length == 1 ? elements[0] : elements;
 };
-
+const formatNumber = (num) => {
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
 // show số lượng sản phẩm trong giỏ hàng
 const cartCounter = $("#cart-counter");
 const countItems = () => {

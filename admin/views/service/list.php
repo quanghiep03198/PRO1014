@@ -39,7 +39,7 @@
                     </tr>
                     <tbody>
                         <?php foreach (get_all_services()  as $item) : extract($item) ?>
-                            <tr>
+                            <tr class="service">
                                 <td>
                                     <span class="text-lg"><?= $name ?></span>
                                 </td>
@@ -52,9 +52,23 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="btn-group my-10 center" id="pagination"></div>
+
             </div>
         </section>
-        <!-- grid end  -->
+        <script src="/js/common.js"></script>
+        <script src="/js/pagination.js"></script>
+        <script>
+            const pagination = new Pagination({
+                selector: ".service",
+                perPage: 10,
+                style: "table-row"
+            })
+            const {
+                showPage
+            } = pagination;
+            showPage(1)
+        </script>
 </body>
 
 </html>
