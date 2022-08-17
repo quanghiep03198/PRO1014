@@ -1,8 +1,10 @@
 <?php
-if (isset($_GET['id'])) {
-    $order_details = get_order_details($_GET['id']);
-    extract($order_details);
-}
+if (isset($_GET['id'])) :
+    $order_items = get_all_order_items($_GET['id']);
+
+    // print_r($order_items);
+    $order_summary = get_order_details($_GET['id']);
+endif;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +26,13 @@ if (isset($_GET['id'])) {
         <section class="w-full min-h-screen">
             <div class="bg-primary px-12 py-8 flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl text-white">Đơn hàng: <?php echo $order_key_id ?></h1>
-                    <span class="text-zinc-300">Ngày đặt hàng: <?php echo $create_date ?></span>
+                    <h1 class="text-3xl text-white">Đơn hàng: <?php echo $order_summary["order_key_id"] ?></h1>
+                    <span class="text-zinc-300">Ngày đặt hàng: <?php echo $order_summary["create_date"] ?></span>
                 </div>
                 <form action="./admin/controllers/order.php" method="POST">
                     <input type="hidden" name="order_id" value=<?= $_GET['id'] ?>>
 
-                    <?php if (!in_array($order_stt_id, [3, 4])) : ?>
+                    <?php if (!in_array($order_summary["order_stt_id"], [3, 4])) : ?>
                         <label for="" class="text-xl text-white">Trạng thái: </label>
                         <select name="order_status" id="" class="select select-bordered">
                             <option value="">Chọn</option>
@@ -44,7 +46,7 @@ if (isset($_GET['id'])) {
                 </form>
             </div>
 
-            <div class="w-full first-line:mx-auto bg-gray-300 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sm:p-0 md:p-5 lg:p-10 gap-10">
+            <div class="max-w-full h-screen mx-auto bg-gray-300 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sm:p-0 md:p-5 lg:p-10 gap-10">
                 <div class="flex flex-col justify-between items-stretch gap-10 h-full">
                     <!-- order items -->
                     <div class="bg-white rounded-box shadow-2xl p-5">
@@ -79,59 +81,59 @@ if (isset($_GET['id'])) {
                         <table class="table w-full mb-5">
                             <tr>
                                 <td>Tạm tính</td>
-                                <td><?= $temp_amount . "₫" ?></td>
+                                <td><?= $order_summary["temp_amount"] . "₫" ?></td>
                             </tr>
                             <tr>
                                 <td>Phí ship</td>
-                                <td><?= $cost . "₫" ?></td>
+                                <td><?= $order_summary["cost"] . "₫" ?></td>
                             </tr>
                             <tr>
                                 <th><span class="text-xl font-medium">Tổng tiền</span></th>
-                                <th><span class="text-xl font-medium"><?= $total_amount . "₫" ?></span></th>
+                                <th><span class="text-xl font-medium"><?= $order_summary["total_amount"] . "₫" ?></span></th>
                             </tr>
                         </table>
-                        <p><span class="text-error">Ghi chú: </span><?php echo $order_notice ?></p>
+                        <p><span class="text-error">Ghi chú: </span><?php echo $order_summary["order_notice"] ?></p>
                     </div>
                 </div>
                 <!-- order details -->
                 <div class="bg-white p-5 rounded-box shadow-2xl w-ful">
                     <h1 class="text-2xl font-medium">Thông tin đơn hàng</h1>
-                    <?php if (!empty($order_details)) : ?>
+                    <?php if (!empty($order_summary)) : ?>
                         <table class="table w-full">
                             <tr>
                                 <td class="flex items-center gap-2 text-zinc-500">
                                     <i class="bi bi-person"></i>
                                     <span class="indent-2">Khách hàng</span>
                                 </td>
-                                <td><?= $user_name ?></td>
+                                <td><?= $order_summary["user_name"] ?></td>
                             </tr>
                             <tr>
                                 <td class="flex items-center gap-2 text-zinc-500">
                                     <i class="bi bi-envelope"></i>
                                     <span class="indent-2">Email</span>
                                 </td>
-                                <td><?= $email ?></td>
+                                <td><?= $order_summary["email"] ?></td>
                             </tr>
                             <tr>
                                 <td class="flex items-center gap-2 text-zinc-500">
                                     <i class="bi bi-geo-alt"></i>
                                     <span class="indent-2">Địa chỉ giao hàng</span>
                                 </td>
-                                <td><?= $shipping_address ?></td>
+                                <td><?= $order_summary["shipping_address"] ?></td>
                             </tr>
                             <tr>
                                 <td class="flex items-center gap-2 text-zinc-500">
                                     <i class="bi bi-truck"></i>
                                     <span class="indent-2">Hình thức giao hàng</span>
                                 </td>
-                                <td><?= $shipping_method ?></td>
+                                <td><?= $order_summary["shipping_method"] ?></td>
                             </tr>
                             <tr>
                                 <td class="flex items-center gap-2 text-zinc-500">
                                     <i class="bi bi-credit-card"></i>
                                     <span class="indent-2">Hình thức thanh toán</span>
                                 </td>
-                                <td><?= $payment_method ?></td>
+                                <td><?= $order_summary["payment_method"] ?></td>
                             </tr>
                             <tr>
                                 <td class="flex items-center gap-2 text-zinc-500">
@@ -139,8 +141,8 @@ if (isset($_GET['id'])) {
                                     <span class="indent-2">Trạng thái đơn hàng</span>
                                 </td>
                                 <td>
-                                    <?php echo $stt_icon ?>
-                                    <span><?= $stt_name ?></span>
+                                    <?php echo $order_summary["stt_icon"] ?>
+                                    <span><?= $order_summary["stt_name"] ?></span>
                                 </td>
                             </tr>
                         </table>

@@ -53,7 +53,8 @@ function get_order_details($order_id)
 					total_amount - shipping_method.cost AS temp_amount,
 					shipping_method.name AS shipping_method,
 					payment_method.name AS payment_method,
-					order_status.stt_name AS order_status
+					order_status.stt_name ,
+					order_status.stt_icon
 			FROM orders
 			INNER JOIN order_status ON orders.order_stt_id = order_status.id
 			INNER JOIN payment_method ON orders.payment_method_id = payment_method.id 
