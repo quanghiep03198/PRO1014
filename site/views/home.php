@@ -28,7 +28,7 @@
             <h2 class="lg:text-6xl text-3xl font-medium text-center mb-5"> Khám phá Playstation®4</h2>
             <p class="lg:text-xl text-base font-medium text-center mb-5">Những tựa games hấp dẫn, giải trí bất tận. Cùng PS Store tận hưởng ngày nghỉ với Playstation 4</p>
             <div class="flex flex-grow justify-center items-stretch gap-16 sm:flex-col md:flex-col lg:flex-row">
-                <div class="flex flex-col gap-5">
+                <div class="flex flex-col items-center gap-5">
                     <picture class="center">
                         <a href=""><img src=<?= ROOT_PRODUCT . 'ps4-slim.webp' ?> alt="" class="max-w-full h-60 object-contain"></a>
                     </picture>
@@ -38,7 +38,7 @@
                         <a href="?page=prod_overview&id=12" class="btn btn-outline sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
-                <div class="flex flex-col gap-5">
+                <div class="flex flex-col items-center gap-5">
                     <picture class="center">
                         <a href=""><img src=<?= ROOT_PRODUCT . 'ps-vr.webp' ?> alt="" class="max-w-full h-60 object-cover"></a>
                     </picture>
@@ -48,7 +48,7 @@
                         <a href="" class="btn btn-outline sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
-                <div class="flex flex-col gap-5">
+                <div class="flex flex-col items-center gap-5">
                     <picture class="center">
                         <a href=""><img src=<?= ROOT_PRODUCT . 'ds4-black.webp' ?> alt="" class="max-w-full h-60 object-contain"></a>
                     </picture>
@@ -141,7 +141,11 @@
     <script src="js/handle-userdata.js"></script>
     <script src="js/handle-wishlist.js"></script>
     <script src="js/carousel.js"></script>
+    <script src="js/pagination.js"></script>
     <script>
+        // const pagination = new Pagination({
+        //     selector:"",
+        // })
         const panels = $('.tab-panel')
         const tabs = $('.tab');
 

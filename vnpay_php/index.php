@@ -96,25 +96,25 @@ $order_key_id = strtoupper(substr(md5(rand(0, 9999)), 0, 8));
                     ?>
                     <div class="form-control gap-1">
                         <label>Họ tên (*)</label>
-                        <input class="input input-bordered" id="txt_ship_fullname" value="<?php echo isset($_COOKIE['auth']) ? $name : "" ?>" data-name="tên của bạn" name="txt_ship_fullname" type="text" />
+                        <input class="input input-bordered" id="txt_ship_fullname" value="<?php echo isset($_COOKIE['auth']) ? $name : null ?>" data-name="tên của bạn" name="txt_ship_fullname" type="text" />
                         <small class="text-base text-error error-message font-semibold"></small>
 
                     </div>
                     <div class="form-control gap-1">
                         <label>Email (*)</label>
-                        <input class="input input-bordered" id="txt_ship_email" data-name="email" value="<?php echo isset($_COOKIE['auth']) ? $email : "" ?>" name="txt_ship_email" type="text" />
+                        <input class="input input-bordered" id="txt_ship_email" data-name="email" value="<?php echo isset($_COOKIE['auth']) ? $email : null ?>" name="txt_ship_email" type="text" />
                         <small class="text-base text-error error-message font-semibold"></small>
 
                     </div>
                     <div class="form-control gap-1">
                         <label>Số điện thoại (*)</label>
-                        <input class="input input-bordered" id="txt_ship_mobile" value="<?php echo isset($_COOKIE['auth']) ? $phone : "" ?>" data-name="số điện thoại" name="txt_ship_mobile" type="text" />
+                        <input class="input input-bordered" id="txt_ship_mobile" value="<?php echo isset($_COOKIE['auth']) ? $phone : null ?>" data-name="số điện thoại" name="txt_ship_mobile" type="text" />
                         <small class="text-base text-error error-message font-semibold"></small>
 
                     </div>
                     <div class="form-control gap-1">
                         <label>Địa chỉ (*)</label>
-                        <input class="input input-bordered" id="txt_ship_addr1" value="<?php echo isset($_COOKIE['auth']) ? $address : "" ?>" data-name="địa chỉ" name="txt_ship_addr1" type="text" />
+                        <input class="input input-bordered" id="txt_ship_addr1" value="<?php echo isset($_COOKIE['auth']) ? $address : null ?>" data-name="địa chỉ" name="txt_ship_addr1" type="text" />
                         <small class="text-base text-error error-message font-semibold"></small>
 
                     </div>
