@@ -36,6 +36,7 @@ if (isset($_POST['create_account'])) {
 
 // update tài khoản
 if (isset($_POST['update_account'])) {
+    $user_id = $_POST['user_id'];
     $username = $_POST['username'];
     $address = $_POST['address'];
     $email = $_POST['email'];
@@ -55,7 +56,8 @@ if (isset($_POST['update_account'])) {
                 `email` = '{$email}',
                 `address` = '{$address}',
                 `phone` = '{$phone}',
-                `role_id` = '{$role}')";
+                `role_id` = '{$role}'
+                WHERE id = {$user_id}";
         execute_query($sql);
         header("Location: ../../admin.php?page=user-list");
 

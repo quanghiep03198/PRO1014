@@ -37,6 +37,7 @@ if (isset($_GET['id'])) {
                 <form action="/admin/controllers/user.php" method="POST" onsubmit="handleUpdateAccount(this,event)">
                     <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5">
                         <!-- tên người dùng -->
+                        <input type="hidden" name="user_id" value=<?= $_GET['id'] ?>>
                         <div class="form-control">
                             <label for="">Tên người dùng</label>
                             <input class="input input-bordered" type="text" name="username" data-name="tên người dùng" value="<?php echo $account['name'] ?>">
@@ -73,7 +74,7 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                     <div class="mt-10">
-                        <button type="submit" name="create_account" class="btn hover:btn-primary">Cập nhật tài khoản</button>
+                        <button type="submit" name="update_account" class="btn hover:btn-primary">Cập nhật tài khoản</button>
                     </div>
                 </form>
             </div>
