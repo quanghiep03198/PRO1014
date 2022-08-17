@@ -45,7 +45,7 @@
                 <label for="my-modal-3" class="modal-button text-2xl"><i class="bi bi-person"></i></label>
                 <input type="checkbox" id="my-modal-3" class="modal-toggle" />
                 <div class="modal">
-                    <div class="modal-box relative">
+                    <div class="modal-box relative !bg-white">
                         <label for="my-modal-3" class="btn btn-circle btn-ghost absolute right-2 top-2">✕</label>
                         <form action="" method="POST" class="flex flex-col gap-5" onsubmit="handleLoginError(this,event)">
                             <h1 class="text-center text-3xl font-semibold">Đăng nhập</h1>

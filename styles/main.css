@@ -4791,7 +4791,7 @@ body[dir="rtl"] .checkbox:checked,
   width: 18rem;
 }
 
-.w-\[20rem\] {
+.w-80 {
   width: 20rem;
 }
 
@@ -4809,10 +4809,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .w-96 {
   width: 24rem;
-}
-
-.w-80 {
-  width: 20rem;
 }
 
 .w-24 {
@@ -4867,10 +4863,6 @@ body[dir="rtl"] .checkbox:checked,
   max-width: 20rem;
 }
 
-.max-w-sm {
-  max-width: 24rem;
-}
-
 .max-w-\[240px\] {
   max-width: 240px;
 }
@@ -4919,12 +4911,12 @@ body[dir="rtl"] .checkbox:checked,
   flex-basis: 60%;
 }
 
-.basis-full {
-  flex-basis: 100%;
-}
-
 .\!basis-1\/3 {
   flex-basis: 33.333333% !important;
+}
+
+.basis-full {
+  flex-basis: 100%;
 }
 
 .translate-x-1\/2 {
@@ -5325,6 +5317,30 @@ body[dir="rtl"] .checkbox:checked,
 
 .from-black\/30 {
   --tw-gradient-from: rgb(0 0 0 / 0.3);
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-zinc-300\/30 {
+  --tw-gradient-from: rgb(212 212 216 / 0.3);
+  --tw-gradient-to: rgb(212 212 216 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-zinc-300\/40 {
+  --tw-gradient-from: rgb(212 212 216 / 0.4);
+  --tw-gradient-to: rgb(212 212 216 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-black\/40 {
+  --tw-gradient-from: rgb(0 0 0 / 0.4);
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-black\/20 {
+  --tw-gradient-from: rgb(0 0 0 / 0.2);
   --tw-gradient-to: rgb(0 0 0 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -5764,9 +5780,9 @@ body[dir="rtl"] .checkbox:checked,
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
-.text-\[\#407CB4\] {
+.text-accent {
   --tw-text-opacity: 1;
-  color: rgb(64 124 180 / var(--tw-text-opacity));
+  color: hsl(var(--a) / var(--tw-text-opacity));
 }
 
 .text-primary {
@@ -5831,16 +5847,6 @@ body[dir="rtl"] .checkbox:checked,
 .text-zinc-500 {
   --tw-text-opacity: 1;
   color: rgb(113 113 122 / var(--tw-text-opacity));
-}
-
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
-}
-
-.text-accent {
-  --tw-text-opacity: 1;
-  color: hsl(var(--a) / var(--tw-text-opacity));
 }
 
 .underline {
@@ -6361,15 +6367,6 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--pc) / var(--tw-text-opacity));
 }
 
-.btn-outline.hover\:btn-secondary:hover .badge {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--s) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-
 .btn-outline.hover\:btn-accent:hover .badge {
   --tw-border-opacity: 1;
   border-color: hsl(var(--a) / var(--tw-border-opacity));
@@ -6385,14 +6382,6 @@ body[dir="rtl"] .checkbox:checked,
   background-color: transparent;
   --tw-text-opacity: 1;
   color: hsl(var(--p) / var(--tw-text-opacity));
-}
-
-.btn-outline.hover\:btn-secondary:hover .badge-outline {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-  background-color: transparent;
-  --tw-text-opacity: 1;
-  color: hsl(var(--s) / var(--tw-text-opacity));
 }
 
 .btn-outline.hover\:btn-accent:hover .badge-outline {
@@ -6427,24 +6416,6 @@ body[dir="rtl"] .checkbox:checked,
   background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: hsl(var(--pc) / var(--tw-text-opacity));
-}
-
-.btn-outline.hover\:btn-secondary:hover:hover .badge {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sc) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sc) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--s) / var(--tw-text-opacity));
-}
-
-.btn-outline.hover\:btn-secondary:hover:hover .badge.outline {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sc) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
 }
 
 .btn-outline.hover\:btn-accent:hover:hover .badge {
@@ -6500,32 +6471,12 @@ body[dir="rtl"] .checkbox:checked,
   outline: 2px solid hsl(var(--p));
 }
 
-.hover\:btn-secondary:hover {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--s) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-
-.hover\:btn-secondary:hover:hover,.hover\:btn-secondary:hover.btn-active {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-}
-
  
     .btn-secondary.hover\:btn-active:hover {
   --tw-border-opacity: 1;
   border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-}
-
-.hover\:btn-secondary:hover:focus-visible {
-  outline: 2px solid hsl(var(--s));
 }
 
 .hover\:btn-accent:hover {
@@ -6643,20 +6594,6 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--pc) / var(--tw-text-opacity));
 }
 
-.btn-outline.hover\:btn-secondary:hover {
-  --tw-text-opacity: 1;
-  color: hsl(var(--s) / var(--tw-text-opacity));
-}
-
-.btn-outline.hover\:btn-secondary:hover:hover {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-
 .btn-outline.hover\:btn-accent:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--a) / var(--tw-text-opacity));
@@ -6701,10 +6638,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.hover\:btn-primary:hover {
   outline: 2px solid hsl(var(--p));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.hover\:btn-secondary:hover {
-  outline: 2px solid hsl(var(--s));
 }
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.hover\:btn-accent:hover {
@@ -7522,14 +7455,14 @@ body[dir="rtl"] .checkbox:checked,
     line-height: 1.5rem;
   }
 
-  .md\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .md\:text-lg {
@@ -7632,10 +7565,6 @@ body[dir="rtl"] .checkbox:checked,
 
   .lg\:max-w-\[10rem\] {
     max-width: 10rem;
-  }
-
-  .lg\:max-w-6xl {
-    max-width: 72rem;
   }
 
   .lg\:max-w-5xl {

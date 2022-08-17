@@ -27,7 +27,7 @@
 
                 <div class="relative hero justify-start flex-grow h-[600px] bg-center bg-gradient-to-t from-black/30 to-transparent bg-blend-darken mb-10 " style="background-image: url(/img/banners/ps4-banner.webp);">
                     <div class="absolute top-0 left-0 hero-overlay w-full bg-opacity-60 z-0"></div>
-                    <div class="text-neutral-content relative z-50 p-10">
+                    <div class="text-neutral-content relative z-10 p-10">
                         <div class="w-full basis-full">
                             <h1 class="mb-5 text-6xl font-extrabold">Playstation 4 - Slim</h1>
                             <p class="text-2xl italic mb-10">Giải trí không giới hạn với Playstation 4 <br>Sức mạnh đến từ CPU AMD "Jaguar" và GPU AMD Radeon™</p>

@@ -1,5 +1,13 @@
 <?php
-
+// using models
+include_once 'site/models/product.php';
+include_once 'site/models/comment.php';
+include_once 'site/models/order.php';
+include_once 'site/models/category.php';
+include_once 'site/models/service.php';
+include_once 'site/models/post.php';
+include_once 'site/models/user.php';
+include_once 'site/models/wishlist.php';
 function page_render()
 {
     $settings = select_single_record("SELECT * FROM site_setting");
