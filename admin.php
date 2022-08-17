@@ -9,11 +9,7 @@ include_once './admin/controllers/render.php';
 
 if (isset($_COOKIE['auth'])) {
     $auth = get_user_data($_COOKIE['auth']);
-    if ($auth['role_id'] == 3) {
-        header("Location: index.php");
-        // nếu người dùng không phải admin yêu cầu quay lại
-    } else
-        render();
+    render();
 }
 // nếu người dùng ko đăng nhập và cô tình truy cập vào trang sẽ yêu cầu người dùng quay lại
 else
