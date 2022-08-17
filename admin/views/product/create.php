@@ -3,8 +3,7 @@
  
 
 
-
-
+ 
 $sql = "SELECT * FROM manufacturer order by id";
 $list_nsx =select_all_records($sql);
 
