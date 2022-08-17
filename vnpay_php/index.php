@@ -134,8 +134,8 @@ $order_key_id = strtoupper(substr(md5(rand(0, 9999)), 0, 8));
                     </div>
                     <!-- submit payment method -->
                     <div class="my-10">
-                        <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Post</button>
-                        <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán Redirect</button>
+                        <!-- <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Post</button> -->
+                        <button type="submit" name="redirect" id="redirect" class="btn hover:btn-primary">Thanh toán</button>
                     </div>
 
             </form>
