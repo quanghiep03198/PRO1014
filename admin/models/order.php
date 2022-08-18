@@ -15,6 +15,14 @@ function get_all_orders()
             INNER JOIN payment_method ON payment_method.id = orders.payment_method_id";
 	return select_all_records($sql);
 }
+// lấy ra 1 đơn hàng theo từ khóa
+function get_order_by_kw($kw)
+{
+	$sql = "SELECT orders.*, order_status.id AS stt_id,order_status.stt_name AS stt_name, order_status.stt_icon, payment_method.name AS payment_method FROM orders 
+			INNER JOIN order_status ON orders.order_stt_id =  order_status.id
+			INNER JOIN payment_method ON payment_method.id = orders.payment_method_id WHERE order_key_id = '{$kw}'";
+	return select_single_record($sql);
+}
 // lấy ra tất cả trạng thái đơn hàng
 function get_all_order_stt()
 {

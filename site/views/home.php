@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
+    <link rel="icon" type="image/x-icon" href="/img/settings/logo-footer.ico">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
@@ -26,7 +28,7 @@
                         <h2 class="sm:text-2xl md:text-4xl lg:text-6xl font-extrabold">Playstation 5 - Digtal Edtion</h2>
                         <p class="sm:text-sm md:text-base lg:text-3xl">Khám phá sức mạnh ấn tượng <br> của AMD Ryzen “Zen 2”</p>
                         <div class="mt-5">
-                            <a href="?page=product" class="btn btn-outline hover:btn-primary sm:btn-md sm:btn-block lg:btn-lg lg:btn-wide ">Xem ngay</a>
+                            <a href="?page=prod_overview&id=12" class="btn btn-outline hover:btn-primary sm:btn-md sm:btn-block lg:btn-lg lg:btn-wide ">Xem ngay</a>
                         </div>
                     </div>
                     <picture>
@@ -43,32 +45,32 @@
             <div class="flex flex-grow justify-center items-stretch gap-16 sm:flex-col md:flex-col lg:flex-row">
                 <div class="flex flex-col items-center gap-5">
                     <picture class="center">
-                        <a href=""><img src=<?= ROOT_PRODUCT . 'ps4-slim.webp' ?> alt="" class="max-w-full h-60 object-contain"></a>
+                        <a href="?page=prod_overview&id=30"><img src=<?= ROOT_PRODUCT . 'ps4-slim.webp' ?> alt="" class="max-w-full h-60 object-contain"></a>
                     </picture>
                     <div>
                         <h3 class="text-3xl font-semibold mb-3">Playstation 4</h3>
                         <p class="text-lg mb-5">Cửa hàng game trực tuyến đa dạng, với<br> 1TB dụng lượng</p>
-                        <a href="?page=prod_overview&id=12" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
+                        <a href="?page=prod_overview&id=30" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
                 <div class="flex flex-col items-center gap-5">
                     <picture class="center">
-                        <a href=""><img src=<?= ROOT_PRODUCT . 'ps-vr.webp' ?> alt="" class="max-w-full h-60 object-cover"></a>
+                        <a href="?page=prod_overview&id=53"><img src=<?= ROOT_PRODUCT . 'ps-vr.webp' ?> alt="" class="max-w-full h-60 object-cover"></a>
                     </picture>
                     <div class="text-left">
                         <h3 class="text-3xl font-semibold mb-3">Playstation VR</h3>
                         <p class="text-lg  mb-5">Trải nghiệm thế giới ảo với kính VR của<br> Sony</p>
-                        <a href="" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
+                        <a href="?page=prod_overview&id=53" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
                 <div class="flex flex-col items-center gap-5">
                     <picture class="center">
-                        <a href=""><img src=<?= ROOT_PRODUCT . 'ds4-black.webp' ?> alt="" class="max-w-full h-60 object-contain"></a>
+                        <a href="?page=prod_overview&id=28"><img src=<?= ROOT_PRODUCT . 'ds4-black.webp' ?> alt="" class="max-w-full h-60 object-contain"></a>
                     </picture>
                     <div class="text-left ">
                         <h3 class="text-3xl font-semibold mb-3"><a href=""> Dualshock 4</a></h3>
                         <p class="text-lg  mb-5">Tay cầm chơi game cực chất với<br> bluetooth 5.0 và touchpad cảm biến</p>
-                        <a href="?page=product&cate=2&manu=1" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
+                        <a href="?page=prod_overview&id=28" class="btn btn-outline hover:btn-primary sm:btn-block md:btn-lg lg:btn-block">Khám phá ngay</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <div class='product-card card px-0 w-80 rounded-box relative shadow-xl bg-base-100'>
     <?php if ($discount > 0 && $stock > 0) : ?>
-        <span class="badge badge-secondary badge-error !p-4 text-xl text-white absolute top-3 left-3 animate-pulse z-20"><?= $discount . '%' ?></span>
+        <span class="badge badge-secondary badge-error !p-4 text-xl text-white absolute top-3 left-3 z-20"><?= $discount . '%' ?></span>
     <?php endif;  ?>
 
     <picture class="max-w-full h-64 relative center">
@@ -36,9 +36,9 @@
                 <input type='hidden' name='total' value=<?= $price * 1 ?>>
                 <input type="hidden" name="REQUEST" value="POST">
                 <!-- product card button group -->
-                <button type='button' actions="goToCart" onclick="addCart(this)" class='btn-square btn-lg p-5 text-3xl hover:animate-pulse hover:text-error'><i class="bi bi-cart3"></i></button>
-                <button type="button" onclick="addCart(this)" class="btn-square btn-lg p-5 text-3xl hover:animate-pulse hover:text-error"><i class="bi bi-bag-plus"></i></button>
-                <button type="submit" onclick="addWishlist(this,event)" class="btn-square btn-lg p-5 text-3xl hover:animate-pulse hover:text-error"><i class="bi bi-heart"></i></button>
+                <button type='button' actions="goToCart" onclick="addCart(this)" class='btn-square btn-lg p-5 text-2xl hover:animate-pulse hover:text-error'><i class="bi bi-cart3"></i></button>
+                <button type="button" onclick="addCart(this)" class="btn-square btn-lg p-5 text-2xl hover:animate-pulse hover:text-error"><i class="bi bi-bag-plus"></i></button>
+                <button type="submit" onclick="addWishlist(this,event)" class="btn-square btn-lg p-5 text-2xl hover:animate-pulse hover:text-error"><i class="bi bi-heart"></i></button>
             </div>
         </form>
     </div>

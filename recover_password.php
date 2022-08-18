@@ -12,9 +12,12 @@
 </head>
 
 <body>
-    <div class="fixed w-full h-full bg-center bg-no-repeat bg-cover bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-        <div class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 w-5xl bg-slate-700 bg-opacity-20 p-10 w-[-webkit-fill-available] max-w-5xl rounded-box shadow-2xl">
-            <h1 class="sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-10 text-white">Lấy lại mật khẩu</h1>
+    <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 items-stretch flex-grow h-screen ">
+        <div class="h-screen sticky top-0 sm:hidden md:hidden ">
+            <img src="/img/banners/contact-image.png" class="w-full h-full object-cover object-center" alt="">
+        </div>
+        <div class=" bg-base-100 p-10 w-[-webkit-fill-available] max-w-5xl rounded-box shadow-2xl">
+            <h1 class="sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-10">Lấy lại mật khẩu</h1>
             <form action="" method="POST" class="max-w-5xl mx-auto " onsubmit="handleGetVerifyCode(this,event)">
                 <div class="flex flex-col gap-5">
                     <!-- tài khoản -->

@@ -15,7 +15,9 @@ endif;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo "Đơn hàng -  " ?></title>
+    <title>Chi tiết đơn hàng</title>
+    <link rel="icon" type="image/x-icon" href="/img/settings/logo-footer.ico">
+
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/swal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">

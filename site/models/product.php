@@ -138,7 +138,7 @@ function get_product_manufacturer($product_id)
 
 
 // lấy các sản phẩm biến thể
-function get_product_variant($product_id)
+function get_product_variants($product_id)
 {
     $sql = "SELECT product.* FROM product
         INNER JOIN product_variant ON product.variant_id = product.variant_id";

@@ -15,8 +15,11 @@ if (!isset($_COOKIE['account']))
     <link rel="stylesheet" href="./styles/main.css">
 </head>
 
-<body class="fixed w-screen h-screen flex justify-center items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-center bg-no-repeat bg-cover">
-    <div class="container mx-auto bg-slate-700 bg-opacity-20 rounded-box shadow-2xl p-10">
+<body class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 items-stretch flex-grow min-h-screen ">
+    <div class="h-screen sticky top-0 sm:hidden md:hidden ">
+        <img src="/img/banners/contact-image.png" class="w-full h-full object-cover object-center" alt="">
+    </div>
+    <div class="container mx-auto bg-base-100 rounded-box shadow-2xl p-10 relative top-1/2 translate-y-1/2">
         <form action="" method="POST" class="max-w-3xl mx-auto" onsubmit="handleResetPassword(this,event)">
             <h1 class="sm:text-xl lg:text-4xl text-center font-semibold mb-5">Thay đổi mật khẩu mới</h1>
             <div class="flex flex-col gap-5">
