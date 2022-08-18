@@ -17,7 +17,6 @@
         <section class="w-full">
             <div class="bg-primary px-12 py-8 flex justify-between items-center mb-10">
                 <h1 class="text-3xl text-white">Danh sách đơn hàng</h1>
-
             </div>
 
             <div class="container mx-auto min-h-screen">

@@ -23,10 +23,10 @@ endif;
         <!-- import sidebar from component  -->
         <?php include_once "/xampp/htdocs/PRO1014/admin/components/sidebar.php" ?>
         <!-- sidebar  end -->
-        <section class="w-full min-h-screen">
+        <section class="w-full min-h-screen bg-gray-300">
             <div class="bg-primary px-12 py-8 flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl text-white">Đơn hàng: <?php echo $order_summary["order_key_id"] ?></h1>
+                    <h1 class="text-3xl text-white">Đơn hàng: <span class="uppercase"><?php echo $order_summary["order_key_id"] ?></span></h1>
                     <span class="text-zinc-300">Ngày đặt hàng: <?php echo $order_summary["create_date"] ?></span>
                 </div>
                 <form action="./admin/controllers/order.php" method="POST">
@@ -46,8 +46,8 @@ endif;
                 </form>
             </div>
 
-            <div class="max-w-full h-screen mx-auto bg-gray-300 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sm:p-0 md:p-5 lg:p-10 gap-10">
-                <div class="flex flex-col justify-between items-stretch gap-10 h-full">
+            <div class="max-w-full mx-auto  grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sm:p-0 md:p-5 lg:p-10 gap-10">
+                <div class="flex flex-col justify-start items-stretch gap-10 h-full">
                     <!-- order items -->
                     <div class="bg-white rounded-box shadow-2xl p-5">
                         <h1 class="text-2xl font-medium">Sản phẩm đã đặt</h1>
@@ -96,7 +96,7 @@ endif;
                     </div>
                 </div>
                 <!-- order details -->
-                <div class="bg-white p-5 rounded-box shadow-2xl w-ful">
+                <div class="bg-white p-5 rounded-box shadow-2xl w-full h-auto">
                     <h1 class="text-2xl font-medium">Thông tin đơn hàng</h1>
                     <?php if (!empty($order_summary)) : ?>
                         <table class="table w-full">

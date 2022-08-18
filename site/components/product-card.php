@@ -1,6 +1,6 @@
 <div class='product-card card px-0 w-80 rounded-box relative shadow-xl bg-base-100'>
     <?php if ($discount > 0 && $stock > 0) : ?>
-        <span class="badge badge-secondary badge-error !p-4 text-xl text-white absolute top-3 left-3 animate-pulse"><?= $discount . '%' ?></span>
+        <span class="badge badge-secondary badge-error !p-4 text-xl text-white absolute top-3 left-3 animate-pulse z-20"><?= $discount . '%' ?></span>
     <?php endif;  ?>
 
     <picture class="max-w-full h-64 relative center">

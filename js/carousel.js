@@ -51,19 +51,19 @@ const postSlider = new Swiper(".post-slider", {
 		prevEl: ".swiper-button-prev",
 	},
 });
-const productVariantSlider = new Swiper(".product_image", {
-	spaceBetween: 10,
-	slidesPerView: 4,
-	freeMode: true,
-	watchSlidesProgress: true,
-});
-const gallery = new Swiper(".gallery", {
-	spaceBetween: 10,
-	navigation: {
-		nextEl: ".swiper-button-next",
-		prevEl: ".swiper-button-prev",
-	},
-	thumbs: {
-		swiper: swiper,
-	},
-});
+// const productVariantSlider = new Swiper(".product_image", {
+// 	spaceBetween: 10,
+// 	slidesPerView: 4,
+// 	freeMode: true,
+// 	watchSlidesProgress: true,
+// });
+// const gallery = new Swiper(".gallery", {
+// 	spaceBetween: 10,
+// 	navigation: {
+// 		nextEl: ".swiper-button-next",
+// 		prevEl: ".swiper-button-prev",
+// 	},
+// 	thumbs: {
+// 		swiper: swiper,
+// 	},
+// });
